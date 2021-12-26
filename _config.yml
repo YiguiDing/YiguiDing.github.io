@@ -2,6 +2,7 @@ title: DYG的个人博客
 description: 这里是DYG的个人技术博客，可能没事儿会发表一些日常学习笔记，或者记录一下生活。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://YiguiDing.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+#url: "192.168.2.104" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author
 author-name:    Yigui Ding
@@ -12,8 +13,8 @@ author-bilibili: 73686452
 #author-twitter: YiguiDing # Add your twitter account
 # author-weiboUid: 6304917168 # Add your twitter account
 
-about-author:   >
-  虽然现在啥也不是，但咸鱼也是有梦想的。
+about-author: >
+  在荒诞中奋起反抗,在绝望中坚持真理。
 
 # Social settings
 # social-twitter:   YiguiDing
@@ -38,6 +39,8 @@ google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-
 disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
 
 # Build settings
+category_dir: 分类 #这个分类是指 /_site/分类
+
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
 plugins:
@@ -47,7 +50,8 @@ paginate: 8
 paginate_path: "/page/:num/"
 
 include:
-  - _pages
+  - search.json     
+  - 分类            #这个分类是指/中的分类 在这里的意思是把/分类 拷贝到/_site/分类
 
 sass:
   sass_dir: _sass
@@ -58,3 +62,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - LICENSE.txt
+  - README.md
