@@ -12,6 +12,7 @@ layout: default
       <div class="c-author__name">{{site.author-name}}</div>
       <span class="c-author__job">{{site.author-job}}</span>
     </div>
+    <p class="c-author__about">{{site.about-author | strip_html | truncatewords: 50}}</p>
     <div class="c-contact-menu">
 
       {% if site.author-bilibili %}
@@ -27,71 +28,29 @@ layout: default
         ></span>联系我</a>
       {% else %}
       {% endif %}
-
     </div>
-    <p class="c-author__about">{{site.about-author | strip_html | truncatewords: 50}}</p>
+    
   </div>
 
   <div class="c-sidebar-footer">
     <div class="c-social">
       <div class="c-social__title">社交账号</div>
       <ul class="c-social__list u-lists-reset">
-
-
         {% if site.social-github %}
           <li class="c-social__item"><a href="https://github.com/{{site.social-github}}" target="_blank"><div data-icon='ei-sc-github' data-size='s'></div></a></li>
         {% else %}
         {% endif %}
-        
         {% if site.social-bilibili %}
           <li class="c-social__item"><a href="https://space.bilibili.com/{{site.social-bilibili}}" target="_blank"><div data-icon='ei-sc-bilibili' data-size='s'></div></a></li>
         {% else %}
-        {% endif %}       
-        
+        {% endif %}              
         {% if site.social-zhihu %}
           <li class="c-social__item"><a href="https://zhihu.com/people/{{site.social-zhihu}}" target="_blank"><div data-icon='ei-sc-zhihu' data-size='s'></div></a></li>
         {% else %}
-        {% endif %}
-        
+        {% endif %}  
         {% if site.social-weibo %}
           <li class="c-social__item"><a href="https://weibo.com/u/{{site.social-weibo}}" target="_blank"><div data-icon='ei-sc-weibo' data-size='s'></div></a></li>
         {% else %}
-        {% endif %}
-
-        {% if site.social-twitter %}
-          <li class="c-social__item"><a href="https://twitter.com/{{ site.social-twitter }}" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-facebook %}
-          <li class="c-social__item"><a href="https://facebook.com/{{ site.social-facebook }}" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-pinterest %}
-          <li class="c-social__item"><a href="https://pinterest.com/{{site.social-pinterest}}" target="_blank"><div data-icon='ei-sc-pinterest' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-instagram %}
-          <li class="c-social__item"><a href="https://instagram.com/{{ site.social-instagram }}" target="_blank"><div data-icon='ei-sc-instagram' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-youtube %}
-          <li class="c-social__item"><a href="https://youtube.com/{{ site.social-youtube }}" target="_blank"><div data-icon='ei-sc-youtube' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-vk %}
-          <li class="c-social__item"><a href="https://vk.com/{{ site.social-vk }}" target="_blank"><div data-icon='ei-sc-vk' data-size='s'></div></a></li>
-        {% else %}
-
-        {% endif %}
-        {% if site.social-linkedin %}
-          <li class="c-social__item"><a href="https://in.linkedin.com/in/{{site.social-linkedin}}" target="_blank"><div data-icon='ei-sc-linkedin' data-size='s'></div></a></li>
-        {% else %}
-
         {% endif %}
       </ul>
     </div>

@@ -14,7 +14,7 @@ author-bilibili: 73686452
 # author-weiboUid: 6304917168 # Add your twitter account
 formspree-Id: mdobkkgl #action="https://formspree.io/f/mdobkkgl"
 about-author: >
-  在荒诞中奋起反抗,在绝望中坚持真理。
+  在绝望中坚持真理 在荒诞中奋起反抗
 
 # Social settings
 # social-twitter:   YiguiDing
@@ -39,7 +39,7 @@ google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-
 disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
 
 # Build settings
-category_dir: 分类 #这个分类是指 /_site/分类
+category_dir: category #这个分类是指 /_site/category
 
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
@@ -50,9 +50,10 @@ paginate: 8
 paginate_path: "/page/:num/"
 
 include:
-  - _pages          #表单和感谢页面
+  - _pages              #表单和感谢页面
   - search.json     
-  - 分类            #这个分类是指/中的分类 在这里的意思是把/分类 拷贝到/_site/分类
+  - category            #这个分类是指/中的分类 在这里的意思是把/category 拷贝到/_site/category 
+#当在本地测试时会创建/_site/category 上传github时需手动将其拷贝到/category
 
 sass:
   sass_dir: _sass
