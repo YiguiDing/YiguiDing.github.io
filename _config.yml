@@ -1,43 +1,60 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+title: DYG的个人博客
+description: 这里是DYG的个人技术博客，没事儿会发表一些日常学习笔记，或者记录一下生活。
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "https://YiguiDing.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Author
+author-name:    Yigui Ding
+author-image:   1.jpg
+author-job:     待业青年
+author-email:   2449695354@qq.com # Add your email for contant form.
+#author-twitter: YiguiDing # Add your twitter account
+author-bilibili: 73686452
+# author-weiboUid: 6304917168 # Add your twitter account
+
+about-author:   >
+  虽然现在啥也不是，但咸鱼也是有梦想的。
+
+# Social settings
+# social-twitter:   YiguiDing
+# social-facebook:
+social-github:    YiguiDing
+social-weibo:     6304917168 #uid
+social-bilibili:  73686452   #uid
+social-zhihu:     ding-yi-gui-90
+# social-pinterest: YiguiDing
+# social-instagram: YiguiDing
+# social-youtube:
+# social-vk:   
+# social-linkedin:
+
+# Newsletter
+mailchimp: # Add your MailChimp form identifier. For example - blogenjoyfreedom.us16.list-manage.com/subscribe/post?u=cd56155d76ddeeb4c0bc4d080&amp;id=7a526cd13e
+
+# Google Analytics
+google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-1
+
+# Comment Section (Disqus)
+disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
 
 # Build settings
 markdown: kramdown
-theme: minima
+permalink: /:year/:month/:day/:title/
 plugins:
-  - jekyll-feed
+  - jekyll-paginate
+
+paginate: 8
+paginate_path: "/page/:num/"
+
+include:
+  - _pages
+
+sass:
+  sass_dir: _sass
+  style: compressed
 
 # Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
