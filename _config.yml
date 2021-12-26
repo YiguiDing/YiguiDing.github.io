@@ -1,5 +1,14 @@
 title: DYG的个人博客
-description: 这里是DYG的个人技术博客，可能没事儿会发表一些日常学习笔记，或者记录一下生活。
+description: >
+  Here is DYG's personal technical blog
+  <br>May publish some study notes
+  <br>Or just record life
+#  <br>Prove to the world that I am still alive
+#这里是DYG的个人技术博客
+#<br>可能会会发表一些学习笔记
+#<br>或者只是单纯记录一下生活
+#<br>向世界证明一下自己还活着
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://YiguiDing.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 #url: "192.168.2.104" # the base hostname & protocol for your site, e.g. http://example.com
@@ -13,7 +22,7 @@ author-bilibili: 73686452
 #author-twitter: YiguiDing # Add your twitter account
 # author-weiboUid: 6304917168 # Add your twitter account
 formspree-Id: mdobkkgl #action="https://formspree.io/f/mdobkkgl"
-about-author: >
+author-slogan: >
   在绝望中坚持真理 在荒诞中奋起反抗
 
 # Social settings
