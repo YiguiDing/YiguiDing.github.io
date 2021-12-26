@@ -20,7 +20,7 @@ jekyll安装
 		yum install gcc-c++
 		gem install jekyll 
 创建一个新的 Jekyll 站点
-	jekyll new --skip-bundle //--skip-bundle表示跳过bundle
+	jekyll new --skip-bundle ./  //--skip-bundle表示跳过bundle
 修改Gemfile //使github-pages和github所支持的版本相一致
 	打开 Jekyll 创建的 Gemfile。
 	在以 开头的行的开头添加“#”gem "jekyll"以注释掉该行。、、、、、、、或者改为 github的 jekyll	3.9.0
@@ -66,7 +66,17 @@ Ubuntu20.04 LTS
 安装git克隆原先配置好的库
 	apt install git
 	git clone https://github.com/YiguiDing/YiguiDing.github.io.git
-安装其中Gemfile所描述依赖
+或
+创建一个新的 Jekyll 站点
+	bundle exec jekyll new --skip-bundle ./ 		//--skip-bundle表示跳过bundle
+修改Gemfile //使github-pages和github所支持的版本相一致
+	打开 Jekyll 创建的 Gemfile。
+	在以 开头的行的开头添加“#”gem "jekyll"以注释掉该行。、、、、、、、或者改为 github的 jekyll	3.9.0
+	添加github-pages通过编辑开头的行宝石# gem "github-pages"。将此行更改为：
+	gem "github-pages", "~> GITHUB-PAGES-VERSION", group: :jekyll_plugins
+	将GITHUB-PAGES-VERSION替换为最新支持的github-pagesgem版本。您可以在此处找到此版本：https://pages.github.com/versions/
+	保存并关闭 Gemfile。
+安装Gemfile中所描述依赖
 	cd YiguiDing.github.io
 	apt install g++
 	bundler install
