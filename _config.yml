@@ -14,8 +14,8 @@ url: "https://YiguiDing.github.io" # the base hostname & protocol for your site,
 
 # Author
 author-name:    Yigui Ding
-author-image:   images/用户头像/head_icon.jpg
-author-job:     待业
+author-image:   images/user/head_icon2.jpg
+author-job:     “待业青年”
 author-email:   2449695354@qq.com # Add your email for contant form.
 author-bilibili: 73686452
 author-slogan: >
@@ -39,7 +39,7 @@ google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-
 disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
 
 # 网站角标
-web_icon_Dir: /images/网页icon/web_icon.jpg
+web_icon_Dir: /images/web_icon/web_icon1.jpg
 MD_img_Dir:   /images/文章图片/       #site.MD_img_Dir
 # 分类文件
 category_dir: category #这个分类是指 /_site/category
