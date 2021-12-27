@@ -1,6 +1,12 @@
-/_site
-!/category/
-.sass-cache
-.jekyll-metadata
-.editorconfig
+#exclude
+.jekyll-cache/
+.jekyll-metadata/
+_site/
 *.DS_Store
+.sass-cache/
+.editorconfig
+
+#include
+!category/
+
+

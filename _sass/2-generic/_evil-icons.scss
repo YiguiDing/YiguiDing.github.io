@@ -77,23 +77,53 @@
 
 .icon--ei-sc-github {
   fill: #333;
-}
-
-.icon--ei-sc-weibo {
-  fill: #333;
-  background:url(/images/favicon_icon/weibo.ico) no-repeat center center;
+  background:url(/images/github.png) no-repeat center center;
   background-size:15px 15px;
 }
-
+.icon--ei-sc-github_ {
+  fill: #333;
+  background:url(/images/icon/github.png) no-repeat center center;
+  background-size:15px 15px;
+}
+.icon--ei-sc-QQ {
+  fill: #333;
+  background:url(/images/icon/qq.webp) no-repeat center center;
+  background-size:15px 15px;
+}
+.icon--ei-sc-qzone {
+  fill: #333;
+  background:url(/images/icon/qzone.ico) no-repeat center center;
+  background-size:15px 15px;
+}
+.icon--ei-sc-TieBa {
+  fill: #333;
+  background:url(/images/icon/tieba.png) no-repeat center center;
+  background-size:15px 15px;
+}
+.icon--ei-sc-weibo {
+  fill: #333;
+  background:url(/images/icon/weibo.ico) no-repeat center center;
+  background-size:15px 15px;
+}
 .icon--ei-sc-bilibili {
   fill: #333;
-  background:url(/images/favicon_icon/bilibili.ico) no-repeat center center;
+  background:url(/images/icon/bilibili.ico) no-repeat center center;
   background-size:15px 15px;
 }
 .icon--ei-sc-zhihu {
   fill: #333;
-  background:url(/images/favicon_icon/zhihu.ico) no-repeat center center;
+  background:url(/images/icon/zhihu.ico) no-repeat center center;
   background-size:15px 15px;
+}
+.icon--ei-sc-ShareIcon {
+  fill: #333;
+  background:url(/images/icon/share2.png) no-repeat center center;
+  background-size:15px 15px;
+}
+.icon--ei-sc-star {
+  fill: #fff;
+  background:url(/images/icon/star.png) no-repeat bottom right;
+  background-size:10px 10px;
 }
 .icon--ei-sc-google-plus {
   fill: #dd4b39;

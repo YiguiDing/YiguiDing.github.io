@@ -16,7 +16,7 @@ layout: home
       </div>
     </header>
     {% if page.image %}
-    <div class="c-article__image o-opacity" style="background-image: url( {{"/images/" | prepend: site.baseurl | append : page.image}} )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( {{ site.MD_img_Dir | prepend: site.baseurl | append : page.image }} )"></div>
     {% else %}
     {% endif %}
     <div class="c-wrap-content">
@@ -27,27 +27,42 @@ layout: home
         </div>
       </header>
       {{page.content | markdownify}}
+      
       <div class="c-article__footer u-clearfix">
+        
         <div class="c-article__tag">
+          <div title="标签" data-icon='ei-sc-star' data-size='s'></div>
           {% for tag in page.tags %}
           <a href="{{site.baseurl}}/tags#{{tag}}">&#35; {{ tag }}</a>
           {% endfor %}
         </div>
         <div class="c-article__share">
-          <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url }}" title="Share
-          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
-          <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
-          <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+
+          <a  title="分享文章" rel="nofollow" target="_blank">
+            <div data-icon='ei-sc-ShareIcon' data-size='s'></div>
+          </a>
+          <a href="{{ site.share_to_qzone | append: site.url | append: page.url }}" title="Share On QQ" rel="nofollow" target="_blank">
+            <div data-icon='ei-sc-qzone' data-size='s'></div>
+          </a>
+          <a href="{{ site.share_to_QQ | append: site.url | append: page.url }}" title="Share On QQ" rel="nofollow" target="_blank">
+            <div data-icon='ei-sc-QQ' data-size='s'></div>
+          </a>
+          <a href="{{ site.share_to_weibo | append: site.url | append: page.url }}" title="Share On QQ" rel="nofollow" target="_blank">
+            <div data-icon='ei-sc-weibo' data-size='s'></div>
+          </a>
+          <a href="{{ site.share_to_TieBa | append: site.url | append: page.url }}" title="Share On QQ" rel="nofollow" target="_blank">
+            <div data-icon='ei-sc-TieBa' data-size='s'></div>
+          </a>
         </div>
       </div>
       {% include newsletter.html %}
       <div class="c-recent-post">
-        <h4 class="c-recent__title">You might also enjoy</h4>
+        <h4 class="c-recent__title">相关推荐</h4>
         <div class="c-recent__box">
         {% for post in site.related_posts limit:4 %}
         {% if post.image %}
           <div class="c-recent__item">
-            <a class="c-recent__image" href="{{ post.url }}" style="background-image: url( {{"/images/" | prepend: site.baseurl | append: post.image}})"></a>
+            <a class="c-recent__image" href="{{ post.url }}" style="background-image: url({{site.MD_img_Dir | prepend: site.url | append: post.image}})"></a>
             <div class="c-recent__footer">
               <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
               <div class="c-recent__date">

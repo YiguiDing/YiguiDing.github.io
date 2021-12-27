@@ -11,32 +11,23 @@ description: >
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://YiguiDing.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-#url: "192.168.2.104" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author
 author-name:    Yigui Ding
-author-image:   head_icon.jpg
-author-job:     待业青年
+author-image:   images/用户头像/head_icon.jpg
+author-job:     待业
 author-email:   2449695354@qq.com # Add your email for contant form.
 author-bilibili: 73686452
-#author-twitter: YiguiDing # Add your twitter account
-# author-weiboUid: 6304917168 # Add your twitter account
-formspree-Id: mdobkkgl #action="https://formspree.io/f/mdobkkgl"
 author-slogan: >
   在绝望中坚持真理 在荒诞中奋起反抗
+#用于接收邮件
+formspree-Id: mdobkkgl #action="https://formspree.io/f/mdobkkgl"
 
-# Social settings
-# social-twitter:   YiguiDing
-# social-facebook:
+#社交账号
 social-github:    YiguiDing
 social-weibo:     6304917168 #uid
 social-bilibili:  73686452   #uid
 social-zhihu:     ding-yi-gui-90
-# social-pinterest: YiguiDing
-# social-instagram: YiguiDing
-# social-youtube:
-# social-vk:   
-# social-linkedin:
 
 # Newsletter
 mailchimp: # Add your MailChimp form identifier. For example - blogenjoyfreedom.us16.list-manage.com/subscribe/post?u=cd56155d76ddeeb4c0bc4d080&amp;id=7a526cd13e
@@ -47,8 +38,17 @@ google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-
 # Comment Section (Disqus)
 disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
 
-# Build settings
+# 网站角标
+web_icon_Dir: /images/网页icon/web_icon.jpg
+MD_img_Dir:   /images/文章图片/       #site.MD_img_Dir
+# 分类文件
 category_dir: category #这个分类是指 /_site/category
+
+#分享链接
+share_to_QQ:    https://connect.qq.com/widget/shareqq/index.html?url=
+share_to_weibo: https://service.weibo.com/share/share.php?url=
+share_to_qzone: https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=
+share_to_TieBa: http://tieba.baidu.com/f/commit/share/openShareApi?title=
 
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
@@ -60,9 +60,8 @@ paginate_path: "/page/:num/"
 
 include:
   - _pages              #表单和感谢页面
-  - search.json     
-  - category            #这个分类是指/中的分类 在这里的意思是把/category 拷贝到/_site/category 
-#当在本地测试时会创建/_site/category 上传github时需手动将其拷贝到/category
+  - search.json         #表单         
+  - category            #/category
 
 sass:
   sass_dir: _sass
@@ -72,6 +71,9 @@ sass:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - Gemfile.github
+  - Gemfile.flxton
   - vendor
   - LICENSE.txt
   - README.md
+  - attachments
