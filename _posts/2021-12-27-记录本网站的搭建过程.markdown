@@ -40,7 +40,7 @@ categories: 笔记
         ```
     + `apt install make gcc` //没有这一步下一步会报错
     + `bundler install`
-* 网站所需运行环境，即/YiguiDing.github.io/Gemfile中所描述依赖
+* 安装网站所需运行环境 即/YiguiDing.github.io/Gemfile中所描述依赖
     + `cd YiguiDing.github.io`
     + `apt install g++`     //下一步的编译安装过程中需要用到g++
     + `bundler install`
