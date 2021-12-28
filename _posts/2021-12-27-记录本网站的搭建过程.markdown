@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "记录本网站的搭建过程——第一篇技术博客"
+title: "记录本网站的搭建过程"
+subtitle: 第一篇技术博客
 date: 2021-12-27 21:45:00 +0800
 image: 笔记.jpg
 tags: [技术博客,网站搭建]
@@ -17,7 +18,7 @@ categories: 笔记
    + git配置过程省略
 1. 使用git命令初始化本地仓库`git init`
 2. 或使用克隆命令直接克隆本网站`git clone https://github.com/YiguiDing/YiguiDing.github.io.git`
-3. 为远程仓库添加别名 git remote add origin `https://github.com/你的用户名/你的仓库名.git`
+3. 为远程仓库添加别名 `git remote add origin https://github.com/你的用户名/你的仓库名.git`
 4. 将本地仓库提交到你的GitHub `git push origin master`
 
 ### 三、本地测试环境的搭建与测试

@@ -12,7 +12,7 @@ layout: default
       <div class="c-author__name">{{site.author-name}}</div>
       <span class="c-author__job">{{site.author-job}}</span>
     </div>
-    <p class="c-author__slogan">{{site.author-slogan | strip_html | truncatewords: 50}}</p>
+    <p class="c-author__slogan">{{site.author-slogan | strip_html | truncate: 50}}</p>
     <div class="c-contact-menu">
 
       {% if site.author-bilibili %}
@@ -29,7 +29,7 @@ layout: default
       {% else %}
       {% endif %}
     </div>
-    <p class="c-web__describe">{{site.description | truncatewords: 60}}</p>
+    <p class="c-web__describe">{{site.description | truncate: 200}}</p>
   </div>
 
   <div class="c-sidebar-footer">
