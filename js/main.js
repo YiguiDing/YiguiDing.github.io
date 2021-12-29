@@ -104,7 +104,7 @@ $(document).ready(function () {
     function ()
     {
       var PostURL=document.getElementById('POST_URL').value;
-      var Redirect_URL=document.getElementById('Redirect_URL').value;
+      var Redirect_URL=document.getElementById('Redirect_URL').value;      
       var data=
       {
         name:     document.getElementById('form-name').value,

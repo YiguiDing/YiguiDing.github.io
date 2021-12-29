@@ -1,7 +1,7 @@
 <div class="c-form-box o-opacity">
   <input  type="hidden" id="POST_URL"       value="{{site.formspree-POST-URL}}"         ></input>
-  <input  type="hidden" id="Redirect_URL"   value="{{ site.baseurl }}/contact/thanks/"  ></input>
-  <form class="c-form">
+  <input  type="hidden" id="Redirect_URL"   value="{{ site.url }}/contact/thanks/"  ></input>
+  <div class="c-form">
     <a href="/"><div class="c-form-bnt__close" data-icon='ei-close' data-size='s'></div></a>
     <div class="c-form__title">向我发送邮件</div>
     <div class="c-form__group">
@@ -23,6 +23,6 @@
     <div class="c-form__group">
       <button class="c-submit_btn c-btn c-btn--secondary c-btn--big c-btn--shadow" >发送</button>
     </div>
-  </form>
+  </div>
 
 </div> <!-- /.c-form-box -->
