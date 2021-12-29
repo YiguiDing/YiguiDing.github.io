@@ -1,5 +1,7 @@
 <div class="c-form-box o-opacity">
-  <form class="c-form" action="{% if site.formspree-Id %}https://formspree.io/{{site.formspree-Id}}{% else %}#{% endif %}" method="POST">
+  <input  type="hidden" id="POST_URL"       value="{{site.formspree-POST-URL}}"         ></input>
+  <input  type="hidden" id="Redirect_URL"   value="{{ site.baseurl }}/contact/thanks/"  ></input>
+  <form class="c-form">
     <a href="/"><div class="c-form-bnt__close" data-icon='ei-close' data-size='s'></div></a>
     <div class="c-form__title">向我发送邮件</div>
     <div class="c-form__group">
@@ -16,11 +18,11 @@
     </div>
     <div class="c-form__group">
       <label for="form-text">*内容</label>
-      <textarea class="c-form__input" id="form-text" name="context" rows="10" required></textarea>
+      <textarea class="c-form__input" id="form-text" type="text" name="context" rows="10" required></textarea>
     </div>
     <div class="c-form__group">
-      <button class="c-btn c-btn--secondary c-btn--big c-btn--shadow" type="submit">发送</button>
+      <button class="c-submit_btn c-btn c-btn--secondary c-btn--big c-btn--shadow" >发送</button>
     </div>
-    <input type="hidden" name="_next" value="{{ site.url }}/contact/thanks/" />
   </form>
+
 </div> <!-- /.c-form-box -->

@@ -23,8 +23,18 @@ layout: home
         <a href="{{post.url | prepend: site.baseurl}}"> {{post.title}} </a>
       </h2>
       <p>{{ post.content | strip_html | truncate: 50 }}</p><!-- truncatewords截取单词 truncate截取字符 -->
-      <span class="c-post-date">{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " minute read" }}{% endunless %}</span>
+      <span class="c-post-date">
+        {{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;
+      </span>
+      <span class="c-post-words">
+        {% capture words %}
+        {% comment %} 本可用number_of_words: "auto"过滤出中午呢字符和英文单词数，但v4.1.0 开始number_of_words过滤器才采用可选参数来控制 而此时GitHub的jekyll版本为3.9.0  {% endcomment %}
+        {{ post.content | strip_html | strip_newlines | split: "" | size }}
+        {% endcapture %}
+        {% unless words contains "-" %}
+        {{ words | at_least: 200 | divided_by: 200 | prepend: "约" | append: "分钟读完" }}
+        {% endunless %}
+      </span>
     </div>
   </article> <!-- /.c-post -->
   {% endfor %}

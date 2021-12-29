@@ -21,7 +21,7 @@ author-bilibili: 73686452
 author-slogan: >
   在绝望中坚持真理 在荒诞中奋起反抗
 #用于接收邮件
-formspree-Id: mdobkkgl #action="https://formspree.io/f/mdobkkgl"
+formspree-POST-URL: https://formspree.io/f/mdobkkgl #action="https://formspree.io/f/mdobkkgl"
 
 #社交账号
 social-github:    YiguiDing
@@ -48,7 +48,15 @@ category_dir: category #这个分类是指 /_site/category
 share_to_QQ:    https://connect.qq.com/widget/shareqq/index.html?url=
 share_to_weibo: https://service.weibo.com/share/share.php?url=
 share_to_qzone: https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=
-share_to_TieBa: http://tieba.baidu.com/f/commit/share/openShareApi?title=
+share_to_TieBa: http://tieba.baidu.com/f/commit/share/openShareApi?url=
+# Facebook：http://www.facebook.com/sharer.php?u=分享地址
+# Twitter ： https://twitter.com/intent/tweet?url=分享地址&via=分享人（可以@）&text=分享内容
+# Google+ : https://plus.google.com/share?url=分享地址
+# 新浪微博：http://service.weibo.com/share/share.php?url=地址&pic=图片地址&title=标题&appkey=您申请的应用appkey,显示分享来源(可选)&ralateUid=关联用户的UID，分享微博会@该用户(可选)
+# 腾讯微博：'http://v.t.qq.com/share/share.php?title='+content+'&url='+url+'&pic='+picurl;
+# 百度贴吧：http://tieba.baidu.com/f/commit/share/openShareApi?url=地址&title=标题&desc=描述&pic=图片
+# QQ空间：http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey??url=地址&title=标题&pics=图片
+# 领英：http://www.linkedin.com/shareArticle?spm= &mini=true&url=地址
 
 markdown: kramdown
 permalink: /:year/:month/:day/:title/

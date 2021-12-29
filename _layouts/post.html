@@ -38,9 +38,12 @@ layout: home
           <a href="{{ site.share_to_weibo | append: site.url | append: page.url }}" title="分享到微博" rel="nofollow" target="_blank">
             <div data-icon='ei-sc-weibo' data-size='s'></div>
           </a>
-          <a href="{{ site.share_to_TieBa | append: site.url | append: page.url }}" title="分享到贴吧" rel="nofollow" target="_blank">
+          <!--
+            <a href="{{ site.share_to_TieBa | append: site.url | append: page.url |append: "&title=" |append: page.title  }}" title="分享到贴吧" rel="nofollow" target="_blank">
+            url=地址&title=标题&desc=描述&pic=图片
             <div data-icon='ei-sc-TieBa' data-size='s'></div>
           </a>
+          --> 
         </div>
       </div>
       {% include newsletter.html %}
