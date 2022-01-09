@@ -70,6 +70,7 @@ include:
   - _pages              #表单和感谢页面
   - search.json         #表单         
   - category            #/category
+  - Bliep.io-Client
 
 sass:
   sass_dir: _sass

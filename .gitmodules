@@ -1,0 +1,3 @@
+[submodule "Bliep.io-Client"]
+	path = Bliep.io-Client
+	url = git@github.com:YiguiDing/Bliep.io-Client.git
