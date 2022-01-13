@@ -1,3 +1,6 @@
 [submodule "Bliep.io-Client"]
 	path = Bliep.io-Client
 	url = git@github.com:YiguiDing/Bliep.io-Client.git
+[submodule "html-js_russiaGame"]
+	path = html-js_russiaGame
+	url = git@github.com:YiguiDing/html-js_russiaGame.git
