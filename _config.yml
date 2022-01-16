@@ -70,8 +70,6 @@ include:
   - _pages              #表单和感谢页面
   - search.json         #表单         
   - category            #/category
-  - Bliep.io-Client
-  - html-js_russiaGame
 sass:
   sass_dir: _sass
   style: compressed
