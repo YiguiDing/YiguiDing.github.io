@@ -49,6 +49,8 @@ cdn: # 这里可以修改站点使用的库的CDN
     js: https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.js
   mathjax: # 开源的 JavaScript 数学显示引擎，适用于所有浏览器。
     js: https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
+  highlight: #highlightjs 代码高亮
+    css: /css/base16_dracula.min.css
 
 menu:
   回到首页: 
@@ -159,6 +161,8 @@ gitalk:
   repo: yiguiding.github.io # 存放评论的 issue 所在的 repo
   clientID: e0b7de11a5245802f0b0 # GitHub Client ID
   clientSecret: 27f791b72cc246099608bb26bd4972043ebc63b5 # GitHub Client Secret
+  pagerDirection: first #评论排序方式
+  createIssueManually: true #admin用户手动创建issue
 gitment:
   owner: nexmoe # 持有该 repo 的 GitHub username
   repo: nexmoe.github.io # 存放评论的 issue 所在的 repo

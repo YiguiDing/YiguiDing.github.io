@@ -46,18 +46,20 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-highlight:
+
+highlight: # 语法高亮
   enable: true
-  line_number: true
-  auto_detect: true
-  tab_replace: ''
-  wrap: true
-  hljs: false
-prismjs:
-  enable: false
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+  hljs: true #为代码的class 添加 hljs- 前缀 使其能够代码高亮
+  auto_detect: true  #自动检测代码块的语言
+  line_number: true #行号显示
+  wrap: true #须和和line_number一致
+  tab_replace: '  ' #/t制表符替换成什么
+
+# prismjs:                # 主要是面向浏览器的。
+#   enable: false         # 启用 PrimeJS 前应设置 highlight.enable 为 false
+#   preprocess: true      # preprocess 与 line_number 均设为 true，需要引入 prism-line-numbers.css 即可启用行号显示。均设为 false，需将prism-line-numbers.css 和 prism-line-numbers.js 都引入
+#   line_number: true    # 是否显示行号
+#   tab_replace: '  '     # /t制表符替换成什么
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
