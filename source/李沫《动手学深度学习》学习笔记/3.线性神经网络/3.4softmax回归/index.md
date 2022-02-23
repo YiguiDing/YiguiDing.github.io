@@ -1,4 +1,5 @@
 ---
+title: 3.4softmax回归
 layout: post
 cover: /images/article/DeepLearning.jpg
 ---

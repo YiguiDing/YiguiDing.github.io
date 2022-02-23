@@ -1,4 +1,5 @@
 ---
+title: 3.3利用深度学习框架实现线性回归
 layout: post
 cover: /images/article/DeepLearning.jpg
 ---

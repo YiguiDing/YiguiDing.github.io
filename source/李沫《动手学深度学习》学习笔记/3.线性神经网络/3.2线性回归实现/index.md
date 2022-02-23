@@ -1,4 +1,5 @@
 ---
+title: 3.2线性回归实现
 layout: post
 cover: /images/article/DeepLearning.jpg
 ---
