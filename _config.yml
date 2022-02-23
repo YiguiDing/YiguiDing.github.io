@@ -1,87 +1,136 @@
-title: DYG的个人博客
-description: >
-  Here is DYG's personal technical blog
-  <br>May publish some study notes
-  <br>Or just record life
-#  <br>Prove to the world that I am still alive
-#这里是DYG的个人技术博客
-#<br>可能会会发表一些学习笔记
-#<br>或者只是单纯记录一下生活
-#<br>向世界证明一下自己还活着
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://YiguiDing.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+# Site
+title: YiguiDing's blog site
+subtitle: 'YiguiDing的博客站点'
+description: ''
+keywords: 
+author: YiguiDing
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
-# Author
-author-name:    Yigui Ding
-author-image:   images/user/head_icon2.jpg
-author-job:     “待业青年”
-author-email:   2449695354@qq.com # Add your email for contant form.
-author-bilibili: 73686452
-author-slogan: >
-  在绝望中坚持真理 在荒诞中奋起反抗
-#用于接收邮件
-formspree-POST-URL: https://formspree.io/f/mdobkkgl #action="https://formspree.io/f/mdobkkgl"
+# URL
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: https://yiguiding.github.io/ # 网址, 必须以 http:// 或 https:// 开头
+# root: /
+permalink: :year/:month/:day/:title/ # 文章的 永久链接 格式
+permalink_defaults: # 永久链接中各部分的默认值
+pretty_urls: # 改写 permalink 的值来美化 URL
+  trailing_index: true # 是否在永久链接中保留尾部的 "index.html"
+  trailing_html: true # 是否在永久链接中保留尾部的 ".html"
 
-#社交账号
-social-github:    YiguiDing
-social-weibo:     6304917168 #uid
-social-bilibili:  73686452   #uid
-social-zhihu:     ding-yi-gui-90
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: #不渲染
+  # - games/* # 忽略source/games/下所有文档
+  - games/**  # 忽略source/games/下所有文档和文件
 
-# Newsletter
-mailchimp: # Add your MailChimp form identifier. For example - blogenjoyfreedom.us16.list-manage.com/subscribe/post?u=cd56155d76ddeeb4c0bc4d080&amp;id=7a526cd13e
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: true
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
-# Google Analytics
-google-analytics: #UA-99631805-1 # Add your identifier. For example UA-99631805-1
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
 
-# Comment Section (Disqus)
-disqus-identifier: Mr-Ding # Add your shortname for Disqus Comment. For example mr-brown
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
 
-# 网站角标
-web_icon_Dir: /images/web_icon/web_icon1.jpg
-MD_img_Dir:   /images/文章图片/       #site.MD_img_Dir
-# 分类文件
-category_dir: category #这个分类是指 /_site/category
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
 
-#分享链接
-share_to_QQ:    https://connect.qq.com/widget/shareqq/index.html?url=
-share_to_weibo: https://service.weibo.com/share/share.php?url=
-share_to_qzone: https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=
-share_to_TieBa: http://tieba.baidu.com/f/commit/share/openShareApi?url=
-# Facebook：http://www.facebook.com/sharer.php?u=分享地址
-# Twitter ： https://twitter.com/intent/tweet?url=分享地址&via=分享人（可以@）&text=分享内容
-# Google+ : https://plus.google.com/share?url=分享地址
-# 新浪微博：http://service.weibo.com/share/share.php?url=地址&pic=图片地址&title=标题&appkey=您申请的应用appkey,显示分享来源(可选)&ralateUid=关联用户的UID，分享微博会@该用户(可选)
-# 腾讯微博：'http://v.t.qq.com/share/share.php?title='+content+'&url='+url+'&pic='+picurl;
-# 百度贴吧：http://tieba.baidu.com/f/commit/share/openShareApi?url=地址&title=标题&desc=描述&pic=图片
-# QQ空间：http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey??url=地址&title=标题&pics=图片
-# 领英：http://www.linkedin.com/shareArticle?spm= &mini=true&url=地址
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
-markdown: kramdown
-permalink: /:year/:month/:day/:title/
-plugins:
-  - jekyll-paginate
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
 
-paginate: 8
-paginate_path: "/page/:num/"
-
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
 include:
-  - _pages              #表单和感谢页面
-  - search.json         #表单         
-  - category            #/category
-  - game
-sass:
-  sass_dir: _sass
-  style: compressed
-
-# Exclude from processing.
+  - 李沫《动手学深度学习》学习笔记/**
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - Gemfile.github
-  - Gemfile.flxton
-  - vendor
-  - LICENSE.txt
-  - README.md
-  - attachments
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+# theme: landscape # 默认主题
+theme: nexmoe # nexmoe主题
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: 'git'
+  repo: https://github.com/YiguiDing/YiguiDing.github.io.git #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  branch: [site]
+  # message: [message]
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true 
+    date: false 
+    path: true 
+    text: true
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: false
+
+    
+aplayer:
+  meting: true
