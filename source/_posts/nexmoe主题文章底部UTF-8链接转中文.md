@@ -2,7 +2,7 @@
 layout: post
 title: "nexmoe主题文章底部UTF-8链接转中文"
 date: 2022-02-23 21:46:00 +0800
-cover: /images/article/book1.jpg
+cover: /images/article/nexmoe主题文章底部UTF-8链接转中文.png
 tags: [笔记,nexmoe]
 categories: 前端
 ---

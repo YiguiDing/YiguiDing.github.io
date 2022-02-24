@@ -59,9 +59,13 @@ menu:
   文章归档:  # 使用说明：https://docs.nexmoe.com/article/archive
    - /archive.html
    - icon-container
-  # 关于博主:
-  #   - /aboutMe.html
-  #   - icon-info-circle
+  近期目标:
+    - recentGoal.html
+    - icon-Recents
+  关于博主:
+    - /aboutMe.html
+    - icon-aboutme
+
   # 网站收藏: 
     # - /stars.html # 使用说明：https://docs.nexmoe.com/article/py
     # - icon-star
@@ -88,23 +92,32 @@ social:
     - https://space.bilibili.com/73686452
     - icon-bilibili
     - rgb(231, 106, 141)
-    - rgba(231, 106, 141, .15)
+    - rgba(231, 106, 141,0.1)
   GitHub:
     - https://github.com/YiguiDing
     - icon-github
-    - rgb(0, 0, 0)
-    - rgba(255, 255, 255,0.3)
-  知乎:
-    - https://zhihu.com/people/ding-yi-gui-90
-    - icon-zhihu
-    - rgb(0, 40, 255)
-    - rgb(0, 40, 255,0.15)
+    - rgb(255, 118, 30)
+    - rgba(255, 118, 30,0.1)
+  Gitee:
+    - https://gitee.com/YiguiDing
+    - icon-gitee
+    - rgb(255, 185, 0)
+    - rgba(255, 185, 0, 0.1)
   微博:
     - https://weibo.com/u/6304917168
     - icon-weibo
-    - rgb(255, 0, 0)
-    - rgba(255, 0, 0,0.15)
-  
+    - rgb(51, 213, 122)
+    - rgba(51, 213, 122, 0.1)
+  知乎:
+    - https://zhihu.com/people/ding-yi-gui-90
+    - icon-zhihu
+    - rgb(14, 135, 234)
+    - rgba(14, 135, 234,0.1)
+  QQ:
+    - 244
+    - icon-qq
+    - rgb(0, 219, 255)
+    - rgba(0, 219, 255, 0.15)
 
 # 自定义样式，启用后可在站点的source文件夹下新建custom.css自定义站点样式
 customstyle: false  
@@ -161,8 +174,8 @@ gitalk:
   repo: yiguiding.github.io # 存放评论的 issue 所在的 repo
   clientID: e0b7de11a5245802f0b0 # GitHub Client ID
   clientSecret: 27f791b72cc246099608bb26bd4972043ebc63b5 # GitHub Client Secret
-  pagerDirection: first #评论排序方式
-  createIssueManually: true #admin用户手动创建issue
+  pagerDirection: first #评论排序方式first时间先后
+  createIssueManually: false #true表示需admin用户手动创建issue,然后其他人才能评论 false表示当admin用户访问该页面时将自动创建issue
 gitment:
   owner: nexmoe # 持有该 repo 的 GitHub username
   repo: nexmoe.github.io # 存放评论的 issue 所在的 repo
