@@ -174,8 +174,7 @@ gitalk:
   repo: yiguiding.github.io # 存放评论的 issue 所在的 repo
   clientID: e0b7de11a5245802f0b0 # GitHub Client ID
   clientSecret: 27f791b72cc246099608bb26bd4972043ebc63b5 # GitHub Client Secret
-  pagerDirection: first #评论排序方式first时间先后
-  createIssueManually: false #true表示需admin用户手动创建issue,然后其他人才能评论 false表示当admin用户访问该页面时将自动创建issue
+  pagerDirection: "last" #评论排序方式first时间先后
 gitment:
   owner: nexmoe # 持有该 repo 的 GitHub username
   repo: nexmoe.github.io # 存放评论的 issue 所在的 repo
