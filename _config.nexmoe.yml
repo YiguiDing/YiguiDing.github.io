@@ -175,6 +175,7 @@ gitalk:
   clientID: e0b7de11a5245802f0b0 # GitHub Client ID
   clientSecret: 27f791b72cc246099608bb26bd4972043ebc63b5 # GitHub Client Secret
   pagerDirection: "last" #评论排序方式first时间先后
+  language: "zh-CN" #Localization language key, support [en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja].
 gitment:
   owner: nexmoe # 持有该 repo 的 GitHub username
   repo: nexmoe.github.io # 存放评论的 issue 所在的 repo
