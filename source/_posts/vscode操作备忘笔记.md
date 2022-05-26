@@ -2,7 +2,7 @@
 layout: post
 title: "vscode操作备忘笔记"
 date: 2022-01-09 20:28:00 +0800
-cover: /images/article/vscode (3).webp
+cover: /images/article/vscode.webp
 tags: [笔记,vscode]
 categories: 笔记
 ---

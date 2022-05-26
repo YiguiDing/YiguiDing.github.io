@@ -1,6 +1,6 @@
 ---
 layout: post
-top: 8
+top: 7
 title: "用js写了个网页版俄罗斯方块"
 date: 2022-01-09 21:39:00 +0800
 cover: /images/article/俄罗斯方块.png

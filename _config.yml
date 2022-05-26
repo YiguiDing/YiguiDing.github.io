@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: YiguiDing的博客站点
+title: YiguiDing的万事笔记本
 subtitle: ''
 description: ''
 keywords: 
@@ -97,6 +97,8 @@ pagination_dir: page
 ## include:/exclude: options only apply to the 'source/' folder
 include:
   - 李沫《动手学深度学习》学习笔记/**
+  - 数据结构与算法分析：C语言描述_原书第2版学习笔记/**
+
 exclude:
 ignore:
 
