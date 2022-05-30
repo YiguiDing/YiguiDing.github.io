@@ -7,10 +7,11 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
+    "fetch": "git fetch origin",
     "calendar": "hexo gc -w=55",
-    "cbs": "hexo clean && hexo gc -w=55 && hexo generate && hexo server",
-    "cgd": "hexo clean && hexo gc -w=55 && hexo generate && hexo deploy",
-    "commit": "git add . && git commit -m '优化' && git push origin master "
+    "cbs": "hexo clean  && hexo gc -w=55 && hexo generate && hexo server",
+    "cgd": "hexo clean  && hexo gc -w=55 && hexo generate && hexo deploy",
+    "commit": "git add . && git commit -m "$(date)" && git push origin master"
   },
   "hexo": {
     "version": "6.0.0"

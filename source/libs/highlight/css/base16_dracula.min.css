@@ -10,10 +10,11 @@
 pre code.hljs{
   display:block;
   overflow-x:auto;
-  padding:1em
+  padding:0em;
+  border-radius:0px;
 }
 code.hljs{
-  /* padding:3px 5px */
+  /* padding:3px 5px; */
   padding:0px 0px;
 }
 .hljs{
@@ -69,7 +70,7 @@ code.hljs{
   color:#00f769
 }
 .hljs-meta .hljs-keyword,.hljs-meta-keyword{
-  font-weight:700
+  font-weight:700;
 }
 /* 代码背景宽度 */
 td.code {
