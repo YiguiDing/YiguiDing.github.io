@@ -7,11 +7,13 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
+    "注释1": "calendar需要git log --all获取全部分支的提交情况，所以需要fetch一下",
     "fetch": "git fetch origin",
     "calendar": "hexo gc -w=55",
     "cbs": "hexo clean  && hexo gc -w=55 && hexo generate && hexo server",
     "cgd": "hexo clean  && hexo gc -w=55 && hexo generate && hexo deploy",
-    "commit": "git add . && git commit -m "$(date)" && git push origin master"
+    "注释2": "json中的字符串必须是双引号，其中需要使用双引号字符需要转义",
+    "commit": "git add . && git commit -m \"$(date)\" && git push origin master"
   },
   "hexo": {
     "version": "6.0.0"
