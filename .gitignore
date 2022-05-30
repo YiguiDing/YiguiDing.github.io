@@ -6,6 +6,8 @@ db.json
 node_modules/*
 #保留该目录下修改过的nexmoe主题文件
 !node_modules/hexo-theme-nexmoe
+!node_modules/hexo-calendar
+
 public/
 .deploy*/
 _multiconfig.yml

@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: YiguiDing的万事笔记本
+title: YiguiDing的个人博客站点
 subtitle: ''
 description: ''
 keywords: 
@@ -33,6 +33,7 @@ skip_render: #不渲染
   # - games/* # 忽略source/games/下所有文档
   - games/**  # 忽略source/games/下所有文档和文件
   - libs/**
+  - live2d_models/**
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
@@ -96,8 +97,8 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
-  - 李沫《动手学深度学习》学习笔记/**
-  - 数据结构与算法分析：C语言描述_原书第2版学习笔记/**
+  - 《动手学深度学习》(李沫)学习笔记/**
+  - 《数据结构与算法分析》学习笔记/**
 
 exclude:
 ignore:
@@ -138,3 +139,113 @@ jsonContent:
 
 aplayer:
   meting: true
+
+# echartsURL: https://cdn.staticfile.org/echarts/4.7.0/echarts.min.js
+
+# Security
+# 启用hexo-blog-encrypt文章加密插件
+encrypt:
+  enable: true
+  abstract: 文章内容已加密,查阅需密码.
+  message: 文章内容已加密,请输入密码.
+  tags:
+  - {name: 日记, password: 147258369Dyg}
+  - {name: 加密, password: 147258369Dyg}
+  wrong_pass_message: 密码错误,请重试.
+  wrong_hash_message: 文章已解密但无法校验.
+
+# ---
+# title: Hello World
+# tags:
+# - 作为日记加密
+# date: 2016-03-30 21:12:21
+# password: mikemessi
+# abstract: 有东西被加密了, 请输入密码查看.
+# message: 您好, 这里需要密码.
+# wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.
+# wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.
+# ---
+
+
+## Live2D看板娘
+live2d:
+  enable: true
+  # pluginRootPath: live2dw/  # 插件在站点上的根目录(相对路径) # 默认 live2dw/
+  # pluginJsPath: lib/  # 脚本文件相对与插件根目录路径 # 默认 lib/
+  # pluginModelPath: assets/  # 模型文件相对与插件根目录路径 # 默认 assets/
+  model:
+    use: /live2d_models/hk416_3401/assets/hk416_3401.model.json #模板目录，在node_modules里
+        # 其配置为：   
+          # width: 400 
+          # height: 600
+          # hOffset: -100 # 水平向左偏移
+          # vOffset: -220 # 垂直向上偏移 
+    
+    # use: https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json # w200 h300
+    # use: live2d-widget-model-shizuku  # 同桌
+
+    # use: live2d-widget-model-hibiki # 美女 vOffset: -50 # 垂直向上偏移 或者 适合放到屏幕左侧
+    # use: live2d-widget-model-izumi  # 美女
+    # use: live2d-widget-model-z16 # 美女
+
+    # use: live2d-widget-model-koharu # 卡通女
+    # use: live2d-widget-model-haruto # 卡通男
+
+    # use: live2d-widget-model-hijiki # 猫咪 黑猫
+    # use: live2d-widget-model-tororo # 猫咪 白猫
+  display:
+    superSample: 2
+    position: right
+    width: 400 
+    height: 600
+    hOffset: -100 # 水平向左偏移
+    vOffset: -220 # 垂直向上偏移 
+  mobile: # 在手机端显示
+    show: true
+    scale: 1
+  rect:
+    opacity: 1
+  dialog:
+    enable: false
+    hitokoto: false
+    
+# Live2D看板娘配置示例
+# live2d:
+#   model:
+#     scale: 1
+#     hHeadPos: 0.5
+#     vHeadPos: 0.618
+#   display:            <!--设置看板娘的上下左右位置-->
+#     superSample: 2
+#     width: 150
+#     height: 300
+#     position: right
+#     hOffset: 0
+#     vOffset: -20
+#   mobile:
+#     show: true
+#     scale: 0.5
+#   react:
+#     opacityDefault: 0.7
+#     opacityOnHover: 0.2
+
+# live2d:
+#   enable: true  # 是否启动
+#   scriptFrom: local # 默认
+#   pluginRootPath: live2dw/  # 插件在站点上的根目录(相对路径)
+#   pluginJsPath: lib/  # 脚本文件相对与插件根目录路径
+#   pluginModelPath: assets/  # 模型文件相对与插件根目录路径
+#   tagMode: false  # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
+#   debug: false  # 调试, 是否在控制台输出日志
+#   model:
+#     use: live2d-widget  ## 模型文件
+#   display:
+#     position: right # 定位方向 left right top bottom
+#     width: 150  # 小人宽度
+#     height: 300 #  小人高度
+#     hOffset: -15  # 向 偏移
+#     vOffset: -15  # 像 偏移
+#   mobile:
+#     show: true  # 手机端是否显示
+#   react:
+#     opacity: 0.7  # 模型透明度

@@ -1,8 +1,15 @@
 #nexmoe主题的配置文件
-avatar: /images/web_img/user_icon.jpg # 头像
+avatar: /images/web_img/user_icon.png # 头像
 
-background: # 既是博客的背景，又是文章默认封面
-  path: /images/web_img/web_background.jpeg
+# 文章默认封面
+default_cover:
+  path: /images/web_img/default_cover.jpeg
+  width: 8000
+  height: 4500
+
+# # 博客的背景
+background: 
+  path: /images/web_img/web_background.jpg
   width: 8000
   height: 4500
 
@@ -258,3 +265,17 @@ sidebar:
     #       </a>
     # '
 #           <script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
+
+
+
+hexo_calendar:
+  enable: true
+  width: 810
+  height: 160
+  id: "calendar"
+  monthLang: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+  dayLang: ['周日','周一','周二','周三','周四','周五','周六']
+  weeks: 55
+  title: "文章更新频率"
+  echarts_Lib_URL: https://cdn.staticfile.org/echarts/4.7.0/echarts.min.js
+  # echarts_Lib_URL: /libs/echarts/echarts4.7.0.min.js
