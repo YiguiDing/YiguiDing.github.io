@@ -47,7 +47,7 @@ plt.plot(y_hat,10 * likeHood(y_hat))
 
 
     
-![png](/动手学深度学习》(李沫)学习笔记/3.线性神经网络/3.4softmax回归/output_2_1.png)
+![png](/《动手学深度学习》(李沫)学习笔记/3.线性神经网络/3.4softmax回归/output_2_1.png)
     
 
 

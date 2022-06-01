@@ -8,6 +8,7 @@ subtitle: ''
 description: ''
 keywords: 
 author: YiguiDing
+motto: "宿命欲催英雄瘦 不改天命誓不休"
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -54,7 +55,7 @@ highlight: # 语法高亮
   auto_detect: true  #自动检测代码块的语言
   line_number: true #行号显示
   wrap: true #须和和line_number一致
-  tab_replace: '  ' #/t制表符替换成什么
+  tab_replace: '    ' #/t制表符替换成什么
 
 # prismjs:                # 主要是面向浏览器的。
 #   enable: false         # 启用 PrimeJS 前应设置 highlight.enable 为 false
@@ -113,8 +114,10 @@ theme: nexmoe # nexmoe主题
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: https://github.com/YiguiDing/YiguiDing.github.io.git #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
-  branch: [site]
+  repo: 
+    github:  https://github.com/YiguiDing/YiguiDing.github.io.git,site #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+    # gitee:   https://gitee.com/YiguiDing/YiguiDing.git,site
+  # branch: [site]
   # message: [message]
 
 jsonContent:

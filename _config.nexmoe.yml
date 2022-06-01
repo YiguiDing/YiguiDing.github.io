@@ -79,8 +79,16 @@ cdn: # 这里可以修改站点使用的库的CDN
     js: /libs/mdui/1.0.2/js/mdui.js
   fancybox: # 支持触控、响应迅速且完全可定制的 jQuery 灯箱脚本
     js: /libs/fancybox/3.5.7/jquery.fancybox.js
-  mathjax: # 开源的 JavaScript 数学显示引擎，适用于所有浏览器。
-    js: /libs/mathjax/3.2.0/es5/tex-mml-chtml.js
+  # mathjax: # 开源的 JavaScript 数学显示引擎，适用于所有浏览器。 (暂时弃用 模板中相关代码已删除)
+  #   js: /libs/mathjax/3.2.0/es5/tex-mml-chtml.js
+  katex: # LaTex的基础是Tex,Tex是一个排版系统,
+    css: /libs/katex/v0.15.6/katex.min.css
+    js: /libs/katex/v0.15.6/katex.min.js
+    auto_render: # 自动渲染扩展
+      js: /libs/katex/v0.15.6/contrib/auto-render.min.js
+    copy_tex: # 复制公式扩展
+      css: /libs/katex/v0.15.6/contrib/copy-tex.css
+      js: /libs/katex/v0.15.6/contrib/copy-tex.min.js
   highlight: #highlightjs 代码高亮
     css: /libs/highlight/css/base16_dracula.min.css
 
@@ -276,6 +284,6 @@ hexo_calendar:
   monthLang: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
   dayLang: ['周日','周一','周二','周三','周四','周五','周六']
   weeks: 55
-  title: "文章发布或内容更新及站点维护提交次数统计"
+  title: "博客内容更新及站点维护提交次数统计"
   echarts_Lib_URL: https://cdn.staticfile.org/echarts/4.7.0/echarts.min.js
   # echarts_Lib_URL: /libs/echarts/echarts4.7.0.min.js

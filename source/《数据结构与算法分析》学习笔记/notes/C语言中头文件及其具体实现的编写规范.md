@@ -4,6 +4,9 @@
 
 
 cover: /《数据结构与算法分析》学习笔记/attachments/Clipboard_2022-05-27-02-08-50.png
+cover: /《数据结构与算法分析》学习笔记/attachments/Clipboard_2022-05-27-02-08-50.png
+coverWidth: 813
+coverHeight: 539
 title: C语言中头文件及其具体实现的编写规范
 created: '2022-05-25T06:12:53.437Z'
 modified: '2022-05-26T18:09:20.016Z'
