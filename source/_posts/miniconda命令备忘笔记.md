@@ -1,10 +1,10 @@
-
 ---
 layout: post
+
 title: "miniconda备忘笔记"
 date: 2022-01-29 13:52:00 +0800
 cover: /images/article/conda.png
-tags: [笔记,miniconda]
+tags: [笔记,miniconda,HIDE]
 categories: 笔记
 ---
 

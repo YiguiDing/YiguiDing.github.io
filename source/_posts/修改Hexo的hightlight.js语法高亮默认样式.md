@@ -1,9 +1,10 @@
 ---
 layout: post
+
 title: "修改Hexo的hightlight.js语法高亮默认样式"
 date: 2022-02-24 01:06:00 +0800
 cover: /images/article/hightlightjs2.png
-tags: [笔记,Hexo,hightlight.js]
+tags: [笔记,Hexo,hightlight.js,HIDE]
 categories: 前端
 ---
 

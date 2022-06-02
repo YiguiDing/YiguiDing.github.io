@@ -1,5 +1,6 @@
 ---
 layout: post
+top: 9
 title: "git命令备忘笔记"
 date: 2022-01-09 20:28:00 +0800
 cover: /images/article/git.jpg

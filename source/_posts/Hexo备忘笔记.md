@@ -1,9 +1,10 @@
 ---
 layout: post
+
 title: "Hexo备忘笔记"
 date: 2022-02-23 09:50:00 +0800
 cover: /images/article/Hexo.jpg
-tags: [笔记,Hexo]
+tags: [笔记,Hexo,HIDE]
 categories: 笔记
 ---
 

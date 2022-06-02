@@ -1,9 +1,10 @@
 ---
 layout: post
+
 title: "MySql笔记"
 date: 2022-05-27 04:50:00 +0800
 cover: /images/article/MySql.webp
-tags: [笔记,MySql]
+tags: [笔记,MySql,HIDE]
 categories: 笔记
 ---
 

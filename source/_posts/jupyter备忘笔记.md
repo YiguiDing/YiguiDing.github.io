@@ -1,10 +1,11 @@
 
 ---
 layout: post
+
 title: "jupyter备忘笔记"
 date: 2022-01-29 20:09:00 +0800
 cover: /images/article/jupyter.png
-tags: [笔记,jupyter]
+tags: [笔记,jupyter,HIDE]
 categories: 笔记
 ---
 # jupyter备忘笔记

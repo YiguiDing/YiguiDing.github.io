@@ -1,9 +1,10 @@
 ---
 layout: post
+
 title: "Hexo设置文章展示优先级"
 date: 2022-02-24 03:15:00 +0800
 cover: /images/article/book1.jpg
-tags: [笔记,Hexo]
+tags: [笔记,Hexo,HIDE]
 categories: 笔记
 ---
 

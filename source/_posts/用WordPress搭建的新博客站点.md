@@ -1,10 +1,10 @@
 ---
 layout: post
-top: 8
+
 title: "用WordPress搭建的新博客站点"
 date: 2022-05-25 01:12:00 +0800
 cover: /images/article/新站点.png
-tags: [日志]
+tags: [日志,HIDE]
 categories: 日志
 ---
 

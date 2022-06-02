@@ -4,9 +4,12 @@ db.json
 *.log
 #忽略该目录下所有文件
 node_modules/*
-#保留该目录下修改过的nexmoe主题文件
+
+#保留该目录下修改过的文件
 !node_modules/hexo-theme-nexmoe
 !node_modules/hexo-calendar
+!node_modules/hexo-renderer-marked
+!node_modules/hexo-generator-category
 
 public/
 .deploy*/

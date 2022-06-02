@@ -63,14 +63,7 @@ highlight: # 语法高亮
 #   line_number: true    # 是否显示行号
 #   tab_replace: '  '     # /t制表符替换成什么
 
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
-index_generator:
-  path: ''
-  per_page: 10
-  order_by: -date
+
 
 # Category & Tag
 default_category: uncategorized
@@ -252,3 +245,27 @@ live2d:
 #     show: true  # 手机端是否显示
 #   react:
 #     opacity: 0.7  # 模型透明度
+
+
+index2_include_index: false
+index2_generator:
+  path: ''
+  per_page: 10
+  order_by: -date # 按发布时间排序
+  # include:
+  #   - tag Web
+  #   - category Web  # 只包含Web分类下的文章
+  exclude:
+    - tag HIDE      # 不包含标签为HIDE的文章
+    - category HIDE # 不包含分类为hide的文章
+
+
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date

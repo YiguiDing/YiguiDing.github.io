@@ -78,7 +78,8 @@ cdn: # 这里可以修改站点使用的库的CDN
   mdui: # 基于材料设计的 CSS 框架
     js: /libs/mdui/1.0.2/js/mdui.js
   fancybox: # 支持触控、响应迅速且完全可定制的 jQuery 灯箱脚本
-    js: /libs/fancybox/3.5.7/jquery.fancybox.js
+    css: /libs/fancybox/3.5.7/jquery.fancybox.min.css
+    js: /libs/fancybox/3.5.7/jquery.fancybox.min.js
   # mathjax: # 开源的 JavaScript 数学显示引擎，适用于所有浏览器。 (暂时弃用 模板中相关代码已删除)
   #   js: /libs/mathjax/3.2.0/es5/tex-mml-chtml.js
   katex: # LaTex的基础是Tex,Tex是一个排版系统,

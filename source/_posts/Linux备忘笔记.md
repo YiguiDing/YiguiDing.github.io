@@ -1,6 +1,6 @@
 ---
 layout: post
-top: 6
+top: 8
 title: "Linux备忘笔记"
 date: 2022-01-09 20:28:00 +0800
 cover: /images/article/linux2.webp
