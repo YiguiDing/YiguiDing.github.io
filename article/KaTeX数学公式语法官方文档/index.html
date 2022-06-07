@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>KaTeX数学公式语法官方文档 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+    <meta name="description" content="KaTeX数学公式语法官方文档This is a list of TeX functions supported by KaTeX. It is sorted into logical groups. There is a similar Support Table, sorted alphabetically, that lists both supported and un-supported">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KaTeX数学公式语法官方文档">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="KaTeX数学公式语法官方文档This is a list of TeX functions supported by KaTeX. It is sorted into logical groups. There is a similar Support Table, sorted alphabetically, that lists both supported and un-supported">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-31T15:10:17.339Z">
+<meta property="article:modified_time" content="2022-06-02T03:51:04.878Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta name="twitter:card" content="summary">
+    <script src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654601980940">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654601980940">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1654601980940">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1654601980940">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>47</div>
+        <div><span>字数</span>37.2k</div>
+        <div><span>标签</span>29</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">7</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">30</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 14.29px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.43px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 12.86px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.86px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.14px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15.71px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.57px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_9.%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">第4章_9.树的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/">第4章_8.伸展树</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%B0%B8%E8%BF%9C%E6%9C%89%E4%B8%8B%E4%B8%80%E5%BA%A7%E6%9C%80%E9%AB%98%E5%B3%B0/">永远有下一座最高峰</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/">CSS3重学笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%9C%80%E7%97%9B%E8%8B%A6%E7%9A%84%E6%97%A5%E5%AD%90%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E4%BA%86/">那些最痛苦的日子已经过去了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link  href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+<script>
+    
+</script>
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="KaTeX数学公式语法官方文档" class="lazyload">
+              <h1>KaTeX数学公式语法官方文档</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月31日</a>
+</div>
+
+      
+
+      <h1 id="KaTeX数学公式语法官方文档"><a href="#KaTeX数学公式语法官方文档" class="headerlink" title="KaTeX数学公式语法官方文档"></a>KaTeX数学公式语法官方文档</h1><p>This is a list of TeX functions supported by KaTeX. It is sorted into logical groups.</p>
+<p>There is a similar <a href="support_table.md">Support Table</a>, sorted alphabetically, that lists both supported and un-supported functions.</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" crossorigin="anonymous">
+<style>
+p {overflow-wrap: break-word;}
+table tr,
+table td {
+    vertical-align: middle;
+    overflow-wrap: break-word;
+}
+</style>
+
+<div class="katex-hopscotch">
+
+<h2 id="Accents"><a href="#Accents" class="headerlink" title="Accents"></a>Accents</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$a’$ <code>a&#39;</code></td>
+<td align="left">$\tilde{a}$ <code>\tilde&#123;a&#125;</code></td>
+<td align="left">$\mathring{g}$ <code>\mathring&#123;g&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$a’’$ <code>a&#39;&#39;</code></td>
+<td align="left">$\widetilde{ac}$ <code>\widetilde&#123;ac&#125;</code></td>
+<td align="left">$\overgroup{AB}$ <code>\overgroup&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$a^{\prime}$ <code>a^&#123;\prime&#125;</code></td>
+<td align="left">$\utilde{AB}$ <code>\utilde&#123;AB&#125;</code></td>
+<td align="left">$\undergroup{AB}$ <code>\undergroup&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\acute{a}$ <code>\acute&#123;a&#125;</code></td>
+<td align="left">$\vec{F}$ <code>\vec&#123;F&#125;</code></td>
+<td align="left">$\Overrightarrow{AB}$ <code>\Overrightarrow&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\bar{y}$ <code>\bar&#123;y&#125;</code></td>
+<td align="left">$\overleftarrow{AB}$ <code>\overleftarrow&#123;AB&#125;</code></td>
+<td align="left">$\overrightarrow{AB}$ <code>\overrightarrow&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\breve{a}$ <code>\breve&#123;a&#125;</code></td>
+<td align="left">$\underleftarrow{AB}$ <code>\underleftarrow&#123;AB&#125;</code></td>
+<td align="left">$\underrightarrow{AB}$ <code>\underrightarrow&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\check{a}$ <code>\check&#123;a&#125;</code></td>
+<td align="left">$\overleftharpoon{ac}$ <code>\overleftharpoon&#123;ac&#125;</code></td>
+<td align="left">$\overrightharpoon{ac}$ <code>\overrightharpoon&#123;ac&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\dot{a}$ <code>\dot&#123;a&#125;</code></td>
+<td align="left">$\overleftrightarrow{AB}$ <code>\overleftrightarrow&#123;AB&#125;</code></td>
+<td align="left">$\overbrace{AB}$ <code>\overbrace&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\ddot{a}$ <code>\ddot&#123;a&#125;</code></td>
+<td align="left">$\underleftrightarrow{AB}$ <code>\underleftrightarrow&#123;AB&#125;</code></td>
+<td align="left">$\underbrace{AB}$ <code>\underbrace&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\grave{a}$ <code>\grave&#123;a&#125;</code></td>
+<td align="left">$\overline{AB}$ <code>\overline&#123;AB&#125;</code></td>
+<td align="left">$\overlinesegment{AB}$ <code>\overlinesegment&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\hat{\theta}$ <code>\hat&#123;\theta&#125;</code></td>
+<td align="left">$\underline{AB}$ <code>\underline&#123;AB&#125;</code></td>
+<td align="left">$\underlinesegment{AB}$ <code>\underlinesegment&#123;AB&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\widehat{ac}$ <code>\widehat&#123;ac&#125;</code></td>
+<td align="left">$\widecheck{ac}$ <code>\widecheck&#123;ac&#125;</code></td>
+<td align="left">$\underbar{X}$ <code>\underbar&#123;X&#125;</code></td>
+</tr>
+</tbody></table>
+<p><em><strong>Accent functions inside \text{…}</strong></em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\text{&#39;{a}}$ <code>\&#39;&#123;a&#125;</code></td>
+<td align="left">$\text{~{a}}$ <code>\~&#123;a&#125;</code></td>
+<td align="left">$\text{.{a}}$ <code>\.&#123;a&#125;</code></td>
+<td align="left">$\text{\H{a}}$ <code>\H&#123;a&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\text{`{a}}$ <code>\`&#123;a&#125;</code></td>
+<td align="left">$\text{={a}}$ <code>\=&#123;a&#125;</code></td>
+<td align="left">$\text{&quot;{a}}$ <code>\&quot;&#123;a&#125;</code></td>
+<td align="left">$\text{\v{a}}$ <code>\v&#123;a&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\text{^{a}}$ <code>\^&#123;a&#125;</code></td>
+<td align="left">$\text{\u{a}}$ <code>\u&#123;a&#125;</code></td>
+<td align="left">$\text{\r{a}}$ <code>\r&#123;a&#125;</code></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>See also <a href="#letters-and-unicode">letters and unicode</a>.</p>
+<h2 id="Delimiters"><a href="#Delimiters" class="headerlink" title="Delimiters"></a>Delimiters</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$(~)$ <code>( )</code></td>
+<td align="left">$\lparen~\rparen$ <code>\lparen</code><br>$~~~~$<code>\rparen</code></td>
+<td align="left">$⌈~⌉$ <code>⌈ ⌉</code></td>
+<td align="left">$\lceil~\rceil$ <code>\lceil</code><br>$~~~~~$<code>\rceil</code></td>
+<td align="left">$\uparrow$ <code>\uparrow</code></td>
+</tr>
+<tr>
+<td align="left">$[~]$ <code>[ ]</code></td>
+<td align="left">$\lbrack~\rbrack$ <code>\lbrack</code><br>$~~~~$<code>\rbrack</code></td>
+<td align="left">$⌊~⌋$ <code>⌊ ⌋</code></td>
+<td align="left">$\lfloor~\rfloor$ <code>\lfloor</code><br>$~~~~~$<code>\rfloor</code></td>
+<td align="left">$\downarrow$ <code>\downarrow</code></td>
+</tr>
+<tr>
+<td align="left">${ }$ <code>\&#123; \&#125;</code></td>
+<td align="left">$\lbrace \rbrace$ <code>\lbrace</code><br>$~~~~$<code>\rbrace</code></td>
+<td align="left">$⎰⎱$ <code>⎰⎱</code></td>
+<td align="left">$\lmoustache \rmoustache$ <code>\lmoustache</code><br>$~~~~$<code>\rmoustache</code></td>
+<td align="left">$\updownarrow$ <code>\updownarrow</code></td>
+</tr>
+<tr>
+<td align="left">$⟨~⟩$ <code>⟨ ⟩</code></td>
+<td align="left">$\langle~\rangle$ <code>\langle</code><br>$~~~~$<code>\rangle</code></td>
+<td align="left">$⟮~⟯$ <code>⟮ ⟯</code></td>
+<td align="left">$\lgroup~\rgroup$ <code>\lgroup</code><br>$~~~~~$<code>\rgroup</code></td>
+<td align="left">$\Uparrow$ <code>\Uparrow</code></td>
+</tr>
+<tr>
+<td align="left">$\vert$ <code>&#124;</code></td>
+<td align="left">$\vert$ <code>\vert</code></td>
+<td align="left">$┌ ┐$ <code>┌ ┐</code></td>
+<td align="left">$\ulcorner \urcorner$ <code>\ulcorner</code><br>$~~~~$<code>\urcorner</code></td>
+<td align="left">$\Downarrow$ <code>\Downarrow</code></td>
+</tr>
+<tr>
+<td align="left">$\Vert$ <code>&#92;&#124;</code></td>
+<td align="left">$\Vert$ <code>\Vert</code></td>
+<td align="left">$└ ┘$ <code>└ ┘</code></td>
+<td align="left">$\llcorner \lrcorner$ <code>\llcorner</code><br>$~~~~$<code>\lrcorner</code></td>
+<td align="left">$\Updownarrow$ <code>\Updownarrow</code></td>
+</tr>
+<tr>
+<td align="left">$\lvert~\rvert$ <code>\lvert</code><br>$~~~~$<code>\rvert</code></td>
+<td align="left">$\lVert~\rVert$ <code>\lVert</code><br>$~~~~~$<code>\rVert</code></td>
+<td align="left"><code>\left.</code></td>
+<td align="left"><code>\right.</code></td>
+<td align="left">$\backslash$ <code>\backslash</code></td>
+</tr>
+<tr>
+<td align="left">$\lang~\rang$ <code>\lang</code><br>$~~~~$<code>\rang</code></td>
+<td align="left">$\lt~\gt$ <code>\lt \gt</code></td>
+<td align="left">$⟦~⟧$ <code>⟦ ⟧</code></td>
+<td align="left">$\llbracket~\rrbracket$ <code>\llbracket</code><br>$~~~~$<code>\rrbracket</code></td>
+<td align="left">$\lBrace~\rBrace$ <code>\lBrace \rBrace</code></td>
+</tr>
+</tbody></table>
+<p><strong>Delimiter Sizing</strong></p>
+<p>$\left(\LARGE{AB}\right)$ <code>\left(\LARGE&#123;AB&#125;\right)</code></p>
+<p>$( \big( \Big( \bigg( \Bigg($ <code>( \big( \Big( \bigg( \Bigg(</code></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>\left</code></td>
+<td align="left"><code>\big</code></td>
+<td align="left"><code>\bigl</code></td>
+<td align="left"><code>\bigm</code></td>
+<td align="left"><code>\bigr</code></td>
+</tr>
+<tr>
+<td align="left"><code>\middle</code></td>
+<td align="left"><code>\Big</code></td>
+<td align="left"><code>\Bigl</code></td>
+<td align="left"><code>\Bigm</code></td>
+<td align="left"><code>\Bigr</code></td>
+</tr>
+<tr>
+<td align="left"><code>\right</code></td>
+<td align="left"><code>\bigg</code></td>
+<td align="left"><code>\biggl</code></td>
+<td align="left"><code>\biggm</code></td>
+<td align="left"><code>\biggr</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>\Bigg</code></td>
+<td align="left"><code>\Biggl</code></td>
+<td align="left"><code>\Biggm</code></td>
+<td align="left"><code>\Biggr</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<h2 id="Environments"><a href="#Environments" class="headerlink" title="Environments"></a>Environments</h2><div class="katex-cards" id="environments">
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\begin{matrix} a &amp; b \ c &amp; d \end{matrix}$</td>
+<td align="left"><code>\begin&#123;matrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;matrix&#125;</code></td>
+<td align="left">$\begin{array}{cc}a &amp; b\c &amp; d\end{array}$</td>
+<td align="left"><code>\begin&#123;array&#125;&#123;cc&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;array&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\begin{pmatrix} a &amp; b \ c &amp; d \end{pmatrix}$</td>
+<td align="left"><code>\begin&#123;pmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;pmatrix&#125;</code></td>
+<td align="left">$\begin{bmatrix} a &amp; b \ c &amp; d \end{bmatrix}$</td>
+<td align="left"><code>\begin&#123;bmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;bmatrix&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\begin{vmatrix} a &amp; b \ c &amp; d \end{vmatrix}$</td>
+<td align="left"><code>\begin&#123;vmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;vmatrix&#125;</code></td>
+<td align="left">$\begin{Vmatrix} a &amp; b \ c &amp; d \end{Vmatrix}$</td>
+<td align="left"><code>\begin&#123;Vmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;Vmatrix&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\begin{Bmatrix} a &amp; b \ c &amp; d \end{Bmatrix}$</td>
+<td align="left"><code>\begin&#123;Bmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;Bmatrix&#125;</code></td>
+<td align="left">$\def\arraystretch{1.5}\begin{array}{c:c:c} a &amp; b &amp; c \ \hline d &amp; e &amp; f \ \hdashline g &amp; h &amp; i \end{array}$</td>
+<td align="left"><code>\def\arraystretch&#123;1.5&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>\begin&#123;array&#125;&#123;c:c:c&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b &amp; c \\ \hline</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>d &amp; e &amp; f \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>\hdashline</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>g &amp; h &amp; i</code><br><code>\end&#123;array&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$x &#x3D; \begin{cases} a &amp;\text{if } b \ c &amp;\text{if } d \end{cases}$</td>
+<td align="left"><code>x = \begin&#123;cases&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp;\text&#123;if &#125; b  \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp;\text&#123;if &#125; d</code><br><code>\end&#123;cases&#125;</code></td>
+<td align="left">$\begin{rcases} a &amp;\text{if } b \ c &amp;\text{if } d \end{rcases}⇒…$</td>
+<td align="left"><code>\begin&#123;rcases&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp;\text&#123;if &#125; b  \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp;\text&#123;if &#125; d</code><br><code>\end&#123;rcases&#125;⇒…</code></td>
+</tr>
+<tr>
+<td align="left">$\begin{smallmatrix} a &amp; b \ c &amp; d \end{smallmatrix}$</td>
+<td align="left"><code>\begin&#123;smallmatrix&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp; b \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>c &amp; d</code><br><code>\end&#123;smallmatrix&#125;</code></td>
+<td align="left">$$\sum_{\begin{subarray}{l} i\in\Lambda\  0&lt;j&lt;n\end{subarray}}$$</td>
+<td align="left"><code>\sum_&#123;</code><br><code>\begin&#123;subarray&#125;&#123;l&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>i\in\Lambda\\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>0&lt;j&lt;n</code><br><code>\end&#123;subarray&#125;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>The auto-render extension will render the following environments even if they are not inside math delimiters such as <code>$$…$$</code>. They are display-mode only.</p>
+<style>
+  #env + table tr td:nth-child(1) { min-width: 11em }
+  #env + table tr td:nth-child(3) { min-width: 13em }
+</style>
+<div id="env"></div>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$$\begin{equation}\begin{split}a &amp;&#x3D;b+c\&amp;&#x3D;e+f\end{split}\end{equation}$$</td>
+<td align="left"><code>\begin&#123;equation&#125;</code><br><code>\begin&#123;split&#125;</code>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a &amp;=b+c\\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>&amp;=e+f</code><br><code>\end&#123;split&#125;</code><br><code>\end&#123;equation&#125;</code></td>
+<td align="left">$$\begin{align} a&amp;&#x3D;b+c \ d+e&amp;&#x3D;f \end{align}$$</td>
+<td align="left"><code>\begin&#123;align&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a&amp;=b+c \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>d+e&amp;=f</code><br><code>\end&#123;align&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$$\begin{gather} a&#x3D;b \ e&#x3D;b+c \end{gather}$$</td>
+<td align="left"><code>\begin&#123;gather&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>a=b \\ </code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>e=b+c</code><br><code>\end&#123;gather&#125;</code></td>
+<td align="left">$$\begin{alignat}{2}10&amp;x+&amp;3&amp;y&#x3D;2\3&amp;x+&amp;13&amp;y&#x3D;4\end{alignat}$$</td>
+<td align="left"><code>\begin&#123;alignat&#125;&#123;2&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>10&amp;x+&amp;3&amp;y=2\\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>3&amp;x+&amp;13&amp;y=4</code><br><code>\end&#123;alignat&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$$\begin{CD}A @&gt;a&gt;&gt; B \@VbVV @AAcA\C @&#x3D; D\end{CD}$$</td>
+<td align="left"><code>\begin&#123;CD&#125;</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>A  @&gt;a&gt;&gt;  B  \\</code><br><code>@VbVV    @AAcA \\</code><br>&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>C  @=   D</code><br><code>\end&#123;CD&#125;</code></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h4 id="Other-KaTeX-Environments"><a href="#Other-KaTeX-Environments" class="headerlink" title="Other KaTeX Environments"></a>Other KaTeX Environments</h4><table>
+<thead>
+<tr>
+<th align="left">Environments</th>
+<th align="left">How they differ from those shown above</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>darray</code>, <code>dcases</code>, <code>drcases</code></td>
+<td align="left">… apply <code>displaystyle</code></td>
+</tr>
+<tr>
+<td align="left"><code>matrix*</code>, <code>pmatrix*</code>, <code>bmatrix*</code><br><code>Bmatrix*</code>, <code>vmatrix*</code>, <code>Vmatrix*</code></td>
+<td align="left">… take an optional argument to set column<br>alignment, as in <code>\begin&#123;matrix*&#125;[r]</code></td>
+</tr>
+<tr>
+<td align="left"><code>equation*</code>, <code>gather*</code><br><code>align*</code>, <code>alignat*</code></td>
+<td align="left">… have no automatic numbering. Alternatively, you can use <code>\nonumber</code> or <code>\notag</code> to omit the numbering for a specific row of the equation.</td>
+</tr>
+<tr>
+<td align="left"><code>gathered</code>, <code>aligned</code>, <code>alignedat</code></td>
+<td align="left">… do not need to be in display mode.<br> … have no automatic numbering.<br> … must be inside math delimiters in<br>order to be rendered by the auto-render<br>extension.</td>
+</tr>
+</tbody></table>
+</div>
+
+<p>Acceptable line separators include: <code>\\</code>, <code>\cr</code>, <code>\\[distance]</code>, and <code>\cr[distance]</code>. <em>Distance</em> can be written with any of the <a href="#units">KaTeX units</a>.</p>
+<p>The <code>&#123;array&#125;</code> environment supports <code>|</code> and <code>:</code> vertical separators.</p>
+<p>The <code>&#123;array&#125;</code> environment does not yet support <code>\cline</code> or <code>\multicolumn</code>.</p>
+<p><code>\tag</code> can be applied to individual rows of top-level environments<br>(<code>align</code>, <code>align*</code>, <code>alignat</code>, <code>alignat*</code>, <code>gather</code>, <code>gather*</code>).</p>
+<div class="katex-hopscotch">
+
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>The following “raw HTML” features are potentially dangerous for untrusted<br>inputs, so they are disabled by default, and attempting to use them produces<br>the command names in red (which you can configure via the <code>errorColor</code><br><a href="options.md">option</a>).  To fully trust your LaTeX input, you need to pass<br>an option of <code>trust: true</code>; you can also enable just some of the commands<br>or for just some URLs via the <code>trust</code> <a href="options.md">option</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\href{<a target="_blank" rel="noopener" href="https://katex.org/%7D%7B/KaTeX%7D$">https://katex.org/}{\KaTeX}$</a></td>
+<td align="left"><code>\href&#123;https://katex.org/&#125;&#123;\KaTeX&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\url{<a target="_blank" rel="noopener" href="https://katex.org/%7D$">https://katex.org/}$</a></td>
+<td align="left"><code>\url&#123;https://katex.org/&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\includegraphics[height&#x3D;0.8em, totalheight&#x3D;0.9em, width&#x3D;0.9em, alt&#x3D;KA logo]{<a target="_blank" rel="noopener" href="https://katex.org/img/khan-academy.png%7D$">https://katex.org/img/khan-academy.png}$</a></td>
+<td align="left"><code>\includegraphics[height=0.8em, totalheight=0.9em, width=0.9em, alt=KA logo]&#123;https://katex.org/img/khan-academy.png&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\htmlId{bar}{x}$ <code>…&lt;span id="bar" class="enclosing"&gt;…x…&lt;/span&gt;…</code></td>
+<td align="left"><code>\htmlId&#123;bar&#125;&#123;x&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\htmlClass{foo}{x}$ <code>…&lt;span class="enclosing foo"&gt;…x…&lt;/span&gt;…</code></td>
+<td align="left"><code>\htmlClass&#123;foo&#125;&#123;x&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\htmlStyle{color: red;}{x}$ <code>…&lt;span style="color: red;" class="enclosing"&gt;…x…&lt;/span&gt;…</code></td>
+<td align="left"><code>\htmlStyle&#123;color: red;&#125;&#123;x&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\htmlData{foo&#x3D;a, bar&#x3D;b}{x}$ <code>…&lt;span data-foo="a" data-bar="b" class="enclosing"&gt;…x…&lt;/span&gt;…</code></td>
+<td align="left"><code>\htmlData&#123;foo=a, bar=b&#125;&#123;x&#125;</code></td>
+</tr>
+</tbody></table>
+<p><code>\includegraphics</code> supports <code>height</code>, <code>width</code>, <code>totalheight</code>, and <code>alt</code> in its first argument. <code>height</code> is required.</p>
+<p>HTML extension (<code>\html</code>-prefixed) commands are non-standard, so loosening <code>strict</code> option for <code>htmlExtension</code> is required.</p>
+<h2 id="Letters-and-Unicode"><a href="#Letters-and-Unicode" class="headerlink" title="Letters and Unicode"></a>Letters and Unicode</h2><p><strong>Greek Letters</strong></p>
+<p>Direct Input: $Α Β Γ Δ Ε Ζ Η Θ Ι \allowbreak Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω$<br>$\allowbreak α β γ δ ϵ ζ η θ ι κ λ μ ν ξ o π \allowbreak ρ σ τ υ ϕ χ ψ ω ε ϑ ϖ ϱ ς φ ϝ$</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\Alpha$ <code>\Alpha</code></td>
+<td>$\Beta$ <code>\Beta</code></td>
+<td>$\Gamma$ <code>\Gamma</code></td>
+<td>$\Delta$ <code>\Delta</code></td>
+</tr>
+<tr>
+<td>$\Epsilon$ <code>\Epsilon</code></td>
+<td>$\Zeta$ <code>\Zeta</code></td>
+<td>$\Eta$ <code>\Eta</code></td>
+<td>$\Theta$ <code>\Theta</code></td>
+</tr>
+<tr>
+<td>$\Iota$ <code>\Iota</code></td>
+<td>$\Kappa$ <code>\Kappa</code></td>
+<td>$\Lambda$ <code>\Lambda</code></td>
+<td>$\Mu$ <code>\Mu</code></td>
+</tr>
+<tr>
+<td>$\Nu$ <code>\Nu</code></td>
+<td>$\Xi$ <code>\Xi</code></td>
+<td>$\Omicron$ <code>\Omicron</code></td>
+<td>$\Pi$ <code>\Pi</code></td>
+</tr>
+<tr>
+<td>$\Rho$ <code>\Rho</code></td>
+<td>$\Sigma$ <code>\Sigma</code></td>
+<td>$\Tau$ <code>\Tau</code></td>
+<td>$\Upsilon$ <code>\Upsilon</code></td>
+</tr>
+<tr>
+<td>$\Phi$ <code>\Phi</code></td>
+<td>$\Chi$ <code>\Chi</code></td>
+<td>$\Psi$ <code>\Psi</code></td>
+<td>$\Omega$ <code>\Omega</code></td>
+</tr>
+<tr>
+<td>$\varGamma$ <code>\varGamma</code></td>
+<td>$\varDelta$ <code>\varDelta</code></td>
+<td>$\varTheta$ <code>\varTheta</code></td>
+<td>$\varLambda$ <code>\varLambda</code></td>
+</tr>
+<tr>
+<td>$\varXi$ <code>\varXi</code></td>
+<td>$\varPi$ <code>\varPi</code></td>
+<td>$\varSigma$ <code>\varSigma</code></td>
+<td>$\varUpsilon$ <code>\varUpsilon</code></td>
+</tr>
+<tr>
+<td>$\varPhi$ <code>\varPhi</code></td>
+<td>$\varPsi$ <code>\varPsi</code></td>
+<td>$\varOmega$ <code>\varOmega</code></td>
+<td></td>
+</tr>
+<tr>
+<td>$\alpha$ <code>\alpha</code></td>
+<td>$\beta$ <code>\beta</code></td>
+<td>$\gamma$ <code>\gamma</code></td>
+<td>$\delta$ <code>\delta</code></td>
+</tr>
+<tr>
+<td>$\epsilon$ <code>\epsilon</code></td>
+<td>$\zeta$ <code>\zeta</code></td>
+<td>$\eta$ <code>\eta</code></td>
+<td>$\theta$ <code>\theta</code></td>
+</tr>
+<tr>
+<td>$\iota$ <code>\iota</code></td>
+<td>$\kappa$ <code>\kappa</code></td>
+<td>$\lambda$ <code>\lambda</code></td>
+<td>$\mu$ <code>\mu</code></td>
+</tr>
+<tr>
+<td>$\nu$ <code>\nu</code></td>
+<td>$\xi$ <code>\xi</code></td>
+<td>$\omicron$ <code>\omicron</code></td>
+<td>$\pi$ <code>\pi</code></td>
+</tr>
+<tr>
+<td>$\rho$ <code>\rho</code></td>
+<td>$\sigma$ <code>\sigma</code></td>
+<td>$\tau$ <code>\tau</code></td>
+<td>$\upsilon$ <code>\upsilon</code></td>
+</tr>
+<tr>
+<td>$\phi$ <code>\phi</code></td>
+<td>$\chi$ <code>\chi</code></td>
+<td>$\psi$ <code>\psi</code></td>
+<td>$\omega$ <code>\omega</code></td>
+</tr>
+<tr>
+<td>$\varepsilon$ <code>\varepsilon</code></td>
+<td>$\varkappa$ <code>\varkappa</code></td>
+<td>$\vartheta$ <code>\vartheta</code></td>
+<td>$\thetasym$ <code>\thetasym</code></td>
+</tr>
+<tr>
+<td>$\varpi$ <code>\varpi</code></td>
+<td>$\varrho$ <code>\varrho</code></td>
+<td>$\varsigma$ <code>\varsigma</code></td>
+<td>$\varphi$ <code>\varphi</code></td>
+</tr>
+<tr>
+<td>$\digamma $ <code>\digamma</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Other Letters</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\imath$ <code>\imath</code></td>
+<td align="left">$\nabla$ <code>\nabla</code></td>
+<td align="left">$\Im$ <code>\Im</code></td>
+<td align="left">$\Reals$ <code>\Reals</code></td>
+<td align="left">$\text{\OE}$ <code>\text&#123;\OE&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\jmath$ <code>\jmath</code></td>
+<td align="left">$\partial$ <code>\partial</code></td>
+<td align="left">$\image$ <code>\image</code></td>
+<td align="left">$\wp$ <code>\wp</code></td>
+<td align="left">$\text{\o}$ <code>\text&#123;\o&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\aleph$ <code>\aleph</code></td>
+<td align="left">$\Game$ <code>\Game</code></td>
+<td align="left">$\Bbbk$ <code>\Bbbk</code></td>
+<td align="left">$\weierp$ <code>\weierp</code></td>
+<td align="left">$\text{\O}$ <code>\text&#123;\O&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\alef$ <code>\alef</code></td>
+<td align="left">$\Finv$ <code>\Finv</code></td>
+<td align="left">$\N$ <code>\N</code></td>
+<td align="left">$\Z$ <code>\Z</code></td>
+<td align="left">$\text{\ss}$ <code>\text&#123;\ss&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\alefsym$ <code>\alefsym</code></td>
+<td align="left">$\cnums$ <code>\cnums</code></td>
+<td align="left">$\natnums$ <code>\natnums</code></td>
+<td align="left">$\text{\aa}$ <code>\text&#123;\aa&#125;</code></td>
+<td align="left">$\text{\i}$ <code>\text&#123;\i&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\beth$ <code>\beth</code></td>
+<td align="left">$\Complex$ <code>\Complex</code></td>
+<td align="left">$\R$ <code>\R</code></td>
+<td align="left">$\text{\AA}$ <code>\text&#123;\AA&#125;</code></td>
+<td align="left">$\text{\j}$ <code>\text&#123;\j&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\gimel$ <code>\gimel</code></td>
+<td align="left">$\ell$ <code>\ell</code></td>
+<td align="left">$\Re$ <code>\Re</code></td>
+<td align="left">$\text{\ae}$ <code>\text&#123;\ae&#125;</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">$\daleth$ <code>\daleth</code></td>
+<td align="left">$\hbar$ <code>\hbar</code></td>
+<td align="left">$\real$ <code>\real</code></td>
+<td align="left">$\text{\AE}$ <code>\text&#123;\AE&#125;</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">$\eth$ <code>\eth</code></td>
+<td align="left">$\hslash$ <code>\hslash</code></td>
+<td align="left">$\reals$ <code>\reals</code></td>
+<td align="left">$\text{\oe}$ <code>\text&#123;\oe&#125;</code></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Direct Input: $∂ ∇ ℑ Ⅎ ℵ ℶ ℷ ℸ ⅁ ℏ ð − ∗$<br>ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝÞßàáâãäåçèéêëìíîïðñòóôöùúûüýþÿ<br>₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ⁺⁻⁼⁽⁾⁰¹²³⁴⁵⁶⁷⁸⁹ᵃᵇᶜᵈᵉᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘʷˣʸᶻᵛᵝᵞᵟᵠᵡ</p>
+<p>Math-mode Unicode (sub|super)script characters will render as if you had written regular characters in a subscript or superscript. For instance, <code>A²⁺³</code> will render the same as <code>A^&#123;2+3&#125;</code>.</p>
+</div>
+<div class="katex-cards" id="math-alpha">
+
+<p><strong>Unicode Mathematical Alphanumeric Symbols</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Range</th>
+<th>Item</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bold</td>
+<td>$\text{𝐀-𝐙 𝐚-𝐳 𝟎-𝟗}$</td>
+<td>Double-struck</td>
+<td>$\text{𝔸-}ℤ\ 𝕜$</td>
+</tr>
+<tr>
+<td>Italic</td>
+<td>$\text{𝐴-𝑍 𝑎-𝑧}$</td>
+<td>Sans serif</td>
+<td>$\text{𝖠-𝖹 𝖺-𝗓 𝟢-𝟫}$</td>
+</tr>
+<tr>
+<td>Bold Italic</td>
+<td>$\text{𝑨-𝒁 𝒂-𝒛}$</td>
+<td>Sans serif bold</td>
+<td>$\text{𝗔-𝗭 𝗮-𝘇 𝟬-𝟵}$</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>$\text{𝒜-𝒵}$</td>
+<td>Sans serif italic</td>
+<td>$\text{𝘈-𝘡 𝘢-𝘻}$</td>
+</tr>
+<tr>
+<td>Fractur</td>
+<td>$\text{𝔄-}ℨ\text{ 𝔞-𝔷}$</td>
+<td>Monospace</td>
+<td>$\text{𝙰-𝚉 𝚊-𝚣 𝟶-𝟿}$</td>
+</tr>
+</tbody></table>
+</div>
+<div class="katex-hopscotch">
+
+<p><strong>Unicode</strong></p>
+<p>The letters listed above will render properly in any KaTeX rendering mode.</p>
+<p>In addition, Armenian, Brahmic, Georgian, Chinese, Japanese, and Korean glyphs are always accepted in text mode. However, these glyphs will be rendered from system fonts (not KaTeX-supplied fonts) so their typography may clash.<br>You can provide rules for CSS classes <code>.latin_fallback</code>, <code>.cyrillic_fallback</code>, <code>.brahmic_fallback</code>, <code>.georgian_fallback</code>, <code>.cjk_fallback</code>, and <code>.hangul_fallback</code> to provide fallback fonts for these languages.<br>Use of these glyphs may cause small vertical alignment issues: KaTeX has detailed metrics for listed symbols and most Latin, Greek, and Cyrillic letters, but other accepted glyphs are treated as if they are each as tall as the letter M in the current KaTeX font.</p>
+<p>If the KaTeX rendering mode is set to <code>strict: false</code> or <code>strict: &quot;warn&quot;</code> (default), then KaTeX will accept all Unicode letters in both text and math mode.<br>All unrecognized characters will be treated as if they appeared in text mode, and are subject to the same issues of using system fonts and possibly using incorrect vertical alignment.</p>
+<p>For Persian composite characters, a user-supplied <a target="_blank" rel="noopener" href="https://github.com/HosseinAgha/persian-katex-plugin">plug-in</a> is under development.</p>
+<p>Any character can be written with the <code>\char</code> function and the Unicode code in hex. For example <code>\char&quot;263a</code> will render as $\char”263a$.</p>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="Annotation"><a href="#Annotation" class="headerlink" title="Annotation"></a>Annotation</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\cancel{5}$ <code>\cancel&#123;5&#125;</code></td>
+<td align="left">$\overbrace{a+b+c}^{\text{note}}$ <code>\overbrace&#123;a+b+c&#125;^&#123;\text&#123;note&#125;&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\bcancel{5}$ <code>\bcancel&#123;5&#125;</code></td>
+<td align="left">$\underbrace{a+b+c}_{\text{note}}$ <code>\underbrace&#123;a+b+c&#125;_&#123;\text&#123;note&#125;&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$\xcancel{ABC}$ <code>\xcancel&#123;ABC&#125;</code></td>
+<td align="left">$\not &#x3D;$ <code>\not =</code></td>
+</tr>
+<tr>
+<td align="left">$\sout{abc}$ <code>\sout&#123;abc&#125;</code></td>
+<td align="left">$\boxed{\pi&#x3D;\frac c d}$ <code>\boxed&#123;\pi=\frac c d&#125;</code></td>
+</tr>
+<tr>
+<td align="left">$a_{\angl n}$ <code>$a_&#123;\angl n&#125;</code></td>
+<td align="left">$a_\angln$ <code>a_\angln</code></td>
+</tr>
+<tr>
+<td align="left">$\phase{-78^\circ}$<code>\phase&#123;-78^\circ&#125;</code></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p><code>\tag&#123;hi&#125; x+y^&#123;2x&#125;</code><br>$$\tag{hi} x+y^{2x}$$</p>
+<p><code>\tag*&#123;hi&#125; x+y^&#123;2x&#125;</code><br>$$\tag*{hi} x+y^{2x}$$</p>
+<h3 id="Line-Breaks"><a href="#Line-Breaks" class="headerlink" title="Line Breaks"></a>Line Breaks</h3><p>KaTeX 0.10.0+ will insert automatic line breaks in inline math after relations or binary operators such as “&#x3D;” or “+”. These can be suppressed by <code>\nobreak</code> or by placing math inside a pair of braces, as in <code>&#123;F=ma&#125;</code>. <code>\allowbreak</code> will allow automatic line breaks at locations other than relations or operators.</p>
+<p>Hard line breaks are <code>\\</code> and <code>\newline</code>.</p>
+<p>In display math, KaTeX does not insert automatic line breaks. It ignores display math hard line breaks when rendering option <code>strict: true</code>.</p>
+<h3 id="Vertical-Layout"><a href="#Vertical-Layout" class="headerlink" title="Vertical Layout"></a>Vertical Layout</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$x_n$ <code>x_n</code></td>
+<td align="left">$\stackrel{!}{&#x3D;}$ <code>\stackrel&#123;!&#125;&#123;=&#125;</code></td>
+<td align="left">$a \atop b$ <code>a \atop b</code></td>
+</tr>
+<tr>
+<td align="left">$e^x$ <code>e^x</code></td>
+<td align="left">$\overset{!}{&#x3D;}$ <code>\overset&#123;!&#125;&#123;=&#125;</code></td>
+<td align="left">$a\raisebox{0.25em}{$b$}c$ <code>a\raisebox&#123;0.25em&#125;&#123;$b$&#125;c</code></td>
+</tr>
+<tr>
+<td align="left">$_u^o $ <code>_u^o </code></td>
+<td align="left">$\underset{!}{&#x3D;}$ <code>\underset&#123;!&#125;&#123;=&#125;</code></td>
+<td align="left">$a+\left(\vcenter{\frac{\frac a b}c}\right)$ <code>a+\left(\vcenter&#123;\hbox&#123;$\frac&#123;\frac a b&#125;c$&#125;&#125;\right)</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">$$\sum_{\substack{0&lt;i&lt;m\0&lt;j&lt;n}}$$ <code>\sum_&#123;\substack&#123;0&lt;i&lt;m\\0&lt;j&lt;n&#125;&#125;</code></td>
+</tr>
+</tbody></table>
+<p><code>\raisebox</code> and <code>\hbox</code> put their argument into text mode. To raise math, nest <code>$…$</code> delimiters inside the argument as shown above. </p>
+<p><code>\vcenter</code> can be written without an <code>\hbox</code> if the <code>strict</code> rendering option is <em>false</em>. In that case, omit the nested <code>$…$</code> delimiters.</p>
+<h3 id="Overlap-and-Spacing"><a href="#Overlap-and-Spacing" class="headerlink" title="Overlap and Spacing"></a>Overlap and Spacing</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">${&#x3D;}\mathllap{&#x2F;,}$ <code>&#123;=&#125;\mathllap&#123;/\,&#125;</code></td>
+<td align="left">$\left(x^{\smash{2}}\right)$ <code>\left(x^&#123;\smash&#123;2&#125;&#125;\right)</code></td>
+</tr>
+<tr>
+<td align="left">$\mathrlap{,&#x2F;}{&#x3D;}$ <code>\mathrlap&#123;\,/&#125;&#123;=&#125;</code></td>
+<td align="left">$\sqrt{\smash[b]{y}}$ <code>\sqrt&#123;\smash[b]&#123;y&#125;&#125; </code></td>
+</tr>
+</tbody></table>
+<p>$\displaystyle\sum_{\mathclap{1\le i\le j\le n}} x_{ij}$ <code>\sum_&#123;\mathclap&#123;1\le i\le j\le n&#125;&#125; x_&#123;ij&#125;</code></p>
+<p>KaTeX also supports <code>\llap</code>, <code>\rlap</code>, and <code>\clap</code>, but they will take only text, not math, as arguments.</p>
+</div>
+<div class="katex-cards" id="spacing-tbl">
+
+<p><strong>Spacing</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Function</th>
+<th align="left">Produces</th>
+<th align="left">Function</th>
+<th align="left">Produces</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>\,</code></td>
+<td align="left">³∕₁₈ em space</td>
+<td align="left"><code>\kern&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\thinspace</code></td>
+<td align="left">³∕₁₈ em space</td>
+<td align="left"><code>\mkern&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\&gt;</code></td>
+<td align="left">⁴∕₁₈ em space</td>
+<td align="left"><code>\mskip&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\:</code></td>
+<td align="left">⁴∕₁₈ em space</td>
+<td align="left"><code>\hskip&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\medspace</code></td>
+<td align="left">⁴∕₁₈ em space</td>
+<td align="left"><code>\hspace&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\;</code></td>
+<td align="left">⁵∕₁₈ em space</td>
+<td align="left"><code>\hspace*&#123;distance&#125;</code></td>
+<td align="left">space, width &#x3D; <em>distance</em></td>
+</tr>
+<tr>
+<td align="left"><code>\thickspace</code></td>
+<td align="left">⁵∕₁₈ em space</td>
+<td align="left"><code>\phantom&#123;content&#125;</code></td>
+<td align="left">space the width and height of content</td>
+</tr>
+<tr>
+<td align="left"><code>\enspace</code></td>
+<td align="left">½ em space</td>
+<td align="left"><code>\hphantom&#123;content&#125;</code></td>
+<td align="left">space the width of content</td>
+</tr>
+<tr>
+<td align="left"><code>\quad</code></td>
+<td align="left">1 em space</td>
+<td align="left"><code>\vphantom&#123;content&#125;</code></td>
+<td align="left">a strut the height of content</td>
+</tr>
+<tr>
+<td align="left"><code>\qquad</code></td>
+<td align="left">2 em space</td>
+<td align="left"><code>\!</code></td>
+<td align="left">– ³∕₁₈ em space</td>
+</tr>
+<tr>
+<td align="left"><code>~</code></td>
+<td align="left">non-breaking space</td>
+<td align="left"><code>\negthinspace</code></td>
+<td align="left">– ³∕₁₈ em space</td>
+</tr>
+<tr>
+<td align="left"><code>\&lt;space&gt;</code></td>
+<td align="left">space</td>
+<td align="left"><code>\negmedspace</code></td>
+<td align="left">– ⁴∕₁₈ em space</td>
+</tr>
+<tr>
+<td align="left"><code>\nobreakspace</code></td>
+<td align="left">non-breaking space</td>
+<td align="left"><code>\negthickspace</code></td>
+<td align="left">– ⁵∕₁₈ em space</td>
+</tr>
+<tr>
+<td align="left"><code>\space</code></td>
+<td align="left">space</td>
+<td align="left"><code>\mathstrut</code></td>
+<td align="left"><code>\vphantom&#123;(&#125;</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><strong>Notes:</strong></p>
+<p><code>distance</code> will accept any of the <a href="#units">KaTeX units</a>.</p>
+<p><code>\kern</code>, <code>\mkern</code>, <code>\mskip</code>, and <code>\hspace</code> accept unbraced distances, as in: <code>\kern1em</code>.</p>
+<p><code>\mkern</code> and <code>\mskip</code> will not work in text mode and both will write a console warning for any unit except <code>mu</code>.</p>
+<div class="katex-hopscotch">
+
+<h2 id="Logic-and-Set-Theory"><a href="#Logic-and-Set-Theory" class="headerlink" title="Logic and Set Theory"></a>Logic and Set Theory</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\forall$ <code>\forall</code></td>
+<td align="left">$\complement$ <code>\complement</code></td>
+<td align="left">$\therefore$ <code>\therefore</code></td>
+<td align="left">$\emptyset$ <code>\emptyset</code></td>
+</tr>
+<tr>
+<td align="left">$\exists$ <code>\exists</code></td>
+<td align="left">$\subset$ <code>\subset</code></td>
+<td align="left">$\because$ <code>\because</code></td>
+<td align="left">$\empty$ <code>\empty</code></td>
+</tr>
+<tr>
+<td align="left">$\exist$ <code>\exist</code></td>
+<td align="left">$\supset$ <code>\supset</code></td>
+<td align="left">$\mapsto$ <code>\mapsto</code></td>
+<td align="left">$\varnothing$ <code>\varnothing</code></td>
+</tr>
+<tr>
+<td align="left">$\nexists$ <code>\nexists</code></td>
+<td align="left">$\mid$ <code>\mid</code></td>
+<td align="left">$\to$ <code>\to</code></td>
+<td align="left">$\implies$ <code>\implies</code></td>
+</tr>
+<tr>
+<td align="left">$\in$ <code>\in</code></td>
+<td align="left">$\land$ <code>\land</code></td>
+<td align="left">$\gets$ <code>\gets</code></td>
+<td align="left">$\impliedby$ <code>\impliedby</code></td>
+</tr>
+<tr>
+<td align="left">$\isin$ <code>\isin</code></td>
+<td align="left">$\lor$ <code>\lor</code></td>
+<td align="left">$\leftrightarrow$ <code>\leftrightarrow</code></td>
+<td align="left">$\iff$ <code>\iff</code></td>
+</tr>
+<tr>
+<td align="left">$\notin$ <code>\notin</code></td>
+<td align="left">$\ni$ <code>\ni</code></td>
+<td align="left">$\notni$ <code>\notni</code></td>
+<td align="left">$\neg$ <code>\neg</code> or <code>\lnot</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">$\Set{ x | x&lt;\frac 1 2 }$<br><code>\Set&#123; x | x&lt;\frac 1 2 &#125;</code></td>
+<td align="left">$\set{x|x&lt;5}$<br><code>\set&#123;x|x&lt;5&#125;</code></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Direct Input: $∀ ∴ ∁ ∵ ∃ ∣ ∈ ∉ ∋ ⊂ ⊃ ∧ ∨ ↦ → ← ↔ ¬$ ℂ ℍ ℕ ℙ ℚ ℝ</p>
+<h2 id="Macros"><a href="#Macros" class="headerlink" title="Macros"></a>Macros</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\def\foo{x^2} \foo + \foo$</td>
+<td align="left"><code>\def\foo&#123;x^2&#125; \foo + \foo</code></td>
+</tr>
+<tr>
+<td align="left">$\gdef\bar#1</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+
+  </article>
+
+  
+      
+    
+    <script type="text/javascript">
+        var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/")
+        var UnDecodePageURI = "https://yiguiding.gitee.io/article/KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/"
+        timer = null
+        timer=setInterval(function(){
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+
+                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            clearInterval(timer)
+        },
+        100
+        )
+    </script>
+
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#KaTeX%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">KaTeX数学公式语法官方文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Accents"><span class="toc-number">1.1.</span> <span class="toc-text">Accents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delimiters"><span class="toc-number">1.2.</span> <span class="toc-text">Delimiters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Environments"><span class="toc-number">1.3.</span> <span class="toc-text">Environments</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Other-KaTeX-Environments"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">Other KaTeX Environments</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">1.4.</span> <span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Letters-and-Unicode"><span class="toc-number">1.5.</span> <span class="toc-text">Letters and Unicode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout"><span class="toc-number">1.6.</span> <span class="toc-text">Layout</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Annotation"><span class="toc-number">1.6.1.</span> <span class="toc-text">Annotation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Line-Breaks"><span class="toc-number">1.6.2.</span> <span class="toc-text">Line Breaks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vertical-Layout"><span class="toc-number">1.6.3.</span> <span class="toc-text">Vertical Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overlap-and-Spacing"><span class="toc-number">1.6.4.</span> <span class="toc-text">Overlap and Spacing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logic-and-Set-Theory"><span class="toc-number">1.7.</span> <span class="toc-text">Logic and Set Theory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Macros"><span class="toc-number">1.8.</span> <span class="toc-text">Macros</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1654601980989"></script>
+
+
+	<script async src="/js/search.js?v=1654601980989"></script>
+
+
+<script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

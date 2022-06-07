@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>git命令备忘笔记 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+    <meta name="description" content="git命令备忘笔记git用户配置 git config --global user.name &quot;YiguiDing&quot; git config --global user.email 2449695354@qq.com --global 意味着配置文件写入进当前用户的家目录的全局配置文件 去掉该选项意味着配置文件写入当前项目的.git&#x2F;config文件文件  编辑git配置文件:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git命令备忘笔记">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="git命令备忘笔记git用户配置 git config --global user.name &quot;YiguiDing&quot; git config --global user.email 2449695354@qq.com --global 意味着配置文件写入进当前用户的家目录的全局配置文件 去掉该选项意味着配置文件写入当前项目的.git&#x2F;config文件文件  编辑git配置文件:">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-09T12:28:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T05:03:44.510Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+    <script src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654601982254">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654601982254">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1654601982254">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1654601982254">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>47</div>
+        <div><span>字数</span>37.2k</div>
+        <div><span>标签</span>29</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">7</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">30</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 14.29px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.43px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 12.86px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.86px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.14px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15.71px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.57px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_9.%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">第4章_9.树的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/">第4章_8.伸展树</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%B0%B8%E8%BF%9C%E6%9C%89%E4%B8%8B%E4%B8%80%E5%BA%A7%E6%9C%80%E9%AB%98%E5%B3%B0/">永远有下一座最高峰</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/">CSS3重学笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%9C%80%E7%97%9B%E8%8B%A6%E7%9A%84%E6%97%A5%E5%AD%90%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E4%BA%86/">那些最痛苦的日子已经过去了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link  href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+<script>
+    
+</script>
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 46.73629242819843%;"> 
+              <img data-src="/images/article/git.jpg" data-sizes="auto" alt="git命令备忘笔记" class="lazyload">
+              <h1>git命令备忘笔记</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月09日</a>
+</div>
+
+      
+
+      <h1 id="git命令备忘笔记"><a href="#git命令备忘笔记" class="headerlink" title="git命令备忘笔记"></a>git命令备忘笔记</h1><h2 id="git用户配置"><a href="#git用户配置" class="headerlink" title="git用户配置"></a>git用户配置</h2><ul>
+<li><code>git config --global user.name &quot;YiguiDing&quot;</code></li>
+<li><code>git config --global user.email 2449695354@qq.com</code></li>
+<li><code>--global</code> 意味着配置文件写入进当前用户的家目录的全局配置文件</li>
+<li>去掉该选项意味着配置文件写入当前项目的<code>.git/config</code>文件文件</li>
+</ul>
+<h2 id="编辑git配置文件"><a href="#编辑git配置文件" class="headerlink" title="编辑git配置文件:"></a>编辑git配置文件:</h2><ul>
+<li><code>git config -e         </code>    # 针对当前仓库 </li>
+<li><code>git config -e --global </code> # 针对系统上所有仓库</li>
+</ul>
+<h2 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h2><ul>
+<li><code>git config --list</code></li>
+<li>输出信息中重复的变量名代表来自不同的文件如<ul>
+<li>系统配置文件 <code>/etc/gitconfig </code></li>
+<li>全局配置文件 <code>~/.config </code></li>
+<li>项目配置文件 <code>./.git/config</code></li>
+</ul>
+</li>
+<li>查询单个配置变量 <code>git config user.name</code></li>
+</ul>
+<h2 id="git默认编辑器配置"><a href="#git默认编辑器配置" class="headerlink" title="git默认编辑器配置"></a>git默认编辑器配置</h2><ul>
+<li><code>git config --global core.editor vim</code></li>
+<li>一般为vi vim 或特殊配置为Emacs</li>
+</ul>
+<h2 id="git默认差异分析工具配置"><a href="#git默认差异分析工具配置" class="headerlink" title="git默认差异分析工具配置"></a>git默认差异分析工具配置</h2><ul>
+<li><code>git config --global merge.tool vimdiff</code></li>
+<li>Git 可以理解 kdiff3，tkdiff，meld，xxdiff，emerge，vimdiff，gvimdiff，ecmerge，和 opendiff 等合并工具的输出信息。</li>
+</ul>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>将当前所在目录初始化为git仓库: <code>git init </code></li>
+<li>将XXX目录初始化为git仓库: <code>git init XXX </code></li>
+<li>告诉Git开始对这些文件进行跟踪: <code>git add 文件名</code></li>
+<li>提交：<code>git commit -m &quot;提交消息&quot;</code><ul>
+<li>linux系统中提交用单引号，win用双引号</li>
+</ul>
+</li>
+<li>推送到远程仓库：<code>git push origin master</code></li>
+<li>克隆远程仓库 <code>git clone 仓库地址 [指定目录]</code></li>
+</ul>
+<h2 id="有关创建与提交你的项目的快照的命令："><a href="#有关创建与提交你的项目的快照的命令：" class="headerlink" title="有关创建与提交你的项目的快照的命令："></a>有关创建与提交你的项目的快照的命令：</h2><ul>
+<li><code>git add    </code>    添加文件到暂存区<ul>
+<li><code>git add 文件名1 文件名2 文件名3</code></li>
+<li><code>git add 文件夹名</code></li>
+<li><code>git add . </code>当前所在文件夹</li>
+</ul>
+</li>
+<li><code>git status</code>    查看仓库当前的状态，显示有变更的文件。<ul>
+<li><code>-s</code>参数来获得简短的输出结果</li>
+<li><code>红色??</code> 表示该文夹没有被追踪（添加到缓存区）</li>
+<li><code>绿色A</code>  表示该文件已被追踪（添加到缓存区）</li>
+<li><code>绿A红M </code>    表示该文件添加到缓存之后又有改动。</li>
+</ul>
+</li>
+<li><code>git diff</code>        比较文件的不同，即暂存区和工作区的差异。<ul>
+<li>尚未缓存的改动：<code>git diff</code></li>
+<li>查看已缓存的改动： <code>git diff --cached</code></li>
+<li>查看已缓存的与未缓存的所有改动：<code>git diff HEAD</code></li>
+<li>显示摘要而非整个diff：<code>git diff --stat</code></li>
+<li>显示暂存区和工作区的差异: <code>git diff [file]</code></li>
+<li>显示暂存区和上一次提交(commit)的差异:<ul>
+<li><code>git diff --cached [file]</code></li>
+<li><code>git diff --staged [file]</code></li>
+</ul>
+</li>
+<li>显示两次提交之间的差异:<ul>
+<li><code>git diff [first-branch]...[second-branch]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>git commit</code>    提交暂存区到本地仓库。<ul>
+<li>提交暂存区所有内容：<code>git commit -m [message]</code></li>
+<li>提交暂存区指定内容：<code>git commit [file1] [file2] ... -m [message]</code></li>
+<li><code>git -am &quot;修改了123.txt文件&quot;</code><ul>
+<li><code>-a</code>意味着可以跳过<code>git add 123.txt</code>步骤，直接提交</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>*<code> git reset</code>        回退版本。</p>
+<ul>
+<li><code>git reset [--soft | --mixed | --hard] [HEAD]</code></li>
+<li><code>--soft</code> 工作区和暂存区内容保持不变，本地仓库回退一个版本</li>
+<li><code>--mixed </code>为默认，工作区保持不变,暂存区内容回退到上一次提交版本</li>
+<li><code>--hard</code> 工作区和暂存区内容都回退到上一次提交版本</li>
+<li><code>git rm</code>        删除工作区文件。<ul>
+<li>将文件从暂存区和工作区中删除(该文件提交到暂存区后未被修改)：<code>git rm fileName.txt</code></li>
+<li>强行从暂存区和工作区中删除一个文件(该文件提交到暂存区后又被修改)：<code>git rm -f fileName.txt </code></li>
+<li>将文件从暂存区删除，但在工作区中保留：<code>git rm --cached fileName.txt</code></li>
+<li>进入某个目录中，递归删除该目录下的所有文件和子目录： <code>git rm –r * </code></li>
+</ul>
+</li>
+<li><code>git mv</code>        移动或重命名工作区文件。<ul>
+<li>移动或重命名：<code>git mv [file] [newfile]</code></li>
+<li>强制移动并覆盖：<code>git mv -f [file] [newfile]</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Git-查看提交历史"><a href="#Git-查看提交历史" class="headerlink" title="Git 查看提交历史"></a>Git 查看提交历史</h2><ul>
+<li><code>git log</code> - 查看历史提交记录。<ul>
+<li><code>-6</code> 指定列出条数</li>
+<li><code>--oneline</code> 选项来查看历史记录的简洁的版本</li>
+<li><code>--all</code> 查看所有分支的提交历史</li>
+<li><code>--graph</code> 选项，查看历史中什么时候出现了分支、合并。</li>
+<li><code> --no-merges</code> 选项以隐藏合并提交记录</li>
+<li><code>--reverse</code> 参数来逆向显示所有日志</li>
+<li><code>--author=YiguiDing</code> 查找指定用户的提交日志</li>
+<li><code>--after</code> <code>--since</code>指定日期之后，使用格式：<code>--after=&#123;2010-04-18&#125;</code></li>
+<li><code>--before</code> <code>--until</code>指定日期之前，使用格式：<code>--before=&#123;3.weeks.ago&#125;</code></li>
+</ul>
+</li>
+<li><code>git blame file</code> - 以列表形式查看指定文件的历史修改记录。</li>
+</ul>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h2><ul>
+<li><code>git remote</code>    远程仓库操作<ul>
+<li><code>git remote show [remote]</code> 显示某个远程仓库详细信息</li>
+<li><code>git remote add [shortName] [url]</code> 为一个远程库取一个<strong>简短名</strong></li>
+<li><code>git remote rm shortName</code>  # 删除远程仓库<strong>简短名</strong></li>
+<li><code>git remote reName old_shortName new_shortName</code>  # 修改仓库<strong>简短名</strong></li>
+<li><code>-v</code> 列举当前仓库remote远程仓库<strong>简短名</strong>和<strong>实际地址</strong>之间的对应关系</li>
+</ul>
+</li>
+<li><code>git fetch</code>   从远程获取代码库<ul>
+<li><code>git fetch origin</code> 从远程获取代码库但不合并到当前分支</li>
+<li><code>git merge origin/master</code> 将远程代码的主分支合并到当前分支</li>
+</ul>
+</li>
+<li><code>git pull</code>    下载远程代码并合并<ul>
+<li>其实就是 <code>git fetch</code> 和 <code>git merge local_master</code> 的简写</li>
+<li><code>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code></li>
+<li><code>git pull origin master:brantest</code>将远程主机 origin 的 master 分支拉取过来，与本地的 brantest 分支合并。</li>
+<li><code>git pull origin master</code>与当前分支合并,冒号后面的部分可以省略。</li>
+</ul>
+</li>
+<li><code>git push</code>    上传远程代码并合并<ul>
+<li><code>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</code> </li>
+<li><code>git push &lt;远程主机名&gt; &lt;本地分支名&gt;</code> 如果远程分支名与本地分支名相同，则可以省略冒号<code>:</code>及其之后内容</li>
+</ul>
+</li>
+</ul>
+<h2 id="git分支管理"><a href="#git分支管理" class="headerlink" title="git分支管理"></a>git分支管理</h2><ul>
+<li><code>git branch</code>列出分支</li>
+<li><code>git branch newBranchName</code>创建一个分支<ul>
+<li><code>-b</code> 创建分支后立马切换</li>
+<li><code>-d</code> 删除分支</li>
+</ul>
+</li>
+<li><code>git checkout newBranchName</code>切换到新创建的分支</li>
+<li>分支切换时，如果工作区内容的全部提交，工作区的全部内容会变成新分支的内容，否则未提交的内容会带新分支去</li>
+<li><code>git merge branchA</code> 将分支branchA合并到当前分支中去<ul>
+<li>合并完成后可以删除branchA分支</li>
+<li>当两个分支内容存在冲突时，合并的操作步骤：<ol>
+<li>执行合并操作</li>
+<li>提示有文件存在冲突</li>
+<li>手动编辑那些已经合并但存在冲突的文件，删除冲突代码</li>
+<li>执行<code>git add 文件名</code> 用用于告诉Git 文件冲突已经解决</li>
+<li>不带参数的执行<code>git commit</code></li>
+<li>成功合并后git将会做出提示</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="git-标签"><a href="#git-标签" class="headerlink" title="git 标签"></a>git 标签</h2><ul>
+<li><code>git tag</code> 默认为给最新一次提交（HEAD）打上标签</li>
+<li><code>git tag 3e92c19 </code> 给3e92c19(commit id)打上标签</li>
+<li><code>-m</code> 指定标签信息注解内容,示例<code>git tag -a &lt;tagname&gt; -m &quot;runoob.com标签&quot;</code></li>
+<li><code>-a</code> (annotated)选项意为”创建一个带注解的标签” 会记录这标签是啥时候打的，谁打的，</li>
+<li><code>-s</code> (signed)如果有私钥,可用GPG签署标签,示例：<code>git tag -s 标签名 -m &#39;标签说明&#39;</code></li>
+<li><code>-d</code> 删除标签 <code>git tag -d 标签名</code></li>
+<li><code>git show 标签名</code> 查看标签信息</li>
+<li><code>git tag</code> 查看所有标签</li>
+<li><code>git log --decorate</code> ，也可以看到打的标签</li>
+</ul>
+<h2 id="SSH加密通信配置"><a href="#SSH加密通信配置" class="headerlink" title="SSH加密通信配置"></a>SSH加密通信配置</h2><ul>
+<li>配置成功后可以免密码向远程仓库推送<ul>
+<li>使用格式大致为<code>git push git@github.com:username/pathToProgectName.git localBranchName:remoteBranchName</code></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>生成 SSH密钥 <code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code><ul>
+<li>将生成两个文件 公钥 <code>~/.ssh/id_rsa.pub</code> 和 私钥<code>~/.ssh/id_rsa</code><ul>
+<li>其中.ssh目录的权限最高允许为755，最低允许为700，也就是说属主用户的权限为rwx,其他用户不能拥有w权限</li>
+<li>私钥的权限必须为600 </li>
+<li>公钥的权限一般为644,最低应该是600</li>
+<li><code>authoried_keys</code>权限一般为644，最低应该是600</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>将生成的SSH公钥附加到服务端的authoried_keys记录文件中<ul>
+<li>先在客户端将文件拷贝到服务端<code>scp ~/.ssh/id_rsa.pub root@域名或IP:~/.ssh/authorized_keys</code></li>
+<li>scp使用SSH方式登录，会要求输入密码</li>
+</ul>
+</li>
+<li>再在服务端执行附加命令<code>cat id_rsa.pub &gt;&gt; authorized_keys</code></li>
+<li>确保服务端的SSH配置<code>/etc/ssh/sshd_config</code>文件中有：<ul>
+<li><code>RSAAuthentication yes</code></li>
+<li><code>PubkeyAuthentication yes</code></li>
+<li>其他无关紧要的配置<ul>
+<li><code>PermitRootLogin yes</code></li>
+<li><code>PasswordAuthentication no</code></li>
+</ul>
+</li>
+<li>如有不同需要修改,然后重启服务<code>service sshd restart</code></li>
+</ul>
+</li>
+<li>客户端SSH配置示例<code>/etc/ssh/ssh_config</code><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arcade">Host *<br>  IdentityFile ~<span class="hljs-regexp">/.ssh/i</span>d_rsa<br>Host github.com<br>  IdentityFile ~<span class="hljs-regexp">/.ssh/i</span>d_rsa<br>Host gitee.com<br>  IdentityFile ~<span class="hljs-regexp">/.ssh/i</span>d_rsa<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Windows-git工具打开后自动测试"><a href="#Windows-git工具打开后自动测试" class="headerlink" title="Windows git工具打开后自动测试"></a>Windows git工具打开后自动测试</h2><p>附加两行内容到<code>/etc/profile</code>或<code>~/.profile</code>文件中</p>
+<ul>
+<li><code>ssh git@github.com</code></li>
+<li><code>ssh git@gitee.com </code></li>
+</ul>
+<h2 id="将已经提交到远程仓库的版本撤销"><a href="#将已经提交到远程仓库的版本撤销" class="headerlink" title="将已经提交到远程仓库的版本撤销"></a>将已经提交到远程仓库的版本撤销</h2><ul>
+<li><code>git log --oneline</code> 找出上一次提交版本的commitID</li>
+<li><code>git reset --mixed xxxx</code> 将缓存区恢复成该commitID</li>
+<li><code>git add .</code> 重新将工作区文件添加到缓存区</li>
+<li><code>git commit -m &quot;xxxxxxx&quot;</code> 提交到本地仓库</li>
+<li><code>git push origin master --force</code> 强制推送到远程仓库</li>
+</ul>
+<h2 id="子仓库"><a href="#子仓库" class="headerlink" title="子仓库"></a>子仓库</h2><h3 id="包含子仓库"><a href="#包含子仓库" class="headerlink" title="包含子仓库"></a>包含子仓库</h3><ul>
+<li>格式：<code>git submodule add &quot;url&quot; &quot;add_To_path&quot;</code><ul>
+<li><code>git submodule add git@github.com:YiguiDing/js_russuaGame.git</code></li>
+<li><code>git submodule add git@github.com:YiguiDing/js_russuaGame.git ./js_russuaGame</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库"><a href="#从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库" class="headerlink" title="从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库"></a>从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库</h3><ul>
+<li><code>git submodule init</code></li>
+<li><code>git submodule update</code></li>
+</ul>
+<h3 id="删除误添加到暂存区的子仓库"><a href="#删除误添加到暂存区的子仓库" class="headerlink" title="删除误添加到暂存区的子仓库"></a>删除误添加到暂存区的子仓库</h3><ul>
+<li><code>git rm --cached html-js_russiaGame</code></li>
+</ul>
+<h2 id="提交信息为当前日期"><a href="#提交信息为当前日期" class="headerlink" title="提交信息为当前日期"></a>提交信息为当前日期</h2><ul>
+<li><code>git commit -m &quot;$(date)&quot;</code></li>
+<li><strong>$(command)</strong> 与 <strong>`command`</strong><ul>
+<li>linux中<strong>echo $(date)</strong> 和 <strong>echo `date`</strong> 的作用是将date命令的结果用echo输出</li>
+<li>在Windows的git工具中两种都能使用（类似Linux环境）</li>
+<li>但是在powerShell中只有第一种能使用</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+
+  
+      
+    
+    <script type="text/javascript">
+        var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/")
+        var UnDecodePageURI = "https://yiguiding.gitee.io/article/git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/"
+        timer = null
+        timer=setInterval(function(){
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+
+                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            clearInterval(timer)
+        },
+        100
+        )
+    </script>
+
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/git/" rel="tag">git</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git%E5%91%BD%E4%BB%A4%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">git命令备忘笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">git用户配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91git%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">编辑git配置文件:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.</span> <span class="toc-text">查看配置信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E9%BB%98%E8%AE%A4%E7%BC%96%E8%BE%91%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.</span> <span class="toc-text">git默认编辑器配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E9%BB%98%E8%AE%A4%E5%B7%AE%E5%BC%82%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.</span> <span class="toc-text">git默认差异分析工具配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.6.</span> <span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E5%85%B3%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%8F%90%E4%BA%A4%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BF%AB%E7%85%A7%E7%9A%84%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">有关创建与提交你的项目的快照的命令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">1.8.</span> <span class="toc-text">Git 查看提交历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9C"><span class="toc-number">1.9.</span> <span class="toc-text">远程操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-number">1.10.</span> <span class="toc-text">git分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E6%A0%87%E7%AD%BE"><span class="toc-number">1.11.</span> <span class="toc-text">git 标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E9%85%8D%E7%BD%AE"><span class="toc-number">1.12.</span> <span class="toc-text">SSH加密通信配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-git%E5%B7%A5%E5%85%B7%E6%89%93%E5%BC%80%E5%90%8E%E8%87%AA%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">1.13.</span> <span class="toc-text">Windows git工具打开后自动测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E7%89%88%E6%9C%AC%E6%92%A4%E9%94%80"><span class="toc-number">1.14.</span> <span class="toc-text">将已经提交到远程仓库的版本撤销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E4%BB%93%E5%BA%93"><span class="toc-number">1.15.</span> <span class="toc-text">子仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%90%AB%E5%AD%90%E4%BB%93%E5%BA%93"><span class="toc-number">1.15.1.</span> <span class="toc-text">包含子仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E8%BF%9C%E7%AB%AF%E5%85%8B%E9%9A%86%E7%88%B6%E4%BB%93%E5%BA%93%E5%90%8E%E5%AD%90%E4%BB%93%E5%BA%93%E4%B8%BA%E9%BB%98%E8%AE%A4%E4%B8%BA%E7%A9%BA%EF%BC%8C%E9%9C%80%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E6%93%8D%E4%BD%9C%E6%9D%A5%E4%B8%8B%E8%BD%BD%E5%AD%90%E4%BB%93%E5%BA%93"><span class="toc-number">1.15.2.</span> <span class="toc-text">从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%AF%AF%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E5%AD%90%E4%BB%93%E5%BA%93"><span class="toc-number">1.15.3.</span> <span class="toc-text">删除误添加到暂存区的子仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F"><span class="toc-number">1.16.</span> <span class="toc-text">提交信息为当前日期</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1654601982297"></script>
+
+
+	<script async src="/js/search.js?v=1654601982297"></script>
+
+
+<script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

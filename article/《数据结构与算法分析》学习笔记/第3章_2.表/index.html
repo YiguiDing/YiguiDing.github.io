@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>第3章_2.表 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+    <meta name="description" content="第3章_2.表表ADT 形如A1、A2、A3、A4……Ax的表 表的大小是N 大小为0的表为空表 对于除空表以为外的任何表，称Ai+1后继Ai 或者说 Ai+1继Ai之后 同时称Ai-1 前驱Ai 表中第一个元素是A1 最后一个元素是A_N 不定义A1的前驱元，也不定义A_N的后继元 元素Ai在表中的位置为i  表ADT的数据操作一些常见的操作  printList 打印输出这个表的内容 make">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第3章_2.表">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="第3章_2.表表ADT 形如A1、A2、A3、A4……Ax的表 表的大小是N 大小为0的表为空表 对于除空表以为外的任何表，称Ai+1后继Ai 或者说 Ai+1继Ai之后 同时称Ai-1 前驱Ai 表中第一个元素是A1 最后一个元素是A_N 不定义A1的前驱元，也不定义A_N的后继元 元素Ai在表中的位置为i  表ADT的数据操作一些常见的操作  printList 打印输出这个表的内容 make">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-41.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-23.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-34-07.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-46-45.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-18-46-12.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-20-24-04.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-22-47-09.png">
+<meta property="article:published_time" content="2022-05-24T05:16:26.000Z">
+<meta property="article:modified_time" content="2022-06-07T09:19:34.123Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="数据结构与算法分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yiguiding.gitee.io/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-41.png">
+    <script src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654601981595">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654601981595">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1654601981595">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1654601981595">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>47</div>
+        <div><span>字数</span>37.2k</div>
+        <div><span>标签</span>29</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">7</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">30</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 14.29px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.43px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 12.86px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.86px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.14px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15.71px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.57px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_9.%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">第4章_9.树的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/">第4章_8.伸展树</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%B0%B8%E8%BF%9C%E6%9C%89%E4%B8%8B%E4%B8%80%E5%BA%A7%E6%9C%80%E9%AB%98%E5%B3%B0/">永远有下一座最高峰</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/">CSS3重学笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%9C%80%E7%97%9B%E8%8B%A6%E7%9A%84%E6%97%A5%E5%AD%90%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E4%BA%86/">那些最痛苦的日子已经过去了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link  href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+<script>
+    
+</script>
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.29766297662977%;"> 
+              <img data-src="/images/《数据结构与算法分析》学习笔记/cover.png" data-sizes="auto" alt="第3章_2.表" class="lazyload">
+              <h1>第3章_2.表</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月24日</a>
+</div>
+
+      
+
+      <h1 id="第3章-2-表"><a href="#第3章-2-表" class="headerlink" title="第3章_2.表"></a>第3章_2.表</h1><h3 id="表ADT"><a href="#表ADT" class="headerlink" title="表ADT"></a>表ADT</h3><ul>
+<li>形如A1、A2、A3、A4……Ax的表 表的大小是N</li>
+<li>大小为0的表为空表</li>
+<li>对于除空表以为外的任何表，称Ai+1后继Ai 或者说 Ai+1继Ai之后 同时称Ai-1 前驱Ai</li>
+<li>表中第一个元素是A1 最后一个元素是A_N</li>
+<li>不定义A1的前驱元，也不定义A_N的后继元</li>
+<li>元素Ai在表中的位置为i</li>
+</ul>
+<h3 id="表ADT的数据操作"><a href="#表ADT的数据操作" class="headerlink" title="表ADT的数据操作"></a>表ADT的数据操作</h3><p>一些常见的操作</p>
+<ul>
+<li>printList 打印输出这个表的内容</li>
+<li>makeEmpty 创建一个空表</li>
+<li>Find 返回关键字首次出现的位置</li>
+<li>Insert 在指定位置之后插入某个关键字</li>
+<li>Delete 删除指定位置的关键字</li>
+<li>FindKth 返回某个位置上的元素</li>
+<li>Next 返回其后继元的位置</li>
+<li>Previous 返回期前继元的位置</li>
+</ul>
+<h2 id="表的简单数组实现"><a href="#表的简单数组实现" class="headerlink" title="表的简单数组实现"></a>表的简单数组实现</h2><ul>
+<li>空间代价：<ul>
+<li>数组可以是动态指定的 （malloc）</li>
+<li>需要对表的大小进行最大值估计 通常会估计的大一些，会浪费大量空间，是严重的局限</li>
+</ul>
+</li>
+<li>时间代价：<ul>
+<li>printList和Find操作花费线性时间</li>
+<li>FindKth花费常数时间</li>
+<li>插入操作花费昂贵，如果插入一个元素在0的位置，那么其余所有元素将向后挪（复制）</li>
+<li>删除操作花费昂贵，如果删除第一个元素，那么其余所有元素将全部向前挪（复制）</li>
+<li>平均来看，插入和删除操作都需要移动一半的元素，要花费线性时间</li>
+<li>通过N次插入操作来建立一个表需要花费二次时间。</li>
+</ul>
+</li>
+</ul>
+<h2 id="表的链表实现"><a href="#表的链表实现" class="headerlink" title="表的链表实现"></a>表的链表实现</h2><p><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-41.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-41.png"></a></p>
+<ul>
+<li>为避免插入和删除的线性开销，需要允许表可以不连续存储（避免表部分或整体全部移动）。</li>
+<li>链表结构不必在内存中连续</li>
+<li>每一个结构含有一个<strong>表元素</strong>和一个<strong>后继元的结构的指针</strong>，称为Next指针</li>
+<li>最后一个单元的Next指向NULL（具体值由c定义，ansiC规定NULL为0）</li>
+<li>空间代价：<ul>
+<li>数组的元素可以在需要插入元素的时候再从内存开辟空间</li>
+</ul>
+</li>
+<li>时间代价：<ul>
+<li>PrintList(L)和Find(L,key)花费线性时间</li>
+<li>FindKth(L,i)花费O(i)时间</li>
+<li>删除操作通过修改指针完成</li>
+<li>插入操作通过执行两次指针调整完成（需先为新元素分配内存）</li>
+</ul>
+</li>
+<li>问题<ul>
+<li>仅从链表的定义出发，无法在一个元素的前面插入一个元素，因为你只能知道当前表的内容和后继表的指针</li>
+<li>在第一个元素位置做表的删除操作，可能导致整个表的丢失。</li>
+<li>删除算法要求知道被删除元素的前一个元素的指针，因为需要将前一个元素的Next指针指向后一个元素的地址</li>
+</ul>
+</li>
+<li>解决方法：增添表头<ul>
+<li>表头（header）或哑节点（dummy node）</li>
+<li>表头位置为0 第一个元素的位置为1</li>
+<li>是否使用头节点是有争议的，但使用头节点将不用再去考虑一些特殊情况</li>
+<li>为避免删除算法的问题，需编写一个FindPrevious 将返回被删除元素的前一个元素，这样删除第一个元素时将返回表头的位置</li>
+</ul>
+</li>
+</ul>
+<p><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-23.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-38-23.png"></a></p>
+<h3 id="例程"><a href="#例程" class="headerlink" title="例程"></a>例程</h3><ul>
+<li>按照C的约定，类型声明以及函数的原型都写在.h头文件中。</li>
+<li>具体的类型定义写在.c文件中。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//List.h</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _List_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _List_H_</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> ElementType;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">PtrToNode</span>;</span><br><span class="hljs-keyword">typedef</span> PtrToNode List;<br><span class="hljs-keyword">typedef</span> PtrToNode Position;<br><br>List <span class="hljs-title function_">MakeEmpty</span><span class="hljs-params">(List L)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">(List L)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">isLast</span><span class="hljs-params">(Position P,List L)</span>;<br>Position <span class="hljs-title function_">Find</span><span class="hljs-params">(ElementType X,List L)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">Delete</span><span class="hljs-params">(ElementType X,List L)</span>;<br>Position <span class="hljs-title function_">FindPrevious</span><span class="hljs-params">(ElementType X,List L)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">Insert</span><span class="hljs-params">(ElementType X,List L,Position P)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">DeleteList</span><span class="hljs-params">(List L)</span>;<br>Position <span class="hljs-title function_">Header</span><span class="hljs-params">(List L)</span>;<br>Position <span class="hljs-title function_">First</span><span class="hljs-params">(List L)</span>;<br>Position <span class="hljs-title function_">Advance</span><span class="hljs-params">(Position P)</span>;<br>ElementType <span class="hljs-title function_">Retrieve</span><span class="hljs-params">(Position P)</span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意，Insert例程和IsLast例程都传入了表L参数，尽管它从未被使用过。之所以这么做，是因为别的实现方法可能会需要这些信息，因此，若不传递表L有可能使得使用ADT的想法失败。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// List.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;List.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span></span><br><span class="hljs-class">&#123;</span><br>  ElementType Element;<br>  Position Next;<br>&#125;;<br><br>List <span class="hljs-title function_">MakeEmpty</span><span class="hljs-params">(List L)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (L-&gt;Next)<br>    &#123;<br>        MakeEmpty(L-&gt;Next);<br>        <span class="hljs-built_in">free</span>(L-&gt;Next);<br>    &#125;<br>    <span class="hljs-keyword">return</span> L;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">IsEmpty</span><span class="hljs-params">(List L)</span><span class="hljs-comment">//测试空表</span><br>&#123;<br>  <span class="hljs-keyword">return</span> L-&gt;Next==<span class="hljs-literal">NULL</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">IsLast</span><span class="hljs-params">(Position P,List L)</span><span class="hljs-comment">//测试当前位置是否为链表尾部</span><br>&#123;<br>  <span class="hljs-keyword">return</span> P-&gt;Next == <span class="hljs-literal">NULL</span>;<br>&#125;<br>Position <span class="hljs-title function_">Find</span><span class="hljs-params">(ElementType X,List L)</span><span class="hljs-comment">//查找一个元素，返回他的地址</span><br>&#123;<br>  Position P;<br>  P=L-&gt;Next;<br>  <span class="hljs-keyword">while</span>(P!=<span class="hljs-literal">NULL</span> &amp;&amp; P-&gt;Element!=X)<span class="hljs-comment">//避免用递归来实现</span><br>    P=P-&gt;Next;<br>  <span class="hljs-keyword">return</span> P;<span class="hljs-comment">//特殊情况：如果为空表将返回表头地址，如果查找不到将返回尾部元素地址</span><br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">Delete</span><span class="hljs-params">(ElementType X,List L)</span><span class="hljs-comment">//查找并删除一个元素</span><br>&#123;<br>  Position P,tempCell;<br>  P = FindPrevious(X,L);<br><br>  <span class="hljs-keyword">if</span>(!isLast(P,L))<br>  &#123;<br>    tempCell=P-&gt;Next;<br>    P-&gt;Next=tempCell-&gt;Next;<br>    <span class="hljs-built_in">free</span>(tempCell);<br>  &#125;<br>&#125;<br>Position <span class="hljs-title function_">FindPrevious</span><span class="hljs-params">(ElementType X,List L)</span><br>&#123;<br>  Position P;<br>  P=L;<span class="hljs-comment">//从表头开始查找</span><br>  <span class="hljs-keyword">while</span>(P-&gt;Next!=<span class="hljs-literal">NULL</span> &amp;&amp; P-&gt;Next-&gt;Element!=X)<br>    P=P-&gt;Next;<br>  <span class="hljs-keyword">return</span> P;<span class="hljs-comment">//特殊情况：如果为空表则返回表头的地址，如果查找不到则返回最后一个元素的地址</span><br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">Insert</span><span class="hljs-params">(ElementType X,List L,Position P)</span><span class="hljs-comment">//插入一个元素到P之后</span><br>&#123;<br>  Position TempCell;<br>  TempCell=<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> Node));<br>  <span class="hljs-keyword">if</span>(TempCell==<span class="hljs-literal">NULL</span>)<br>    ;<span class="hljs-comment">//out of space</span><br>  TempCell-&gt;Element=X;<br><br>  TempCell=P-&gt;Next;<br>  P-&gt;Next=TempCell;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">DeleteList</span><span class="hljs-params">(List L)</span><br>&#123;<br>  Position P,temp;<br>  P=L-&gt;Next;<br>  L-&gt;Next=<span class="hljs-literal">NULL</span>;<span class="hljs-comment">//头元素不删除</span><br>  <span class="hljs-keyword">while</span>(P!=<span class="hljs-literal">NULL</span>)<br>  &#123;<br>    temp=P-&gt;Next;<br>    <span class="hljs-built_in">free</span>(P);<br>    P=temp;<br>  &#125;<br>&#125;<br>Position <span class="hljs-title function_">Header</span><span class="hljs-params">(List L)</span><br>&#123;<br>  <span class="hljs-keyword">return</span> L;<br>&#125;<br>Position <span class="hljs-title function_">First</span><span class="hljs-params">(List L)</span><br>&#123;<br>  <span class="hljs-keyword">return</span> L-&gt;Next;<br>&#125;<br>Position <span class="hljs-title function_">Advance</span><span class="hljs-params">(Position P)</span><br>&#123;<br>  <span class="hljs-keyword">return</span> P-&gt;Next;<br>&#125;<br>ElementType <span class="hljs-title function_">Retrieve</span><span class="hljs-params">(Position P)</span><br>&#123;<br>  <span class="hljs-keyword">return</span> P-&gt;Element;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><ul>
+<li>解决问题：解决单链表无法倒序扫描的问题</li>
+<li>代价<ul>
+<li>空间代价：数据结构中增添的一个指针域</li>
+<li>时间代价：<ul>
+<li>简化了删除操作，原先无法得知前驱元素的指针，现在这个指针是现成的</li>
+<li>插入和删除操作的开销增加了一倍，因为多了一倍量的指针需要定位</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-34-07.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-34-07.png"></a></p>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><ul>
+<li>一种流行的做法</li>
+<li>让最后一个元素的指针域指向第一个元素</li>
+<li>可以有表头，也可以没有</li>
+<li>如果有表头，最后一个元素的指针域指向表头</li>
+<li>可以同时也是双向链表</li>
+<li>下图为无头循环双链表<br><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-46-45.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-25-20-46-45.png"></a></li>
+</ul>
+<h2 id="三个使用链表的例子"><a href="#三个使用链表的例子" class="headerlink" title="三个使用链表的例子"></a>三个使用链表的例子</h2><ul>
+<li>一元多项式</li>
+<li>基数排序（以线性时间进行）</li>
+<li>学生课程选课系统</li>
+</ul>
+<h3 id="一元多项式-结构体-数组方式实现"><a href="#一元多项式-结构体-数组方式实现" class="headerlink" title="一元多项式(结构体+数组方式实现)"></a>一元多项式(结构体+数组方式实现)</h3><ul>
+<li>如果一个一元的多项式的系数大部分为非零（稠密多项式），那么可以用一个数组来存储这些系数，同时用一个变量来记录这个多项式的最高次项的指数，将其用一个结构体存储，继而可以写出其加减乘微分的操作函数。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MaxDegree 100</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">polynomial</span>&#123;</span><span class="hljs-comment">//存储一个多项式</span><br>  <span class="hljs-type">int</span> coeffArray[MaxDegree];<span class="hljs-comment">//存储各项系数，coeffArray[0] 存储x^0项的系数</span><br>  <span class="hljs-type">int</span> HighPower;<span class="hljs-comment">//存储最高此项的指数</span><br>&#125;;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">polynomial</span> <span class="hljs-title">Polynomial</span>;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">polynomial</span>* <span class="hljs-title">PPolynomial</span>;</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">ZeroPolynomial</span><span class="hljs-params">(PPolynomial Poly)</span><span class="hljs-comment">//初始化一个多项式</span><br>&#123;<br>  <span class="hljs-type">int</span> i;<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;MaxDegree;i++)<br>    Poly-&gt;coeffArray[i]=<span class="hljs-number">0</span>;<br>  Poly-&gt;HighPower=<span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">AddPolynomial</span><span class="hljs-params">(PPolynomial A1,PPolynomial A2,PPolynomial Result)</span><span class="hljs-comment">//加法</span><br>&#123;<br>  <span class="hljs-type">int</span> i,j;<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;MaxDegree;i++)<br>        Result-&gt;coeffArray[i] = A1-&gt;coeffArray[i] + A2-&gt;coeffArray[j] ;<br>  Result-&gt;HighPower = (A1-&gt;HighPower &gt; A2-&gt;HighPower)? A1-&gt;HighPower : A2-&gt;HighPower ;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">multiplePolynomial</span><span class="hljs-params">(PPolynomial A1,PPolynomial A2,PPolynomial Result)</span><span class="hljs-comment">//乘法</span><br>&#123;<br>  <span class="hljs-keyword">if</span>(A1-&gt;HighPower + A2-&gt;HighPower  &gt;= MaxDegree)<br>  &#123;<br>    <span class="hljs-comment">//out of memory</span><br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-type">int</span> i,j;<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;MaxDegree;i++)<br>  &#123;<br>    <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;MaxDegree;j++)<br>    &#123;<br>      Result-&gt;coeffArray[i+j] += A1-&gt;coeffArray[i] * A2-&gt;coeffArray[j] ;<br>    &#125;<br>  &#125;<br>  Result-&gt;HighPower = A1-&gt;HighPower + A2-&gt;HighPower;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="一元多项式-链表方式实现"><a href="#一元多项式-链表方式实现" class="headerlink" title="一元多项式(链表方式实现)"></a>一元多项式(链表方式实现)</h3><ul>
+<li>非稠密多项式用上述方式实现会遇到很多问题，<ul>
+<li>如当多项式的最高次项为1000，那么用上述方式就需要保存1001个系数，造成空间资源的浪费；</li>
+<li>如果这个多项式的系数只有最高次项和最低次项有值其余次项的系数基本上全都是0，那么在做加法运算的时候程序会去计算系数为零的项，造成计算资源的浪费。</li>
+</ul>
+</li>
+</ul>
+<p><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-18-46-12.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-18-46-12.png"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span><br>  <span class="hljs-type">int</span> Coeff;<br>  <span class="hljs-type">int</span> Exponent;<br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> <span class="hljs-title">Next</span>;</span><br>&#125;;<br><span class="hljs-keyword">typedef</span> Node* PPolynomial;<br><span class="hljs-keyword">typedef</span> Node Polynomial;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">addPolynomial</span><span class="hljs-params">(PPolynomial A1,PPolynomial A2,PPolynomial Result)</span><br>&#123;<br>  <br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><ul>
+<li>预备知识：桶排序</li>
+<li>基数排序是桶排序的推广</li>
+<li>通过从低到高比较基数大小来进行多次桶排序<br><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-20-24-04.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-20-24-04.png"></a></li>
+</ul>
+<p>桶排序概念实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>  <span class="hljs-type">int</span> count[<span class="hljs-number">100</span>]=&#123;<span class="hljs-number">0</span>&#125;;<br>  <span class="hljs-type">int</span> num[<span class="hljs-number">100</span>];<br><br>  <span class="hljs-type">int</span> i,j;<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)<span class="hljs-comment">//随机赋值0~100</span><br>    num[i]=(srand(rand()+clock()),rand()%<span class="hljs-number">100</span>);<br>  <br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)<span class="hljs-comment">//桶排序</span><br>    count[num[i]]++;<br>  <br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)<span class="hljs-comment">//输出</span><br>    <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;count[i];j++)<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%4d&quot;</span>,i);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>基数排序实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//略</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="多重表"><a href="#多重表" class="headerlink" title="多重表"></a>多重表</h3><p><a data-fancybox="gallery" href="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-22-47-09.png"><img src="/images/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Clipboard_2022-05-26-22-47-09.png"></a></p>
+<h3 id="链表的游标实现"><a href="#链表的游标实现" class="headerlink" title="链表的游标实现"></a>链表的游标实现</h3><ul>
+<li>解决一些语言中没有指针的问题</li>
+<li>需要提前申请一个足够长的数组</li>
+<li>需要另外一个数组记录内存的分配情况</li>
+<li>编写函数模拟malloc() 和free()操作</li>
+<li>malloc()就是从数组中查找出一个未被使用的位置，标记其为被占用，返回该元素的索引位置</li>
+<li>free()操作就是标记一个区域为未被占用</li>
+<li>链表的指针域存储的是索引值<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//略</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+
+  </article>
+
+  
+      
+    
+    <script type="text/javascript">
+        var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8/")
+        var UnDecodePageURI = "https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8/"
+        timer = null
+        timer=setInterval(function(){
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+
+                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            clearInterval(timer)
+        },
+        100
+        )
+    </script>
+
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E7%AC%AC3%E7%AB%A0_2.%E8%A1%A8&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" rel="tag">数据结构与算法分析</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-2-%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">第3章_2.表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8ADT"><span class="toc-number">1.0.1.</span> <span class="toc-text">表ADT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8ADT%E7%9A%84%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">表ADT的数据操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%9A%84%E7%AE%80%E5%8D%95%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.</span> <span class="toc-text">表的简单数组实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%9A%84%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.</span> <span class="toc-text">表的链表实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E7%A8%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">例程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">双链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">循环链表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E4%BD%BF%E7%94%A8%E9%93%BE%E8%A1%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">1.3.</span> <span class="toc-text">三个使用链表的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E5%A4%9A%E9%A1%B9%E5%BC%8F-%E7%BB%93%E6%9E%84%E4%BD%93-%E6%95%B0%E7%BB%84%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">一元多项式(结构体+数组方式实现)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E5%A4%9A%E9%A1%B9%E5%BC%8F-%E9%93%BE%E8%A1%A8%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">一元多项式(链表方式实现)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">基数排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E8%A1%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">多重表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%B8%B8%E6%A0%87%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.5.</span> <span class="toc-text">链表的游标实现</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1654601981640"></script>
+
+
+	<script async src="/js/search.js?v=1654601981640"></script>
+
+
+<script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>vscode操作备忘笔记 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+    <meta name="description" content="vscode操作备忘笔记面板 命令面板是vscode快捷键的主要交互界面，可以使用f1或者Cmd+Shift+P(win Ctrl+Shift+P)打开。 在命令面板中你可以输入命令进行搜索(中英文都可以)，然后执行。命名面板中可以执行各种命令，包括编辑器自带的功能和插件提供的功能。所以一定要记住它的快捷键Cmd+Shift+P   搜索面板CTRL+E、R、P 打开文件或切换工作目录  注释 注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vscode操作备忘笔记">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="vscode操作备忘笔记面板 命令面板是vscode快捷键的主要交互界面，可以使用f1或者Cmd+Shift+P(win Ctrl+Shift+P)打开。 在命令面板中你可以输入命令进行搜索(中英文都可以)，然后执行。命名面板中可以执行各种命令，包括编辑器自带的功能和插件提供的功能。所以一定要记住它的快捷键Cmd+Shift+P   搜索面板CTRL+E、R、P 打开文件或切换工作目录  注释 注">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-09T12:28:00.000Z">
+<meta property="article:modified_time" content="2022-06-07T00:45:52.111Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary">
+    <script src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654601982339">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654601982339">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1654601982339">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1654601982339">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>47</div>
+        <div><span>字数</span>37.2k</div>
+        <div><span>标签</span>29</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">7</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">30</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 14.29px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.43px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 12.86px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.86px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.14px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15.71px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.57px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_9.%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">第4章_9.树的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/">第4章_8.伸展树</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%B0%B8%E8%BF%9C%E6%9C%89%E4%B8%8B%E4%B8%80%E5%BA%A7%E6%9C%80%E9%AB%98%E5%B3%B0/">永远有下一座最高峰</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/CSS3%E9%87%8D%E5%AD%A6%E7%AC%94%E8%AE%B0/">CSS3重学笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E6%9C%80%E7%97%9B%E8%8B%A6%E7%9A%84%E6%97%A5%E5%AD%90%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E4%BA%86/">那些最痛苦的日子已经过去了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link  href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+<script>
+    
+</script>
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
+              <img data-src="/images/article/vscode.webp" data-sizes="auto" alt="vscode操作备忘笔记" class="lazyload">
+              <h1>vscode操作备忘笔记</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月09日</a>
+</div>
+
+      
+
+      <h2 id="vscode操作备忘笔记"><a href="#vscode操作备忘笔记" class="headerlink" title="vscode操作备忘笔记"></a>vscode操作备忘笔记</h2><h3 id="面板"><a href="#面板" class="headerlink" title="面板"></a>面板</h3><ol>
+<li>命令面板是vscode快捷键的主要交互界面，可以使用f1或者Cmd+Shift+P(win Ctrl+Shift+P)打开。<blockquote>
+<p>在命令面板中你可以输入命令进行搜索(中英文都可以)，然后执行。<br>命名面板中可以执行各种命令，包括编辑器自带的功能和插件提供的功能。<br>所以一定要记住它的快捷键Cmd+Shift+P</p>
+</blockquote>
+</li>
+<li>搜索面板CTRL+E、R、P 打开文件或切换工作目录</li>
+</ol>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li>注释选中行 ctrl+&#x2F;</li>
+<li>注释选中代码块 alt + shift + a</li>
+</ul>
+<h3 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h3><ul>
+<li>对选中代码格式化 ？？？？？？？</li>
+<li>对整个文件格式化 ctrl + shift + f 苹果：Option+Shift+F</li>
+</ul>
+<h3 id="代码缩进"><a href="#代码缩进" class="headerlink" title="代码缩进"></a>代码缩进</h3><ul>
+<li>对个文档进行缩进调节，使用Cmd+Shift+P打开命令面板，输入缩进,然后选择相应的命令</li>
+<li>对选中代码缩进调节：ctrl+] ctrl+[ 苹果：Cmd+] Cmd+[</li>
+</ul>
+<h3 id="一些小技巧"><a href="#一些小技巧" class="headerlink" title="一些小技巧"></a>一些小技巧</h3><ul>
+<li>调整选中代码的大小写 选中后在命令面板输入转化为大写或者转化为小写的中文或英文</li>
+<li>合并代码行，多行代码合并为一行，Cmd+J(win下未绑定</li>
+<li>对选中的代码行排序 调出命令面板，输入按升序排序或者按降序排序</li>
+</ul>
+<h3 id="光标操作"><a href="#光标操作" class="headerlink" title="光标操作"></a>光标操作</h3><ul>
+<li>基础<ol>
+<li>以单词为单位移动光标：windows中：CTRL+左右方向键</li>
+<li>鼠标滚轮效果：windows中：CTRL+上下方向键</li>
+<li>移动到行首 windows中：Home键 苹果中：Cmd+左方向键</li>
+<li>移动到行尾 windows中：end键 苹果中：Cmd+右方向键</li>
+<li>移动到文档的开头和末尾 windows中： Ctrl+Home&#x2F;End 苹果中：Cmd+上下方向键</li>
+</ol>
+</li>
+<li>进阶<ol>
+<li>回到上一个光标的位置，win Ctrl+U(mac：Cmd+U) </li>
+<li>在不同的文件之间回到上一个光标的位置 win Ctrl+shift+U</li>
+</ol>
+</li>
+<li>文本选择<ol>
+<li>在光标移动的时候多按一个shift键就可以选中文本</li>
+<li>选中单词 Cmd+D</li>
+</ol>
+</li>
+<li>删除<ol>
+<li>选中代码之后再按删除</li>
+<li>删除当前行Ctrl+Shift+K Cmd+Shift+K</li>
+</ol>
+</li>
+<li>代码移动 <ol>
+<li>剪切移动Alt+上下 苹果：Option+上下方向键</li>
+<li>复制移动Alt+shift+上下 苹果：Option+Shift+上下</li>
+</ol>
+</li>
+</ul>
+<h3 id="多光标特性"><a href="#多光标特性" class="headerlink" title="多光标特性"></a>多光标特性</h3><p>使用鼠标：按住Option(win Alt),然后用鼠标点，鼠标点在哪里哪里就会出现一个光标<br>注意：有的mac电脑上是按住Cmd，然后用鼠标点才可以</p>
+<h3 id="选中单词"><a href="#选中单词" class="headerlink" title="选中单词"></a>选中单词</h3><p>Cmd+D (win Ctrl+D) 第一次按下时，它会选中光标附近的单词；第二次按下时，它会找到这个单词第二次出现的位置，创建一个新的光标，并且选中它。(注：cmd-k cmd-d 跳过当前的选择)</p>
+<h3 id="在每行末尾添加光标"><a href="#在每行末尾添加光标" class="headerlink" title="在每行末尾添加光标"></a>在每行末尾添加光标</h3><p>首先你要选中多行代码，然后按Alt+Shift+i(苹果：Option+Shift+i),这样做的结果是：每一行后面都会多出来一个光标 Option+Shift+i</p>
+<h3 id="撤销多光标"><a href="#撤销多光标" class="headerlink" title="撤销多光标"></a>撤销多光标</h3><p>使用Esc 或鼠标点击一下</p>
+<h3 id="快速打开文件"><a href="#快速打开文件" class="headerlink" title="快速打开文件"></a>快速打开文件</h3><p>Cmd+P （win Ctrl+P）输入你要打开的文件名,回车打开</p>
+<p>这里有个小技巧，选中你要打开的文件后，按Cmd+Enter,就会在一个新的编辑器窗口打开</p>
+<h3 id="在tab不同的文件间切换，"><a href="#在tab不同的文件间切换，" class="headerlink" title="在tab不同的文件间切换，"></a>在tab不同的文件间切换，</h3><p>Windows：？？？ 苹果：cmd+shift+[] </p>
+<h3 id="行跳转"><a href="#行跳转" class="headerlink" title="行跳转"></a>行跳转</h3><p>假如浏览器报了个错，错误在53行，如何快速跳转到53行<br>Ctrl+g 输入行号</p>
+<h3 id="文件行跳转"><a href="#文件行跳转" class="headerlink" title="文件行跳转"></a>文件行跳转</h3><p>如果你想跳转到某个文件的某一行，你只需要先按下 “Cmd + P”，输入文件名，然后在这之后加上 “:”和指定行号即可。</p>
+<h3 id="符号跳转"><a href="#符号跳转" class="headerlink" title="符号跳转"></a>符号跳转</h3><p>符号可以是文件名、函数名，可以是css的类名<br>Cmd+Shift+O(win Ctrl+Shift+o) 输入你要跳转的符号，回车进行跳转</p>
+<p>win下输入Ctrl+T，可以在不同文件的符号间进行搜索跳转</p>
+<h3 id="定义-definition-和实现-implementation-处"><a href="#定义-definition-和实现-implementation-处" class="headerlink" title="定义(definition)和实现(implementation)处"></a>定义(definition)和实现(implementation)处</h3><p>f12跳到函数的定义处<br>Cmd+f12(win Ctrl+f12)跳转到函数的实现处</p>
+<h3 id="引用跳转"><a href="#引用跳转" class="headerlink" title="引用跳转"></a>引用跳转</h3><p>很多时候，除了要知道一个函数或者类的定义和实现以外，你可能还希望知道它们被谁引用了，以及在哪里被引用了。这时你只需要将光标移动到函数或者类上面，然后按下 Shift + F12，VS Code 就会打开一个引用列表和一个内嵌的编辑器。在这个引用列表里，你选中某个引用，VS Code 就会把这个引用附近的代码展示在这个内嵌的编辑器里。</p>
+<h3 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h3><p>当我们想修改一个函数或者变量的名字时候，我们只需把光标放到函数或者变量名上，然后按下 F2，这样这个函数或者变量出现的地方就都会被修改。</p>
+<h3 id="一些插件"><a href="#一些插件" class="headerlink" title="一些插件"></a>一些插件</h3><ol>
+<li><p>万能语言运行环境 （Code Runner）：</p>
+<blockquote>
+<p>如果你需要学习或者接触各种各样的开发语言，那么 Code Runner 插件可以让你不用搭建各种语言的开发环境，直接通过此插件就可以直接运行对应语言的代码，非常适合学习或测试各种开发语言。<br>支持的语言有：C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT&#x2F;CMD, BASH&#x2F;SH, F# Script, F# (.NET Core), C# Script, C# (.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic .NET, Clojure, Haxe, Objective-C, Rust, Racket, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D, 以及一些自定义的命令。</p>
+</blockquote>
+</li>
+<li><p>快速注释（ Document This）：优秀的代码除了优秀的性能、规范的格式，注释也是不可或缺的，而且注释也应该有一套标准的注释方法，特别对于 JavaScript 这种语言。Document This 可以快速地帮你生成注释，如一些函数的注释还能帮你抽取出参数的定义等，是你编写规范代码必备的工具。Document This目前仅支持JavaScript和TypeScript。</p>
+</li>
+<li><p>CSS 类名智能提示（HTML CSS Support）：它会提示一些类名供你选择。</p>
+</li>
+<li><p>代码拼写检查（Code Spell Checker）：此插件安装后就不用管就好了，在你代码中有单词拼写错误时，你就会发现它的好处，因为我们写代码毕竟都是大量的英文单词变量定义，插件还可以给出错误拼写单词的建议。如果单词有错下面就会出现波浪线。</p>
+</li>
+<li><p>备忘插件（TODO Highlight）：在很多的其他代码编辑器中都有 TODO 标注功能的，如你写到某一部分的代码时，其中部分的功能需要稍后再来实现，这是就可以在对应的代码处添加一个 TODO 类型的注释，那么后期就可以快速地跳转到这部分继续写，而且当项目很大的时候，TODO 就变得更加有用，因为有时候 TODO 可能有几十个，帮助你标注那些功能需要继续实现或优化。</p>
+</li>
+<li><p>自动重命名标签（Auto Rename Tag）：这个插件对你的标签修改起来一个很大的作用，当你修改起始标签的时候，结束标签也会随着起始标签的修改而修改</p>
+</li>
+<li><p>html模板（HTML Boilerplate）：就是一个很标准html5的模板插件，兼容新老版浏览器。</p>
+</li>
+<li><p>代码格式化（Prettier - Code formatter）</p>
+</li>
+<li><p>颜色提示（Color Info）</p>
+</li>
+<li><p>自动闭合标签（Auto Close Tag）：安装了这个插件后，如果你的起始标签不小心删除的结束标签，只要打 &lt;&#x2F; 就会自动补全，根据就近原则，一次只能补全一个标签。</p>
+</li>
+</ol>
+<h2 id="预定义变量列表"><a href="#预定义变量列表" class="headerlink" title="预定义变量列表"></a>预定义变量列表</h2><ul>
+<li><code>$&#123;workspaceFolder&#125;</code> -在 VS Code 中打开的文件夹的路径</li>
+<li><code>$&#123;workspaceFolderBasename&#125;</code> -在 VS Code 中打开的文件夹名称，不带任何斜杠（&#x2F;）</li>
+<li><code>$&#123;file&#125;</code> -当前打开的文件</li>
+<li><code>$&#123;relativeFile&#125;</code> -当前相对于打开的文件 workspaceFolder</li>
+<li><code>$&#123;relativeFileDirname&#125;</code> -当前打开文件的目录名，相对于 workspaceFolder</li>
+<li><code>$&#123;fileBasename&#125;</code> -当前打开的文件的基本名称</li>
+<li><code>$&#123;fileBasenameNoExtension&#125;</code> -当前打开的文件的基本名称，没有文件扩展名</li>
+<li><code>$&#123;fileDirname&#125;</code> -当前打开的文件的目录名</li>
+<li><code>$&#123;fileExtname&#125;</code> -当前打开的文件的扩展名</li>
+<li><code>$&#123;cwd&#125;</code> -启动时任务运行器的当前工作目录</li>
+<li><code>$&#123;lineNumber&#125;</code> -活动文件中当前选择的行号</li>
+<li><code>$&#123;selectedText&#125;</code> -活动文件中的当前选定文本</li>
+<li><code>$&#123;execPath&#125;</code> -正在运行的 VS Code 可执行文件的路径</li>
+<li><code>$&#123;defaultBuildTask&#125;</code> -默认构建任务的名称</li>
+</ul>
+<h2 id="预定义变量的例子"><a href="#预定义变量的例子" class="headerlink" title="预定义变量的例子"></a>预定义变量的例子</h2><h3 id="vscode-的当前状态"><a href="#vscode-的当前状态" class="headerlink" title="vscode 的当前状态"></a>vscode 的当前状态</h3><table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="center">路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">当前打开工作区的路径。</td>
+<td align="center">&#x2F;home&#x2F;your-username&#x2F;your-project</td>
+</tr>
+<tr>
+<td align="center">当前编辑器打开的文件路径。</td>
+<td align="center">&#x2F;home&#x2F;your-username&#x2F;your-project&#x2F;folder&#x2F;file.ext</td>
+</tr>
+</tbody></table>
+<h3 id="预定义变量值列表"><a href="#预定义变量值列表" class="headerlink" title="预定义变量值列表"></a>预定义变量值列表</h3><table>
+<thead>
+<tr>
+<th align="left">变量</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>$&#123;workspaceFolder&#125;</code></td>
+<td align="left">&#x2F;home&#x2F;your-username&#x2F;your-project</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;workspaceFolderBasename&#125;</code></td>
+<td align="left">your-project</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;file&#125;</code></td>
+<td align="left">&#x2F;home&#x2F;your-username&#x2F;your-project&#x2F;folder&#x2F;file.ext</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;relativeFile&#125;</code></td>
+<td align="left">folder&#x2F;file.ext</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;relativeFileDirname&#125;</code></td>
+<td align="left">folder</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;fileBasename&#125;</code></td>
+<td align="left">file.ext</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;fileBasenameNoExtension&#125;</code></td>
+<td align="left">file</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;fileDirname&#125;</code></td>
+<td align="left">&#x2F;home&#x2F;your-username&#x2F;your-project&#x2F;folder</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;fileExtname&#125;</code></td>
+<td align="left">.ext</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;lineNumber&#125;</code></td>
+<td align="left">光标的行号</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;selectedText&#125;</code></td>
+<td align="left">在代码编辑器中选择的文本</td>
+</tr>
+<tr>
+<td align="left"><code>$&#123;execPath&#125;</code></td>
+<td align="left">Code.exe 的位置</td>
+</tr>
+</tbody></table>
+
+  </article>
+
+  
+      
+    
+    <script type="text/javascript">
+        var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/")
+        var UnDecodePageURI = "https://yiguiding.gitee.io/article/vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/"
+        timer = null
+        timer=setInterval(function(){
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+
+                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
+                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            clearInterval(timer)
+        },
+        100
+        )
+    </script>
+
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/vscode/" rel="tag">vscode</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E6%93%8D%E4%BD%9C%E5%A4%87%E5%BF%98%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">vscode操作备忘笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E6%9D%BF"><span class="toc-number">1.1.</span> <span class="toc-text">面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">代码格式化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%A9%E8%BF%9B"><span class="toc-number">1.4.</span> <span class="toc-text">代码缩进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.</span> <span class="toc-text">一些小技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%A0%87%E6%93%8D%E4%BD%9C"><span class="toc-number">1.6.</span> <span class="toc-text">光标操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%89%E6%A0%87%E7%89%B9%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">多光标特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%AD%E5%8D%95%E8%AF%8D"><span class="toc-number">1.8.</span> <span class="toc-text">选中单词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%AF%8F%E8%A1%8C%E6%9C%AB%E5%B0%BE%E6%B7%BB%E5%8A%A0%E5%85%89%E6%A0%87"><span class="toc-number">1.9.</span> <span class="toc-text">在每行末尾添加光标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E5%A4%9A%E5%85%89%E6%A0%87"><span class="toc-number">1.10.</span> <span class="toc-text">撤销多光标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="toc-number">1.11.</span> <span class="toc-text">快速打开文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8tab%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E9%97%B4%E5%88%87%E6%8D%A2%EF%BC%8C"><span class="toc-number">1.12.</span> <span class="toc-text">在tab不同的文件间切换，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.13.</span> <span class="toc-text">行跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%A1%8C%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.14.</span> <span class="toc-text">文件行跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.15.</span> <span class="toc-text">符号跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-definition-%E5%92%8C%E5%AE%9E%E7%8E%B0-implementation-%E5%A4%84"><span class="toc-number">1.16.</span> <span class="toc-text">定义(definition)和实现(implementation)处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.17.</span> <span class="toc-text">引用跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84"><span class="toc-number">1.18.</span> <span class="toc-text">代码重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8F%92%E4%BB%B6"><span class="toc-number">1.19.</span> <span class="toc-text">一些插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">预定义变量列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">3.</span> <span class="toc-text">预定义变量的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode-%E7%9A%84%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81"><span class="toc-number">3.1.</span> <span class="toc-text">vscode 的当前状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E5%80%BC%E5%88%97%E8%A1%A8"><span class="toc-number">3.2.</span> <span class="toc-text">预定义变量值列表</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1654601982376"></script>
+
+
+	<script async src="/js/search.js?v=1654601982376"></script>
+
+
+<script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
