@@ -3,7 +3,7 @@ layout: post
 title: "I am Tiny Rick"
 date: 2021-12-28 20:21:00 +0800
 cover: /images/article/rick.jpg
-tags: [Tiny Rick]
+tags: [Tiny Rick,日志]
 categories: 日志
 ---
 

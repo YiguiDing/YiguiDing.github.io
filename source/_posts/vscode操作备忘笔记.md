@@ -122,3 +122,41 @@ Cmd+f12(win Ctrl+f12)跳转到函数的实现处
 10. 自动闭合标签（Auto Close Tag）：安装了这个插件后，如果你的起始标签不小心删除的结束标签，只要打 </ 就会自动补全，根据就近原则，一次只能补全一个标签。
 
 
+## 预定义变量列表
+- `${workspaceFolder}` -在 VS Code 中打开的文件夹的路径
+- `${workspaceFolderBasename}` -在 VS Code 中打开的文件夹名称，不带任何斜杠（/）
+- `${file}` -当前打开的文件
+- `${relativeFile}` -当前相对于打开的文件 workspaceFolder
+- `${relativeFileDirname}` -当前打开文件的目录名，相对于 workspaceFolder
+- `${fileBasename}` -当前打开的文件的基本名称
+- `${fileBasenameNoExtension}` -当前打开的文件的基本名称，没有文件扩展名
+- `${fileDirname}` -当前打开的文件的目录名
+- `${fileExtname}` -当前打开的文件的扩展名
+- `${cwd}` -启动时任务运行器的当前工作目录
+- `${lineNumber}` -活动文件中当前选择的行号
+- `${selectedText}` -活动文件中的当前选定文本
+- `${execPath}` -正在运行的 VS Code 可执行文件的路径
+- `${defaultBuildTask}` -默认构建任务的名称
+
+## 预定义变量的例子
+### vscode 的当前状态
+|            描述            |                       路径                       |
+| :------------------------: | :----------------------------------------------: |
+|   当前打开工作区的路径。   |         /home/your-username/your-project         |
+| 当前编辑器打开的文件路径。 | /home/your-username/your-project/folder/file.ext |
+
+### 预定义变量值列表
+| 变量                         | 值                                               |
+| :--------------------------- | :----------------------------------------------- |
+| `${workspaceFolder}`         | /home/your-username/your-project                 |
+| `${workspaceFolderBasename}` | your-project                                     |
+| `${file}`                    | /home/your-username/your-project/folder/file.ext |
+| `${relativeFile}`            | folder/file.ext                                  |
+| `${relativeFileDirname}`     | folder                                           |
+| `${fileBasename}`            | file.ext                                         |
+| `${fileBasenameNoExtension}` | file                                             |
+| `${fileDirname}`             | /home/your-username/your-project/folder          |
+| `${fileExtname}`             | .ext                                             |
+| `${lineNumber}`              | 光标的行号                                       |
+| `${selectedText}`            | 在代码编辑器中选择的文本                         |
+| `${execPath}`                | Code.exe 的位置                                  |
