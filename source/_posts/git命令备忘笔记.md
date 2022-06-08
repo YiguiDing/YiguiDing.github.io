@@ -1,6 +1,6 @@
 ---
 layout: post
-top: 9
+top: 6
 title: "git命令备忘笔记"
 date: 2022-01-09 20:28:00 +0800
 cover: /images/article/git.jpg
@@ -11,6 +11,29 @@ categories: 笔记
 ---
 
 # git命令备忘笔记
+
+## 目录
+- [git命令备忘笔记](#git命令备忘笔记)
+  - [目录](#目录)
+  - [git用户配置](#git用户配置)
+  - [编辑git配置文件:](#编辑git配置文件)
+  - [查看配置信息](#查看配置信息)
+  - [git默认编辑器配置](#git默认编辑器配置)
+  - [git默认差异分析工具配置](#git默认差异分析工具配置)
+  - [基本操作](#基本操作)
+  - [有关创建与提交你的项目的快照的命令：](#有关创建与提交你的项目的快照的命令)
+  - [git-查看提交历史](#git-查看提交历史)
+  - [远程操作](#远程操作)
+  - [git分支管理](#git分支管理)
+  - [git 标签](#git-标签)
+  - [ssh加密通信配置](#ssh加密通信配置)
+  - [windows-git工具打开后自动测试](#windows-git工具打开后自动测试)
+  - [将已经提交到远程仓库的版本撤销](#将已经提交到远程仓库的版本撤销)
+  - [子仓库](#子仓库)
+    - [包含子仓库](#包含子仓库)
+    - [从远端克隆父仓库后子仓库为默认为空，需执行以下操作来下载子仓库](#从远端克隆父仓库后子仓库为默认为空需执行以下操作来下载子仓库)
+    - [删除误添加到暂存区的子仓库](#删除误添加到暂存区的子仓库)
+  - [提交信息为当前日期](#提交信息为当前日期)
 
 ## git用户配置
 * `git config --global user.name "YiguiDing"`
@@ -89,7 +112,7 @@ categories: 笔记
   * 移动或重命名：`git mv [file] [newfile]`
   * 强制移动并覆盖：`git mv -f [file] [newfile]`
 
-## Git 查看提交历史
+## git-查看提交历史
 * `git log` - 查看历史提交记录。
   * `-6` 指定列出条数
   *  `--oneline` 选项来查看历史记录的简洁的版本
@@ -150,7 +173,7 @@ categories: 笔记
 * `git tag` 查看所有标签
 * `git log --decorate` ，也可以看到打的标签
 
-## SSH加密通信配置
+## ssh加密通信配置
 * 配置成功后可以免密码向远程仓库推送
   * 使用格式大致为`git push git@github.com:username/pathToProgectName.git localBranchName:remoteBranchName`
 1. 生成 SSH密钥 `ssh-keygen -t rsa -C "youremail@example.com"`
@@ -180,7 +203,7 @@ Host gitee.com
   IdentityFile ~/.ssh/id_rsa
 ```
 
-## Windows git工具打开后自动测试
+## windows-git工具打开后自动测试
 附加两行内容到`/etc/profile`或`~/.profile`文件中
   * `ssh git@github.com`
   * `ssh git@gitee.com
