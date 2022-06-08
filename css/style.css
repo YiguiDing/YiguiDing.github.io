@@ -155,7 +155,7 @@ article code::-webkit-scrollbar-thumb {
   padding: 0 0.5em;
   background: #282c34;
   color: #abb2bf;
-  margin: 5px 0;
+  margin: 5px 0 15px 0;
   border-radius: 13px;
   overflow: auto;
 }
@@ -304,7 +304,7 @@ article h4,
 article h5,
 article h6 {
   color: #111;
-  margin: 25px 0 10px;
+  margin: 25px 0 10px 0;
 }
 article h4,
 article h5,
@@ -539,7 +539,7 @@ article ul {
 }
 article ul li {
   position: relative;
-  padding: 0.25em 0;
+  padding: 5px 0;
   padding-left: 25px;
   line-height: 1rem;
 }
@@ -550,9 +550,9 @@ article ul li::before {
   background: #ff4e6a;
   display: inline-block;
   vertical-align: middle;
-  margin-top: 0;
-  margin-right: 0;
-  margin-left: 0;
+  margin-top: -2px;
+  margin-right: 11px;
+  margin-left: -25px;
   border-radius: 100%;
   border: 3px solid #fff;
   z-index: 100;
@@ -564,8 +564,8 @@ article ul li::after {
   width: 4px;
   background: rgba(255,78,106,0.2);
   position: absolute;
-  left: 0.35em;
-  top: 0.7em;
+  left: 3px;
+  top: 20px;
 }
 article ul li:last-child:after {
   display: none;
