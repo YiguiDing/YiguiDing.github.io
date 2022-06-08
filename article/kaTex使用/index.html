@@ -33,14 +33,14 @@
     <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654608851137">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654688228557">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654608851137">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654688228557">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654608851137">
+    <link rel="stylesheet" href="/css/style.css?v=1654688228557">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654608851137">
+        <link rel="stylesheet" href="/css/dark.css?v=1654688228558">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -73,7 +73,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>47</div>
-        <div><span>字数</span>37.2k</div>
+        <div><span>字数</span>40.6k</div>
         <div><span>标签</span>29</div>
         <div><span>分类</span>3</div>
     </div>
@@ -324,10 +324,11 @@
       
       <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月01日</a>
+    <a><span class="post-count">总字数：251</span></a>
+    <!-- <a><span class="post-count">读完需：1分钟</span></a> -->
 </div>
 
       
-
       <h1 id="kaTex使用"><a href="#kaTex使用" class="headerlink" title="kaTex使用"></a>kaTex使用</h1><ul>
 <li>KaTeX排版系统核心库<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/libs/katex/v0.15.6/katex.min.css&quot;</span> &gt;</span><br><span class="hljs-comment">&lt;!-- The loading of KaTeX is deferred to speed up page rendering --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">defer</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/libs/katex/v0.15.6/katex.min.js&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
 <li>用于自动渲染的KaTeX扩展库<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- To automatically render math in text elements, include the auto-render extension: --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">defer</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/libs/katex/v0.15.6/contrib/auto-render.min.js&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;DOMContentLoaded&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">renderMathInElement</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>, &#123;</span><br><span class="language-javascript">          <span class="hljs-comment">// customised options</span></span><br><span class="language-javascript">          <span class="hljs-attr">delimiters</span>: [</span><br><span class="language-javascript">              &#123;<span class="hljs-attr">left</span>: <span class="hljs-string">&#x27;$$&#x27;</span>, <span class="hljs-attr">right</span>: <span class="hljs-string">&#x27;$$&#x27;</span>, <span class="hljs-attr">display</span>: <span class="hljs-literal">true</span>&#125;,</span><br><span class="language-javascript">              &#123;<span class="hljs-attr">left</span>: <span class="hljs-string">&#x27;$&#x27;</span>, <span class="hljs-attr">right</span>: <span class="hljs-string">&#x27;$&#x27;</span>, <span class="hljs-attr">display</span>: <span class="hljs-literal">false</span>&#125;,</span><br><span class="language-javascript">              &#123;<span class="hljs-attr">left</span>: <span class="hljs-string">&#x27;\\(&#x27;</span>, <span class="hljs-attr">right</span>: <span class="hljs-string">&#x27;\\)&#x27;</span>, <span class="hljs-attr">display</span>: <span class="hljs-literal">true</span>&#125;,</span><br><span class="language-javascript">              &#123;<span class="hljs-attr">left</span>: <span class="hljs-string">&#x27;\\[&#x27;</span>, <span class="hljs-attr">right</span>: <span class="hljs-string">&#x27;\\]&#x27;</span>, <span class="hljs-attr">display</span>: <span class="hljs-literal">false</span>&#125;</span><br><span class="language-javascript">          ],</span><br><span class="language-javascript">          <span class="hljs-comment">// • rendering keys, e.g.:</span></span><br><span class="language-javascript">          throwOnError : <span class="hljs-literal">true</span></span><br><span class="language-javascript">        &#125;);</span><br><span class="language-javascript">    &#125;);</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
@@ -432,10 +433,10 @@
 
      
 
-<script async src="/js/app.js?v=1654608851211"></script>
+<script async src="/js/app.js?v=1654688228613"></script>
 
 
-	<script async src="/js/search.js?v=1654608851211"></script>
+	<script async src="/js/search.js?v=1654688228613"></script>
 
 
 <script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>

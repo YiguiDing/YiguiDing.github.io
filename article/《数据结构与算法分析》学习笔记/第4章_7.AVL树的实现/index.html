@@ -35,14 +35,14 @@
     <script src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654608851095">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654688228449">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654608851095">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654688228449">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654608851095">
+    <link rel="stylesheet" href="/css/style.css?v=1654688228449">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654608851095">
+        <link rel="stylesheet" href="/css/dark.css?v=1654688228449">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -75,7 +75,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>47</div>
-        <div><span>字数</span>37.2k</div>
+        <div><span>字数</span>40.6k</div>
         <div><span>标签</span>29</div>
         <div><span>分类</span>3</div>
     </div>
@@ -326,10 +326,11 @@
       
       <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月01日</a>
+    <a><span class="post-count">总字数：850</span></a>
+    <!-- <a><span class="post-count">读完需：4分钟</span></a> -->
 </div>
 
       
-
       <h1 id="第4章-7-AVL树的实现"><a href="#第4章-7-AVL树的实现" class="headerlink" title="第4章_7.AVL树的实现"></a>第4章_7.AVL树的实现</h1><ul>
 <li><p><strong>AvlTree.h</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _AvlTree_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _AvlTree_H_</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> ElementType;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AvlTreeNode</span>;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AvlTreeNode</span> *<span class="hljs-title">Position</span>;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AvlTreeNode</span> *<span class="hljs-title">AvlTree</span>;</span><br><br>AvlTree <span class="hljs-title function_">MakeEmpty</span><span class="hljs-params">(AvlTree T)</span>;<br>AvlTree <span class="hljs-title function_">Insert</span><span class="hljs-params">(ElementType X,AvlTree T)</span>;<span class="hljs-comment">//插入操作应该返回根节点地址，所以返回值是树</span><br>AvlTree <span class="hljs-title function_">Delete</span><span class="hljs-params">(ElementType X,AvlTree T)</span>;<span class="hljs-comment">//同上</span><br>Position <span class="hljs-title function_">Find</span><span class="hljs-params">(ElementType X,AvlTree T)</span>;<br>Position <span class="hljs-title function_">FindMax</span><span class="hljs-params">(AvlTree T)</span>;<br>Position <span class="hljs-title function_">FindMin</span><span class="hljs-params">(AvlTree T)</span>;<br>ElementType <span class="hljs-title function_">Retrieve</span><span class="hljs-params">(Position P)</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
@@ -438,10 +439,10 @@
 
      
 
-<script async src="/js/app.js?v=1654608851136"></script>
+<script async src="/js/app.js?v=1654688228499"></script>
 
 
-	<script async src="/js/search.js?v=1654608851136"></script>
+	<script async src="/js/search.js?v=1654688228499"></script>
 
 
 <script src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
