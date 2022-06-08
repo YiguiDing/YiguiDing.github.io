@@ -147,7 +147,7 @@ encrypt:
   abstract: 文章内容已加密,查阅需密码.
   message: 文章内容已加密,请输入密码.
   tags:
-  - {name: 日志, password: 1357924680}
+  # - {name: 日志, password: 1357924680}
   - {name: 加密, password: 1357924680}
   wrong_pass_message: 密码错误,请重试.
   wrong_hash_message: 文章已解密但无法校验.
@@ -260,7 +260,7 @@ live2d:
 #     opacity: 0.7  # 模型透明度
 
 
-index2_include_index: false
+index2_include_index: true
 index2_generator:
   path: ''
   per_page: 10
@@ -278,7 +278,7 @@ index2_generator:
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
-index_generator:
-  path: ''
-  per_page: 10
-  order_by: -date
+# index_generator:
+#   path: ''
+#   per_page: 10
+#   order_by: -date

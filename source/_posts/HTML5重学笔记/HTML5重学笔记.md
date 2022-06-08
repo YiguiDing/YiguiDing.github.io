@@ -1,11 +1,11 @@
 ---
 title: HTML5重学笔记
-top: 3
+# top: 3
 cover: /images/HTML5重学笔记/cover.png
 coverWidth: 1920
 coverHeight: 1080
 date: 2022-06-04T18:25:06+08:00
-tags: [HTML,前端]
+tags: [HTML,前端,HIDE]
 categories: 笔记
 ---
 
