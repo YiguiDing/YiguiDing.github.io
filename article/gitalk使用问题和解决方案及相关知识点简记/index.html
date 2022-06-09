@@ -24,13 +24,13 @@
                 <meta id="share_image_address" itemprop="image" content="图片URL" />
                 <!-- <meta name="description" itemprop="description" content="描述" /> -->
                 <script>
-                    var decodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    var encodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
                     timer = null
                     timer=setInterval(function(){
                         do
                         {
-                            document.getElementById("share_image_address").content=decodePageURI
-                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
                         clearInterval(timer)
                     },
                     100
@@ -56,14 +56,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756330443">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654758996783">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756330443">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654758996783">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654756330443">
+    <link rel="stylesheet" href="/css/style.css?v=1654758996783">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654756330443">
+        <link rel="stylesheet" href="/css/dark.css?v=1654758996783">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -430,7 +430,9 @@
     
     <script type="text/javascript">
         var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/gitalk%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E8%AE%B0/")
-        var encodePageURI = encodeURI(decodePageURI)
+        var encodePageURI = "https://yiguiding.gitee.io/article/gitalk%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E8%AE%B0/"
+        console.log("https://yiguiding.gitee.io/article/gitalk%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E8%AE%B0/");
+        console.log(encodeURI("https://yiguiding.gitee.io/article/gitalk%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E8%AE%B0/"));
         timer = null
         timer=setInterval(function(){
             do
@@ -521,10 +523,10 @@
 
      
 
-<script async src="/js/app.js?v=1654756330486"></script>
+<script async src="/js/app.js?v=1654758996824"></script>
 
 
-	<script async src="/js/search.js?v=1654756330486"></script>
+	<script async src="/js/search.js?v=1654758996824"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>

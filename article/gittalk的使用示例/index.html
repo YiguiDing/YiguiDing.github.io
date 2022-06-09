@@ -24,13 +24,13 @@
                 <meta id="share_image_address" itemprop="image" content="图片URL" />
                 <!-- <meta name="description" itemprop="description" content="描述" /> -->
                 <script>
-                    var decodePageURI = encodeURI("/images/article/gittalk.png")
+                    var encodePageURI = encodeURI("/images/article/gittalk.png")
                     timer = null
                     timer=setInterval(function(){
                         do
                         {
-                            document.getElementById("share_image_address").content=decodePageURI
-                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
                         clearInterval(timer)
                     },
                     100
@@ -57,14 +57,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756331726">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654758998000">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756331726">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654758998000">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654756331726">
+    <link rel="stylesheet" href="/css/style.css?v=1654758998000">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654756331726">
+        <link rel="stylesheet" href="/css/dark.css?v=1654758998000">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -369,7 +369,9 @@
     
     <script type="text/javascript">
         var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/gittalk%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/")
-        var encodePageURI = encodeURI(decodePageURI)
+        var encodePageURI = "https://yiguiding.gitee.io/article/gittalk%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/"
+        console.log("https://yiguiding.gitee.io/article/gittalk%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/");
+        console.log(encodeURI("https://yiguiding.gitee.io/article/gittalk%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/"));
         timer = null
         timer=setInterval(function(){
             do
@@ -462,10 +464,10 @@
 
      
 
-<script async src="/js/app.js?v=1654756331768"></script>
+<script async src="/js/app.js?v=1654758998041"></script>
 
 
-	<script async src="/js/search.js?v=1654756331768"></script>
+	<script async src="/js/search.js?v=1654758998041"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
