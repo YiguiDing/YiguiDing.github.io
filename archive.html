@@ -14,7 +14,29 @@
     <!-- Site Verification -->
     <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
 
-    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="文章归档 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var decodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=decodePageURI
+                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
     <meta property="og:type" content="website">
 <meta property="og:title" content="文章归档">
 <meta property="og:url" content="https://yiguiding.gitee.io/archive.html">
@@ -30,14 +52,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654746801844">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756329952">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654746801844">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756329952">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654746801844">
+    <link rel="stylesheet" href="/css/style.css?v=1654756329952">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654746801844">
+        <link rel="stylesheet" href="/css/dark.css?v=1654756329952">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -287,7 +309,7 @@
     let startDay = Math.ceil(startDate/(24*3600*1000))
     let endDay = Math.ceil(endDate/(24*3600*1000))
 
-    let commitData = {"2022-06-09":5,"2022-06-07":3,"2022-06-02":2,"2022-06-01":1,"2022-05-31":1,"2022-05-30":22,"2022-05-29":16,"2022-05-27":20,"2022-05-24":5,"2022-05-23":1,"2022-05-10":1,"2022-03-13":7,"2022-02-25":6,"2022-02-24":6,"2022-02-23":3,"2022-01-17":3,"2022-01-16":1,"2022-01-14":3,"2022-01-13":1,"2022-01-10":1,"2022-01-09":2,"2022-01-02":1,"2021-12-31":1,"2021-12-29":3,"2021-12-28":2,"2021-12-27":7,"2021-12-26":7,"2021-12-25":4}
+    let commitData = {"2022-06-09":11,"2022-06-08":3,"2022-06-07":10,"2022-06-02":2,"2022-06-01":1,"2022-05-31":1,"2022-05-30":22,"2022-05-29":16,"2022-05-27":20,"2022-05-24":5,"2022-05-23":1,"2022-05-10":1,"2022-03-13":7,"2022-02-25":6,"2022-02-24":6,"2022-02-23":3,"2022-01-17":3,"2022-01-16":1,"2022-01-14":3,"2022-01-13":1,"2022-01-10":1,"2022-01-09":2,"2022-01-02":1,"2021-12-31":1,"2021-12-29":3,"2021-12-28":2,"2021-12-27":7,"2021-12-26":7,"2021-12-25":4}
     let seriesData = []
 
     for(let i = startDay;i <= endDay;i++){
@@ -701,10 +723,10 @@
 
      
 
-<script async src="/js/app.js?v=1654746801893"></script>
+<script async src="/js/app.js?v=1654756329995"></script>
 
 
-	<script async src="/js/search.js?v=1654746801893"></script>
+	<script async src="/js/search.js?v=1654756329995"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
@@ -731,6 +753,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 

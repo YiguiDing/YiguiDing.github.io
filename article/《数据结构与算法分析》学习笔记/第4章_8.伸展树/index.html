@@ -14,7 +14,29 @@
     <!-- Site Verification -->
     <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
 
-    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="第4章_8.伸展树 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var decodePageURI = encodeURI("/images/《数据结构与算法分析》学习笔记/cover.png")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=decodePageURI
+                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
     <meta name="description" content="伸展树 基本想法： 访问一个节点后，通过一系列的旋转操作将该节点放到根节点上，这样这个节点和这条路径上的所有节点的深度就会降低，下一次访问所花费的时间就会更少。 不需要保存或计算高度信息和平衡信息 它保证从空树开始任意连续M次对树的操作最多花费 $O(MlogN)$  但不保证某次操作花费$O(N)$时间的可能， 这种单次最坏$O(N)$的时间花费虽不如平均最坏花费$O(logN)$时间短，但实际">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第4章_8.伸展树">
@@ -38,14 +60,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654746802047">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756330135">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654746802047">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756330135">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654746802047">
+    <link rel="stylesheet" href="/css/style.css?v=1654756330135">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654746802047">
+        <link rel="stylesheet" href="/css/dark.css?v=1654756330135">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -375,7 +397,7 @@
     
     <script type="text/javascript">
         var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/")
-        var UnDecodePageURI = "https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/"
+        var encodePageURI = encodeURI(decodePageURI)
         timer = null
         timer=setInterval(function(){
             do
@@ -384,9 +406,9 @@
                 document.getElementById("page_address_Decode").title=decodePageURI
                 document.getElementById("page_address_Decode").innerHTML=decodePageURI
 
-                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
 
             }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
             clearInterval(timer)
@@ -402,7 +424,7 @@
         <strong>本文解码链接：</strong>
         <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
         <strong>本文编码链接：</strong>
-        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -468,10 +490,10 @@
 
      
 
-<script async src="/js/app.js?v=1654746802095"></script>
+<script async src="/js/app.js?v=1654756330179"></script>
 
 
-	<script async src="/js/search.js?v=1654746802095"></script>
+	<script async src="/js/search.js?v=1654756330179"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
@@ -498,6 +520,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 

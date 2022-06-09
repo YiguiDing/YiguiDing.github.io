@@ -14,7 +14,29 @@
     <!-- Site Verification -->
     <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
 
-    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="第2章_算法分析 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var decodePageURI = encodeURI("/images/《数据结构与算法分析》学习笔记/cover.png")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=decodePageURI
+                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
     <meta name="description" content="第2章_算法分析 用于评价一个算法的好坏 确定一个算法需要的时间代价和空间代价  四个定义 定义：如果存在正常数c和n0使得当N&gt;&#x3D;n0时T(N)&lt;&#x3D;cf(N)，则记为T(N) &#x3D; O(f(N))。 定义：如果存在正常数c和n0使得当N&gt;&#x3D;n0时T(N)&gt;&#x3D;cf(N)，则记为T(N) &#x3D; Ω(f(N))。 定义：T">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第2章_算法分析">
@@ -38,14 +60,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654746803328">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756331454">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654746803328">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756331454">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654746803328">
+    <link rel="stylesheet" href="/css/style.css?v=1654756331454">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654746803328">
+        <link rel="stylesheet" href="/css/dark.css?v=1654756331454">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -368,7 +390,7 @@
     
     <script type="text/javascript">
         var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0_%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/")
-        var UnDecodePageURI = "https://yiguiding.gitee.io/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0_%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/"
+        var encodePageURI = encodeURI(decodePageURI)
         timer = null
         timer=setInterval(function(){
             do
@@ -377,9 +399,9 @@
                 document.getElementById("page_address_Decode").title=decodePageURI
                 document.getElementById("page_address_Decode").innerHTML=decodePageURI
 
-                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
 
             }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
             clearInterval(timer)
@@ -395,7 +417,7 @@
         <strong>本文解码链接：</strong>
         <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
         <strong>本文编码链接：</strong>
-        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -461,10 +483,10 @@
 
      
 
-<script async src="/js/app.js?v=1654746803370"></script>
+<script async src="/js/app.js?v=1654756331497"></script>
 
 
-	<script async src="/js/search.js?v=1654746803370"></script>
+	<script async src="/js/search.js?v=1654756331497"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
@@ -491,6 +513,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 

@@ -14,7 +14,29 @@
     <!-- Site Verification -->
     <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
 
-    <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" />
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="滚动条动态居中 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var decodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=decodePageURI
+                        }while(document.getElementById("share_image_address").content!=decodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
     <meta name="description" content="移动端滚动条动态水平居中 关键代码  123456789101112131415161718&#x2F;&#x2F;滚动条位置居中,使得标题能在移动端被居中    function middleScroll(step,totalTime)&amp;#123;      let f &#x3D; document.getElementById(&quot;BOX_outside&quot;)      let s &#x3D; document.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滚动条动态居中">
@@ -37,14 +59,14 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654746802416">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1654756330487">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654746802416">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1654756330487">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1654746802416">
+    <link rel="stylesheet" href="/css/style.css?v=1654756330487">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1654746802416">
+        <link rel="stylesheet" href="/css/dark.css?v=1654756330487">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -347,7 +369,7 @@
     
     <script type="text/javascript">
         var decodePageURI = decodeURI("https://yiguiding.gitee.io/article/%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%8A%A8%E6%80%81%E5%B1%85%E4%B8%AD/")
-        var UnDecodePageURI = "https://yiguiding.gitee.io/article/%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%8A%A8%E6%80%81%E5%B1%85%E4%B8%AD/"
+        var encodePageURI = encodeURI(decodePageURI)
         timer = null
         timer=setInterval(function(){
             do
@@ -356,9 +378,9 @@
                 document.getElementById("page_address_Decode").title=decodePageURI
                 document.getElementById("page_address_Decode").innerHTML=decodePageURI
 
-                document.getElementById("page_address_UnDecode").href=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").title=UnDecodePageURI
-                document.getElementById("page_address_UnDecode").innerHTML=UnDecodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
 
             }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
             clearInterval(timer)
@@ -374,7 +396,7 @@
         <strong>本文解码链接：</strong>
         <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
         <strong>本文编码链接：</strong>
-        <a id="page_address_UnDecode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -440,10 +462,10 @@
 
      
 
-<script async src="/js/app.js?v=1654746802459"></script>
+<script async src="/js/app.js?v=1654756330528"></script>
 
 
-	<script async src="/js/search.js?v=1654746802459"></script>
+	<script async src="/js/search.js?v=1654756330528"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
@@ -470,6 +492,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
