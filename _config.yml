@@ -110,7 +110,7 @@ theme: nexmoe # nexmoe主题
 deploy:
   type: 'git'
   repo: 
-    # github:  https://github.com/YiguiDing/YiguiDing.github.io.git,site #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+    github:  https://github.com/YiguiDing/YiguiDing.github.io.git,site #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
     gitee:   https://gitee.com/YiguiDing/YiguiDing.git,site
   branch: [site]
   # message: [message]
