@@ -258,8 +258,8 @@ article > table tr:nth-child(2n) {
 article ul li::before {
   border: 3px solid #303436 !important;
   position: absolute;
-  left: 1.5em;
-  top: 0.6em;
+  left: 0em;
+  top: 0em;
 }
 .aplayer .aplayer-list ol li.aplayer-list-light {
   background: #181a1b !important;
