@@ -5,8 +5,8 @@
 # Site
 title: YiguiDing的个人博客站点
 subtitle: ''
-description: ''
-keywords: 
+description: '一个用来随便记点笔记的地方'
+keywords: ""
 author: YiguiDing
 motto: "宿命欲催英雄瘦 不改天命誓不休"
 language: zh-CN
@@ -259,6 +259,15 @@ live2d:
 #   react:
 #     opacity: 0.7  # 模型透明度
 
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+# index_generator:
+#   path: ''
+#   per_page: 10
+#   order_by: -date
+
 
 index2_include_index: true
 index2_generator:
@@ -271,14 +280,3 @@ index2_generator:
   exclude:
     - tag HIDE      # 不包含标签为HIDE的文章
     - category HIDE # 不包含分类为hide的文章
-
-
-
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
-# index_generator:
-#   path: ''
-#   per_page: 10
-#   order_by: -date

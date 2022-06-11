@@ -19,6 +19,7 @@ categories: 笔记
 - [HTML5重学笔记](#html5重学笔记)
     - [说明](#说明)
     - [目录](#目录)
+    - [基本结构](#基本结构)
     - [标题h](#标题h)
     - [段落p](#段落p)
     - [换行和分割线](#换行和分割线)
@@ -41,6 +42,21 @@ categories: 笔记
     - [table 表格](#table-表格)
     - [语义化标签](#语义化标签)
     - [字符实体标签](#字符实体标签)
+
+
+## 基本结构
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+```
 
 
 ## 标题h

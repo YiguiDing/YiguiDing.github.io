@@ -1,5 +1,6 @@
 ---
 title: C语言中头文件及其具体实现的编写规范
+top: 10
 cover: /images/《数据结构与算法分析》学习笔记/cover.png
 coverWidth: 813
 coverHeight: 539
