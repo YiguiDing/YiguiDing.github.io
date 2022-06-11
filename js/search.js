@@ -41,7 +41,7 @@ function searchkey(keyword) {
             if (flag) {
                 rend.title = !rend.title ? post.title : rend.title;
                 rend.text= !rend.text ? post.text : rend.text;
-                rend.href = `/${post.path}`;
+                rend.href = `${post.path}`;
                 render(rend);
             }
         });
