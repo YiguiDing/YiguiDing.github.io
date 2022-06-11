@@ -145,11 +145,12 @@ aplayer:
 encrypt:
   enable: true
   abstract: 文章内容已加密,查阅需密码.
-  message: 文章内容已加密,请输入密码.
+  message: 密码是123456789
   tags:
   # - {name: 日志, password: 1357924680}
   - {name: 加密, password: 1357924680}
-  wrong_pass_message: 密码错误,请重试.
+  wrong_pass_message: 不会吧不会吧，不会真的有人相信密码是123456789吧？
+  # wrong_pass_message: 密码错误，请重试
   wrong_hash_message: 文章已解密但无法校验.
 
 # ---
