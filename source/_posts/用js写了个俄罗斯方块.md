@@ -8,8 +8,11 @@ tags: [网站,游戏]
 categories: [前端]
 ---
 
-# [--->点击试玩<---](/games/html_jsRussia_client/index.html)
+# [-->点击试玩V1.01<--](/demos/html-js_russia_client/index.html)
+# [-->点击试玩V1.00<--](/demos/games/html_jsRussia_client/index.html)
 
-<svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-gitee"></use>
-</svg>
+<style>
+h1{
+    text-align: center;
+}
+</style>
