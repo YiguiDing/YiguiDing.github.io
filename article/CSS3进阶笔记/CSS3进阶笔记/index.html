@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>CSS3进阶笔记 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="CSS3进阶笔记 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var encodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
+    <meta name="description" content="CSS3进阶笔记字体图标 字体图标展示的是图标，实际特性却像是字，可以通过color属性改变颜色 字体图标用于处理颜色单一的简单小图（复杂图用精灵图）  优点： 灵活，尺寸颜色可用css属性修改 轻量，体积小渲染快降低服务器请求次数 兼容，几乎兼容所有主流浏览器 方便， 下载字体包 使用字体图标      阿里巴巴矢量字体库iconfont使用步骤 iconfont.cn下载字体图标  引入的cs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3进阶笔记">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="CSS3进阶笔记字体图标 字体图标展示的是图标，实际特性却像是字，可以通过color属性改变颜色 字体图标用于处理颜色单一的简单小图（复杂图用精灵图）  优点： 灵活，尺寸颜色可用css属性修改 轻量，体积小渲染快降低服务器请求次数 兼容，几乎兼容所有主流浏览器 方便， 下载字体包 使用字体图标      阿里巴巴矢量字体库iconfont使用步骤 iconfont.cn下载字体图标  引入的cs">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-01-55-16.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-23-42.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-26-00.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-50-20.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-57-28.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-04-31-22.png">
+<meta property="article:published_time" content="2022-06-16T09:51:00.000Z">
+<meta property="article:modified_time" content="2022-06-16T23:04:26.046Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yiguiding.gitee.io/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-01-55-16.png">
+    <script  defer src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script  defer src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1655420974966">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1655420974966">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1655420974966">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1655420974966">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>50</div>
+        <div><span>字数</span>47.8k</div>
+        <div><span>标签</span>31</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">32</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 13.75px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/demo/" style="font-size: 10px;">demo</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.25px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.5px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 16.25px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.75px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 11.25px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">47</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/">CSS3进阶笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3+HTML5%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">CSS3+HTML5项目实战</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/">前端项目笔记</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_9.%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">第4章_9.树的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AC%AC4%E7%AB%A0_8.%E4%BC%B8%E5%B1%95%E6%A0%91/">第4章_8.伸展树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link   href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script defer src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link  href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script defer src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="CSS3进阶笔记" class="lazyload">
+              <h1>CSS3进阶笔记</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月16日</a>
+    <a>字数:<span class="post-count">930</span></a>
+</div>
+
+      
+
+      <h1 id="CSS3进阶笔记"><a href="#CSS3进阶笔记" class="headerlink" title="CSS3进阶笔记"></a>CSS3进阶笔记</h1><h2 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h2><ul>
+<li>字体图标展示的是图标，实际特性却像是字，可以通过color属性改变颜色</li>
+<li>字体图标用于处理颜色单一的简单小图（复杂图用精灵图）</li>
+<li><a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-01-55-16.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-01-55-16.png"></a></li>
+<li>优点：<ul>
+<li>灵活，尺寸颜色可用css属性修改</li>
+<li>轻量，体积小渲染快降低服务器请求次数</li>
+<li>兼容，几乎兼容所有主流浏览器</li>
+<li>方便，<ul>
+<li>下载字体包</li>
+<li>使用字体图标</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="阿里巴巴矢量字体库iconfont使用步骤"><a href="#阿里巴巴矢量字体库iconfont使用步骤" class="headerlink" title="阿里巴巴矢量字体库iconfont使用步骤"></a>阿里巴巴矢量字体库iconfont使用步骤</h2><ol>
+<li><p><code>iconfont.cn</code>下载字体图标</p>
+</li>
+<li><p>引入的css文件名为iconfont.css <a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-23-42.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-23-42.png"></a></p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;./iconfont/iconfont.css&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>调用图标对应的类名，<strong>必须</strong>调用两个类名</p>
+<ol>
+<li><code>iconfont</code>类,基本样式，包含字体图标的默认大小和颜色</li>
+<li><code>icon-xxx</code>类,图标对应的类名<a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-26-00.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-26-00.png"></a> <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;iconfont icon-XXX&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>iconfont具体实现原理<ul>
+<li><code>.iconfont</code>类</li>
+<li><a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-50-20.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-50-20.png"></a></li>
+<li><code>.icon-XXX</code>类<br>  <a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-57-28.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-02-57-28.png"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="平面转换"><a href="#平面转换" class="headerlink" title="平面转换"></a>平面转换</h2><ul>
+<li>作用：改变盒子在**平面(2D)**的形态(<strong>位移</strong> ， 旋转 ， <strong>缩放</strong> )</li>
+<li>属性名: <strong>transform</strong></li>
+<li>语法格式:<ul>
+<li><code>transform: translate(水平向右移动距离,垂直向下移动距离);</code></li>
+<li><code>transform: translate(自身宽度的百分比,自身高度的百分比);</code></li>
+<li><code>transform: translate(只写一个参数表示X轴移动距离);</code></li>
+<li><code>transform: translateX(一个参数);</code></li>
+<li><code>transform: translateY(一个参数);</code></li>
+<li><a data-fancybox="gallery" href="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-04-31-22.png"><img src="/images/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/2022-06-17-04-31-22.png"></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><ul>
+<li><p>水平和垂直居中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;father&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>transform: translate(-50%,-50%);<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-class">.father</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: relative;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">500px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-class">.father</span> <span class="hljs-selector-class">.box</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>:absolute;</span><br><span class="language-css">        <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;</span><br><span class="language-css">        <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span><br><span class="language-css">        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>,-<span class="hljs-number">50%</span>);</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: green;</span><br><span class="language-css">        <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<div class="father">
+  <div class="box">transform: translate(-50%,-50%);</div>
+</div>
+<style>
+  .father{
+      position: relative;
+      width: 500px;
+      height: 300px;
+      background: skyblue;
+  }
+  .father .box{
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 200px;
+      height: 100px;
+      background-color: green;
+      line-height: 100px;
+  }
+</style>
+</li>
+<li><p>天猫</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tianmao-bgi&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">683px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">images/CSS3进阶笔记/bg.jpg</span>);</span><br><span class="language-css">        <span class="hljs-attribute">background-size</span>: contain;</span><br><span class="language-css">        <span class="hljs-comment">/* 溢出部分隐藏 */</span></span><br><span class="language-css">        <span class="hljs-attribute">overflow</span>: hidden;</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span><span class="hljs-selector-pseudo">::before</span>,</span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span><span class="hljs-selector-pseudo">::after</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="language-css">        <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">341px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">images/CSS3进阶笔记/fm.jpg</span>);</span><br><span class="language-css">        <span class="hljs-attribute">background-size</span>:cover;</span><br><span class="language-css">        <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.5s</span>;</span><br><span class="language-css">        </span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span><span class="hljs-selector-pseudo">::after</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">background-position</span><span class="hljs-selector-pseudo">:right</span> <span class="hljs-number">0</span>;</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span><span class="hljs-selector-pseudo">:hover</span><span class="hljs-selector-pseudo">::before</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">100%</span>);</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-class">.tianmao-bgi</span><span class="hljs-selector-pseudo">:hover</span><span class="hljs-selector-pseudo">::after</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(+<span class="hljs-number">100%</span>);</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<div class="tianmao-bgi"></div>
+<style>
+  .tianmao-bgi{
+      width: 683px;
+      height: 300px;
+      background-image: url(images/CSS3进阶笔记/bg.jpg);
+      background-size: contain;
+      /* 溢出部分隐藏 */
+      overflow: hidden;
+  }
+  .tianmao-bgi::before,
+  .tianmao-bgi::after{
+      display: inline-block;
+      content: "";
+      width: 341px;
+      height: 300px;
+      background-image: url(images/CSS3进阶笔记/fm.jpg);
+      background-size:cover;
+      transition: all 0.5s;
+      
+<p>  }<br>  .tianmao-bgi::after{<br>  background-position:right 0;<br>  }<br>  .tianmao-bgi:hover::before{<br>  transform: translate(-100%);<br>  }<br>  .tianmao-bgi:hover::after{<br>  transform: translate(+100%);<br>  }</p>
+</li>
+</ul>
+<p></style></p>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><ul>
+<li>语法 <code>transform:rotate(角度deg);</code></li>
+<li>角度单位deg</li>
+<li>旋转一圈为360deg</li>
+<li>取正为顺时针旋转，取负则相反</li>
+<li>一定要配合<strong>过渡</strong>属性才能看到动态的效果</li>
+</ul>
+<div class="rotate-test" >旋转测试</div>
+<style>
+    .rotate-test{
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        text-align: center;
+        line-height: 100px;
+        /* 一定要配合过渡属性才能看到动态的效果 */
+        transition: all 1s;
+    }
+    .rotate-test:hover{
+        transform:rotate(360deg);
+    }
+</style>
+
+<h3 id="转换属性：位移、旋转、缩放的中心点更改"><a href="#转换属性：位移、旋转、缩放的中心点更改" class="headerlink" title="转换属性：位移、旋转、缩放的中心点更改"></a>转换属性：位移、旋转、缩放的中心点更改</h3><ul>
+<li>默认原点是盒子的中心点</li>
+<li>语法: <code>transform-origin: 水平位置 垂直位置;</code></li>
+<li>取值：<strong>方位名词</strong>、像素、百分比（相对于盒子自身尺寸计算）</li>
+<li>示例<div class="origin-test" >旋转测试</div>
+<style>
+  .origin-test{
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 100px;
+      transition: all 1s;
+      transform-origin: right bottom;
+  }
+  .origin-test:hover{
+      transform:rotate(360deg);
+  }
+</style></li>
+</ul>
+<h2 id="多重转换"><a href="#多重转换" class="headerlink" title="多重转换"></a>多重转换</h2><ul>
+<li>语法格式,将其当做复合属性：<code>transform: translate() rotate();</code></li>
+<li>因为旋转会改变坐标轴方向，所以如果要实现平移+旋转效果，需要注意该属性的两个参数的顺序<div class="multip" >
+  <div>多重转换</div>
+</div>
+<style>
+  .multip{
+      width: 313px;
+      height: 100px;
+      background-color: #fff;
+  }
+  .multip div{
+      height: 100px;
+      width: 100px;
+      background: green;
+      transition: all 1s;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 100px;
+  }
+  .multip:hover div{
+      transform: translate(313px,0) rotate(360deg);
+  }
+</style></li>
+</ul>
+
+  </article>
+
+  
+      
+    
+    <div  class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0&#x2F;CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0&#x2F;CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+    <script >
+        setTimeout("setURL()",0 );  
+        function setURL(){  
+            var raw = "https://yiguiding.gitee.io/article/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/"
+            var decodePageURI = decodeURI(raw)
+            var encodePageURI = encodeURI(decodePageURI)
+            console.log(raw);
+            console.log(decodePageURI);
+            console.log(encodePageURI);
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
+            // }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+        }  
+    </script>
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HTML/" rel="tag">HTML</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">CSS3进阶笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87"><span class="toc-number">1.1.</span> <span class="toc-text">字体图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%AD%97%E4%BD%93%E5%BA%93iconfont%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.</span> <span class="toc-text">阿里巴巴矢量字体库iconfont使用步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.</span> <span class="toc-text">平面转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">使用示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC"><span class="toc-number">1.4.</span> <span class="toc-text">旋转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E5%B1%9E%E6%80%A7%EF%BC%9A%E4%BD%8D%E7%A7%BB%E3%80%81%E6%97%8B%E8%BD%AC%E3%80%81%E7%BC%A9%E6%94%BE%E7%9A%84%E4%B8%AD%E5%BF%83%E7%82%B9%E6%9B%B4%E6%94%B9"><span class="toc-number">1.4.1.</span> <span class="toc-text">转换属性：位移、旋转、缩放的中心点更改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.5.</span> <span class="toc-text">多重转换</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1655420975026"></script>
+
+
+	<script async src="/js/search.js?v=1655420975026"></script>
+
+
+<script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
