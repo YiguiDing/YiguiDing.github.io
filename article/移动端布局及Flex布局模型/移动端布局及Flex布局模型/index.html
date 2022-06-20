@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>移动端布局 - YiguiDing的个人博客站点</title>
+    <title>移动端布局及Flex布局模型 - YiguiDing的个人博客站点</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -20,7 +20,7 @@
     
 
     <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
-                <meta itemprop="name" content="移动端布局 - YiguiDing的个人博客站点"/>
+                <meta itemprop="name" content="移动端布局及Flex布局模型 - YiguiDing的个人博客站点"/>
                 <meta id="share_image_address" itemprop="image" content="图片URL" />
                 <!-- <meta name="description" itemprop="description" content="描述" /> -->
                 <script>
@@ -37,48 +37,48 @@
                     )
                 </script>
     
-    <meta name="description" content="移动端布局目录 移动端布局 目录 pc端和移动端分辨率 pc端分辨率物理分辨率和逻辑分辨率 手机端物理分辨率和逻辑分辨率   视口 二倍图 百分比布局 flex布局 flex布局的构成 主轴对齐方式 主轴对齐方式测试   侧轴对齐方式 侧轴对齐方式测试 控制单个盒子的侧轴对齐方式   flex伸缩比 修改主轴方向 修改主轴方向后修改主轴的对齐方式 使用示例   弹性盒子的换行 弹性盒子的侧轴对齐方">
+    <meta name="description" content="移动端布局及Flex布局模型目录 移动端布局及Flex布局模型 目录 pc端和移动端分辨率 pc端分辨率物理分辨率和逻辑分辨率 手机端物理分辨率和逻辑分辨率   视口 二倍图 百分比布局 flex布局 flex布局的构成 主轴对齐方式 主轴对齐方式测试   侧轴对齐方式 侧轴对齐方式测试 控制单个盒子的侧轴对齐方式   flex伸缩比 修改主轴方向 修改主轴方向后修改主轴的对齐方式 使用示例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动端布局">
-<meta property="og:url" content="https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:title" content="移动端布局及Flex布局模型">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="YiguiDing的个人博客站点">
-<meta property="og:description" content="移动端布局目录 移动端布局 目录 pc端和移动端分辨率 pc端分辨率物理分辨率和逻辑分辨率 手机端物理分辨率和逻辑分辨率   视口 二倍图 百分比布局 flex布局 flex布局的构成 主轴对齐方式 主轴对齐方式测试   侧轴对齐方式 侧轴对齐方式测试 控制单个盒子的侧轴对齐方式   flex伸缩比 修改主轴方向 修改主轴方向后修改主轴的对齐方式 使用示例   弹性盒子的换行 弹性盒子的侧轴对齐方">
+<meta property="og:description" content="移动端布局及Flex布局模型目录 移动端布局及Flex布局模型 目录 pc端和移动端分辨率 pc端分辨率物理分辨率和逻辑分辨率 手机端物理分辨率和逻辑分辨率   视口 二倍图 百分比布局 flex布局 flex布局的构成 主轴对齐方式 主轴对齐方式测试   侧轴对齐方式 侧轴对齐方式测试 控制单个盒子的侧轴对齐方式   flex伸缩比 修改主轴方向 修改主轴方向后修改主轴的对齐方式 使用示例">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-00-53-45.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-51-53.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-56-49.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-02-58-50.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-39-43.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-57-53.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-04-31-31.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-06-54-01.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-10-02.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-09-01.png">
-<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-58-31.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-00-53-45.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-51-53.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-56-49.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-02-58-50.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-39-43.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-57-53.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-04-31-31.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-06-54-01.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-10-02.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-09-01.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-58-31.png">
 <meta property="article:published_time" content="2022-06-18T16:23:00.000Z">
-<meta property="article:modified_time" content="2022-06-20T14:10:28.975Z">
+<meta property="article:modified_time" content="2022-06-20T22:26:35.585Z">
 <meta property="article:author" content="YiguiDing">
 <meta property="article:tag" content="HIDE">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-00-53-45.png">
+<meta name="twitter:image" content="https://yiguiding.gitee.io/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-00-53-45.png">
     <script  defer src="/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <script  defer src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1655763429215">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1655764241240">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1655763429215">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1655764241240">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1655763429215">
+    <link rel="stylesheet" href="/css/style.css?v=1655764241240">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1655763429215">
+        <link rel="stylesheet" href="/css/dark.css?v=1655764241240">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -258,7 +258,7 @@
           </li>
         
           <li>
-            <a href="/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/">移动端布局</a>
+            <a href="/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/">移动端布局及Flex布局模型</a>
           </li>
         
           <li>
@@ -353,8 +353,8 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="移动端布局" class="lazyload">
-              <h1>移动端布局</h1>
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="移动端布局及Flex布局模型" class="lazyload">
+              <h1>移动端布局及Flex布局模型</h1>
           </div>
       
       
@@ -365,8 +365,8 @@
 
       
 
-      <h1 id="移动端布局"><a href="#移动端布局" class="headerlink" title="移动端布局"></a>移动端布局</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">移动端布局</a><ul>
+      <h1 id="移动端布局及Flex布局模型"><a href="#移动端布局及Flex布局模型" class="headerlink" title="移动端布局及Flex布局模型"></a>移动端布局及Flex布局模型</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8Aflex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B">移动端布局及Flex布局模型</a><ul>
 <li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
 <li><a href="#pc%E7%AB%AF%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87">pc端和移动端分辨率</a><ul>
 <li><a href="#pc%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87%E7%89%A9%E7%90%86%E5%88%86%E8%BE%A8%E7%8E%87%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E8%BE%A8%E7%8E%87">pc端分辨率物理分辨率和逻辑分辨率</a></li>
@@ -413,29 +413,29 @@
 </li>
 <li><p>pc端设置按比例缩放后的分辨率-<strong>逻辑分辨率</strong></p>
 <ul>
-<li>缩放150%后的分辨率：(1920&#x2F;150%)x(1080&#x2F;150%)<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-00-53-45.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-00-53-45.png"></a></li>
+<li>缩放150%后的分辨率：(1920&#x2F;150%)x(1080&#x2F;150%)<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-00-53-45.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-00-53-45.png"></a></li>
 </ul>
 </li>
 <li><p>写html时应该参考<strong>逻辑</strong>分辨率</p>
 </li>
 </ul>
-<h3 id="手机端物理分辨率和逻辑分辨率"><a href="#手机端物理分辨率和逻辑分辨率" class="headerlink" title="手机端物理分辨率和逻辑分辨率"></a>手机端物理分辨率和逻辑分辨率</h3><p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png"></a></p>
+<h3 id="手机端物理分辨率和逻辑分辨率"><a href="#手机端物理分辨率和逻辑分辨率" class="headerlink" title="手机端物理分辨率和逻辑分辨率"></a>手机端物理分辨率和逻辑分辨率</h3><p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png"></a></p>
 <h2 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h2><ul>
 <li><p>一些概念</p>
   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs routeros">1.什么是视口?<br>    视口简单理解就是可视区域大小我们称之为视口<br>    在PC端，视口大小就是浏览器窗口可视区域的大小<br>    在移动端, 视口大小并不等于窗口大小, 移动端视口宽度被人为定义为了980<br><br>2.为什么是980而不是其他的值?<br>    **因为过去网页的版心都是980**<br>    乔老爷子为了能够让网页在移动端完美的展示, 所以将iOS手机视口的大小定义为了980<br>    后来谷歌也觉得这是一个非常牛X的方案, 所以Android手机的视口也定义为了980<br><br>3.移动端自动将视口宽度设置为980带来的问题<br>    虽然移动端自动将视口宽度设置为980之后让我们可以很完美的看到整个网页<br>    但是由于移动端的物理尺寸(设备宽度)是远远小于视口宽度的<br>    所以为了能够在较小的范围内看到视口中所有的内容, 那么就必须将内容缩小<br>    (和前面讲解Canvas时讲解的viewbox一样, 近大远小原理)<br><br>4.如何保证在移动端不自动缩放网页的尺寸?<br>    通过meta设置视口大小<br>    &lt;meta <span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attribute">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;<br>    <span class="hljs-attribute">width</span>=device-width 设置视口宽度等于设备的宽度<br>    <span class="hljs-attribute">initial-scale</span>=1.0 初始缩放比例, 1不缩放<br>    maximum-scale：允许用户缩放到的最大比例<br>    minimum-scale：允许用户缩放到的最小比例<br>    user-scalable：用户是否可以手动缩放<br></code></pre></td></tr></table></figure></li>
 <li><p><strong>移动端</strong>网页视口默认的宽是<strong>980px</strong></p>
 </li>
-<li><p><strong>PC端</strong>网页视口默认的宽和<strong>电脑逻辑分辨率的宽度</strong>一致<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-51-53.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-51-53.png"></a></p>
+<li><p><strong>PC端</strong>网页视口默认的宽和<strong>电脑逻辑分辨率的宽度</strong>一致<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-51-53.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-51-53.png"></a></p>
 </li>
 <li><p>使用<code>meta</code>标签设置<strong>视口</strong>，可以使<strong>网页宽度</strong>和设备的<strong>逻辑宽度</strong>一致</p>
   <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<p>  <a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-56-49.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-56-49.png"></a></p>
+<p>  <a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-56-49.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-56-49.png"></a></p>
 </li>
 </ul>
 <h2 id="二倍图"><a href="#二倍图" class="headerlink" title="二倍图"></a>二倍图</h2><ul>
 <li>当前移动端网页一般参考iPhone6、7、8出设计稿，然后再想办法适配其他机型</li>
 <li>但由于分辨率的原因，设计稿将会按照物理分辨率设计，因为如果按照逻辑分辨率设计，一张低分辨率的图到了高分辨率的屏幕将会变得模糊不清，所以往往是设计稿用高分辨率的图，但用低分辨率的尺寸，这样经过移动端浏览器的放大，图片的尺寸被放大后依然是清晰的，又由于其物理分辨率和逻辑分辨率<strong>往往是</strong>二倍的关系，所以这样的设计稿的图称为<strong>二倍图</strong></li>
-<li>所以结论就是当设计稿中页面宽度为750px时,其实际尺寸应该写375px<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-01-46-41.png"></a></li>
+<li>所以结论就是当设计稿中页面宽度为750px时,其实际尺寸应该写375px<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-01-46-41.png"></a></li>
 <li>需要注意的是，pc端的设计图也存在二倍图，如果设计图标识网页宽度为3840px，则其实际宽度很可能是1920px</li>
 </ul>
 <h2 id="百分比布局"><a href="#百分比布局" class="headerlink" title="百分比布局"></a>百分比布局</h2><ul>
@@ -444,7 +444,7 @@
 <li>具体就是盒子的宽度取百分比，高度取固定值</li>
 <li>效果：宽度自适应，高度固定</li>
 </ul>
-<p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-02-58-50.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-02-58-50.png"></a></p>
+<p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-02-58-50.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-02-58-50.png"></a></p>
 <h2 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h2><ul>
 <li>flex布局也叫弹性布局</li>
 <li>是一种<strong>浏览器提倡</strong>的<strong>布局模型</strong></li>
@@ -456,7 +456,7 @@
 <li>对于ie浏览器不兼容</li>
 <li>查看是否兼容<a target="_blank" rel="noopener" href="https://caniuse.com/">caniuse.com</a></li>
 </ul>
-<h3 id="flex布局的构成"><a href="#flex布局的构成" class="headerlink" title="flex布局的构成"></a>flex布局的构成</h3><p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-39-43.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-39-43.png"></a></p>
+<h3 id="flex布局的构成"><a href="#flex布局的构成" class="headerlink" title="flex布局的构成"></a>flex布局的构成</h3><p><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-39-43.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-39-43.png"></a></p>
 <ul>
 <li>设置方式：父元素添加<code>display:flex</code></li>
 <li>作用：设置后子元素可以自动的挤压或拉伸</li>
@@ -471,7 +471,7 @@
 <h3 id="主轴对齐方式"><a href="#主轴对齐方式" class="headerlink" title="主轴对齐方式"></a>主轴对齐方式</h3><ul>
 <li>在flex布局模型中，调节主轴或侧轴的对齐方式可以设置盒子之间的间距</li>
 <li>属性名：<code>justify-content</code></li>
-<li>属性值：<a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-57-53.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-03-57-53.png"></a></li>
+<li>属性值：<a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-57-53.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-03-57-53.png"></a></li>
 <li><strong>当主轴方向为默认方向时，<code>justify-content</code>控制水平方向对齐方式</strong></li>
 </ul>
 <h4 id="主轴对齐方式测试"><a href="#主轴对齐方式测试" class="headerlink" title="主轴对齐方式测试"></a>主轴对齐方式测试</h4><ul>
@@ -608,7 +608,7 @@
 </ul>
 <h3 id="侧轴对齐方式"><a href="#侧轴对齐方式" class="headerlink" title="侧轴对齐方式"></a>侧轴对齐方式</h3><ul>
 <li>属性名align-items <strong>添加给弹性容器</strong>，控制<strong>所有</strong>盒子的侧轴对齐方式</li>
-<li>属性名align-self <strong>添加给弹性盒子</strong>,控制<strong>单个</strong>盒子的侧轴对齐方式<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-04-31-31.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-19-04-31-31.png"></a></li>
+<li>属性名align-self <strong>添加给弹性盒子</strong>,控制<strong>单个</strong>盒子的侧轴对齐方式<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-04-31-31.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-19-04-31-31.png"></a></li>
 <li><strong>当主轴方向为默认方向时，<code>align-self</code>控制垂直方向对齐方式</strong></li>
 </ul>
 <h4 id="侧轴对齐方式测试"><a href="#侧轴对齐方式测试" class="headerlink" title="侧轴对齐方式测试"></a>侧轴对齐方式测试</h4><ul>
@@ -769,7 +769,7 @@
 <h3 id="修改主轴方向"><a href="#修改主轴方向" class="headerlink" title="修改主轴方向"></a>修改主轴方向</h3><ul>
 <li>作用：修改主轴方向，实现子元素垂直排列</li>
 <li>属性名：<code>flex-direction</code></li>
-<li>属性值：<br>  <a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-06-54-01.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-06-54-01.png"></a></li>
+<li>属性值：<br>  <a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-06-54-01.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-06-54-01.png"></a></li>
 <li>主轴修改为垂直方向后，水平方向的轴就是侧轴</li>
 </ul>
 <h4 id="修改主轴方向后修改主轴的对齐方式"><a href="#修改主轴方向后修改主轴的对齐方式" class="headerlink" title="修改主轴方向后修改主轴的对齐方式"></a>修改主轴方向后修改主轴的对齐方式</h4><ul>
@@ -827,12 +827,12 @@
 <li>取值：<ul>
 <li><code>no-wrap</code> 默认值<ul>
 <li>弹性盒子会受到挤压，设定的宽度会失效</li>
-<li><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-10-02.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-10-02.png"></a></li>
+<li><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-10-02.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-10-02.png"></a></li>
 </ul>
 </li>
 <li><code>wrap</code> 换行 <ul>
 <li>弹性盒子的尺寸不会受到挤压，会在弹性容器容纳不下时换行</li>
-<li><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-09-01.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-09-01.png"></a><ul>
+<li><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-09-01.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-09-01.png"></a><ul>
 <li>水平方向末尾留下了多余空间因为justify-content（主轴方向对齐方式）默认值是justify-content:flex-start）</li>
 <li>垂直方向行间留下了多余空间 这是因为align-content(侧轴方向对齐方式)默认值的影响）</li>
 </ul>
@@ -887,7 +887,7 @@
 </style>
 
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>如何处理最后一行不能左对齐的问题？<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-58-31.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/2022-06-20-08-58-31.png"></a></li>
+<li>如何处理最后一行不能左对齐的问题？<br><a data-fancybox="gallery" href="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-58-31.png"><img src="/images/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/2022-06-20-08-58-31.png"></a></li>
 </ul>
 
   </article>
@@ -898,7 +898,7 @@
     <div  class="nexmoe-post-copyright">
         <strong>本文作者：</strong>YiguiDing<br>
         <!-- <strong>本文解码链接：</strong> -->
-        <!-- <a href="https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80&#x2F;</a><br> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B&#x2F;</a><br> -->
         <strong>本文解码链接：</strong>
         <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
         <strong>本文编码链接：</strong>
@@ -911,7 +911,7 @@
     <script >
         setTimeout("setURL()",0 );  
         function setURL(){  
-            var raw = "https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/"
+            var raw = "https://yiguiding.gitee.io/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/"
             var decodePageURI = decodeURI(raw)
             var encodePageURI = encodeURI(decodePageURI)
             console.log(raw);
@@ -961,7 +961,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80"><span class="toc-number">1.</span> <span class="toc-text">移动端布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pc%E7%AB%AF%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.</span> <span class="toc-text">pc端和移动端分辨率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pc%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87%E7%89%A9%E7%90%86%E5%88%86%E8%BE%A8%E7%8E%87%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">pc端分辨率物理分辨率和逻辑分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%89%A9%E7%90%86%E5%88%86%E8%BE%A8%E7%8E%87%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.2.</span> <span class="toc-text">手机端物理分辨率和逻辑分辨率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%8F%A3"><span class="toc-number">1.3.</span> <span class="toc-text">视口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%80%8D%E5%9B%BE"><span class="toc-number">1.4.</span> <span class="toc-text">二倍图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BE%E5%88%86%E6%AF%94%E5%B8%83%E5%B1%80"><span class="toc-number">1.5.</span> <span class="toc-text">百分比布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80"><span class="toc-number">1.6.</span> <span class="toc-text">flex布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">1.6.1.</span> <span class="toc-text">flex布局的构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">主轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">主轴对齐方式测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.3.</span> <span class="toc-text">侧轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">侧轴对齐方式测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8D%95%E4%B8%AA%E7%9B%92%E5%AD%90%E7%9A%84%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.3.2.</span> <span class="toc-text">控制单个盒子的侧轴对齐方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E4%BC%B8%E7%BC%A9%E6%AF%94"><span class="toc-number">1.6.4.</span> <span class="toc-text">flex伸缩比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91"><span class="toc-number">1.6.5.</span> <span class="toc-text">修改主轴方向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91%E5%90%8E%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.5.1.</span> <span class="toc-text">修改主轴方向后修改主轴的对齐方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.6.5.2.</span> <span class="toc-text">使用示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E7%9A%84%E6%8D%A2%E8%A1%8C"><span class="toc-number">1.6.6.</span> <span class="toc-text">弹性盒子的换行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E7%9A%84%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.7.</span> <span class="toc-text">弹性盒子的侧轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.7.1.</span> <span class="toc-text">效果测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.6.7.2.</span> <span class="toc-text">问题</span></a></li></ol></li></ol></li></ol></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">移动端布局及Flex布局模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pc%E7%AB%AF%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.</span> <span class="toc-text">pc端和移动端分辨率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pc%E7%AB%AF%E5%88%86%E8%BE%A8%E7%8E%87%E7%89%A9%E7%90%86%E5%88%86%E8%BE%A8%E7%8E%87%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">pc端分辨率物理分辨率和逻辑分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%89%A9%E7%90%86%E5%88%86%E8%BE%A8%E7%8E%87%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.2.2.</span> <span class="toc-text">手机端物理分辨率和逻辑分辨率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%8F%A3"><span class="toc-number">1.3.</span> <span class="toc-text">视口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%80%8D%E5%9B%BE"><span class="toc-number">1.4.</span> <span class="toc-text">二倍图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BE%E5%88%86%E6%AF%94%E5%B8%83%E5%B1%80"><span class="toc-number">1.5.</span> <span class="toc-text">百分比布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80"><span class="toc-number">1.6.</span> <span class="toc-text">flex布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E5%B8%83%E5%B1%80%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">1.6.1.</span> <span class="toc-text">flex布局的构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">主轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">主轴对齐方式测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.3.</span> <span class="toc-text">侧轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">侧轴对齐方式测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8D%95%E4%B8%AA%E7%9B%92%E5%AD%90%E7%9A%84%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.3.2.</span> <span class="toc-text">控制单个盒子的侧轴对齐方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E4%BC%B8%E7%BC%A9%E6%AF%94"><span class="toc-number">1.6.4.</span> <span class="toc-text">flex伸缩比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91"><span class="toc-number">1.6.5.</span> <span class="toc-text">修改主轴方向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91%E5%90%8E%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E7%9A%84%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.5.1.</span> <span class="toc-text">修改主轴方向后修改主轴的对齐方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.6.5.2.</span> <span class="toc-text">使用示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E7%9A%84%E6%8D%A2%E8%A1%8C"><span class="toc-number">1.6.6.</span> <span class="toc-text">弹性盒子的换行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E7%9A%84%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.7.</span> <span class="toc-text">弹性盒子的侧轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E6%B5%8B%E8%AF%95"><span class="toc-number">1.6.7.1.</span> <span class="toc-text">效果测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.6.7.2.</span> <span class="toc-text">问题</span></a></li></ol></li></ol></li></ol></li></ol>
                                   </div>
                               </button>
                           
@@ -989,10 +989,10 @@
 
      
 
-<script async src="/js/app.js?v=1655763429283"></script>
+<script async src="/js/app.js?v=1655764241332"></script>
 
 
-	<script async src="/js/search.js?v=1655763429283"></script>
+	<script async src="/js/search.js?v=1655764241332"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
