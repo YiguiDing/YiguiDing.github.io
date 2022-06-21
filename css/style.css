@@ -226,7 +226,7 @@ article a:hover {
   text-decoration: underline;
 }
 article p {
-  margin: 25px 0;
+  margin: 10px 0;
   position: relative;
 }
 article p:after {

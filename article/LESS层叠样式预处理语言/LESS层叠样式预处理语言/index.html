@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>LESS层叠样式预处理语言 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="LESS层叠样式预处理语言 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var encodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
+    <meta name="description" content="LESS层叠样式预处理语言目录 LESS层叠样式预处理语言 目录 概述 注释 运算语法 选择器嵌套语法 变量 导入 导出位置修改 修改方法1 修改方法2   禁止导出    概述 less是一个css的预处理器  less文件后缀是.less  优点：  它扩充了 CSS 语言， 增加了诸如变量、混合（mixin）、函数等功能， 让 CSS 更易维护,简化了 CSS 的编写   vscode插件E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LESS层叠样式预处理语言">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="LESS层叠样式预处理语言目录 LESS层叠样式预处理语言 目录 概述 注释 运算语法 选择器嵌套语法 变量 导入 导出位置修改 修改方法1 修改方法2   禁止导出    概述 less是一个css的预处理器  less文件后缀是.less  优点：  它扩充了 CSS 语言， 增加了诸如变量、混合（mixin）、函数等功能， 让 CSS 更易维护,简化了 CSS 的编写   vscode插件E">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-21T00:46:00.000Z">
+<meta property="article:modified_time" content="2022-06-21T02:35:30.427Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+    <script  defer src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script  defer src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1655779624472">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1655779624472">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1655779624472">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1655779624472">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>54</div>
+        <div><span>字数</span>56.5k</div>
+        <div><span>标签</span>31</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/recentGoal.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">9</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">35</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 13.75px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/demo/" style="font-size: 11.25px;">demo</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.25px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.25px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 12.5px;">加密</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.75px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 12.5px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/">LESS层叠样式预处理语言</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D/%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D/">移动适配</a>
+          </li>
+        
+          <li>
+            <a href="/article/Flex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">Flex布局模型项目实战</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80%E5%8F%8AFlex%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B/">移动端布局及Flex布局模型</a>
+          </li>
+        
+          <li>
+            <a href="/article/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/CSS3%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/">CSS3进阶笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link   href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script defer src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link  href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script defer src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="LESS层叠样式预处理语言" class="lazyload">
+              <h1>LESS层叠样式预处理语言</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月21日</a>
+    <a>字数:<span class="post-count">660</span></a>
+</div>
+
+      
+
+      <h1 id="LESS层叠样式预处理语言"><a href="#LESS层叠样式预处理语言" class="headerlink" title="LESS层叠样式预处理语言"></a>LESS层叠样式预处理语言</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#less%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80">LESS层叠样式预处理语言</a><ul>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E6%B3%A8%E9%87%8A">注释</a></li>
+<li><a href="#%E8%BF%90%E7%AE%97%E8%AF%AD%E6%B3%95">运算语法</a></li>
+<li><a href="#%E9%80%89%E6%8B%A9%E5%99%A8%E5%B5%8C%E5%A5%97%E8%AF%AD%E6%B3%95">选择器嵌套语法</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
+<li><a href="#%E5%AF%BC%E5%85%A5">导入</a></li>
+<li><a href="#%E5%AF%BC%E5%87%BA%E4%BD%8D%E7%BD%AE%E4%BF%AE%E6%94%B9">导出位置修改</a><ul>
+<li><a href="#%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%951">修改方法1</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%952">修改方法2</a></li>
+</ul>
+</li>
+<li><a href="#%E7%A6%81%E6%AD%A2%E5%AF%BC%E5%87%BA">禁止导出</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li><p>less是一个<strong>css的预处理器</strong></p>
+</li>
+<li><p>less文件后缀是.less</p>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>它扩充了 CSS 语言，</li>
+<li>增加了诸如变量、混合（mixin）、函数等功能，</li>
+<li>让 CSS 更易维护,简化了 CSS 的编写</li>
+</ul>
+</li>
+<li><p>vscode插件EasyLESS</p>
+<ul>
+<li>可以在保存的时候自动编译生成同名的.css文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li>单行注释：<code>//注释内容</code></li>
+<li>多行注释：<code>/* 注释内容 */</code> 多行注释会同步生成到css文件中</li>
+</ul>
+<h2 id="运算语法"><a href="#运算语法" class="headerlink" title="运算语法"></a>运算语法</h2><ul>
+<li>加<code>+</code></li>
+<li>减<code>-</code></li>
+<li>乘<code>*</code> </li>
+<li>除法需要添加<code>(小括号)</code>或<code>.</code><ul>
+<li><code>(1/1)</code></li>
+<li><code>1./1</code>  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">div</span>&#123;<br>    <span class="hljs-comment">// 加</span><br>    <span class="hljs-attribute">height</span>:<span class="hljs-number">10</span>+<span class="hljs-number">10px</span>;<br>    <span class="hljs-comment">// 减</span><br>    <span class="hljs-attribute">height</span>:<span class="hljs-number">10</span>-<span class="hljs-number">10px</span>;<br>    <span class="hljs-comment">// 乘</span><br>    <span class="hljs-attribute">height</span>:<span class="hljs-number">10</span>*<span class="hljs-number">10px</span>;<br>    <span class="hljs-comment">// 除</span><br>    <span class="hljs-attribute">height</span>:(<span class="hljs-number">10</span>/<span class="hljs-number">10px</span>);<br>    <span class="hljs-attribute">height</span>:<span class="hljs-number">10</span>./<span class="hljs-number">10px</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>注意：less4.0之前可以直接写<code>1 / 1</code></li>
+</ul>
+<h2 id="选择器嵌套语法"><a href="#选择器嵌套语法" class="headerlink" title="选择器嵌套语法"></a>选择器嵌套语法</h2><ul>
+<li>css后代选择器的写法比较冗长，但为了保证其选择器的权重又不得不这样写</li>
+<li>less嵌套写法可以快速生成css语法的后代选择器</li>
+<li>语法格式  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less">父选择器&#123;<br>    <span class="hljs-comment">// 父级样式</span><br>    子选择器&#123;<br>        <span class="hljs-comment">// 子级样式</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>示例写法  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.father</span>&#123;<br>    <span class="hljs-attribute">width</span>:<span class="hljs-number">100px</span>;<br>    <span class="hljs-selector-class">.son</span>&#123;<br>        <span class="hljs-attribute">width</span>:<span class="hljs-number">50px</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>生成css代码  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.father</span>&#123;<br>    <span class="hljs-attribute">width</span>:<span class="hljs-number">100px</span>;<br>&#125;<br><span class="hljs-selector-class">.father</span> <span class="hljs-selector-class">.son</span>&#123;<br>        <span class="hljs-attribute">width</span>:<span class="hljs-number">50px</span>;<br>    &#125;<br></code></pre></td></tr></table></figure></li>
+<li>注意： <strong><code>&amp;</code>表示当前选择器，通常配合伪元素或伪类使用</strong>  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.father</span>&#123;<br>    <span class="hljs-attribute">width</span>:<span class="hljs-number">100px</span>;<br>    <span class="hljs-selector-class">.son</span>&#123;<br>        <span class="hljs-attribute">width</span>:<span class="hljs-number">50px</span>;<br>    &#125;<br>    <span class="hljs-selector-tag">&amp;</span><span class="hljs-selector-pseudo">:hover</span>&#123;<br>        <span class="hljs-attribute">width</span>:<span class="hljs-number">60px</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li>定义变量：<code>@变量名:值;</code></li>
+<li>使用示例：  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@bgcolor:</span><span class="hljs-number">#333</span>;<br><span class="hljs-selector-tag">div</span>&#123;<br>    <span class="hljs-attribute">background-color</span>:<span class="hljs-variable">@bgcolor</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><ul>
+<li>语法格式：<code>@import &quot;path/to/fileName.less&quot;;</code></li>
+<li>省略后缀：<code>@import &quot;path/to/fileName&quot;;</code></li>
+<li>注意: import之后后<strong>一定</strong>要有空格</li>
+<li>和c语言include含义类似，实际上就是把另一个文件的内容复制到该位置</li>
+</ul>
+<h2 id="导出位置修改"><a href="#导出位置修改" class="headerlink" title="导出位置修改"></a>导出位置修改</h2><ul>
+<li>默认生成的css文件导出在当前文件所在位置</li>
+<li>一般less可以写在网站根目录的less文件夹</li>
+<li>导出的文件目录在网站根目录的css文件夹</li>
+</ul>
+<h3 id="修改方法1"><a href="#修改方法1" class="headerlink" title="修改方法1"></a>修改方法1</h3><p>配置vscode的easyLess插件</p>
+<ul>
+<li>注意：<ul>
+<li><code>*/css/</code>表示存放在<code>css</code><strong>文件夹</strong> </li>
+<li><code>*/css</code>表示存放为一个名为<code>css</code>的<strong>文件</strong></li>
+</ul>
+</li>
+</ul>
+<p>setting.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;less.compile&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;out&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;../css/&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="修改方法2"><a href="#修改方法2" class="headerlink" title="修改方法2"></a>修改方法2</h3><p>控制单个文件的导出路径</p>
+<ul>
+<li>语法：<ul>
+<li><strong>写在第一行:</strong></li>
+<li><code>//out: ./out/</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="禁止导出"><a href="#禁止导出" class="headerlink" title="禁止导出"></a>禁止导出</h2><ul>
+<li>对于<code>base.less</code>、<code>common.less</code>等类似的公共样式文件，可以禁止其导出为css文件</li>
+<li>语法：<code>//out: false</code></li>
+<li>如要调用这些被禁止导出的样式，可以使用<code>@import</code>导入</li>
+</ul>
+
+  </article>
+
+  
+      
+    
+    <div  class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80&#x2F;LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80&#x2F;LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+    <script >
+        setTimeout("setURL()",0 );  
+        function setURL(){  
+            var raw = "https://yiguiding.gitee.io/article/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80/"
+            var decodePageURI = decodeURI(raw)
+            var encodePageURI = encodeURI(decodePageURI)
+            console.log(raw);
+            console.log(decodePageURI);
+            console.log(encodePageURI);
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
+            // }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+        }  
+    </script>
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HTML/" rel="tag">HTML</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LESS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">LESS层叠样式预处理语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E8%AF%AD%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">运算语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8%E5%B5%8C%E5%A5%97%E8%AF%AD%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择器嵌套语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">1.6.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5"><span class="toc-number">1.7.</span> <span class="toc-text">导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E4%BD%8D%E7%BD%AE%E4%BF%AE%E6%94%B9"><span class="toc-number">1.8.</span> <span class="toc-text">导出位置修改</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%951"><span class="toc-number">1.8.1.</span> <span class="toc-text">修改方法1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%952"><span class="toc-number">1.8.2.</span> <span class="toc-text">修改方法2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%81%E6%AD%A2%E5%AF%BC%E5%87%BA"><span class="toc-number">1.9.</span> <span class="toc-text">禁止导出</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1655779624534"></script>
+
+
+	<script async src="/js/search.js?v=1655779624534"></script>
+
+
+<script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
