@@ -94,8 +94,8 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
-  - 《动手学深度学习》(李沫)学习笔记/**
-  - 《数据结构与算法分析》学习笔记/**
+  # - 《动手学深度学习》(李沫)学习笔记/**
+  # - 《数据结构与算法分析》学习笔记/**
 
 exclude:
 ignore:

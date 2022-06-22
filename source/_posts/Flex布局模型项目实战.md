@@ -11,8 +11,8 @@ categories: [前端]
 # Flex布局模型项目实战
 
 ## Demos
-### [-->移动端下单页<--](/demos/Flex布局模型项目实战/xiaotuxianOrders/order)
-### [-->PC端个人中心页<--](/demos/Flex布局模型项目实战/xiaotuxianCenter/center)
+* [-->移动端小兔仙儿下单页<--](/demos/Flex布局模型项目实战/xiaotuxianOrders/order)
+* [-->PC端小兔仙儿个人中心页<--](/demos/Flex布局模型项目实战/xiaotuxianCenter/center)
 
 
 <br>
