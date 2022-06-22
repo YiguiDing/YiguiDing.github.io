@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>bootstrap笔记 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="bootstrap笔记 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var encodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
+    <meta name="description" content="bootstrap笔记目录 bootstrap笔记 目录 简介 dist 基本使用步骤 栅格系统 栅格化 代码书写方式 使用测试   一些类名 container   官方文档 全局样式 组件 JavaScript插件      简介用于开发响应式布局、移动设备优先的 WEB 项目。 dist bootstrap-3.4.1 源码 bootstrap-3.4.1-dist 用于生产环境的 -min">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bootstrap笔记">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/bootstrap%E7%AC%94%E8%AE%B0/bootstrap%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="bootstrap笔记目录 bootstrap笔记 目录 简介 dist 基本使用步骤 栅格系统 栅格化 代码书写方式 使用测试   一些类名 container   官方文档 全局样式 组件 JavaScript插件      简介用于开发响应式布局、移动设备优先的 WEB 项目。 dist bootstrap-3.4.1 源码 bootstrap-3.4.1-dist 用于生产环境的 -min">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-35-08.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-41-42.png">
+<meta property="og:image" content="https://yiguiding.gitee.io/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-05-50-57.png">
+<meta property="article:published_time" content="2022-06-20T22:35:00.000Z">
+<meta property="article:modified_time" content="2022-06-22T23:09:35.233Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="bootstrap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yiguiding.gitee.io/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-35-08.png">
+    <script  defer src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script  defer src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1655939434766">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1655939434766">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1655939434766">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1655939434767">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>67</div>
+        <div><span>字数</span>112.2k</div>
+        <div><span>标签</span>34</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/2022.html" title="近期目标">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-Recents"></i>
+            <div class="mdui-list-item-content">
+                近期目标
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">10</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习日志/">学习日志</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">37</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 13.75px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/demo/" style="font-size: 12.5px;">demo</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.25px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.25px;">前端</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 13.75px;">加密</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" style="font-size: 10px;">响应式</a> <a href="/tags/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" style="font-size: 10px;">媒体查询</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.75px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 13.75px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">64</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/bootstrap%E7%AC%94%E8%AE%B0/test/1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/bootstrap%E7%AC%94%E8%AE%B0/test/lib/bootstrap-3.4.1-dist/css/bootstrap-theme/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/bootstrap%E7%AC%94%E8%AE%B0/test/lib/bootstrap-3.4.1-dist/css/bootstrap.min/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/bootstrap%E7%AC%94%E8%AE%B0/test/lib/bootstrap-3.4.1-dist/css/bootstrap/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/bootstrap%E7%AC%94%E8%AE%B0/test/lib/bootstrap-3.4.1-dist/css/bootstrap-theme.min/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link   href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script defer src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link  href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script defer src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="bootstrap笔记" class="lazyload">
+              <h1>bootstrap笔记</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月21日</a>
+    <a>字数:<span class="post-count">605</span></a>
+</div>
+
+      
+
+      <h1 id="bootstrap笔记"><a href="#bootstrap笔记" class="headerlink" title="bootstrap笔记"></a>bootstrap笔记</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#bootstrap%E7%AC%94%E8%AE%B0">bootstrap笔记</a><ul>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#dist">dist</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4">基本使用步骤</a></li>
+<li><a href="#%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F">栅格系统</a><ul>
+<li><a href="#%E6%A0%85%E6%A0%BC%E5%8C%96">栅格化</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E4%B9%A6%E5%86%99%E6%96%B9%E5%BC%8F">代码书写方式</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%B5%8B%E8%AF%95">使用测试</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%90%8D">一些类名</a><ul>
+<li><a href="#container">container</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3">官方文档</a><ul>
+<li><a href="#%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F">全局样式</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
+<li><a href="#javascript%E6%8F%92%E4%BB%B6">JavaScript插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用于开发<strong>响应式</strong>布局、<strong>移动设备优先</strong>的 WEB 项目。</p>
+<h2 id="dist"><a href="#dist" class="headerlink" title="dist"></a>dist</h2><ul>
+<li><code>bootstrap-3.4.1</code> 源码</li>
+<li><code>bootstrap-3.4.1-dist</code> 用于生产环境的</li>
+<li><code>-min</code>格式化到同一行的，一定程度上压缩了体积的代码</li>
+</ul>
+<h2 id="基本使用步骤"><a href="#基本使用步骤" class="headerlink" title="基本使用步骤"></a>基本使用步骤</h2><ol>
+<li>引用booststrap的css代码 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;./lib/bootstrap-3.4.1-dist/css/bootstrap.css&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;./lib/bootstrap-3.4.1-dist/css/bootstrap.min.css&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>调用类</li>
+</ol>
+<h2 id="栅格系统"><a href="#栅格系统" class="headerlink" title="栅格系统"></a>栅格系统</h2><h3 id="栅格化"><a href="#栅格化" class="headerlink" title="栅格化"></a>栅格化</h3><p>栅格化是指将整个网页的宽度分成诺干份<br>bootstrap3中默认将网页分成12等份<br><a data-fancybox="gallery" href="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-35-08.png"><img src="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-35-08.png"></a><br>如有一个盒子要一行容纳四个子盒子，那么每个子盒子就要占父盒子宽度的三份</p>
+<h3 id="代码书写方式"><a href="#代码书写方式" class="headerlink" title="代码书写方式"></a>代码书写方式</h3><p>bootstrap3把所有屏幕分成4类<br><a data-fancybox="gallery" href="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-41-42.png"><img src="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-04-41-42.png"></a></p>
+<ul>
+<li>语义解释<ul>
+<li>.col-xs- 超小屏幕 手机 (&lt;&#x3D;768px) (iPhone6、7、8 375px) (iPhone12Pro 390px)</li>
+<li>.col-sm- 小屏幕 平板 (≥768px)</li>
+<li>.col-md- 中等屏幕 桌面显示器 (≥992px)</li>
+<li>.col-lg- 大屏幕 大桌面显示器 (≥1200px)</li>
+<li>col-列；colum</li>
+<li>xs-maxsmall，超小；sm-small，小；md-medium，中等；lg-large，大；</li>
+<li>-*表示占列，即占自动每行row分12列栅格系统比；</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用测试"><a href="#使用测试" class="headerlink" title="使用测试"></a>使用测试</h3><p><a href="./test/1.thml">大屏一行排列4个；中屏一行排列2个</a></p>
+<h2 id="一些类名"><a href="#一些类名" class="headerlink" title="一些类名"></a>一些类名</h2><h3 id="container"><a href="#container" class="headerlink" title="container"></a>container</h3><ul>
+<li><code>container</code> 响应式布局版心,自带15px左右内边距</li>
+<li><code>row</code> 自带-15px的左右外边距，用于抵消container的15px <strong>用法</strong>是:<code>container&gt;row</code>  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>container-fluid</code> 宽度为100%的容器，自带15px左右内边距</li>
+</ul>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p>一般直接查<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">官方文档</a></p>
+<ul>
+<li><p><strong>全局样式</strong> 可以直接调用的类名</p>
+</li>
+<li><p><strong>组件</strong> 封装好的功能组件，下拉菜单，导航等</p>
+</li>
+<li><p><strong>JavaScript插件</strong> 一些现成的封装好的交互效果</p>
+</li>
+<li><p><strong>定制</strong> 根据需求修改框架原有的功能<br><a data-fancybox="gallery" href="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-05-50-57.png"><img src="/images/bootstrap%E7%AC%94%E8%AE%B0/2022-06-23-05-50-57.png"></a></p>
+</li>
+</ul>
+<h3 id="全局样式"><a href="#全局样式" class="headerlink" title="全局样式"></a>全局样式</h3><p>一般直接查<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">官方文档</a></p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p>一般直接查<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">官方文档</a></p>
+<h3 id="JavaScript插件"><a href="#JavaScript插件" class="headerlink" title="JavaScript插件"></a>JavaScript插件</h3><p>一般直接查<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">官方文档</a></p>
+<p>JavaScript插件</p>
+<ul>
+<li>需要先引入jquery</li>
+<li>再引入bootstrap.js</li>
+<li>位置一般写在body结束标签之前</li>
+</ul>
+<p>Carousel是轮播图</p>
+
+  </article>
+
+  
+      
+    
+    <div  class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/bootstrap%E7%AC%94%E8%AE%B0/bootstrap%E7%AC%94%E8%AE%B0/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;bootstrap%E7%AC%94%E8%AE%B0&#x2F;bootstrap%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;bootstrap%E7%AC%94%E8%AE%B0&#x2F;bootstrap%E7%AC%94%E8%AE%B0&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+    <script >
+        setTimeout("setURL()",0 );  
+        function setURL(){  
+            var raw = "https://yiguiding.gitee.io/article/bootstrap%E7%AC%94%E8%AE%B0/bootstrap%E7%AC%94%E8%AE%B0/"
+            var decodePageURI = decodeURI(raw)
+            var encodePageURI = encodeURI(decodePageURI)
+            console.log(raw);
+            console.log(decodePageURI);
+            console.log(encodePageURI);
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
+            // }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+        }  
+    </script>
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/bootstrap/" rel="tag">bootstrap</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bootstrap%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">bootstrap笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dist"><span class="toc-number">1.3.</span> <span class="toc-text">dist</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.4.</span> <span class="toc-text">基本使用步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.5.</span> <span class="toc-text">栅格系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E5%8C%96"><span class="toc-number">1.5.1.</span> <span class="toc-text">栅格化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E4%B9%A6%E5%86%99%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">代码书写方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">1.5.3.</span> <span class="toc-text">使用测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%90%8D"><span class="toc-number">1.6.</span> <span class="toc-text">一些类名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#container"><span class="toc-number">1.6.1.</span> <span class="toc-text">container</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-number">1.7.</span> <span class="toc-text">官方文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.7.1.</span> <span class="toc-text">全局样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">1.7.2.</span> <span class="toc-text">组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E6%8F%92%E4%BB%B6"><span class="toc-number">1.7.3.</span> <span class="toc-text">JavaScript插件</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1655939434917"></script>
+
+
+	<script async src="/js/search.js?v=1655939434917"></script>
+
+
+<script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
