@@ -1,0 +1,360 @@
+#carousel-example-generic .carousel-inner .item {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
+#carousel-example-generic .carousel-inner .item:nth-child(1) {
+  background-image: url(../uploads/banner_0.jpg);
+}
+#carousel-example-generic .carousel-inner .item:nth-child(2) {
+  background-image: url(../uploads/banner_1.jpg);
+}
+#carousel-example-generic .carousel-inner .item:nth-child(3) {
+  background-image: url(../uploads/banner_2.jpg);
+}
+#carousel-example-generic .carousel-inner .item:nth-child(4) {
+  background-image: url(../uploads/banner_tweb2019.png);
+}
+#carousel-example-generic .carousel-inner .item .carousel-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+#carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h2 {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  animation: move1 1s forwards;
+  transition: all 1s;
+  opacity: 1;
+}
+#carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h3 {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  animation: move2 1s forwards;
+  transition: all 1s;
+  opacity: 1;
+}
+@keyframes move1 {
+  from {
+    opacity: 0;
+    left: 150%;
+  }
+}
+@keyframes move2 {
+  from {
+    opacity: 0;
+    left: -50%;
+  }
+}
+#carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h2,
+#carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  animation: move3 1s forwards;
+  opacity: 1;
+  transition: all 1s;
+}
+#carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h3,
+#carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h3 {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  animation: move4 1s forwards;
+  opacity: 1;
+  transition: all 1s;
+}
+@keyframes move3 {
+  from {
+    opacity: 0;
+    top: -100%;
+  }
+}
+@keyframes move4 {
+  from {
+    opacity: 0;
+    top: 200%;
+  }
+}
+#carousel-example-generic .carousel-indicators li {
+  margin: 0 2px;
+  padding: 0;
+  height: 5px;
+  background-color: #fff;
+  transition: all 0.25s;
+  opacity: 0.5;
+}
+#carousel-example-generic .carousel-indicators li.active {
+  opacity: 1;
+}
+#carousel-example-generic .carousel-indicators li:hover {
+  transform: scale(1.15);
+}
+@media (min-width: 0px) {
+  #carousel-example-generic .carousel-inner .item {
+    height: 250px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h2 {
+    font-size: 20px;
+    left: 50%;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h3 {
+    display: none;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h2,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h2 {
+    font-size: 25px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h3,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h3 {
+    font-size: 20px;
+  }
+  #carousel-example-generic .carousel-indicators li {
+    width: 30px;
+  }
+}
+@media (min-width: 768px) {
+  #carousel-example-generic .carousel-inner .item {
+    height: 400px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h2 {
+    font-size: 40px;
+    left: 50%;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h3 {
+    font-size: 40px;
+    display: block;
+    left: 50%;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h2,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h2 {
+    font-size: 35px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h3,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h3 {
+    font-size: 30px;
+  }
+  #carousel-example-generic .carousel-indicators li {
+    width: 50px;
+  }
+}
+@media (min-width: 992px) {
+  #carousel-example-generic .carousel-inner .item {
+    height: 500px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h2 {
+    left: 65%;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(1) .carousel-caption h3 {
+    left: 25%;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h2,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h2 {
+    font-size: 55px;
+  }
+  #carousel-example-generic .carousel-inner .item:nth-child(2) .carousel-caption h3,
+  #carousel-example-generic .carousel-inner .item:nth-child(3) .carousel-caption h3 {
+    font-size: 50px;
+  }
+}
+.nav-full {
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+}
+.nav-full.active {
+  background-color: #26282c;
+}
+.nav-full.active .nav > .right > span {
+  color: black;
+}
+.nav-full .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.nav-full .nav .logo {
+  margin-left: 20px;
+  height: 35px;
+  width: 200px;
+  background-image: url(../images/alloyteam-w-34df9d.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+.nav-full .nav .right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.nav-full .nav .right ul {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  margin: 0;
+  list-style: none;
+}
+.nav-full .nav .right ul li {
+  padding: 0 15px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+}
+.nav-full .nav .right ul li.active {
+  color: #f2b535;
+}
+.nav-full .nav .right ul.active {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  display: block;
+  transform: translate(0, 100%);
+  width: 100%;
+  height: auto;
+  background-color: #26282c;
+  animation: open 0.5s;
+  overflow: hidden;
+}
+@keyframes open {
+  from {
+    height: 0;
+  }
+  to {
+    height: 350px;
+  }
+}
+.nav-full .nav .right span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+@media (min-width: 0px) {
+  .nav-full .nav .right > ul {
+    display: none;
+  }
+  .nav-full .nav span {
+    display: inline-block;
+  }
+}
+@media (min-width: 992px) {
+  .nav-full .nav .right > ul {
+    display: flex;
+  }
+  .nav-full .nav span {
+    display: none;
+  }
+}
+.commonlist {
+  margin-top: 50px;
+  text-align: center;
+}
+.commonlist > h2 {
+  text-align: center;
+}
+.commonlist > p {
+  text-align: center;
+  color: gray;
+}
+.commonlist .items .item {
+  padding: 5px;
+}
+.commonlist .items .item .box {
+  transition: all 0.25s;
+}
+.commonlist .items .item .box:hover {
+  transform: translate(0, -10px);
+  box-shadow: #c0c0c0 0px 10px 30px;
+}
+.commonlist > a {
+  margin-top: 10px;
+}
+.OpenSource .items .item .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.OpenSource .items .item .box img {
+  height: 50px;
+  margin-top: 20px;
+}
+.OpenSource .items .item .box h3 {
+  color: #fff;
+}
+.OpenSource .items .item .box p {
+  color: #fff;
+}
+.OpenSource .items .item:nth-child(1) .box {
+  background-color: skyblue;
+}
+.OpenSource .items .item:nth-child(2) .box {
+  background-color: crimson;
+}
+.OpenSource .items .item:nth-child(3) .box {
+  background-color: gray;
+}
+.OpenSource .items .item:nth-child(4) .box {
+  background-color: green;
+}
+.Product .items .item .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #e4ecf3;
+}
+.Product .items .item .box .pic {
+  width: 100%;
+  overflow: hidden;
+}
+.Product .items .item .box .pic img {
+  width: 100%;
+  transition: all 0.5s;
+}
+.Product .items .item .box:hover .pic img {
+  transform: scale(1.1);
+}
+.Product .items .item .box h3 {
+  padding: 0 10px;
+  width: 100%;
+  text-align: left;
+}
+.Product .items .item .box p {
+  padding: 0 10px;
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.footer {
+  width: 100%;
+  height: 100px;
+}
