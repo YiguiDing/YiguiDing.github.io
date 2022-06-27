@@ -13,7 +13,7 @@
     "cbs": "hexo clean && hexo gc -w=55 && hexo generate && hexo server",
     "cgd": "hexo clean && git fetch origin && hexo gc -w=55 && hexo generate && hexo deploy",
     "注释2": "json中的字符串必须是双引号，其中需要使用双引号字符需要转义（似乎还是有问题）",
-    "commit": "git add . && git commit -m '更新' && git push origin master && git push origin_gitee master"
+    "commit": "git add . && git commit -m \"$(date)\" && git push origin master && git push origin_gitee master"
   },
   "hexo": {
     "version": "6.0.0"
