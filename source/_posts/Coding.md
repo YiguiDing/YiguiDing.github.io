@@ -1,0 +1,150 @@
+---
+title: Coding
+date: 2022/02/24 13:34:00+08:00
+layout: post
+cover: /images/名言/我要向前走.png
+permalink: Coding.html #为本页面地址
+tags: [HIDE]
+categories: 学习日志
+---
+
+# 2022年
+## 一月 flags 🚩
++ ✅ [尝试用js写俄罗斯方块](/article/用js写了个俄罗斯方块/)  <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅《概率论与数理统计(宋浩)》学习 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
+
+## 二月 flags 🚩
+2月25日-5月22日:
++ ✅ 免试保送政策取消 复习备考 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
+
+## 五月 flags 🚩
+5月23日:
++ ⬜ [《数据结构与算法分析》学习](/article/《数据结构与算法分析》学习笔记/《数据结构与算法分析》学习笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>30.7%</span></div>
++ ✅ [重学Git补全笔记缺失知识点](/article/git命令备忘笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
+
+## 六月 flags 🚩
++ ✅ 《七天学会NodeJS》教程学习 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ [重学HTML5并做笔记](/article/HTML5重学笔记/HTML5重学笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ [重学CSS3并做笔记](/article/CSS3重学笔记/CSS3重学笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ [CSS3+HTML5项目实战](/article/CSS3+HTML5项目实战/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ [LESS层叠样式预处理语言学习](/article/LESS层叠样式预处理语言/LESS层叠样式预处理语言) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ 移动web开发学习 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
+    + ✅ [CSS3进阶](/article/CSS3进阶笔记/CSS3进阶笔记/index.html)
+    + ✅ [移动端布局及Flex布局模型](/article/移动端布局及Flex布局模型/移动端布局及Flex布局模型)
+    + ✅ [Flex布局模型项目实战](/article/Flex布局模型项目实战/)
+    + ✅ [移动适配](/article/移动适配/移动适配/)
+    + ✅ [移动适配项目实战](/article/移动适配项目实战/)
+    + ✅ [响应式](/article/响应式/响应式/)
+    + ✅ [响应式BootStrap框架](/article/bootstrap笔记/bootstrap笔记/)
+    + ✅ [响应式网页项目实战](/article/响应式网页项目实战/)
++ ✅ [JavaScript基础知识复习](/article/JavaScript基础知识复习笔记/JavaScript基础知识复习笔记) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
+
+
+## 七月 flags 🚩
++ ✅ [jsAPI:DOM学习](/article/jsWebApis学习笔记/jsWebApis学习笔记之DOM/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div> 
++ ⬜ jsAPI:BOM学习 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>5%</span></div> 
++ ⬜ jQuery学习
++ ⬜ 数据交互、异步编程、Ajax
+
+<!-- + ⬜ 重学JavaScript并做简要笔记 <div class="progress-bg"><div class="process" style="width:0%;"></div></div> -->
+
+
+<!-- + ⬜《Node.js全套入门教程》学习 <div class="progress-bg"><div class="process" style="width:0%;"></div></div> -->
+
+<!-- 
+<br>
+
+## flags 🚩
++ 《数据结构与算法分析》学习+理解+笔记
++ 系统性重学HTML5、CSS3、JavaScript
++ 学习NodeJs后端开发
++ 用js或C++编写模拟CHIP-8处理器并运行游戏
++ 写一个自举c编译器
++ 《电路原理(于歆杰)》剩余部分学完
++ 《动手学深度学习(李沫)》剩余部分学习
+
+<p><strong>不要浪费时间了，看看你还有多少事情没做！！！</strong></p>
+ -->
+
+</br>
+</br>
+</br>
+
+<!-- 1. ~~学完李沫的动手学深度学习教程并做jupyter笔记~~
+1. ~~学完吴恩达深度学习教程并做笔记~~
+2. ~~如果还有时间就学周志华的西瓜书🍉~~
+3. ~~阅读,把没看完的书看完,5~10本~~
+4. 报送政策取消了，全力备考 -->
+    
+<!-- 
+📔 Notebook with Decorative Cover
+📕 Closed Book
+📖 Open Book
+📗 Green Book
+📘 Blue Book
+📙 Orange Book
+📚 Books
+📓 Notebook
+📒 Ledger
+📃 Page with Curl
+📜 Scroll
+📄 Page Facing Up
+📰 Newspaper
+🗞️ Rolled-Up Newspaper
+📑 Bookmark Tabs
+🔖 Bookmark
+🏷️ Label
+💰 Money Bag
+
+ -->
+
+<style>
+/* article ul li{
+    padding-right: 20%;
+} */
+.progress-bg-box{
+    position:absolute;
+    right: 0;
+    top: 0;
+    transform:translate(0,0%);
+    z-index: 1;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30%;
+}
+.progress-bg-box span{
+    display: inline-block;
+    height: 100%;
+    width: 3em;
+    line-height: 1em;
+    font-size: 0.8em;
+    vertical-align: middle;
+    text-align: right;
+}
+.progress-bg{
+    flex: 1;
+    display: inline-block;
+    height: 1em;
+    background-color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0.5em;
+}
+.process{
+    height: 100%;
+    /* background-color: #0f0; */
+    /* background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%), linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%); */
+    background: linear-gradient(90deg, #0ff, #0f0);
+    border-radius: 0.5em;
+    color: rgb(255, 255, 255);
+}
+</style>
+<script>
+    var progressBox=document.querySelectorAll(".progress-bg-box")
+    for(var i=0;i<progressBox.length;i++)
+    {
+        progressBox[i].querySelector(".process").style.width=progressBox[i].querySelector("span").innerText;
+    }
+</script>
+
+<!-- <div class="progress-bg"><div class="process" style="width:50%;"></div></div> -->

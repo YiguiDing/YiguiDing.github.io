@@ -102,9 +102,13 @@ menu:
   文章归档:  # 使用说明：https://docs.nexmoe.com/article/archive
    - /archive.html
    - icon-container
-  近期目标:
-    - 2022.html
-    - icon-Recents
+  Coding:
+    - Coding.html
+    - icon-code
+    # - icon-Recents
+  Studying:
+    - Studying.html
+    - icon-xuewei
   关于博主:
     - /aboutMe.html
     - icon-aboutme

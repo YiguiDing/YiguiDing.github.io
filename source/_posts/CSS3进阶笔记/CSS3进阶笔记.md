@@ -41,6 +41,7 @@ categories: 笔记
     - [渐变背景](#渐变背景)
         - [使用示例1](#使用示例1)
         - [使用示例2-综合案例实现](#使用示例2-综合案例实现)
+    - [绘制三角形](#绘制三角形)
 
 ## 字体图标
 * 字体图标展示的是图标，实际特性却像是字，可以通过color属性改变颜色
@@ -1436,3 +1437,102 @@ categories: 笔记
     }
 </style>
 ```
+
+## 绘制三角形
+
+**利用边框拐角处的45度角绘制三角形**
+
+
+<div id="demoNOH895">利用边框拐角处的45度角绘制三角形</div>
+<style>
+    #demoNOH895{
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border-top: 50px solid black;
+    border-right: 50px solid red;
+    border-bottom: 50px solid green;
+    border-left: 50px solid blue;
+}
+</style>
+
+```html
+<div id="demoNOH895">利用边框拐角处的45度角绘制三角形</div>
+<style>
+    #demoNOH895{
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border-top: 50px solid black;
+    border-right: 50px solid red;
+    border-bottom: 50px solid green;
+    border-left: 50px solid blue;
+}
+</style>
+```
+
+
+**宽高不定，各边框50px，效果：**
+
+<div id="demojowej09"></div>
+<style>
+    #demojowej09{
+    box-sizing: border-box;
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid black;
+    border-right: 50px solid red;
+    border-bottom: 50px solid green;
+    border-left: 50px solid blue;
+}
+</style>
+
+```html
+<div id="demojowej09"></div>
+<style>
+    #demojowej09{
+    box-sizing: border-box;
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid black;
+    border-right: 50px solid red;
+    border-bottom: 50px solid green;
+    border-left: 50px solid blue;
+}
+</style>
+```
+
+
+**宽高不定，上边框50px，其他边框透明，效果：**
+
+<div id="demojowewdeio"></div>
+<style>
+    #demojowewdeio{
+    box-sizing: border-box;
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid green;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 50px solid transparent;
+}
+</style>
+
+```html
+<div id="demojowewdeio"></div>
+<style>
+    #demojowewdeio{
+    box-sizing: border-box;
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid green;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 50px solid transparent;
+}
+</style>
+```
+
+
+可以实现的其他效果：
+![](/images/CSS3进阶笔记/2022-07-03-14-51-07.png)
