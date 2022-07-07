@@ -8,6 +8,7 @@ server = flask.Flask(__name__)
 CORS(server, resources={r"/*": {"origins": "*"}})
 
 # github auth
+# secret秘钥已失效
 client_id = "e0b7de11a5245802f0b0"
 client_secret = "b076dfdb5e3738f307e9e8277201f6cdc77a2c0b"
 

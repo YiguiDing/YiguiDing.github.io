@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+<div id="demofowefj3490">
+    侧边栏测试 
+</div>
+<div style="margin: 0 auto; width:1000px;height: 2000px; background-color: pink;">主体内容</div>
+<style>
+    #demofowefj3490{
+        position: absolute;
+        bottom: 200px;
+        right: 50px;
+        width: 50px;
+        height: 200px;
+        background-color: skyblue;
+    }
+</style>
+<script>
+    var demofowefj3490 = document.querySelector("#demofowefj3490")
+    var offsetTop = demofowefj3490.offsetTop 
+    document.addEventListener("scroll",function()
+    {
+        if(window.pageYOffset >= offsetTop)
+        {
+            demofowefj3490.style.position = "fixed";
+            demofowefj3490.style.top = "0";
+        }else
+        {
+            demofowefj3490.style.position = "absolute";
+            demofowefj3490.style.top = "";
+        }
+    })
+</script>
+</body>
+</html>

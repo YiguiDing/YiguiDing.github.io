@@ -1,6 +1,6 @@
 ---
 title: jsWebApis学习笔记之DOM
-date: 2022-06-24 05:27:00 +0800
+date: 2022-06-28 08:55:00 +0800
 # top: 10
 # cover: /images/CSS3重学笔记/cover.png
 # coverWidth: 1920
@@ -26,6 +26,7 @@ categories: 笔记
         - [特殊元素标签的获取](#特殊元素标签的获取)
     - [事件](#事件)
         - [常用事件类型](#常用事件类型)
+            - [面试题：mousemove与mouseenter的区别](#面试题mousemove与mouseenter的区别)
         - [DOM事件流](#dom事件流)
         - [注册事件](#注册事件)
             - [传统注册方式](#传统注册方式)
@@ -50,12 +51,11 @@ categories: 笔记
         - [单标签(表单)元素属性的修改](#单标签表单元素属性的修改)
         - [操作元素示例](#操作元素示例)
     - [节点操作](#节点操作)
-    - [一些案例](#一些案例)
-        - [全选框](#全选框)
-        - [tab栏切换制作](#tab栏切换制作)
-        - [新浪下拉菜单](#新浪下拉菜单)
-        - [简单留言发布案例实现](#简单留言发布案例实现)
-        - [动态生成表格](#动态生成表格)
+    - [元素偏移量offset系列属性](#元素偏移量offset系列属性)
+    - [元素可视区client系列属性](#元素可视区client系列属性)
+    - [元素滚动scroll系列属性](#元素滚动scroll系列属性)
+    - [页面window.scroll](#页面windowscroll)
+    - [offset、client、scroll三系列总结](#offsetclientscroll三系列总结)
     - [dom核心知识点总结](#dom核心知识点总结)
         - [创建](#创建)
         - [增](#增)
@@ -64,11 +64,17 @@ categories: 笔记
         - [查](#查)
         - [属性操作](#属性操作)
         - [事件操作](#事件操作)
-    - [实例：防止复制内容](#实例防止复制内容)
-        - [禁止鼠标右键菜单](#禁止鼠标右键菜单)
-        - [禁止鼠标选中文字](#禁止鼠标选中文字)
-        - [禁止f12键](#禁止f12键)
-    - [实例：阻止链接跳转](#实例阻止链接跳转)
+    - [一些案例](#一些案例)
+        - [全选框](#全选框)
+        - [tab栏切换制作](#tab栏切换制作)
+        - [新浪下拉菜单](#新浪下拉菜单)
+        - [简单留言发布案例实现](#简单留言发布案例实现)
+        - [动态生成表格](#动态生成表格)
+        - [实例：防止复制内容](#实例防止复制内容)
+            - [禁止鼠标右键菜单](#禁止鼠标右键菜单)
+            - [禁止鼠标选中文字](#禁止鼠标选中文字)
+            - [禁止f12键](#禁止f12键)
+        - [实例：阻止链接跳转](#实例阻止链接跳转)
 
 
 ## 内容组成
@@ -287,6 +293,13 @@ querySelectorAll返回查询到的**所有**元素
 * `element.onkeydown` 键盘按下 按下后会一直不断触发
 * `element.onkeypress` 键盘按下，按下后会一直不断触发 但不能识别功能键，如ctrl shift
 * 按键事件执行顺序为down->press->up
+
+#### 面试题：mousemove与mouseenter的区别
+* 当鼠标移动到元素上时就会触发moseenter事件
+* mouseover是鼠标经过自身盒子会触发，经过子盒子，父盒子也会触发该事件
+* moseenter是只有鼠标经过自身盒子才会触发，
+*  因为moseenter不支持冒泡，子元素的事件不会传播到父级
+*  常和moseenter搭配的mouseleave也不支持冒泡，
 
 ### DOM事件流
 * 事件流描述的是从页面中接收事件的顺序
@@ -1103,6 +1116,343 @@ keyup事件发生时，文字已经落入文本框
         2. `list.push("<div>循环执行1000次</div>");`
         3. `node.innerHtml=list.join("")` **效率最高** 耗时8ms 不用拼接字符串
 
+
+## 元素偏移量offset系列属性
+* 可以动态的获取元素的**位置**，**大小**
+* 获取的元素**位置**偏移量是相对于带有定位属性的父元素的，若所有父元素都没有定位属性则相对于body
+* 获取的元素**大小**，也就是宽高，包含**width/height + padding + border**
+* 返回的数值**没有单位**
+* 是一个**只读**属性
+
+**常用属性**
+* `element.offsetParent` 返回该元素**带有定位属性的父级**，如果找不到则返回body
+* `element.offsetTop` 返回元素的上偏移（相对于offsetParent）
+* `element.offsetLeft` 返回元素的左偏移（相对于offsetParent）
+* `element.offsetWidth` 返回元素的宽度（包含width padding border）
+* `element.offsetHeight` 返回元素的宽度（包含height padding border）
+
+offset和style属性的区别
+* offset得到的是元素盒子的宽高（包含padding border），style得到的是元素行内样式中设置的宽高（不包含padding border）
+* offset没有单位 style有单位
+* offset是只读属性 style是可读写属性
+
+
+**商品细节展示**
+
+效果图:
+![](/images/jsWebApis学习笔记之DOM/2022-07-05-04-58-49.png)
+
+```html
+<!-- div#demoOHdfn9e的父级需为body -->
+<style>
+    #demoOHdfn9e{
+        position: relative;
+        margin: 0;
+        width: 400px;
+        height: 400px;
+        background: url(/images/jsWebApis学习笔记之DOM/2022-07-05-04-19-00.png);
+        background-size: contain;
+    }
+    #demoOHdfn9e .mask{
+        display: none;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: gold;
+        opacity: 0.5;
+        cursor: move;
+    }
+    #demoOHdfn9e .big{
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: 500px;
+        height: 500px;
+        overflow: hidden;
+    }
+    #demoOHdfn9e .big img{
+        position: absolute;
+
+    }
+</style>
+<div id="demoOHdfn9e">
+    <div class="mask"></div>
+    <div class="big"><img src="/images/jsWebApis学习笔记之DOM/2022-07-05-04-19-00.png" alt=""></div>
+</div>
+<script>
+    var demoOHdfn9e = document.querySelector("#demoOHdfn9e")
+    var mask = document.querySelector("#demoOHdfn9e>.mask")
+    var big = document.querySelector("#demoOHdfn9e>.big")
+    var img = document.querySelector("#demoOHdfn9e>.big>img")
+    function updataPos(e){//更新子盒子的位置
+            //鼠标相对于父级盒子的坐标
+            var innerMousePosX = e.pageX - demoOHdfn9e.offsetLeft
+            var innerMousePosY = e.pageY - demoOHdfn9e.offsetTop
+            //计算子盒子相对于父盒子的偏移
+            var newMaskPosX = innerMousePosX-mask.offsetWidth/2
+            var newMaskPosY = innerMousePosY-mask.offsetHeight/2
+            //限制小盒子的移动范围
+            if(newMaskPosX < 0)
+            {
+                newMaskPosX=0
+            }else if(demoOHdfn9e.offsetWidth-mask.offsetWidth < newMaskPosX )
+            {
+                newMaskPosX=demoOHdfn9e.offsetWidth-mask.offsetWidth
+            }
+            if( newMaskPosY < 0 )
+            {
+                newMaskPosY= 0
+            }
+            else if(demoOHdfn9e.offsetHeight-mask.offsetHeight < newMaskPosY)
+            {
+                newMaskPosY=demoOHdfn9e.offsetHeight-mask.offsetHeight
+            }
+            mask.style.left=newMaskPosX + "px";
+            mask.style.top=newMaskPosY + "px"
+            //根据比例计算大图的宽高
+            img.style.width=demoOHdfn9e.offsetWidth * big.offsetWidth / mask.offsetWidth + "px"
+            img.style.height=demoOHdfn9e.offsetHeight * big.offsetHeight / mask.offsetHeight + "px"
+            //根据比例移动大图
+            img.style.left = - newMaskPosX * img.offsetWidth / demoOHdfn9e.offsetWidth  + "px"
+            img.style.top = - newMaskPosY * img.offsetHeight / demoOHdfn9e.offsetHeight + "px"
+        }
+    demoOHdfn9e.addEventListener("mouseenter",function(e){
+        mask.style.display="block";
+        big.style.display="block";
+        demoOHdfn9e.addEventListener("mousemove",updataPos);
+    })
+    demoOHdfn9e.addEventListener("mouseleave",function(){
+        mask.style.display="none";
+        big.style.display="none";
+        demoOHdfn9e.removeEventListener("mousemove",updataPos);
+    })
+</script>
+```
+## 元素可视区client系列属性
+* client可获得元素的大小（内容+padding），边框的大小
+* `element.clientTop` 上边框的大小
+* `element.clientLeft` 左边框的大小
+* `element.clientWidth` 内容区域+padding的宽
+* `element.clientHeight` 内容区域+padding的高
+![](/images/jsWebApis学习笔记之DOM/2022-07-05-06-25-04.png)
+
+
+## 元素滚动scroll系列属性
+
+* element.scrollTop 被卷去的上侧边距 (没有bottom)
+* element.scrollLeft 被卷去的左侧边距 （没有right）
+* element.scrollWidth 自身实际宽度
+* element.scrollHeight 自身实际高度
+* 滚动事件`element.onscroll`
+
+
+**草图**
+![](/images/jsWebApis学习笔记之DOM/2022-07-05-20-14-21.png)
+
+
+**测试**
+
+<div id="demo1237hf834r9">
+    内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+</div>
+<p id="demoNDNDURNO"></p>
+<style>
+    #demo1237hf834r9{
+        width: 200px;
+        height: 200px;
+        overflow: auto;
+        word-break: keep-all;
+    }
+</style>
+<script>
+    var demo1237hf834r9 = document.querySelector("#demo1237hf834r9")
+    var demoNDNDURNO = document.querySelector("#demoNDNDURNO")
+    demo1237hf834r9.addEventListener("scroll",function(){
+        demoNDNDURNO.innerHTML=
+        "scrollTop:" + demo1237hf834r9.scrollTop + "<br>" +
+        "scrollLeft:" + demo1237hf834r9.scrollLeft + "<br>" +
+        "scrollWidth:" + demo1237hf834r9.scrollWidth + "<br>" +
+        "scrollHeight:" + demo1237hf834r9.scrollHeight;
+    })
+</script>
+
+
+```html
+<div id="demo1237hf834r9">
+    内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+</div>
+<p id="demoNDNDURNO"></p>
+<style>
+    #demo1237hf834r9{
+        width: 200px;
+        height: 200px;
+        overflow: auto;
+        word-break: keep-all;
+    }
+</style>
+<script>
+    var demo1237hf834r9 = document.querySelector("#demo1237hf834r9")
+    var demoNDNDURNO = document.querySelector("#demoNDNDURNO")
+    demo1237hf834r9.addEventListener("scroll",function(){
+        demoNDNDURNO.innerHTML=
+        "scrollTop:" + demo1237hf834r9.scrollTop + "<br>" +
+        "scrollLeft:" + demo1237hf834r9.scrollLeft + "<br>" +
+        "scrollWidth:" + demo1237hf834r9.scrollWidth + "<br>" +
+        "scrollHeight:" + demo1237hf834r9.scrollHeight;
+    })
+</script>
+```
+
+
+## 页面window.scroll
+* 页面被卷去的头部：window.pageYoffset
+* 页面被卷去的左侧：window.pageXoffset
+* ![](/images/jsWebApis学习笔记之DOM/2022-07-05-21-52-44.png)
+
+
+**案例测试**
+
+![](/images/jsWebApis学习笔记之DOM/2022-07-06-00-26-26.png)
+
+```html
+<body>
+<div id="demofowefj3490">
+    侧边栏测试 
+</div>
+<div style="margin: 0 auto; width:1000px;height: 2000px; background-color: pink;">主体内容</div>
+<style>
+    #demofowefj3490{
+        position: absolute;
+        bottom: 200px;
+        right: 50px;
+        width: 50px;
+        height: 200px;
+        background-color: skyblue;
+    }
+</style>
+<script>
+    var demofowefj3490 = document.querySelector("#demofowefj3490")
+    var offsetTop = demofowefj3490.offsetTop 
+    document.addEventListener("scroll",function()
+    {
+        if(window.pageYOffset >= offsetTop)
+        {
+            demofowefj3490.style.position = "fixed";
+            demofowefj3490.style.top = "0";
+        }else
+        {
+            demofowefj3490.style.position = "absolute";
+            demofowefj3490.style.top = "";
+        }
+    })
+</script>
+</body>
+```
+
+## offset、client、scroll三系列总结
+* offsetWidth 元素的宽度，包含边框
+* clientWidth 元素的宽度，content+padding部分的宽度；不包含边框；
+* scrollWidth 元素内容的实际宽度，大于等于content的宽度
+* offset主要用来获取在页面中的偏移位置
+* client主要用来获取元素的宽高
+* offset主要用来获取被滚动条卷去的内容部分的宽高
+* 获取整个页面在窗口中的滚动距离用window.pageYOffset
+![](/images/jsWebApis学习笔记之DOM/2022-07-06-00-35-41.png)
+
+## dom核心知识点总结
+### 创建
+* `document.write()`
+* `element.innerHTML`  
+* `document.createElement()`  
+
+### 增
+* `node.appendChild()`
+* `node.insertBefore()`
+
+### 删
+* `node.removeChild(childNode)`
+
+### 改
+修改元素属性
+* `element.src`
+* `element.href`
+* `element.title`
+
+修改普通元素内容
+* `element.innerHTML`
+* `element.innerText`
+
+修改表单元素
+* `element.value`
+* `element.type`
+* `element.disabled`
+* 注意： `element.active` 似乎不存在
+
+修改元素样式
+* `element.style`
+* `element.className`
+
+### 查
+DOM的API(古老用法不推荐)
+* `document.getElementById()`
+* `document.getElementsByTagName()`
+
+H5的新方法(提倡)
+* `document.querySelector()`
+* `document.querySelectorAll()`
+
+利用节点关系获取元素
+* `node.parentNode`
+* `node.children`
+* `node.previousElementSibling`
+* `node.nextElementSibling`
+
+### 属性操作
+主要针对于自定义属性
+* `element.setAttribute(属性名,属性值)`
+* `element.getAttribute(属性名)`
+* `element.removeAttribute(属性名)`
+
+### 事件操作
+* `element.onclick` 鼠标点击
+* `element.onfocus` 获得鼠标焦点
+* `element.onblur` 失去鼠标焦点
+* `element.onmouseover` 鼠标经过
+* `element.onmouseout` 鼠标离开
+* `element.onmousemove` 鼠标移动
+* `element.onmouseup` 鼠标弹起触发
+* `element.onmousedown` 鼠标按下触发
+* `element.onkeyup` 键盘弹起 松开按键时会触发一次
+* `element.onkeydown` 键盘按下 按下后会一直不断触发
+* `element.onkeypress` 键盘按下，按下后会一直不断触发 但不能识别功能键，如ctrl shift
+* 按键事件执行顺序为down->press->up
+
+
 ## 一些案例
 
 ### 全选框
@@ -1774,80 +2124,11 @@ keyup事件发生时，文字已经落入文本框
 ```
 
 
-## dom核心知识点总结
-### 创建
-* `document.write()`
-* `element.innerHTML`  
-* `document.createElement()`  
-
-### 增
-* `node.appendChild()`
-* `node.insertBefore()`
-
-### 删
-* `node.removeChild(childNode)`
-
-### 改
-修改元素属性
-* `element.src`
-* `element.href`
-* `element.title`
-
-修改普通元素内容
-* `element.innerHTML`
-* `element.innerText`
-
-修改表单元素
-* `element.value`
-* `element.type`
-* `element.disabled`
-
-修改元素样式
-* `element.style`
-* `element.className`
-
-### 查
-DOM的API(古老用法不推荐)
-* `document.getElementById()`
-* `document.getElementsByTagName()`
-
-H5的新方法(提倡)
-* `document.querySelector()`
-* `document.querySelectorAll()`
-
-利用节点关系获取元素
-* `node.parentNode`
-* `node.children`
-* `node.previousElementSibling`
-* `node.nextElementSibling`
-
-### 属性操作
-主要针对于自定义属性
-* `element.setAttribute(属性名,属性值)`
-* `element.getAttribute(属性名)`
-* `element.removeAttribute(属性名)`
-
-### 事件操作
-* `element.onclick` 鼠标点击
-* `element.onfocus` 获得鼠标焦点
-* `element.onblur` 失去鼠标焦点
-* `element.onmouseover` 鼠标经过
-* `element.onmouseout` 鼠标离开
-* `element.onmousemove` 鼠标移动
-* `element.onmouseup` 鼠标弹起触发
-* `element.onmousedown` 鼠标按下触发
-* `element.onkeyup` 键盘弹起 松开按键时会触发一次
-* `element.onkeydown` 键盘按下 按下后会一直不断触发
-* `element.onkeypress` 键盘按下，按下后会一直不断触发 但不能识别功能键，如ctrl shift
-* 按键事件执行顺序为down->press->up
 
 
+### 实例：防止复制内容
 
-
-
-## 实例：防止复制内容
-
-### 禁止鼠标右键菜单
+#### 禁止鼠标右键菜单
 ```html
 <div id="demowoejf923fe">
     这是一段不能直接复制的文字
@@ -1861,7 +2142,7 @@ H5的新方法(提倡)
 ```
 
 
-### 禁止鼠标选中文字
+#### 禁止鼠标选中文字
 ```html
 <div id="demoGEOJweoir932">
     这是一段不能直接复制的文字
@@ -1877,7 +2158,7 @@ H5的新方法(提倡)
 </script>
 ```
 
-### 禁止f12键
+#### 禁止f12键
 ```js
 document.addEventListener("keydown",function(event){
     if(event.keyCode==123)
@@ -1889,7 +2170,7 @@ document.addEventListener("keydown",function(event){
 
 
 
-## 实例：阻止链接跳转
+### 实例：阻止链接跳转
 ```html
 //两种方法
 <a href="javascript:;"></a>

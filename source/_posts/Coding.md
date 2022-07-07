@@ -41,7 +41,7 @@ categories: 学习日志
 
 
 ## 七月 flags 🚩
-+ ✅ [jsAPI:DOM学习](/article/jsWebApis学习笔记/jsWebApis学习笔记之DOM/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div> 
++ ✅ [jsAPI:DOM学习](/article/jsWebApis学习笔记之DOM/jsWebApis学习笔记之DOM/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div> 
 + ⬜ jsAPI:BOM学习 <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>5%</span></div> 
 + ⬜ jQuery学习
 + ⬜ 数据交互、异步编程、Ajax
