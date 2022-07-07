@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>js动画 - YiguiDing的个人博客站点</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-IwADCOhUh1" />
+
+
+    <!-- 网站logo -->
+    <!-- <link rel="shortcut icon" href="/images/web_img/favicon_icon.jpg" type="image/x-icon" /> -->
+    
+
+    <!-- QQ内置分享会从这里读取分享的标题，图片，描述 -->
+                <meta itemprop="name" content="js动画 - YiguiDing的个人博客站点"/>
+                <meta id="share_image_address" itemprop="image" content="图片URL" />
+                <!-- <meta name="description" itemprop="description" content="描述" /> -->
+                <script>
+                    var encodePageURI = encodeURI("/images/web_img/favicon_icon.jpg")
+                    timer = null
+                    timer=setInterval(function(){
+                        do
+                        {
+                            document.getElementById("share_image_address").content=encodePageURI
+                        }while(document.getElementById("share_image_address").content!=encodePageURI)
+                        clearInterval(timer)
+                    },
+                    100
+                    )
+                </script>
+    
+    <meta name="description" content="js动画动画实现原理核心原理：通过定时器setinterval()不断移动盒子位置  利用offset获取当前位置 通过css定位设置新位置  12345678910111213141516171819&lt;div id&#x3D;&quot;demoNOUH98u9&quot;&gt;&lt;&#x2F;div&gt;&lt;style&gt;    #demoNOUH98u9&amp;#123;        posi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js动画">
+<meta property="og:url" content="https://yiguiding.gitee.io/article/js%E5%8A%A8%E7%94%BB/js%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="YiguiDing的个人博客站点">
+<meta property="og:description" content="js动画动画实现原理核心原理：通过定时器setinterval()不断移动盒子位置  利用offset获取当前位置 通过css定位设置新位置  12345678910111213141516171819&lt;div id&#x3D;&quot;demoNOUH98u9&quot;&gt;&lt;&#x2F;div&gt;&lt;style&gt;    #demoNOUH98u9&amp;#123;        posi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-05T17:07:00.000Z">
+<meta property="article:modified_time" content="2022-07-05T21:00:56.214Z">
+<meta property="article:author" content="YiguiDing">
+<meta property="article:tag" content="HIDE">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="动画">
+<meta name="twitter:card" content="summary">
+    <script  defer src="/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script  defer src="/libs/lazysizes/5.3.2/lazysizes.js"></script>
+    <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
+
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1657154700317">
+    <!-- 网站css图标 -->
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1657154700317">
+    <!-- 社交css图标 -->
+    <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
+    <link rel="stylesheet" href="/lib/font_ti9q4a8wfrh/iconfont.css">
+    <link rel="stylesheet" href="/css/style.css?v=1657154700317">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1657154700317">
+     
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/web_img/web_background.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="YiguiDing" class="mdui-btn mdui-btn-icon"><img src="/images/web_img/user_icon.png" alt="YiguiDing"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YiguiDing">
+            <img src="/images/web_img/user_icon.png" alt="YiguiDing" alt="YiguiDing">
+        </a>
+    </div>
+    <div class="author-name">
+        <a href="/" title="YiguiDing">
+            <h1>YiguiDing</h1>
+            <div class="author_motto">宿命欲催英雄瘦 不改天命誓不休</div>
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>72</div>
+        <div><span>字数</span>83.9k</div>
+        <div><span>标签</span>51</div>
+        <div><span>分类</span>5</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/Coding.html" title="Coding">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-code"></i>
+            <div class="mdui-list-item-content">
+                Coding
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/Studying.html" title="Studying">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-xuewei"></i>
+            <div class="mdui-list-item-content">
+                Studying
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/aboutMe.html" title="关于博主">
+            <i class="mdui-list-item-icon iconfont nexmoefont icon-aboutme"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/73686452" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-bilibili"></i> -->
+            <i class="iconfont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(255, 118, 30);background-color: rgba(255, 118, 30,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-github"></i> -->
+            <i class="iconfont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/YiguiDing" target="_blank" mdui-tooltip="{content: 'Gitee'}" style="color: rgb(255, 185, 0);background-color: rgba(255, 185, 0, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-gitee"></i> -->
+            <i class="iconfont icon-gitee"></i>
+        </a><a class="mdui-ripple" href="https://weibo.com/u/6304917168" target="_blank" mdui-tooltip="{content: '微博'}" style="color: rgb(51, 213, 122);background-color: rgba(51, 213, 122, 0.1);">
+            <!-- <i class="iconfont nexmoefont icon-weibo"></i> -->
+            <i class="iconfont icon-weibo"></i>
+        </a><a class="mdui-ripple" href="https://zhihu.com/people/ding-yi-gui-90" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(14, 135, 234);background-color: rgba(14, 135, 234,0.1);">
+            <!-- <i class="iconfont nexmoefont icon-zhihu"></i> -->
+            <i class="iconfont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/244" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(0, 219, 255);background-color: rgba(0, 219, 255, 0.15);">
+            <!-- <i class="iconfont nexmoefont icon-qq"></i> -->
+            <i class="iconfont icon-qq"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/ideas/">ideas</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习日志/">学习日志</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/日志/">日志</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/笔记/">笔记</a>
+          <span class="category-list-count">47</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/BOM/" style="font-size: 11.11px;">BOM</a> <a href="/tags/BootStrap/" style="font-size: 10px;">BootStrap</a> <a href="/tags/CSS/" style="font-size: 14.44px;">CSS</a> <a href="/tags/DOM/" style="font-size: 11.11px;">DOM</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/HIDE/" style="font-size: 20px;">HIDE</a> <a href="/tags/HTML/" style="font-size: 11.11px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 12.22px;">JavaScript</a> <a href="/tags/LESS/" style="font-size: 10px;">LESS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/Tiny-Rick/" style="font-size: 10px;">Tiny Rick</a> <a href="/tags/WebApis/" style="font-size: 11.11px;">WebApis</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/click%E4%BA%8B%E4%BB%B6/" style="font-size: 10px;">click事件</a> <a href="/tags/demo/" style="font-size: 13.33px;">demo</a> <a href="/tags/fancybox/" style="font-size: 10px;">fancybox</a> <a href="/tags/font-class/" style="font-size: 10px;">font-class</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 11.11px;">gitalk</a> <a href="/tags/hightlight-js/" style="font-size: 10px;">hightlight.js</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/js/" style="font-size: 14.44px;">js</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/miniconda/" style="font-size: 10px;">miniconda</a> <a href="/tags/nexmoe/" style="font-size: 10px;">nexmoe</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E5%8F%8A%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">前端常用插件及框架</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/" style="font-size: 10px;">前端本地存储</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 14.44px;">加密</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" style="font-size: 11.11px;">响应式</a> <a href="/tags/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" style="font-size: 10px;">媒体查询</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">技术博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 17.78px;">数据结构与算法分析</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15.56px;">日志</a> <a href="/tags/%E6%AC%A2%E8%BF%8E/" style="font-size: 10px;">欢迎</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 10px;">源码分析</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 11.11px;">移动端</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D/" style="font-size: 10px;">移动适配</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 18.89px;">笔记</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 13.33px;">网站</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E8%BD%AE%E6%92%AD%E5%9B%BE/" style="font-size: 10px;">轮播图</a> <a href="/tags/%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8/" style="font-size: 10px;">返回顶部</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">69</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/article/%E5%89%8D%E7%AB%AF%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/%E5%89%8D%E7%AB%AF%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/">前端本地存储</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E5%8F%8A%E6%A1%86%E6%9E%B6/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E5%8F%8A%E6%A1%86%E6%9E%B6/">前端常用插件及框架</a>
+          </li>
+        
+          <li>
+            <a href="/article/%E7%A7%BB%E5%8A%A8%E7%AB%AFclick%E4%BA%8B%E4%BB%B6%E9%97%AE%E9%A2%98/%E7%A7%BB%E5%8A%A8%E7%AB%AFclick%E4%BA%8B%E4%BB%B6%E9%97%AE%E9%A2%98/">移动端click事件问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/js%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8/js%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8/">js返回顶部</a>
+          </li>
+        
+          <li>
+            <a href="/article/js%E8%BD%AE%E6%92%AD%E5%9B%BE/js%E8%BD%AE%E6%92%AD%E5%9B%BE/">js轮播图</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 200px;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 YiguiDing
+        <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a> -->
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            
+<link   href="/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script defer src="/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<!-- highlight.js代码高亮css -->
+<link  href="/libs/highlight/css/base16_dracula.min.css" rel="stylesheet">
+
+
+<!-- KaTeX排版系统 -->
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<link rel="stylesheet" href="/libs/katex/v0.15.6/katex.min.css" >
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/libs/katex/v0.15.6/katex.min.js" ></script>
+
+<!-- 自动渲染KaTeX扩展 -->
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="/libs/katex/v0.15.6/contrib/auto-render.min.js" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : true
+        });
+    });
+</script>
+
+<!-- 复制tex公式库 扩展 -->
+<link href="/libs/katex/v0.15.6/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+<script defer src="/libs/katex/v0.15.6/contrib/copy-tex.min.js"></script>
+
+
+<div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="/images/web_img/default_cover2.jpg" data-sizes="auto" alt="js动画" class="lazyload">
+              <h1>js动画</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年07月06日</a>
+    <a>字数:<span class="post-count">2.2k</span></a>
+</div>
+
+      
+
+      <h1 id="js动画"><a href="#js动画" class="headerlink" title="js动画"></a>js动画</h1><h2 id="动画实现原理"><a href="#动画实现原理" class="headerlink" title="动画实现原理"></a>动画实现原理</h2><p>核心原理：通过定时器setinterval()不断移动盒子位置</p>
+<ul>
+<li>利用offset获取当前位置</li>
+<li>通过css定位设置新位置</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUH98u9&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demoNOUH98u9</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> demoNOUH98u9 = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUH98u9&quot;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> timer = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">if</span>(demoNOUH98u9.<span class="hljs-property">offsetLeft</span>&gt;=<span class="hljs-number">200</span>)</span><br><span class="language-javascript">        &#123;</span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(timer)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        demoNOUH98u9.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = demoNOUH98u9.<span class="hljs-property">offsetLeft</span> + <span class="hljs-number">1</span> + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">    &#125;,<span class="hljs-number">50</span>)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="封装成函数"><a href="#封装成函数" class="headerlink" title="封装成函数"></a>封装成函数</h2><h3 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUH98123&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demoNOUH98123</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> demoNOUH98123 = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUH98123&quot;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj,target</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> timer = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">if</span>(elementObj.<span class="hljs-property">offsetLeft</span>&gt;=target)</span><br><span class="language-javascript">        &#123;</span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(timer)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + <span class="hljs-number">1</span> + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">    &#125;,<span class="hljs-number">50</span>)</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">    <span class="hljs-title function_">animate</span>(demoNOUH98123,<span class="hljs-number">200</span>)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="优化写法"><a href="#优化写法" class="headerlink" title="优化写法"></a>优化写法</h3><p><button id="demoNOUHdwee">测试</button></p>
+<div style="position:relative;height: 100px;">
+    <div id="demoNOUH98456"></div>
+</div>
+<style>
+    #demoNOUH98456{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+    }
+</style>
+<script>
+(function(){
+    var demoNOUH98456 = document.querySelector("#demoNOUH98456")
+    var demoNOUHdwee = document.querySelector("#demoNOUHdwee")
+    function animate(elementObj,target){
+        //clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖
+        clearInterval(elementObj.timer)
+        //elementObj.timer可以避免反复申请内存
+        elementObj.timer = setInterval(function(){
+        if(elementObj.offsetLeft>=target)
+        {
+            clearInterval(elementObj.timer)
+        }
+        elementObj.style.left = elementObj.offsetLeft + 1 + "px"
+    },15)
+    }
+    demoNOUHdwee.addEventListener("click",function(){
+        animate(demoNOUH98456,200)
+    })
+})();
+</script>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUHdwee&quot;</span>&gt;</span>测试<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position:relative;height: 100px;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUH98456&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demoNOUH98456</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> demoNOUH98456 = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUH98456&quot;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> demoNOUHdwee = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUHdwee&quot;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj,target</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-comment">//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖</span></span><br><span class="language-javascript">        <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">        <span class="hljs-comment">//elementObj.timer可以避免反复申请内存</span></span><br><span class="language-javascript">        elementObj.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">if</span>(elementObj.<span class="hljs-property">offsetLeft</span>&gt;=target)</span><br><span class="language-javascript">        &#123;</span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + <span class="hljs-number">1</span> + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">    &#125;,<span class="hljs-number">15</span>)</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">    demoNOUHdwee.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">animate</span>(demoNOUH98456,<span class="hljs-number">200</span>)</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">&#125;)();</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="缓动动画"><a href="#缓动动画" class="headerlink" title="缓动动画"></a>缓动动画</h2><ul>
+<li>原理：让盒子每次移动的距离慢慢变小，移动速度就会慢下来</li>
+<li>公式：步长 &#x3D;（目标值-当前值）&#x2F;10</li>
+<li>注意<ul>
+<li>需要向上或向下取整，否则，根据公式，步长将会无限接近0，这就导致(当前值+步长)永远无法到达目标值</li>
+<li>如果步长是负数则应该向下取整，如果步长是正数则应该向上取整。<ul>
+<li>如果步长是0.1，则应该向上取整，步长应为1</li>
+<li>如果步长是-0.1，则应该向下取整，步长应为-1</li>
+</ul>
+</li>
+<li>若只需要单方向移动，判断条件写成这样是没问题的：<ul>
+<li><code>elementObj.offsetLeft&gt;=target</code> 左移</li>
+<li><code>elementObj.offsetLeft&lt;=target</code> 右移</li>
+</ul>
+</li>
+<li>若需要允许左右方向移动，判断条件应该写成：<ul>
+<li><code>elementObj.offsetLeft==target</code> </li>
+<li>需要配合判断步长的正负性对其上下取整</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>公式测试</strong></p>
+<p><button id="demoNOUHdw123we">测试</button><br><button id="demoNOUHddfwefe">复位</button></p>
+<div style="position:relative;height: 100px;">
+    <div id="demoNOUH9fe12we"></div>
+</div>
+<style>
+    #demoNOUH9fe12we{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+    }
+</style>
+<script>
+    (function(){
+        var demoNOUH9fe12we = document.querySelector("#demoNOUH9fe12we")
+        var demoNOUHdw123we = document.querySelector("#demoNOUHdw123we")
+        var demoNOUHddfwefe = document.querySelector("#demoNOUHddfwefe")
+        function animate(elementObj, target) {
+            //clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖
+            clearInterval(elementObj.timer)
+            //elementObj.timer可以避免反复申请内存
+            elementObj.timer = setInterval(function () {
+                if (elementObj.offsetLeft == target) {
+                    clearInterval(elementObj.timer)
+                }
+                //根据公式计算步长
+                var step = (target - elementObj.offsetLeft) / 10
+                //如果步长是负数则向下取整，如果步长是正数则向上取整。
+                step = step > 0 ? Math.ceil(step) : Math.floor(step)
+                elementObj.style.left = elementObj.offsetLeft + step + "px"
+            }, 15)
+        }
+        demoNOUHdw123we.addEventListener("click", function () {
+            animate(demoNOUH9fe12we, 200)
+        })
+        demoNOUHddfwefe.addEventListener("click", function () {
+            animate(demoNOUH9fe12we, 0)
+        })
+    })();
+</script>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUHdw123we&quot;</span>&gt;</span>测试<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUHddfwefe&quot;</span>&gt;</span>复位<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position:relative;height: 100px;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demoNOUH9fe12we&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demoNOUH9fe12we</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    (<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demoNOUH9fe12we = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUH9fe12we&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demoNOUHdw123we = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUHdw123we&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demoNOUHddfwefe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demoNOUHddfwefe&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj, target</span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-comment">//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖</span></span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">            <span class="hljs-comment">//elementObj.timer可以避免反复申请内存</span></span><br><span class="language-javascript">            elementObj.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">                <span class="hljs-keyword">if</span> (elementObj.<span class="hljs-property">offsetLeft</span> == target) &#123;</span><br><span class="language-javascript">                    <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">                &#125;</span><br><span class="language-javascript">                <span class="hljs-comment">//根据公式计算步长</span></span><br><span class="language-javascript">                <span class="hljs-keyword">var</span> step = (target - elementObj.<span class="hljs-property">offsetLeft</span>) / <span class="hljs-number">10</span></span><br><span class="language-javascript">                <span class="hljs-comment">//如果步长是负数则向下取整，如果步长是正数则向上取整。</span></span><br><span class="language-javascript">                step = step &gt; <span class="hljs-number">0</span> ? <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(step) : <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(step)</span><br><span class="language-javascript">                elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + step + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">            &#125;, <span class="hljs-number">15</span>)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        demoNOUHdw123we.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-title function_">animate</span>(demoNOUH9fe12we, <span class="hljs-number">200</span>)</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">        demoNOUHddfwefe.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-title function_">animate</span>(demoNOUH9fe12we, <span class="hljs-number">0</span>)</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">    &#125;)();</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="缓动动画函数添加回调函数"><a href="#缓动动画函数添加回调函数" class="headerlink" title="缓动动画函数添加回调函数"></a>缓动动画函数添加回调函数</h2><h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fuc</span>(<span class="hljs-params">其他形式参数,callback</span>)&#123;<br>    <span class="hljs-comment">//do sthing...</span><br>    <span class="hljs-comment">//判断是否传入了回调函数</span><br>    <span class="hljs-keyword">if</span>(callback)<br>    &#123;<br>        <span class="hljs-title function_">callback</span>();<br>    &#125;<br>&#125;<br><span class="hljs-title function_">fuc</span>(其他实参,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-comment">//do sthing...</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p><button id="demonvefoijgfwf">测试</button><br><button id="demofjewoifjw12">复位</button></p>
+<div style="position:relative;height: 100px;">
+    <div id="demofweijp090"></div>
+</div>
+<style>
+    #demofweijp090 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+    }
+</style>
+<script>
+    (function () {
+        var demofweijp090 = document.querySelector("#demofweijp090")
+        var demonvefoijgfwf = document.querySelector("#demonvefoijgfwf")
+        var demofjewoifjw12 = document.querySelector("#demofjewoifjw12")
+        function animate(elementObj, target, callback) {
+            //clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖
+            clearInterval(elementObj.timer)
+            //elementObj.timer可以避免反复申请内存
+            elementObj.timer = setInterval(function () {
+                if (elementObj.offsetLeft == target) {
+                    clearInterval(elementObj.timer)
+                    if (callback) {
+                        callback();
+                    }
+                }
+                //根据公式计算步长
+                var step = (target - elementObj.offsetLeft) / 10
+                //如果步长是负数则向下取整，如果步长是正数则向上取整。
+                step = step > 0 ? Math.ceil(step) : Math.floor(step)
+                elementObj.style.left = elementObj.offsetLeft + step + "px"
+            }, 15)
+        }
+        demonvefoijgfwf.addEventListener("click", function () {
+            animate(demofweijp090, 200, function () {
+                demofweijp090.style.backgroundColor = "pink"
+            })
+        })
+        demofjewoifjw12.addEventListener("click", function () {
+            animate(demofweijp090, 0, function () {
+                demofweijp090.style.backgroundColor = "green"
+            })
+        })
+    })();
+</script>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demonvefoijgfwf&quot;</span>&gt;</span>测试<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demofjewoifjw12&quot;</span>&gt;</span>复位<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position:relative;height: 100px;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demofweijp090&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demofweijp090</span> &#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: skyblue;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    (<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demofweijp090 = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demofweijp090&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demonvefoijgfwf = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demonvefoijgfwf&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> demofjewoifjw12 = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demofjewoifjw12&quot;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj, target, callback</span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-comment">//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖</span></span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">            <span class="hljs-comment">//elementObj.timer可以避免反复申请内存</span></span><br><span class="language-javascript">            elementObj.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">                <span class="hljs-keyword">if</span> (elementObj.<span class="hljs-property">offsetLeft</span> == target) &#123;</span><br><span class="language-javascript">                    <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">                    <span class="hljs-keyword">if</span> (callback) &#123;</span><br><span class="language-javascript">                        <span class="hljs-title function_">callback</span>();</span><br><span class="language-javascript">                    &#125;</span><br><span class="language-javascript">                &#125;</span><br><span class="language-javascript">                <span class="hljs-comment">//根据公式计算步长</span></span><br><span class="language-javascript">                <span class="hljs-keyword">var</span> step = (target - elementObj.<span class="hljs-property">offsetLeft</span>) / <span class="hljs-number">10</span></span><br><span class="language-javascript">                <span class="hljs-comment">//如果步长是负数则向下取整，如果步长是正数则向上取整。</span></span><br><span class="language-javascript">                step = step &gt; <span class="hljs-number">0</span> ? <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(step) : <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(step)</span><br><span class="language-javascript">                elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + step + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">            &#125;, <span class="hljs-number">15</span>)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        demonvefoijgfwf.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-title function_">animate</span>(demofweijp090, <span class="hljs-number">200</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">                demofweijp090.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;pink&quot;</span></span><br><span class="language-javascript">            &#125;)</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">        demofjewoifjw12.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-title function_">animate</span>(demofweijp090, <span class="hljs-number">0</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">                demofweijp090.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;green&quot;</span></span><br><span class="language-javascript">            &#125;)</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">    &#125;)();</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="动画核心代码"><a href="#动画核心代码" class="headerlink" title="动画核心代码"></a>动画核心代码</h2><p><strong>animate.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj, target, callback</span>) &#123;<br>    <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)<span class="hljs-comment">//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖</span><br>    elementObj.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<span class="hljs-comment">//elementObj.timer可以避免反复申请内存</span><br>        <span class="hljs-keyword">if</span> (elementObj.<span class="hljs-property">offsetLeft</span> == target) &#123;<br>            <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)<br>            <span class="hljs-keyword">if</span> (callback) &#123;<br>                <span class="hljs-title function_">callback</span>();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">var</span> step = (target - elementObj.<span class="hljs-property">offsetLeft</span>) / <span class="hljs-number">10</span> <span class="hljs-comment">//根据公式计算步长</span><br>        step = step &gt; <span class="hljs-number">0</span> ? <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(step) : <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(step)<span class="hljs-comment">//如果步长是负数则向下取整，如果步长是正数则向上取整。</span><br>        elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + step + <span class="hljs-string">&quot;px&quot;</span><br>    &#125;, <span class="hljs-number">15</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="动画案例：侧边栏"><a href="#动画案例：侧边栏" class="headerlink" title="动画案例：侧边栏"></a>动画案例：侧边栏</h2><div id="demo83492379">
+    <div class="more">→</div>
+    <div class="more-address">了解更多</div>
+</div>
+<style>
+    #demo83492379{
+        position: relative;
+        height: 50px;
+        width: 50px;
+        background-color: pink;
+        overflow: visible;
+        word-break: keep-all;
+    }
+    #demo83492379 .more{
+        z-index: 2;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        font-size: 25px;
+        line-height: 50px;
+        text-align: center;
+    }
+    #demo83492379 .more-address{
+        position: absolute;
+        left: -500px;
+        top: 0;
+        display: inline-block;
+        padding: 0 10px;
+        padding-left: 50px;
+        height: 50px;
+        background-color: black;
+        font-size: 25px;
+        line-height: 50px;
+        text-align: center;
+    }
+</style>
+<script>
+(function(){
+    var more = document.querySelector("#demo83492379 .more")
+    var more_address = document.querySelector("#demo83492379 .more-address")
+    more_address.style.left=-more_address.offsetWidth+"px"
+    more.addEventListener("mouseenter",function(){
+        animate(more_address,0,function(){
+            more.innerHTML="←"
+        })
+    })
+    more.addEventListener("mouseleave",function(){
+        animate(more_address,-more_address.offsetWidth,function(){
+            more.innerHTML="→"
+        })
+    })
+    function animate(elementObj, target, callback) {
+    clearInterval(elementObj.timer)//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖
+    elementObj.timer = setInterval(function () {//elementObj.timer可以避免反复申请内存
+        if (elementObj.offsetLeft == target) {
+            clearInterval(elementObj.timer)
+            if (callback) {
+                callback();
+            }
+        }
+        var step = (target - elementObj.offsetLeft) / 10 //根据公式计算步长
+        step = step > 0 ? Math.ceil(step) : Math.floor(step)//如果步长是负数则向下取整，如果步长是正数则向上取整。
+        elementObj.style.left = elementObj.offsetLeft + step + "px"
+    }, 15)
+}
+})();
+</script>
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;demo83492379&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;more&quot;</span>&gt;</span>→<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;more-address&quot;</span>&gt;</span>了解更多<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">    <span class="hljs-selector-id">#demo83492379</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: relative;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: pink;</span><br><span class="language-css">        <span class="hljs-attribute">overflow</span>: visible;</span><br><span class="language-css">        <span class="hljs-attribute">word-break</span>: keep-all;</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-id">#demo83492379</span> <span class="hljs-selector-class">.more</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">z-index</span>: <span class="hljs-number">2</span>;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: relative;</span><br><span class="language-css">        <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: black;</span><br><span class="language-css">        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">25px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">line-height</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">    &#125;</span><br><span class="language-css">    <span class="hljs-selector-id">#demo83492379</span> <span class="hljs-selector-class">.more-address</span>&#123;</span><br><span class="language-css">        <span class="hljs-attribute">position</span>: absolute;</span><br><span class="language-css">        <span class="hljs-attribute">left</span>: -<span class="hljs-number">500px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">        <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="language-css">        <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">background-color</span>: black;</span><br><span class="language-css">        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">25px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">line-height</span>: <span class="hljs-number">50px</span>;</span><br><span class="language-css">        <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">    &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> more = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demo83492379 .more&quot;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> more_address = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#demo83492379 .more-address&quot;</span>)</span><br><span class="language-javascript">    more_address.<span class="hljs-property">style</span>.<span class="hljs-property">left</span>=-more_address.<span class="hljs-property">offsetWidth</span>+<span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">    more.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;mouseenter&quot;</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">animate</span>(more_address,<span class="hljs-number">0</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">            more.<span class="hljs-property">innerHTML</span>=<span class="hljs-string">&quot;←&quot;</span></span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">    more.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;mouseleave&quot;</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">animate</span>(more_address,-more_address.<span class="hljs-property">offsetWidth</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">            more.<span class="hljs-property">innerHTML</span>=<span class="hljs-string">&quot;→&quot;</span></span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params">elementObj, target, callback</span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)<span class="hljs-comment">//clearInterval可以防止animate被反复调用时导致同时调用多个setInterval，致使timer被覆盖</span></span><br><span class="language-javascript">    elementObj.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<span class="hljs-comment">//elementObj.timer可以避免反复申请内存</span></span><br><span class="language-javascript">        <span class="hljs-keyword">if</span> (elementObj.<span class="hljs-property">offsetLeft</span> == target) &#123;</span><br><span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(elementObj.<span class="hljs-property">timer</span>)</span><br><span class="language-javascript">            <span class="hljs-keyword">if</span> (callback) &#123;</span><br><span class="language-javascript">                <span class="hljs-title function_">callback</span>();</span><br><span class="language-javascript">            &#125;</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> step = (target - elementObj.<span class="hljs-property">offsetLeft</span>) / <span class="hljs-number">10</span> <span class="hljs-comment">//根据公式计算步长</span></span><br><span class="language-javascript">        step = step &gt; <span class="hljs-number">0</span> ? <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(step) : <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(step)<span class="hljs-comment">//如果步长是负数则向下取整，如果步长是正数则向上取整。</span></span><br><span class="language-javascript">        elementObj.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = elementObj.<span class="hljs-property">offsetLeft</span> + step + <span class="hljs-string">&quot;px&quot;</span></span><br><span class="language-javascript">    &#125;, <span class="hljs-number">15</span>)</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript">&#125;)();</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+  </article>
+
+  
+      
+    
+    <div  class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YiguiDing<br>
+        <!-- <strong>本文解码链接：</strong> -->
+        <!-- <a href="https://yiguiding.gitee.io/article/js%E5%8A%A8%E7%94%BB/js%E5%8A%A8%E7%94%BB/" title="https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;js%E5%8A%A8%E7%94%BB&#x2F;js%E5%8A%A8%E7%94%BB&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yiguiding.gitee.io&#x2F;article&#x2F;js%E5%8A%A8%E7%94%BB&#x2F;js%E5%8A%A8%E7%94%BB&#x2F;</a><br> -->
+        <strong>本文解码链接：</strong>
+        <a id="page_address_Decode" href="" title="" target="_blank" rel="noopener"></a><br>
+        <strong>本文编码链接：</strong>
+        <a id="page_address_encode" href="" title="" target="_blank" rel="noopener"></a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+    <script >
+        setTimeout("setURL()",0 );  
+        function setURL(){  
+            var raw = "https://yiguiding.gitee.io/article/js%E5%8A%A8%E7%94%BB/js%E5%8A%A8%E7%94%BB/"
+            var decodePageURI = decodeURI(raw)
+            var encodePageURI = encodeURI(decodePageURI)
+            console.log(raw);
+            console.log(decodePageURI);
+            console.log(encodePageURI);
+            do
+            {
+                document.getElementById("page_address_Decode").href=decodePageURI
+                document.getElementById("page_address_Decode").title=decodePageURI
+                document.getElementById("page_address_Decode").innerHTML=decodePageURI
+                document.getElementById("page_address_encode").href=encodePageURI
+                document.getElementById("page_address_encode").title=encodePageURI
+                document.getElementById("page_address_encode").innerHTML=encodePageURI
+            // }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+            }while(document.getElementById("page_address_Decode").innerHTML!=decodePageURI)
+        }  
+    </script>
+
+
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/HIDE/" rel="tag">HIDE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/js/" rel="tag">js</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#js%E5%8A%A8%E7%94%BB"><span class="toc-number">1.</span> <span class="toc-text">js动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">动画实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">封装成函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%86%99%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">一般写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%86%99%E6%B3%95"><span class="toc-number">1.2.2.</span> <span class="toc-text">优化写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB"><span class="toc-number">1.3.</span> <span class="toc-text">缓动动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E6%B7%BB%E5%8A%A0%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">缓动动画函数添加回调函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.1.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.4.2.</span> <span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">动画核心代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="toc-number">1.6.</span> <span class="toc-text">动画案例：侧边栏</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+     
+
+<script async src="/js/app.js?v=1657154700449"></script>
+
+
+	<script async src="/js/search.js?v=1657154700449"></script>
+
+
+<script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?592a2fc69f1a550bacc5ab20a37f672d';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d_models/hk416_3401/assets/hk416_3401.model.json"},"display":{"superSample":2,"position":"right","width":400,"height":600,"hOffset":-100,"vOffset":-220},"mobile":{"show":true,"scale":0.8},"rect":{"opacity":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
