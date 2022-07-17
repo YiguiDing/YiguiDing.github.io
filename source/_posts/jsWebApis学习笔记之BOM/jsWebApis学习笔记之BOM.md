@@ -13,21 +13,21 @@ categories: 笔记
 
 ## 目录
 - [jsWebApis学习笔记之BOM](#jswebapis学习笔记之bom)
-    - [目录](#目录)
-    - [概述](#概述)
-    - [window对象构成：](#window对象构成)
-    - [window对象事件](#window对象事件)
-    - [定时器](#定时器)
-        - [倒计时案例](#倒计时案例)
-        - [发送短信按钮案例](#发送短信按钮案例)
-    - [this指向问题](#this指向问题)
-    - [js执行机制](#js执行机制)
-        - [原来存在的问题](#原来存在的问题)
-        - [新标准](#新标准)
-    - [window的location对象](#window的location对象)
-        - [URL](#url)
-    - [window.navigator对象](#windownavigator对象)
-    - [window.history对象](#windowhistory对象)
+  - [目录](#目录)
+  - [概述](#概述)
+  - [window对象构成：](#window对象构成)
+  - [window对象事件](#window对象事件)
+  - [定时器](#定时器)
+    - [倒计时案例](#倒计时案例)
+    - [发送短信按钮案例](#发送短信按钮案例)
+  - [this指向问题](#this指向问题)
+  - [js执行机制](#js执行机制)
+    - [原来存在的问题](#原来存在的问题)
+    - [新标准](#新标准)
+  - [window的location对象](#window的location对象)
+    - [URL](#url)
+  - [window.navigator对象](#windownavigator对象)
+  - [window.history对象](#windowhistory对象)
 
 ## 概述
 * BOM(Browser Object Model浏览器对象模型)
@@ -116,7 +116,7 @@ categories: 笔记
     var hh=document.querySelector("#hh")
     var mm=document.querySelector("#mm")
     var ss=document.querySelector("#ss")
-    var targetTime =+new Date("2022-07-04T04:45:00")//设置目标时间
+    var targetTime =+new Date("9922-07-04T04:45:00")//设置目标时间
     updateTime()//防止刷新页面后要等1秒才更新倒计时
     var timeDown = setInterval(updateTime,1000)
     function updateTime(){

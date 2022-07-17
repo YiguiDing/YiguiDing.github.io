@@ -43,7 +43,9 @@ categories: 学习日志
 ## 七月 flags 🚩
 + ✅ [jsAPI:DOM学习](/article/jsWebApis学习笔记之DOM/jsWebApis学习笔记之DOM/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div> 
 + ✅ [jsAPI:BOM学习](/article/jsWebApis学习笔记之BOM/jsWebApis学习笔记之BOM/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div> 
-+ ⬜ jQuery学习
++ ✅ [jQuery学习](/article/jQuery学习笔记/jQuery学习笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ✅ [indexedDB学习笔记](/article/indexedDB学习笔记/indexedDB学习笔记/) <div class="progress-bg-box"><div class="progress-bg"><div class="process"></div></div><span>100%</span></div>
++ ⬜ promise学习
 + ⬜ 数据交互、异步编程、Ajax
 
 <!-- + ⬜ 重学JavaScript并做简要笔记 <div class="progress-bg"><div class="process" style="width:0%;"></div></div> -->
