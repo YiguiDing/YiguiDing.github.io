@@ -37,12 +37,12 @@
                     )
                 </script>
     
-    <meta name="description" content="记录前端实现的简易待办任务管理工具 使用js在客户端动态渲染页面 为了实现数据的大容量持久存储，使用IndexedDB数据库，数据存储在客户端 实现了在客户端对本地数据库的增删改查 响应式；对移动端，pc端，ipad做了兼容性适配 使用到的技术：promsie indexedDB JQuery bootstrap  地址：–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&amp;">
+    <meta name="description" content="记录前端实现的简易待办任务管理工具简介  使用js在客户端动态渲染页面 为了实现数据的大容量持久存储，使用IndexedDB数据库，数据存储在客户端 实现了在客户端对本地数据库的增删改查 响应式；对移动端，pc端，ipad做了兼容性适配 使用到的技术：promsie indexedDB JQuery bootstrap  地址 –&gt;&#x2F;demos&#x2F;tools&#x2F;de">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端实现简易待办任务管理工具">
 <meta property="og:url" content="https://yiguiding.gitee.io/article/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="YiguiDing的个人博客站点">
-<meta property="og:description" content="记录前端实现的简易待办任务管理工具 使用js在客户端动态渲染页面 为了实现数据的大容量持久存储，使用IndexedDB数据库，数据存储在客户端 实现了在客户端对本地数据库的增删改查 响应式；对移动端，pc端，ipad做了兼容性适配 使用到的技术：promsie indexedDB JQuery bootstrap  地址：–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&amp;">
+<meta property="og:description" content="记录前端实现的简易待办任务管理工具简介  使用js在客户端动态渲染页面 为了实现数据的大容量持久存储，使用IndexedDB数据库，数据存储在客户端 实现了在客户端对本地数据库的增删改查 响应式；对移动端，pc端，ipad做了兼容性适配 使用到的技术：promsie indexedDB JQuery bootstrap  地址 –&gt;&#x2F;demos&#x2F;tools&#x2F;de">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yiguiding.gitee.io/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG">
 <meta property="og:image" content="https://yiguiding.gitee.io/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4420.PNG">
@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://yiguiding.gitee.io/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-29-45.png">
 <meta property="og:image" content="https://yiguiding.gitee.io/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-30-39.png">
 <meta property="article:published_time" content="2022-07-19T17:40:00.000Z">
-<meta property="article:modified_time" content="2022-07-19T17:47:11.421Z">
+<meta property="article:modified_time" content="2022-07-19T17:58:26.318Z">
 <meta property="article:author" content="YiguiDing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yiguiding.gitee.io/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG">
@@ -72,15 +72,15 @@
     <script defer src="/libs/mdui/1.0.2/js/mdui.js"></script>
 
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1658253109167">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1658253645617">
     <!-- 网站css图标 -->
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1658253109167">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1658253645617">
     <!-- 社交css图标 -->
     <link rel="stylesheet" href="/lib/social_logo88_icons/iconfont.css">
     <link rel="stylesheet" href="/lib/font_ti9q4a8wfrh/iconfont.css">
-    <link rel="stylesheet" href="/css/style.css?v=1658253109167">
+    <link rel="stylesheet" href="/css/style.css?v=1658253645617">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1658253109167">
+        <link rel="stylesheet" href="/css/dark.css?v=1658253645617">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -383,19 +383,23 @@
       
       <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年07月20日</a>
-    <a>字数:<span class="post-count">129</span></a>
+    <a>字数:<span class="post-count">131</span></a>
 </div>
 
       
 
-      <h1 id="记录前端实现的简易待办任务管理工具"><a href="#记录前端实现的简易待办任务管理工具" class="headerlink" title="记录前端实现的简易待办任务管理工具"></a>记录前端实现的简易待办任务管理工具</h1><ul>
+      <h1 id="记录前端实现的简易待办任务管理工具"><a href="#记录前端实现的简易待办任务管理工具" class="headerlink" title="记录前端实现的简易待办任务管理工具"></a>记录前端实现的简易待办任务管理工具</h1><p><strong>简介</strong></p>
+<ul>
 <li>使用js在客户端动态渲染页面</li>
 <li>为了实现数据的大容量持久存储，使用IndexedDB数据库，数据存储在客户端</li>
 <li>实现了在客户端对本地数据库的增删改查</li>
 <li>响应式；对移动端，pc端，ipad做了兼容性适配</li>
 <li>使用到的技术：promsie indexedDB JQuery bootstrap</li>
 </ul>
-<h2 id="地址：–-gt-x2F-demos-x2F-tools-x2F-demo-x2F-index-html-lt-–"><a href="#地址：–-gt-x2F-demos-x2F-tools-x2F-demo-x2F-index-html-lt-–" class="headerlink" title="地址：–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&#x2F;index.html&lt;–"></a>地址：<a href="/demos/tools/demo/index.html">–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&#x2F;index.html&lt;–</a></h2><h2 id="当前效果"><a href="#当前效果" class="headerlink" title="当前效果"></a>当前效果</h2><h3 id="移动端效果"><a href="#移动端效果" class="headerlink" title="移动端效果"></a>移动端效果</h3><p><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4420.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4420.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4421.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4421.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4422.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4422.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4423.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4423.PNG"></a></p>
+<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><ul>
+<li><a href="/demos/tools/demo/index.html">–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&#x2F;index.html&lt;–</a></li>
+</ul>
+<h2 id="当前效果"><a href="#当前效果" class="headerlink" title="当前效果"></a>当前效果</h2><h3 id="移动端效果"><a href="#移动端效果" class="headerlink" title="移动端效果"></a>移动端效果</h3><p><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4418.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4420.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4420.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4421.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4421.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4422.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4422.PNG"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4423.PNG"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/IMG_4423.PNG"></a></p>
 <h3 id="PC端效果"><a href="#PC端效果" class="headerlink" title="PC端效果"></a>PC端效果</h3><p><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-23-22.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-23-22.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-23-52.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-23-52.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-24-21.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-24-21.png"></a></p>
 <p><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-25-09.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-25-09.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-25-55.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-25-55.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-26-12.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-26-12.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-27-15.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-27-15.png"></a></p>
 <p><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-28-07.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-28-07.png"></a><br><a data-fancybox="gallery" href="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-28-33.png"><img src="/images/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2022-07-20-01-28-33.png"></a></p>
@@ -471,7 +475,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">记录前端实现的简易待办任务管理工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%EF%BC%9A%E2%80%93-gt-x2F-demos-x2F-tools-x2F-demo-x2F-index-html-lt-%E2%80%93"><span class="toc-number">1.1.</span> <span class="toc-text">地址：–&gt;&#x2F;demos&#x2F;tools&#x2F;demo&#x2F;index.html&lt;–</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.</span> <span class="toc-text">当前效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">移动端效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PC%E7%AB%AF%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">PC端效果</span></a></li></ol></li></ol></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AE%80%E6%98%93%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">记录前端实现的简易待办任务管理工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.</span> <span class="toc-text">地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.</span> <span class="toc-text">当前效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">移动端效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PC%E7%AB%AF%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">PC端效果</span></a></li></ol></li></ol></li></ol>
                                   </div>
                               </button>
                           
@@ -499,10 +503,10 @@
 
      
 
-<script async src="/js/app.js?v=1658253109297"></script>
+<script async src="/js/app.js?v=1658253645730"></script>
 
 
-	<script async src="/js/search.js?v=1658253109297"></script>
+	<script async src="/js/search.js?v=1658253645730"></script>
 
 
 <script defer src="/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
