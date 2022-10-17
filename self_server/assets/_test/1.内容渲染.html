@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="./lib/vue@2.6.14.min.js"></script> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+    <div id="app" class="container container-fluid">
+        <div class="card">
+            <div class="card-header">添加品牌</div>
+            <div class="card-body row">
+                <div class="input-group col">
+                    <span class="input-group-text">品牌名称</span>
+                    <!-- v-model.trim="tempBrand.name" 双向绑定 -->
+                    <!-- @keyup.esc="tempBrand.name=``"键盘esc弹出事件发生后执行 tempBrand.name=`` -->
+                    <!-- @keyup.enter="addItem"     键盘enter弹出事件事件发生后调用addItem() -->
+                    <input type="text" class="form-control" placeholder="请输入品牌名称" v-model.trim="tempBrand.name"
+                        @keyup.esc="tempBrand.name=``" @keyup.enter="addItem">
+                    <!-- @click="addItem"点击事件发生后调用addItem() -->
+                    <button class="btn btn-outline-secondary" type="button" @click="addItem">添加</button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">品牌名称</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">创建时间</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- :id="`item_${item.id}`" 控制防止vue2中列表顺序渲染紊乱 -->
+                <tr v-for="item in brandList" :id="`item_${item.id}`">
+                    <th scope="row">{{item.id}}</th>
+                    <th>{{item.name}}</th>
+                    <th>
+                        <div class="form-check form-switch">
+                            <!-- v-model控制双向绑定更新数据 -->
+                            <input class="form-check-input" :id="`item_check_${item.id}`" type="checkbox" role="switch"
+                                v-model="item.status">
+                            <!-- v-if="item.status"控制是否显示 -->
+                            <!-- :for="`item_check_${item.id}`" 绑定到指定id,表示点击该元素就相当于点击带有#id的元素 -->
+                            <label v-if="item.status" class="form-check-label"
+                                :for="`item_check_${item.id}`">已启用</label>
+                            <label v-else class="form-check-label" :for="`item_check_${item.id}`">已禁用</label>
+                        </div>
+                    </th>
+                    <th>{{item.time}}</th>
+                    <!-- removeItemById(item.id)控制删除项目 -->
+                    <th><a href="" @click.prevent="removeItemById(item.id)">删除</a></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                tempBrand: { name: "" },//用于临时存储数据
+                nextId: 4,
+                brandList: [
+                    { id: 1, name: "华为", status: true, time: new Date() },
+                    { id: 2, name: "小米", status: false, time: new Date() },
+                    { id: 3, name: "苹果", status: true, time: new Date() },
+                ]
+            },
+            methods: {
+                removeItemById(targetId) {//根据id删除数据
+                    this.brandList.splice(this.brandList.findIndex((item) => item.id == targetId), 1)
+                },
+                addItem() {
+                    if (!this.tempBrand.name) return alert("名称不能为空!!!")
+                    this.brandList.push({
+                        id: this.nextId,
+                        name: this.tempBrand.name,
+                        status: true,
+                        time: new Date()
+                    })
+                    this.tempBrand = { name: "" }//清空
+                    this.nextId++       //自增id
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

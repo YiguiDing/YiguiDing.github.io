@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- jquery库 ,crossorigin="anonymous"表示不携带当前页面的cookie -->
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- axios 库 ,crossorigin="anonymous"表示不携带当前页面的cookie -->
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <button id="btn7-1">点击使用axios(config)发送请求</button>
+    <button id="btn7-2">点击使用axios.get(url[, config])发送请求</button>
+    <button id="btn7-3">点击使用axios.post(url[, data[, config]])发送请求</button>
+    <script>
+        $("#btn7-1").click(function(){
+            //axios(config)
+            axios({
+                method: 'get',
+                url:"http://127.0.0.1:8000/demo7",
+                params: {//url格式数据
+                    name:"DingYigui",
+                    id:123
+                },
+                headers:{//报头
+                    test:321
+                },
+                data:{
+                    a:123,
+                    b:321
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+        })
+        $("#btn7-2").click(function(){
+            // axios.get(url[, config])
+            axios.get('http://127.0.0.1:8000/demo7',{
+                params: {
+                    name:"DingYigui",
+                    id:123
+                },
+                headers:{
+                    test:321
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+        })
+        $("#btn7-3").click(function(){
+            // axios.post(url[, data[, config]])
+            axios.post('http://127.0.0.1:8000/demo7',{a:123,b:321},{
+                params: {//url格式数据
+                    name:"DingYigui",
+                    id:123
+                },
+                headers:{//报头
+                    test:321
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+        })
+    </script>
+</body>
+</html>

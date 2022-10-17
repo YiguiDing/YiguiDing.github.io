@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result4{
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn4_1">点击发送请求</button>
+    <button id="btn4_2">点击取消请求</button>
+    <script>
+        var btn4_1 = document.getElementById("btn4_1")
+        var btn4_2 = document.getElementById("btn4_2")
+        let xhr = null;
+        btn4_1.onclick=function(){
+            xhr = new XMLHttpRequest();
+            xhr.open("POST","http://127.0.0.1:8000/demo4")
+            xhr.send("hello server");
+        }
+        btn4_2.onclick = function(){
+            xhr.abort();
+        }
+    </script>
+</body>
+</html>
