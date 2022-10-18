@@ -1,0 +1,446 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+  display: none;
+  width: 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #c8c8c8;
+  border-radius: 5px;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: white;
+}
+.container-fluid {
+  padding: 0;
+}
+header.container-fluid {
+  margin-bottom: 15px;
+  background-color: #24292f;
+}
+header.container-fluid nav.container {
+  display: flex;
+  align-items: center;
+}
+header.container-fluid nav.container h1 {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0 0;
+  color: white;
+  font-size: x-large;
+}
+header.container-fluid nav.container a {
+  margin: 5px;
+}
+header.container-fluid nav.container a img {
+  height: 50px;
+}
+.myPanel {
+  margin-bottom: 15px;
+  padding: 0;
+  background-color: white;
+  border: 2px solid #d0d7de;
+  border-radius: 5px;
+}
+.myPanel > .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  border-bottom: 1px solid #d0d7de;
+  background-color: #f6f8fa;
+}
+.myPanel > .header h1,
+.myPanel > .header h2,
+.myPanel > .header h3,
+.myPanel > .header h4,
+.myPanel > .header h5,
+.myPanel > .header h6 {
+  flex: 1;
+  display: inline-block;
+  margin: 0;
+}
+.myPanel > .header > button,
+.myPanel > .header > span {
+  float: left;
+  margin: 0 5px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.myPanel > .header > button:hover,
+.myPanel > .header > span:hover {
+  background-color: #d0d7de;
+}
+.myPanel > .header .btn-years {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.myPanel > .header .btn-years > button,
+.myPanel > .header .btn-years > span {
+  float: left;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background-color: whitesmoke;
+  border: none;
+  border-radius: none;
+  box-sizing: border-box;
+}
+.myPanel > .header .btn-years > button:hover,
+.myPanel > .header .btn-years > span:hover {
+  background-color: white;
+}
+.myPanel > .content {
+  padding: 0;
+  overflow-y: auto;
+}
+ul.TasksBox {
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+ul.TasksBox li.item {
+  margin: 0;
+  padding: 0;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+ul.TasksBox li.item div.item-innerBox {
+  padding: 15px;
+  padding-bottom: 0;
+  background-color: #f6f8fa;
+  background-color: white;
+  border: 2px solid #d0d7de;
+  border-radius: 5px;
+}
+ul.TasksBox li.item div.item-innerBox .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ul.TasksBox li.item div.item-innerBox .header h1,
+ul.TasksBox li.item div.item-innerBox .header h2,
+ul.TasksBox li.item div.item-innerBox .header h3,
+ul.TasksBox li.item div.item-innerBox .header h4,
+ul.TasksBox li.item div.item-innerBox .header h5,
+ul.TasksBox li.item div.item-innerBox .header h6 {
+  flex: 1;
+  /* 溢出隐藏 */
+  overflow: hidden;
+  /* 文字溢出显示省略号 */
+  text-overflow: ellipsis;
+  /* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象 */
+  white-space: nowrap;
+}
+ul.TasksBox li.item div.item-innerBox .header span {
+  margin-left: 5px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+}
+ul.TasksBox li.item div.item-innerBox .header span:hover {
+  background-color: #d0d7de;
+}
+ul.TasksBox li.item div.item-innerBox .content p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+ul.TasksBox li.item div.item-innerBox .content p span {
+  display: inline-block;
+  margin: 0 5px;
+}
+ul.TasksBox li.item div.item-innerBox .content .progress {
+  margin: 0;
+  margin-bottom: 15px;
+}
+ul.TasksBox li.item div.item-innerBox .content .list-group {
+  margin: 0;
+  margin-bottom: 15px;
+}
+ul.TasksBox li.item div.item-innerBox .content .list-group .list-group-item:hover {
+  background-color: #d0d7de;
+}
+.dailyBoxmyPanel {
+  margin: 0;
+}
+.dailyBoxmyPanel > .header {
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #f6f8fa;
+  overflow: hidden;
+  color: black;
+}
+.dailyBoxmyPanel > .header h1,
+.dailyBoxmyPanel > .header h2,
+.dailyBoxmyPanel > .header h3,
+.dailyBoxmyPanel > .header h4,
+.dailyBoxmyPanel > .header h5,
+.dailyBoxmyPanel > .header h6 {
+  font-size: small;
+}
+.dailyBoxmyPanel > .header > span {
+  color: black;
+  margin-left: 2px;
+}
+.dailyBoxmyPanel > .content {
+  padding: 5px 5px 0 5px;
+  margin: 0;
+  overflow-y: scroll;
+}
+.dailyBoxmyPanel > .content .plansmyPanel {
+  margin-bottom: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #ebebeb;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f6f8fa;
+  color: black;
+  overflow: hidden;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .header h1,
+.dailyBoxmyPanel > .content .plansmyPanel .header h2,
+.dailyBoxmyPanel > .content .plansmyPanel .header h3,
+.dailyBoxmyPanel > .content .plansmyPanel .header h4,
+.dailyBoxmyPanel > .content .plansmyPanel .header h5,
+.dailyBoxmyPanel > .content .plansmyPanel .header h6 {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .header span {
+  margin-left: 5px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .header span:hover {
+  background-color: #d0d7de;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .content {
+  padding: 0;
+  margin: 0;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .content div {
+  cursor: pointer;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .content div:hover {
+  background-color: #eee;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .content div.unticked::after {
+  float: right;
+  content: "⬜";
+  margin-right: 0;
+}
+.dailyBoxmyPanel > .content .plansmyPanel .content div.ticked::after {
+  float: right;
+  content: "✅";
+  margin-right: 0;
+}
+.dailyBoxmyPanel > .content .plansmyPanel.timeManage .content div {
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.dailyBoxmyPanel > .content .plansmyPanel.timeManage .content div span.time {
+  width: 100px;
+  text-align: center;
+  /* 溢出隐藏 */
+  overflow: hidden;
+  /* 文字溢出显示省略号 */
+  text-overflow: ellipsis;
+  /* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象 */
+  white-space: nowrap;
+}
+.dailyBoxmyPanel > .content .plansmyPanel.timeManage .content div span.texts {
+  flex: 1;
+  /* 溢出隐藏 */
+  overflow: hidden;
+  /* 文字溢出显示省略号 */
+  text-overflow: ellipsis;
+  /* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象 */
+  white-space: nowrap;
+}
+#Plan-Add-Editer .modal-body > .input-group {
+  margin-bottom: 5px;
+}
+#Plan-Add-Editer .modal-body > .panel {
+  margin-bottom: 5px;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-heading {
+  padding: 0;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-heading span,
+#Plan-Add-Editer .modal-body > .panel .panel-heading input {
+  border: none;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-heading .add-btn {
+  background-color: #337ab7;
+  color: white;
+  cursor: pointer;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-body {
+  padding: 0;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item .content {
+  flex: 1;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up,
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up:hover,
+#Plan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete:hover {
+  background-color: gray;
+  color: white;
+}
+#delete-Plan-content .modal-content,
+#delete-Plan .modal-content {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+#delete-Plan-content .modal-content .modal-body,
+#delete-Plan .modal-content .modal-body,
+#delete-Plan-content .modal-content .modal-footer,
+#delete-Plan .modal-content .modal-footer {
+  color: #c7254e;
+  background-color: #f9f2f4;
+}
+#dailyPlan-Notes-Editer .modal-body > .input-group,
+#dailyPlan-timeManage-Editer .modal-body > .input-group,
+#dailyPlan-Add-Editer .modal-body > .input-group {
+  margin-bottom: 5px;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel,
+#dailyPlan-timeManage-Editer .modal-body > .panel,
+#dailyPlan-Add-Editer .modal-body > .panel {
+  margin-bottom: 5px;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-heading,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-heading,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-heading {
+  padding: 0;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-heading span,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-heading span,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-heading span,
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-heading input,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-heading input,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-heading input {
+  border: none;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-heading .add-btn,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-heading .add-btn,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-heading .add-btn {
+  background-color: #337ab7;
+  color: white;
+  cursor: pointer;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body {
+  padding: 0;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item .content,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item .content,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item .content {
+  flex: 1;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up,
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up:hover,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up:hover,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .up:hover,
+#dailyPlan-Notes-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete:hover,
+#dailyPlan-timeManage-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete:hover,
+#dailyPlan-Add-Editer .modal-body > .panel .panel-body.list-group .list-group-item > .delete:hover {
+  background-color: gray;
+  color: white;
+}
+#dailyPlan-Notes-Editer .modal-body .timeManage .panel-heading .input-group > div,
+#dailyPlan-timeManage-Editer .modal-body .timeManage .panel-heading .input-group > div,
+#dailyPlan-Add-Editer .modal-body .timeManage .panel-heading .input-group > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#dailyPlan-Notes-Editer .modal-body .timeManage .panel-heading .input-group > div input,
+#dailyPlan-timeManage-Editer .modal-body .timeManage .panel-heading .input-group > div input,
+#dailyPlan-Add-Editer .modal-body .timeManage .panel-heading .input-group > div input {
+  flex: 1;
+}
+footer.container-fluid {
+  background-color: #24292f;
+}
+footer.container-fluid div.container {
+  padding: 50px;
+  text-align: center;
+  color: white;
+}
