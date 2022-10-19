@@ -1,5 +1,5 @@
 {
-    "pasteImage.path":"${currentFileDir}/images/移动适配/",//剪切板图片保存路径 A
+    "pasteImage.path":"${currentFileDir}/images/前端本地存储/",//剪切板图片保存路径 A
     "pasteImage.defaultName":"Y-MM-DD-HH-mm-ss",//图片名称
 
     "pasteImage.basePath":"${currentFileDir}/",//上面的路径A减去这里设置的路径，就是md文件![](这里的路径)
