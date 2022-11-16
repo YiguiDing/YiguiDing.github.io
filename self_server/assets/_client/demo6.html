@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- jquery库 ,crossorigin="anonymous"表示不携带当前页面的cookie -->
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <button id="btn6-1">点击发送GET请求</button>
+    <button id="btn6-2">点击发送POST请求</button>
+    <button id="btn6-3">通用方法</button>
+    <script>
+        $("#btn6-1").click(function(){
+            $.get("http://127.0.0.1:8000/demo6",{a:1,b:2},function(data){
+                console.log(data)
+            })
+        })
+        $("#btn6-2").click(function(){
+            $.post("http://127.0.0.1:8000/demo6",{a:1,b:2},function(data){
+                console.log(data)
+            })
+        })
+        $("#btn6-3").click(function(){
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8000/demo6",
+                headers: {
+                    a:100,
+                    b:200,
+                },
+                data: {a:1,b:2},
+                dataType: "json",//可将字符串类型的data自动转换为json
+                success: function(data){ console.log(data) },
+                timeout: 2000,
+                error: function(){ console.log("出错了") },//超时或网络异常的错误回调函数
+            })
+        })
+        
+    </script>
+</body>
+</html>
