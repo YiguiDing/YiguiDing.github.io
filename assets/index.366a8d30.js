@@ -1,1 +1,0 @@
-import{_ as e,o as t,b as n,k as s}from"./index.9d2b6fa2.js";const _={},c={class:"article common_container common_bgColor common_fontColor"};function r(o,a,l,i,m,d){return t(),n("div",c,[s(o.$slots,"default")])}const f=e(_,[["render",r]]);export{f as D};
