@@ -1,0 +1,30 @@
+// out:"./dist/"
+
+@font-face {
+	font-family: "HanaleiFill";
+	src: url(../font/HanaleiFill-Regular.ttf);
+}
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	overflow: hidden;
+	font: 50px italic;
+	color: white;
+}
+html,
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	background: black;
+	#myCanvas,
+	#loading {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		max-width: 100vw;
+		max-height: 100vh;
+	}
+}

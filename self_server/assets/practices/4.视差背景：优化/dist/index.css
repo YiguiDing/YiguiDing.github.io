@@ -1,0 +1,15 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+body #myCanvas {
+  border: 5px solid black;
+}
+body .speedChanger-container,
+body .speedChanger-container input {
+  text-align: center;
+  width: 80%;
+}
