@@ -16,7 +16,7 @@ export class Game {
         this.Scene = new Scene(this);
         this.player = new ShadowDog(this, this.GAME_WIDTH, this.GAME_HEIGHT);
         this.Music = new Audio();
-        this.Music.src = "./sounds/gameMusic.wav";
+        this.Music.src = "./sounds/gameMusic1M.mp3";
         this.Music.loop = true;
         this.UI = new UI(this);
         this.allStates[Game.StateEnum.Preview] = new PreviewStatus(this);
