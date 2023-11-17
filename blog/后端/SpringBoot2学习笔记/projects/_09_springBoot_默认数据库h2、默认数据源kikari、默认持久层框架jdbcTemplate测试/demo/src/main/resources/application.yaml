@@ -1,0 +1,21 @@
+server:
+  address: 0.0.0.0
+  port: 80
+
+spring:
+# 配置数据库
+  h2:
+    console:
+      path: /h2
+      enabled: true
+      settings:
+        web-admin-password: 123456
+        web-allow-others: false
+  # 配置数据源
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: sa
+    password: 123456  
+    hikari:
+      maximum-pool-size: 50

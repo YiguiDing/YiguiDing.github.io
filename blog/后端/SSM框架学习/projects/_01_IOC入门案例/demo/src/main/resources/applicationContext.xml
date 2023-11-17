@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!-- id指定实例化后的对象名，class指定被实例化的类所在位置（包名） -->
+    <bean id="myBookDao_id1" class="com.example.dao.impl.BookDaoImpl" />
+    <bean id="myService_id2" class="com.example.service.impl.ServiceImp" />
+</beans>

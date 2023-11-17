@@ -1,0 +1,46 @@
+server:
+  address: 0.0.0.0
+  port: 80
+
+# 连接池
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/ssmp_demo2
+    username: root
+    password: root
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # id自增规则，表前缀配置
+      table-prefix: tbl_
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  
+
+jetcache:
+  # statIntervalMinutes: 15
+  # areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap #other choose：caffeine
+      # 存储的key如果是对象的话，必须配置转换规则
+      keyConvertor: fastjson #other choose： fastjson2/fastjson/jackson
+      # 存储的value如果是对象的话，必须配置转换规则，还要实现对象的序列化接口
+      valueEncoder: java #other choose：kryo/kryo5
+      valueDecoder: java #other choose：kryo/kryo5
+  #     limit: 100
+  remote:
+    default:
+      type: redis
+      host: 172.30.64.71
+      port: 6379
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      # 存储的key如果是对象的话，必须配置转换规则
+      keyConvertor: fastjson #other choose： fastjson2/fastjson/jackson
+      # 存储的value如果是对象的话，必须配置转换规则，还要实现对象的序列化接口
+      valueEncoder: java #other choose：kryo/kryo5
+      valueDecoder: java #other choose：kryo/kryo5

@@ -1,0 +1,5 @@
+{
+    "pasteImage.path": "${currentFileDir}/images/${currentFileNameWithoutExt}/",//图片存储路径
+    "pasteImage.forceUnixStyleSeparator": true,
+	"pasteImage.prefix": "./",
+}

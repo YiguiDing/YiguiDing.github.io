@@ -1,0 +1,44 @@
+{
+  "author": "Yigui-Ding",
+  "license": "MIT",
+  "keywords": [
+    "personal-blog"
+  ],
+  "type": "module",
+  "packageManager": "pnpm@8.10.5",
+  "scripts": {
+    "dev": "vuepress dev blog",
+    "dev:clean-dev": "vuepress dev blog --clean-cache",
+    "build": "vuepress build blog",
+    "lint": "prettier --check --write .",
+    "lint:check": "prettier --check .",
+    "lint-md": "markdownlint **/*.md --ignore node_modules --fix",
+    "clean": "find ./blog -name \"node_modules\" -o -name \"dist\" -o -name \"target\" -type d -exec rm -rf '{}' +",
+    "build:live2d": "cd blog/.vuepress/public/live2d_models  && node ./scripts/build-live2d.js",
+    "commitizen_install": "npm install commitizen -D",
+    "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
+    "commit": "git cz"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "execa": "^8.0.1",
+    "live2d-static-api": "github:evgo2017/live2d-static-api",
+    "markdownlint-cli": "^0.37.0",
+    "prettier": "^3.1.0"
+  },
+  "dependencies": {
+    "@vue/repl": "^2.7.0",
+    "@vuepress/bundler-vite": "^2.0.0-beta.68",
+    "katex": "^0.16.9",
+    "vue-live2d": "^1.3.1",
+    "vuepress": "^2.0.0-beta.68",
+    "vuepress-plugin-search-pro": "^2.0.0-beta.251",
+    "vuepress-theme-hope": "^2.0.0-beta.251"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

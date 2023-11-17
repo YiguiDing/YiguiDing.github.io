@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!--  使用静态工厂实例化Bean，class填静态工厂的类名，factory-method填静态方法名 -->
+    <bean id="myBookDao_id1" class="com.example.factory.BookDaoFactory" factory-method="getBookDao" />
+    <bean id="myService_id2" class="com.example.service.impl.ServiceImp">
+        <property name="bookDao" ref="myBookDao_id1"></property>
+    </bean>
+</beans>

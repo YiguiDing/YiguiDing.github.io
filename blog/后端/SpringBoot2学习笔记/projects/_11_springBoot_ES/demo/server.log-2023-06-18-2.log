@@ -1,0 +1,9 @@
+2023-06-18 02:22:07.092  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] c.e.demo.controller.BookController       : 这是info日志
+2023-06-18 02:22:07.106  WARN 31952 --- [http-nio-0.0.0.0-80-exec-1] c.e.demo.controller.BookController       : 这是warn日志
+2023-06-18 02:22:07.118 ERROR 31952 --- [http-nio-0.0.0.0-80-exec-1] c.e.demo.controller.BookController       : 这是error日志
+2023-06-18 02:22:09.803  INFO 31952 --- [http-nio-0.0.0.0-80-exec-2] c.e.demo.controller.BookController       : 这是info日志
+2023-06-18 02:22:09.804  WARN 31952 --- [http-nio-0.0.0.0-80-exec-2] c.e.demo.controller.BookController       : 这是warn日志
+2023-06-18 02:22:09.804 ERROR 31952 --- [http-nio-0.0.0.0-80-exec-2] c.e.demo.controller.BookController       : 这是error日志
+2023-06-18 02:22:13.025  INFO 31952 --- [http-nio-0.0.0.0-80-exec-3] c.e.demo.controller.BookController       : 这是info日志
+2023-06-18 02:22:13.028  WARN 31952 --- [http-nio-0.0.0.0-80-exec-3] c.e.demo.controller.BookController       : 这是warn日志
+2023-06-18 02:22:13.029 ERROR 31952 --- [http-nio-0.0.0.0-80-exec-3] c.e.demo.controller.BookController       : 这是error日志

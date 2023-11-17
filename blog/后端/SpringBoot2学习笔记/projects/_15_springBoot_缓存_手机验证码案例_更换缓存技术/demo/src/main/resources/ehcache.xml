@@ -1,0 +1,28 @@
+<ehcache
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+    updateCheck="true"
+>
+    <diskStore path="java.io.tmpdir" />
+    <!-- 默认缓存配置 -->
+    <defaultCache
+        eternal="false"
+        diskPersistent="false"
+        maxElementsInMemory="10000"
+        overflowToDisk="false"
+        timeToIdleSeconds="60"
+        timeToLiveSeconds="60"
+        memoryStoreEvictionPolicy="LRU"
+    />
+    <!-- simcode的缓存配置 -->
+    <cache
+        name="simcode"
+        eternal="false"
+        diskPersistent="false"
+        maxElementsInMemory="10000"
+        overflowToDisk="false"
+        timeToIdleSeconds="60"
+        timeToLiveSeconds="60"
+        memoryStoreEvictionPolicy="LRU"
+    />
+</ehcache>

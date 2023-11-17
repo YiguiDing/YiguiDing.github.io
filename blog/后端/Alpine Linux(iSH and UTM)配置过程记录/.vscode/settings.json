@@ -1,0 +1,8 @@
+{
+    "pasteImage.path":"${currentFileDir}/images/iSH配置过程记录/",//剪切板图片保存路径 A
+    "pasteImage.defaultName":"Y-MM-DD-HH-mm-ss",//图片名称
+
+    "pasteImage.basePath":"${currentFileDir}/",//上面的路径A减去这里设置的路径，就是md文件![](这里的路径)
+    "pasteImage.prefix": "/",//md文件![](这里的路径) 的前缀，说白了上面的路径以/ 结尾这里就要加上/
+    
+}

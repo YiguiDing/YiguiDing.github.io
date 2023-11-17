@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!-- 使用constructor-arg标签指定为构造器传递参数 -->
+    <bean id="myBookDao_id" class="com.example.dao.impl.BookDaoImpl">
+        <!-- 标准写法，耦合度高的写法：根据[形式参数的参数名]传递给构造函数 -->
+        <!-- 使用name指定形式参数的参数名，使用value指定基本数据类型 -->
+        <constructor-arg name="dbName" value="mysql_db_books" />
+        <constructor-arg name="maxConnections" value="50" />
+    </bean>
+    <bean id="myUserDao_id" class="com.example.dao.impl.UserDaoImpl">
+        <!-- 解耦合的写法：根据形式参数的位置传递给构造函数 -->
+        <!-- 使用index指定形式参数的位置，使用value指定基本数据类型 -->
+        <constructor-arg index="0" value="mysql_db_users" />
+        <constructor-arg index="1" value="1000" />
+    </bean>
+    <bean id="myService_id" class="com.example.service.impl.ServiceImp">
+        <!-- 解耦合的写法：根据形式参数的类型传递给构造函数 -->
+        <!-- 使用type指定形式参数的类型，使用ref指定引用数据类型 -->
+        <constructor-arg type="com.example.dao.BookDao" ref="myBookDao_id" />
+        <constructor-arg type="com.example.dao.UserDao" ref="myUserDao_id" />
+    </bean>
+</beans>

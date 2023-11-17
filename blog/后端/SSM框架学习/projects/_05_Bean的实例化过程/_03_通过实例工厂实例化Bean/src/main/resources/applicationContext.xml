@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!--  使用实例化工厂实例化Bean，现要实例化这个工厂 -->
+    <bean id="myBookDaoFactory_id0" class="com.example.factory.BookDaoFactory"></bean>
+
+    <!-- 实例化工厂工厂来实例化BookDao，factory-bean填这个工厂实例 factory-method填创建BookDao实例的方法  -->
+    <bean id="myBookDao_id1" factory-bean="myBookDaoFactory_id0" factory-method="getBookDao" />
+    <bean id="myService_id2" class="com.example.service.impl.ServiceImp">
+        <property name="bookDao" ref="myBookDao_id1"></property>
+    </bean>
+</beans>

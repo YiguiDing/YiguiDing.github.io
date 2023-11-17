@@ -1,0 +1,16 @@
+{
+  "name": "qqq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "https": "^1.0.0",
+    "node-fetch": "^3.3.1"
+  }
+}

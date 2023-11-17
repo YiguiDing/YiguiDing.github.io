@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql:///ssm_demo1
+    username: root
+    password: root
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id # 全局默认ID分配策略
+      # table-prefix: tbl_  # 数据库表名为tbl_user 实体类类名如果是User,则需要加前缀tbl_ 在此处的设置是全局设置
+      # logic-delete-field: deleted # 全局删除标记字段
+      # logic-not-delete-value: 0 # 表示不删除的值
+      # logic-delete-value: 1 # 表示删除的值

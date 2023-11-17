@@ -1,0 +1,53 @@
+{
+  "version": "Sample 1.0.0",
+  "model": "model.moc",
+  "modelIntroduce": "hk416_3401",
+  "textures": ["textures/texture_00/texture_00.png"],
+  "layout": {
+    "center_x": 0.0,
+    "center_y": -0.8,
+    "width": 2.0
+  },
+  "motions": {
+    "": [
+      { "基本,几乎不动": "motions/416兒童節.mtn" },
+      { "默认,握着猫": "motions/daiji_idle_01.mtn" },
+
+      { "摇头幌脑": "motions/shake.mtn" },
+      { "微表情,后倾": "motions/touch_1.mtn" },
+      { "微表情,轻微歪斜身体": "motions/touch_2.mtn" },
+      { "给你看看猫": "motions/touch_4.mtn" },
+      { "差点睡着扎眨眼": "motions/touch_5.mtn" },
+      { "前后摇晃身体,不连续": "motions/wait_1.mtn" },
+      { "像是被摸头,也像是在用猫擦头": "motions/wait_2.mtn" },
+
+      { "说话,认真,摇晃": "motions/wedding.mtn" },
+      { "说话,微笑": "motions/wedding_touch.mtn" },
+      { "说话的": "motions/login.mtn" },
+      { "说话": "motions/touch_3.mtn" }
+    ],
+    "idle": [
+      { "file": "motions/daiji_idle_01.mtn" },
+      { "file": "motions/wait_1.mtn" }
+    ],
+    "tap_body": [
+      { "file": "motions/shake.mtn" },
+      { "file": "motions/touch_1.mtn" },
+      { "file": "motions/touch_2.mtn" },
+      { "file": "motions/touch_4.mtn" },
+      { "file": "motions/touch_5.mtn" },
+      { "file": "motions/wait_1.mtn" },
+      { "file": "motions/wait_2.mtn" }
+    ],
+    "以下几个属性好像没有用": [],
+    "tap_head": [],
+    "shake": [],
+    "pinch_in": [],
+    "flick_head": []
+  },
+  "physics": "physics.json",
+  "hit_areas": [
+    { "name": "head", "id": "D_REF.HEAD" },
+    { "name": "body", "id": "D_REF.BODY" }
+  ]
+}

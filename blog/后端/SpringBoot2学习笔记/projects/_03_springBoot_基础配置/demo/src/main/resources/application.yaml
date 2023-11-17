@@ -1,0 +1,19 @@
+server:
+  port: 80
+
+myconfig:
+    info: this is a config defind by me
+    likes:
+        - 唱
+        - 跳
+        - rap
+    baseDir: /home
+    tempDir: ${myconfig.baseDir}/temp
+    anotherTest1: 这是反斜杠和t \t
+    anotherTest2: "这是制表符  \t_\t_\t_" 
+
+mydatasource:
+    driver: com.mysql.??.Driver
+    url: jdbc:mysql:///db1
+    username: root
+    passwd: root

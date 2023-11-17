@@ -1,0 +1,10 @@
+server:
+  port: 80
+
+spring:
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+  jms:
+    pub-sub-domain: true # 使用发布订阅模型
+    template:
+      default-destination: default_dest_

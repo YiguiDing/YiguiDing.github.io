@@ -1,0 +1,15 @@
+my-server:
+    ip: 0.0.0.0
+    port: 65535
+    time-out: 10s
+    size: 10MB
+
+my-datasource:
+    driver-class-name: xxx.xxx
+    url: jdbc://?/abc
+    username: root
+    password: root
+
+    
+a: 1
+c: 2

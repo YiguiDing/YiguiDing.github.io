@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!--init-method填初始化方法名，可以理解为afterCreateHook  -->
+    <!--destroy-method填销毁方法名，可以理解为beforeDestoryHook  -->
+    <bean id="myBookDao_id1" class="com.example.dao.impl.BookDaoImpl" init-method="init"
+        destroy-method="destory" />
+    <bean id="myService_id2" class="com.example.service.impl.ServiceImp">
+        <property name="bookDao" ref="myBookDao_id1"></property>
+    </bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!-- 使用property标签指定为setter传递参数 -->
+    <bean id="myBookDao_id" class="com.example.dao.impl.BookDaoImpl">
+        <!-- 使用name指定字段名称，使用value指定基本数据类型 -->
+        <property name="dbName" value="mysql_db_books" />
+        <property name="maxConnections" value="50" />
+    </bean>
+    <bean id="myUserDao_id" class="com.example.dao.impl.UserDaoImpl">
+        <property name="dbName" value="mysql_db_users" />
+        <property name="maxConnections" value="1000" />
+    </bean>
+    <bean id="myService_id" class="com.example.service.impl.ServiceImp">
+        <!-- 使用name指定字段名称，使用ref指定引用数据类型 -->
+        <property name="bookDao" ref="myBookDao_id" />
+        <property name="userDao" ref="myUserDao_id" />
+    </bean>
+</beans>

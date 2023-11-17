@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <bean id="test" class="com.example.Demo">
+        <property name="myArray">
+            <!-- 数组的注入 -->
+            <array>
+                <value>123</value>
+                <value>456</value>
+                <value>789</value>
+                <ref bean="beanId"/>
+            </array>
+        </property>
+        <property name="myList">
+            <!-- 列表的注入 -->
+            <list>
+                <value>123</value>
+                <value>456</value>
+                <value>789</value>
+                <!-- <ref bean="beanId"/> -->
+            </list>
+        </property>
+        <property name="mySet">
+            <!-- 集合的注入 -->
+            <set>
+                <value>123</value>
+                <value>456</value>
+                <value>789</value>
+                <!-- <ref bean="beanId"/> -->
+            </set>
+        </property>
+        <property name="myMap">
+            <!-- Map的注入 -->
+            <map>
+                <entry key="name" value="YiguiDing"></entry>
+                <entry key="age" value="22"></entry>
+                <!-- <entry key-ref="keyId" value-ref="valueId"></entry> -->
+            </map>
+        </property>
+        <property name="myProperties">
+            <!-- 配置属性的注入 -->
+            <props>
+                <prop key="name">YiguiDing</prop>
+                <prop key="age">22</prop>
+                <prop key="test">
+                </prop>
+            </props>
+        </property>
+    </bean>    
+
+</beans>

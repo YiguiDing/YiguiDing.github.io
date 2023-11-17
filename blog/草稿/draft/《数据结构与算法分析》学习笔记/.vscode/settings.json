@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "string": "c",
+        "vector": "c",
+        "memory": "c",
+        "string_view": "c",
+        "typeinfo": "c",
+        "cstdio": "c",
+        "deque": "c"
+    }
+}

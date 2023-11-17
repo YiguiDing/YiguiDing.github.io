@@ -1,0 +1,34 @@
+server:
+  address: 0.0.0.0
+  port: 80
+
+# 连接池
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/ssmp_demo2
+    username: root
+    password: root
+  elasticsearch:
+    uris: http://172.30.64.71:9200
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # id自增规则，表前缀配置
+      table-prefix: tbl_
+      # id-type: auto
+  # configuration:
+    # 使用标准输出打印mybatis-plus运行日志，仅适用于开发环境
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  
+
+logging:
+  level:
+    root: warn
+  file:
+    name: server_log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.log

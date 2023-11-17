@@ -1,0 +1,7 @@
+2023-06-18 02:21:30.461  INFO 31952 --- [main] com.example.demo.Application             : Starting Application using Java 17.0.4.1 on fz53vd7300 with PID 31952 (D:\GitProject\my-projects\blogWebSites\blog\articles\后端\SpringBoot2学习笔记\projects\_05_springBoot_SSMplus综合案例_复习\demo\target\classes started by Administrator in D:\GitProject\my-projects\blogWebSites\blog\articles\后端\SpringBoot2学习笔记\projects\_05_springBoot_SSMplus综合案例_复习\demo)
+2023-06-18 02:21:30.467  INFO 31952 --- [main] com.example.demo.Application             : The following 1 profile is active: "dev"
+2023-06-18 02:21:33.554  INFO 31952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2023-06-18 02:21:33.580  INFO 31952 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-18 02:21:33.593  INFO 31952 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-06-18 02:21:33.967  INFO 31952 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-18 02:21:33.972  INFO 31952 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3389 ms

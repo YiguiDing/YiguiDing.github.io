@@ -1,0 +1,9 @@
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 10 # 线程池大小
+      thread-name-prefix: jobs_ #  线程名的前缀，默认：scheduling-
+      shutdown:
+        await-termination: true # 关闭线程池前是否等待所有任务执行完毕
+        await-termination-period: 10s # 如果等待最多等待多久

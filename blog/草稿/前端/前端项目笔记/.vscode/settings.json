@@ -1,0 +1,17 @@
+{
+    "pasteImage.path":"${currentFileDir}/images/前端项目笔记/",//剪切板图片保存路径 A
+    "pasteImage.defaultName":"Y-MM-DD-HH-mm-ss",//图片名称
+
+    "pasteImage.basePath":"${currentFileDir}/",//上面的路径A减去这里设置的路径，就是md文件![](这里的路径)
+    "pasteImage.prefix": "/",//md文件![](这里的路径) 的前缀，说白了上面的路径以/ 结尾这里就要加上/
+    
+    
+    // "MarkdownPaste.path": "${fileWorkspaceFolder}/images/${fileBasenameNoExtension}/",
+    
+    // "MarkdownPaste.namePrefix":"",//文件名的前缀
+    // "MarkdownPaste.nameBase":"${datetime}",//文件名
+    // "MarkdownPaste.nameSuffix":"",//文件名附加字符串
+
+    // "MarkdownPaste.silence":false, //粘贴时的确认框
+    
+}

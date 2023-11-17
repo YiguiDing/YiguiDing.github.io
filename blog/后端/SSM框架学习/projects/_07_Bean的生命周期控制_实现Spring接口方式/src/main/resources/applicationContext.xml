@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!-- 使用实现Spring接口的方式实现对Bean生命周期的控制则不需要写init-method和destroy-method属性 -->
+    <bean id="myBookDao_id1" class="com.example.dao.impl.BookDaoImpl" />
+    <bean id="myService_id2" class="com.example.service.impl.ServiceImp">
+        <property name="bookDao" ref="myBookDao_id1"></property>
+    </bean>
+</beans>

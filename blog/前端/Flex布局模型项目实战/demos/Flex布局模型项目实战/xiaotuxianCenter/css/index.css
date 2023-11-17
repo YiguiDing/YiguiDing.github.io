@@ -1,0 +1,365 @@
+/* 主页样式 */
+.banner{
+    height: 500px;
+    background-color: #f5f5f5;
+}
+
+.banner-box{
+    position: relative;
+    height: 500px;
+}
+
+.banner-box .left-nav-ul{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+.banner-box .left-nav-ul li{
+    width: 250px;
+    height: 50px;
+}
+.banner-box .left-nav-ul li a{
+    position: relative;
+    display: block;
+    height: 50px;
+    padding-left: 35px;
+    line-height: 50px;
+	font-family: PingFangSC-Regular;
+	font-size: 14px;
+	color: #ffffff;
+}
+.banner-box .left-nav-ul li a dl{
+    display: inline-block;
+    height: 50px;
+    vertical-align: middle;
+
+}
+.banner-box .left-nav-ul li a dt{
+    float: left;
+    margin-right: 15px;
+    font-family: PingFangSC-Regular;
+	font-size: 16px;
+	color: #ffffff;
+}
+.banner-box .left-nav-ul li a dd{
+    float: left;
+    margin-right: 7px;
+}
+
+.banner-box .left-nav-ul li a::after{
+    position: absolute;
+    right: 20px;    
+    top: 50%;
+    transform: translate(0,-50%);
+    content: "";
+    display: inline-block;
+    height: 13px;
+    width: 7px;
+    line-height: 50px;
+    background-image: url(../images/sprites.png);
+    background-position: -40px -110px;
+    vertical-align: middle;
+}
+
+.banner-box .left-nav-ul li a:hover{
+    background-color: #27ba9b;
+}
+.banner-box .prev{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0,-50%);
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 50%;
+}
+.banner-box .prev .guide{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-25%,-50%);
+    display: inline-block;
+    width: 13px;
+    height: 23px;
+    background-image: url("../images/sprites.png");
+    background-position: -40px -70px;
+}
+
+.banner-box .next{
+    position: absolute;
+    top: 50%;
+    left: 260px;
+    transform: translate(0,-50%);
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 50%;
+}
+.banner-box .next .guide{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-75%,-50%);
+    display: inline-block;
+    width: 13px;
+    height: 23px;
+    background-image: url("../images/sprites.png");
+    background-position: 0 -70px;
+}
+
+.banner ol{
+    position: absolute;
+    bottom: 31px;
+    left: 680px;
+    height: 10px;
+}
+
+.banner ol li{
+    float: left;
+    margin-right: 25px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.43);
+    cursor: pointer;
+}
+.current{
+    background-color: #fff !important;
+}
+
+.goods .hd{
+    height: 112px;
+    line-height: 112px;
+}
+.goods .hd h2{
+    float: left;
+    height: 100%;
+	font-family: PingFangSC-Regular;
+	font-size: 29px;
+	font-weight: normal;
+	color: #333333;
+}
+.goods .hd h2 span{
+    margin-left: 34px;
+	font-size: 16px;
+	font-weight: normal;
+	color: #999;
+}
+
+.goods .hd a{
+    float: right;
+	font-family: PingFangSC-Regular;
+	font-size: 16px;
+	font-weight: normal;
+	color: #999;
+}
+
+.goods .hd a::after{
+    content: "";
+    display: inline-block;
+    margin-left: 14px;
+    width: 7px;
+    height: 12px;
+    background-image: url(../images/sprites.png);
+    background-position: 0 -110px;
+}
+
+.goods .bd ul{
+}
+
+.goods .bd li{
+    position: relative;
+    float: left;
+    margin-right: 8px;
+    height: 405px;
+    text-align: center;
+    background-color: #f0f9f4;
+
+}
+.goods .bd li a{
+    /* vertical-align: top; */
+}
+.goods .bd li:last-child{
+    margin-right: 0px;
+}
+.goods .bd li img{
+    display: block;
+    width: 304px;
+}
+
+.goods .bd li h3{
+    display: inline-block;
+    margin-top: 22px;
+    margin-bottom: 10px;
+	font-family: PingFangSC-Regular;
+	font-size: 20px;
+	font-weight: normal;
+	color: #333333;
+}
+.goods .bd li p{
+	font-family: PingFangSC-Medium;
+	font-size: 23px;
+	color: #9a2e1f;
+}
+.goods .bd li p span{
+	font-size: 17px;
+} 
+.goods .bd li::before{
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    display: inline-block;
+    content: "新品";
+    width: 28px;
+    height: 51px;
+    border: 2px solid #27ba9b;
+    border-radius: 3px;
+    font-family: PingFangSC-Regular;
+	font-size: 18px;
+	color: #27ba9b;
+}
+
+.fresh .hd{
+    height: 96px;
+    line-height: 96px;
+}
+.fresh .hd .left{
+    float: left;
+}
+.fresh .hd .right{
+    float: right;
+}
+.fresh .hd .left h3{
+	font-family: PingFangSC-Regular;
+	font-size: 29px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #333333;
+}
+
+.fresh .hd .right ul{
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: middle;
+}
+.fresh .hd .right ul li{
+    float: left;
+    padding: 2px 7px;
+    margin-right: 6px;
+    font-family: PingFangSC-Regular;
+	font-size: 16px;
+	color: #333;
+}
+.fresh .hd .right ul li:hover{
+    background-color: #27ba9b;
+	color: #fefbfc;
+}
+.fresh .hd .right span{
+    display: inline-block;
+    margin-left: 65px;
+    font-family: PingFangSC-Regular;
+	font-size: 16px;
+	color: #999999;
+    vertical-align: middle;
+}
+.fresh .hd .right span::after{
+    content: "";
+    display: inline-block;
+    margin-left: 14px;
+    width: 7px;
+    height: 12px;
+    background-image: url(../images/sprites.png);
+    background-position: 0 -110px;
+}
+.fresh .bd{
+    /* height: 617px; */
+}
+.fresh .bd .left{
+    float: left;
+    width: 242px;
+}
+.fresh .bd .right{
+    width: 998px;
+    float: right;
+}
+.fresh .bd .left img{
+    height: 617px;
+    width: 242px;
+}
+
+.fresh .bd .right li{
+    position: relative;
+    float: left;
+    margin-left: 8px;
+    padding: 0 30px;
+    height: 304px;
+    width: 241px;
+    text-align: center;
+}
+.fresh .bd .right li:hover{
+    border: solid 2px #27ba9b;
+}
+.fresh .bd .right li h4{
+    text-align: left;
+    font-family: PingFangSC-Regular;
+	font-size: 16px;
+	font-weight: normal;
+	color: #333333;
+}
+.fresh .bd .right img{
+    margin-top: 8px;
+    margin-bottom: 5px;
+    height: 184px;
+    width: 184px;
+}
+.fresh .bd .right li p{
+    margin-top: 5px;
+	font-family: PingFangSC-Medium;
+	font-size: 23px;
+	color: #9a2e1f;
+    text-align: left;
+}
+.fresh .bd .right li p span{
+	font-size: 17px;
+} 
+
+.fresh .bd .right li .more{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 238px;
+    height: 0px;
+    background-color: #27ba9b;
+    text-align: center;
+    transition: all 0.5s;
+    opacity: 0;
+}
+.fresh .bd .right li .more p{
+    display: block;
+    margin: 0 auto;
+    width: 125px;
+    margin-top: 19px;
+    padding-bottom: 6px;
+    margin-bottom: 5px;
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    border-bottom: 2px solid #a9dbcc;
+}
+.fresh .bd .right li .more span{
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #ffffff;
+}
+.fresh .bd .right li:hover .more{
+    height: 84px;
+    opacity: 1;
+}

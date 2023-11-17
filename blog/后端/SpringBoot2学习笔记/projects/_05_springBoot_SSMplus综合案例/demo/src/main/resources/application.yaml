@@ -1,0 +1,22 @@
+# 端口配置
+server:
+  port: 80
+
+# druid数据源配置
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost/ssmp_demo1
+      username: root
+      password: root
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # id自增规则，表前缀配置
+      table-prefix: tbl_
+      id-type: auto
+  configuration:
+    # 使用标准输出打印mybatis-plus运行日志，仅适用于开发环境
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

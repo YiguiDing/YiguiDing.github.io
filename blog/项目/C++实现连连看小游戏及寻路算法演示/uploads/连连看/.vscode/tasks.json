@@ -1,0 +1,49 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "options": 
+    {
+        "cwd": "${fileDirname}"
+    },
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": 
+            [
+                "${fileBasename}",
+                "-o",
+
+                "${fileBasenameNoExtension}.exe",
+
+                "-mwindows",//关闭windows的控制台窗口
+
+                "-fexec-charset=gbk",
+                
+                "-lgraphics64",
+                "-luuid",
+                "-lmsimg32",
+                "-lgdi32",
+                "-limm32",
+                "-lole32",
+                "-loleaut32",
+                "-lwinmm",
+
+
+
+                //   "-L", //指定动态链接库搜素路径
+                // // // ".",
+                // "${fileDirname}\\EGE\\EGE_lib",
+                
+                // "-l",
+                // "libgraphics64",
+
+                //"./EGE/EGE_lib/graphics1964.lib",
+
+                "-static"
+            ]
+        }
+    ]
+}

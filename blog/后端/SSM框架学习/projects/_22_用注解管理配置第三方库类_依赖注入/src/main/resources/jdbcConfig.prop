@@ -1,0 +1,4 @@
+jdbcConfig.driverClass = com.mysql.jdbc.driver
+jdbcConfig.url = jdbc:///db5
+jdbcConfig.username = root
+jdbcConfig.password = root

@@ -1,0 +1,1377 @@
+{
+    "code": 200,
+    "meta": {},
+    "data": [
+        {
+            "_id": 3482,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1527405920637,
+                    "hide_output": true,
+                    "show": true,
+                    "output": "418.294",
+                    "input": "\n"
+                }
+            ],
+            "name": "【第一季 冲刺A卷 基本编程 1】",
+            "content": "<p>仅使用 Python 基本语法，即不使用任何模块，编写 Python 程序计算下列数学表达式的结果并输出，小数点后保留3位。</p>\n<p><img src=\"/images/6a/f8/646782cb54cfac80f01733dd62a1.png\" width=\"195\" height=\"86\" /></p>\n<p>&nbsp;</p>\n<p><strong>输入</strong></p>\n<p>该题目没有输入</p>\n<p>&nbsp;</p>\n<p><strong>输出</strong></p>\n<p>输出结果小数点后保留 3 位</p>",
+            "explanation_content": "<p>参考代码</p>\n<pre class=\"language-python\"><code>x = pow((3**4 + 5*(6**7))/8, 0.5)\nprint(\"{:.3f}\".format(x))\n</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 6,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:01:04.017Z",
+                    "2023-06-06T06:01:04.332Z"
+                ],
+                "_id": 3482,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:01:04.017Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/3482"
+        },
+        {
+            "_id": 4383,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.1单项选择3【语法基础】",
+            "content": "[[1,\"Python 语言不采用严格的“缩进”来表明程序的格式框架\"],[2,\"Python 语言的缩进可以采用 Tab 键实现\"],[3,\" Python 单层缩进代码属于之前最邻近的一行非缩进代码，多层缩进代码根据缩进关系决定所属范围\"],[4,\" 判断、循环、函数等语法形式能够通过缩进包含一批 Python 代码，进而表达对应的语义\"]]",
+            "description": "关于 Python 程序格式框架，以下选项中描述错误的是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4383"
+        },
+        {
+            "_id": 4386,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.1单项选择6【语法基础】",
+            "content": "[[1,\"<p class=\\\"MsoNormal\\\"><span style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\" data-mce-style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\">&nbsp;print(TempStr[–5:]) &nbsp;&nbsp;</span></p>\"],[2,\"<p class=\\\"MsoNormal\\\" style=\\\"margin-left: 28.0000pt; mso-para-margin-left: 1.1100gd; text-indent: -14.7000pt; mso-char-indent-count: -1.4000; line-height: 17.0000pt; mso-line-height-rule: exactly;\\\" data-mce-style=\\\"margin-left: 28.0000pt; mso-para-margin-left: 1.1100gd; text-indent: -14.7000pt; mso-char-indent-count: -1.4000; line-height: 17.0000pt; mso-line-height-rule: exactly;\\\"><span style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\" data-mce-style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\">print(TempStr[–5: –1])</span></p>\"],[3,\"<p class=\\\"MsoNormal\\\"><span style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\" data-mce-style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\">. print(TempStr[–5:0])&nbsp;</span></p>\"],[4,\"<p class=\\\"MsoNormal\\\" style=\\\"margin-left: 28.0000pt; mso-para-margin-left: 1.1100gd; text-indent: -14.7000pt; mso-char-indent-count: -1.4000; line-height: 17.0000pt; mso-line-height-rule: exactly;\\\" data-mce-style=\\\"margin-left: 28.0000pt; mso-para-margin-left: 1.1100gd; text-indent: -14.7000pt; mso-char-indent-count: -1.4000; line-height: 17.0000pt; mso-line-height-rule: exactly;\\\"><span style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\" data-mce-style=\\\"mso-spacerun: 'yes'; font-family: 'Times New Roman'; mso-fareast-font-family: 宋体; font-size: 10.5000pt; mso-font-kerning: 0.0000pt;\\\">print(TempStr[–4: –1])</span></p>\"]]",
+            "description": "<p>给出如下代码</p><pre class=\"language-python\" contenteditable=\"false\">TempStr <span class=\"token operator\">=</span><span class=\"token string\">\"Hello World\"</span></pre><p>可以输出“World”子串的是</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4386"
+        },
+        {
+            "_id": 4389,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.1单项选择9【语法基础】",
+            "content": "[[1,\"Python语言有两种注释方式：单行注释和多行注释\"],[2,\"Python语言的单行注释以#开头\"],[3,\"Python语言的单行注释以单引号 ' 开头\"],[4,\" Python语言的多行注释以'''（三个单引号）开头和结尾\"]]",
+            "description": "关于Python语言的注释，以下选项中描述错误的是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4389"
+        },
+        {
+            "_id": 4417,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.1单项选择37【语法基础】",
+            "content": "[[1,\" get()\"],[2,\"eval()\\t\"],[3,\"input()\\t\"],[4,\"print()\"]]",
+            "description": "在Python函数中，用于获取用户输入的是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4417"
+        },
+        {
+            "_id": 4455,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择10【py-数据类型】",
+            "content": "[[1,\"<p>12.12</p>\"],[2,\"<p>34</p>\"],[3,\"<p>12</p>\"],[4,\"<p>34.0</p>\"]]",
+            "description": "<p>下面代码的输出结果是</p><pre class=\"language-python\" contenteditable=\"false\">z <span class=\"token operator\">=</span> <span class=\"token number\">12.34</span> <span class=\"token operator\">+</span> <span class=\"token number\">34j</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>z<span class=\"token punctuation\">.</span>imag<span class=\"token punctuation\">)</span></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4455"
+        },
+        {
+            "_id": 4459,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择14【py-数据类型】",
+            "content": "[[1,\"<p>（3,1）</p>\"],[2,\"<p>（1,3）</p>\"],[3,\"<p>3,1</p>\"],[4,\"<p>1,3</p>\"]]",
+            "description": "<p>下面代码的输出结果是</p><pre class=\"language-python\" contenteditable=\"false\">x<span class=\"token operator\">=</span><span class=\"token number\">10</span>\ny<span class=\"token operator\">=</span><span class=\"token number\">3</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>divmod<span class=\"token punctuation\">(</span>x<span class=\"token punctuation\">,</span>y<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4459"
+        },
+        {
+            "_id": 4464,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择19【py-数据类型】",
+            "content": "[[1,\"<p>(10.99+0j)</p>\"],[2,\"<p>10.99+0j</p>\"],[3,\"<p>10.99</p>\"],[4,\"<p>0.99</p>\"]]",
+            "description": "下面代码的执行结果是<pre class=\"language-python\" contenteditable=\"false\">a <span class=\"token operator\">=</span> <span class=\"token number\">10.99</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>complex<span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4464"
+        },
+        {
+            "_id": 4468,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择23【py-数据类型】",
+            "content": "[[1,\"<p>beh</p>\"],[2,\"<p>adgj</p>\"],[3,\"<p>adg</p>\"],[4,\"<p>behk</p>\"]]",
+            "description": "<p>给出如下代码</p><pre>s<span>=</span> <span>\"abcdefghijklmn\"</span>\n<span>print</span><span>(</span>s<span>[</span><span>1</span><span>:</span><span>10</span><span>:</span><span>3</span><span>]</span><span>)</span></pre><p>上述代码的输出结果是</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4468"
+        },
+        {
+            "_id": 4477,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择32【py-数据类型】",
+            "content": "[[1,\"<p>The python language is a scripting language.</p>\"],[2,\"<p>The python language is a general language.</p>\"],[3,\"<p>['The', 'python', 'language', 'is', 'a', 'scripting', 'language.']</p>\"],[4,\"<p>系统报错</p>\"]]",
+            "description": "下面代码的输出结果是<pre class=\"language-python\" contenteditable=\"false\">s1 <span class=\"token operator\">=</span> <span class=\"token string\">\"The python language is a scripting language.\"</span>\ns2 <span class=\"token operator\">=</span> s1<span class=\"token punctuation\">.</span>replace<span class=\"token punctuation\">(</span><span class=\"token string\">'scripting'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'general'</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>s2<span class=\"token punctuation\">)</span></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4477"
+        },
+        {
+            "_id": 4479,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.2单项选择34【py-数据类型】",
+            "content": "[[1,\"<p>['The', 'python', 'language', 'is', 'a', 'multimodel', 'language.']</p>\"],[2,\"<p>Thepythonlanguageisamultimodellanguage.</p>\"],[3,\"<p>The python language is a multimodel language.</p>\"],[4,\"<p>系统报错</p>\"]]",
+            "description": "<p>下面代码的输出结果是</p><pre>s <span>=</span> <span>\"The python language is a multimodel language.\"</span>\n<span>print</span><span>(</span>s<span>.</span>split<span>(</span><span>' '</span><span>)</span><span>)</span></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4479"
+        },
+        {
+            "_id": 4656,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【py-控制结构】",
+            "content": "[[1,\"生成一个[a, b]之间的随机整数\"],[2,\"生成一个[a, b]之间的随机小数\"],[3,\"生成一个均值为a，方差为b的正态分布\"],[4,\"生成一个(a, b)之间的随机数\"]]",
+            "description": "random.uniform(a,b)的作用是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4656"
+        },
+        {
+            "_id": 4664,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【py-控制结构】",
+            "content": "[[1,\"条件35&lt;=45&lt;75是合法的，且输出为False\"],[2,\"条件24&lt;=28&lt;25是合法的，且输出为False\"],[3,\"条件24&lt;=28&lt;25是不合法的\"],[4,\"条件24&lt;=28&lt;25是合法的，且输出为True\"]]",
+            "description": "以下选项中描述正确的是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4664"
+        },
+        {
+            "_id": 4767,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "9.4单项选择题 20【py-函数+代复】",
+            "content": "[[1,\"<p><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">代码中</span><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">n</span><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">是可选参数</span></p>\"],[2,\"<p><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">fact(n)</span><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">函数功能为求</span><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">n</span><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">的阶乘</span></p>\"],[3,\"<p><span style=\\\"font-family: 宋体; font-size:10.5pt;\\\" data-mce-style=\\\"font-family: 宋体; font-size: 10.5pt;\\\">s是局部变量</span></p>\"],[4,\"<p><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">range()</span><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">函数是</span><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">Python</span><span style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">内置函数</span></p>\"]]",
+            "description": "<p class=\"MsoNormal\" style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\" data-mce-style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\"><span style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\" data-mce-style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\">给出如下代码：</span></p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">def</span> <span class=\"token function\">fact</span><span class=\"token punctuation\">(</span>n<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    s <span class=\"token operator\">=</span> <span class=\"token number\">1</span>\n    <span class=\"token keyword\">for</span> i <span class=\"token keyword\">in</span> range<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span>n<span class=\"token operator\">+</span><span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        s <span class=\"token operator\">*=</span> i\n    <span class=\"token keyword\">return</span> s\n</pre><p><span style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\" data-mce-style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\">以下选项中描述错误的是</span></p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4767"
+        },
+        {
+            "_id": 4776,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【py-函数+代复】",
+            "content": "[[1,\"<p>5</p>\"],[2,\"<p>8</p>\"],[3,\"<p>13</p>\"],[4,\"<p>21</p>\"]]",
+            "description": "<p class=\"MsoNormal\" style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\" data-mce-style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\"><span style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\" data-mce-style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\">下面代码的输出结果是</span></p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">def</span> <span class=\"token function\">fib</span><span class=\"token punctuation\">(</span>n<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    a<span class=\"token punctuation\">,</span>b <span class=\"token operator\">=</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span><span class=\"token number\">1</span>\n    <span class=\"token keyword\">for</span> i <span class=\"token keyword\">in</span> range<span class=\"token punctuation\">(</span>n<span class=\"token number\">-1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        a<span class=\"token punctuation\">,</span>b <span class=\"token operator\">=</span> b<span class=\"token punctuation\">,</span>a<span class=\"token operator\">+</span>b\n    <span class=\"token keyword\">return</span> a\n<span class=\"token keyword\">print</span> <span class=\"token punctuation\">(</span>fib<span class=\"token punctuation\">(</span><span class=\"token number\">7</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4776"
+        },
+        {
+            "_id": 4799,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【py-函数+代复】",
+            "content": "[[1,\"<p>出错</p>\"],[2,\"<p>无输出</p>\"],[3,\"<p>39.4384</p>\"],[4,\"<p>50.24</p>\"]]",
+            "description": "<p class=\"MsoNormal\" style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\" data-mce-style=\"line-height: 17.0pt; mso-line-height-rule: exactly;\"><span style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\" data-mce-style=\"font-size: 10.5pt; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';\">下面代码的执行结果是</span></p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token operator\">&gt;&gt;</span><span class=\"token operator\">&gt;</span> <span class=\"token keyword\">def</span> <span class=\"token function\">area</span><span class=\"token punctuation\">(</span>r<span class=\"token punctuation\">,</span> pi <span class=\"token operator\">=</span> <span class=\"token number\">3.14159</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword\">return</span> pi <span class=\"token operator\">*</span> r <span class=\"token operator\">*</span>r\n<span class=\"token operator\">&gt;&gt;</span><span class=\"token operator\">&gt;</span> area<span class=\"token punctuation\">(</span>pi <span class=\"token operator\">=</span> <span class=\"token number\">3.14</span><span class=\"token punctuation\">,</span> r <span class=\"token operator\">=</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>\n</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4799"
+        },
+        {
+            "_id": 4899,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题【Py-数据类型】",
+            "content": "[[1,\"x是一个二元元组，判断x是否是字典d中的键值对\"],[2,\"判断x是否是字典d中的键\"],[3,\"判断x是否是字典d中的值\"],[4,\"判断x是否是在字典d中以键或值方式存在\"]]",
+            "description": "给定字典d，以下选项中对x in d的描述正确的是",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4899"
+        },
+        {
+            "_id": 4917,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【Py-数据类型】",
+            "content": "[[1,\"<p><span style=\\\"font-family: &quot;Times New Roman&quot;, serif; font-size: 10.5pt;\\\">['PP',\\n'yy', 'tt', 'hh', 'oo', 'nn']</span></p>\"],[2,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">[2,\\n4, 6, 8, 10, 12]</span><br data-mce-bogus=\\\"1\\\"></p>\"],[3,\"<p>错误</p>\"],[4,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">Python\\nPython</span><br data-mce-bogus=\\\"1\\\"></p>\"]]",
+            "description": "<p><span style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\" data-mce-style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\">下面代码的输出结果是</span></p><pre class=\"language-python\" contenteditable=\"false\">list1 <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span>i<span class=\"token operator\">*</span><span class=\"token number\">2</span> <span class=\"token keyword\">for</span> i <span class=\"token keyword\">in</span> <span class=\"token string\">'Python'</span><span class=\"token punctuation\">]</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>list1<span class=\"token punctuation\">)</span>\n</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4917"
+        },
+        {
+            "_id": 4921,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【Py-数据类型】",
+            "content": "[[1,\"<p>1</p>\"],[2,\"<p>2</p>\"],[3,\"<p>3</p>\"],[4,\"<p><span style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\" data-mce-style=\\\"font-size: 10.5pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\\\">{‘c’:3}</span></p>\"]]",
+            "description": "<p><span style=\"font-family: 宋体; font-size: 10.5pt;\" data-mce-style=\"font-family: 宋体; font-size: 10.5pt;\">下面代码的输出结果是</span></p><pre class=\"language-python\" contenteditable=\"false\">d <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span><span class=\"token string\">'a'</span><span class=\"token punctuation\">:</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span><span class=\"token string\">'b'</span><span class=\"token punctuation\">:</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span><span class=\"token string\">'c'</span><span class=\"token punctuation\">:</span><span class=\"token number\">3</span><span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>d<span class=\"token punctuation\">[</span><span class=\"token string\">'c'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4921"
+        },
+        {
+            "_id": 4934,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "单项选择题 【Py-数据类型】",
+            "content": "[[1,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">&nbsp;&lt;class 'dict'&gt;</span><br data-mce-bogus=\\\"1\\\"></p>\"],[2,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">&nbsp;&lt;class 'set'&gt;</span><br data-mce-bogus=\\\"1\\\"></p>\"],[3,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">&lt;class\\n'list'&gt;</span><br data-mce-bogus=\\\"1\\\"></p>\"],[4,\"<p><span style=\\\"font-size:10.5pt;font-family: &quot;Times New Roman&quot;,serif;mso-fareast-font-family:宋体;mso-font-kerning:0pt; mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA\\\">&nbsp;&lt;class 'tuple'&gt;</span><br data-mce-bogus=\\\"1\\\"></p>\"]]",
+            "description": "<p><span style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-weight: bold;\" data-mce-style=\"font-size: 10.5pt; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-weight: bold;\">下面代码的输出结果是</span></p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token operator\">&gt;&gt;</span><span class=\"token operator\">&gt;</span> s <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span><span class=\"token punctuation\">}</span>\n<span class=\"token operator\">&gt;&gt;</span><span class=\"token operator\">&gt;</span> type<span class=\"token punctuation\">(</span>s<span class=\"token punctuation\">)</span>\n</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/4934"
+        },
+        {
+            "_id": 5111,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "\n",
+                    "output": "1368",
+                    "show": false,
+                    "hide_output": false,
+                    "_id": 1534230142606
+                }
+            ],
+            "name": "【列表类型的操作】基本操作题14",
+            "content": "<h3><strong>基本操作题 14</strong></h3>\n<p>类型：<code>Python 组合数据类型</code></p>\n<hr>\n<p><code>ls</code> 是一个列表，内容如下：</p>\n<pre class=\"language-python\"><code class=\"language-python\">ls <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">123</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"456\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">789</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"123\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">456</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"789\"</span><span class=\"token punctuation\">]</span>\n</code></pre>\n<p>请补充如下代码，求其各整数元素的和：</p>\n<pre class=\"language-python\"><code class=\"language-python\">ls <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">123</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"456\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">789</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"123\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">456</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"789\"</span><span class=\"token punctuation\">]</span>\ns <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n<span class=\"token keyword\">for</span> item <span class=\"token keyword\">in</span> ls<span class=\"token punctuation\">:</span>\n    <span class=\"token keyword\">if</span> ___①_  _ <span class=\"token operator\">==</span> <span class=\"token builtin\">type</span><span class=\"token punctuation\">(</span><span class=\"token number\">123</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        s <span class=\"token operator\">+=</span> ___②_  _\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>s<span class=\"token punctuation\">)</span>\n</code></pre>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：无\n输出：<span class=\"token number\">123</span>\n</code></pre>\n<p><strong>注意</strong>：这是一个自动评阅题目，请补充&quot;编程模板&quot;中横线内容，横线不保留。示例仅是输入输出格式样例，不是程序输出结果。</p>\n",
+            "explanation_content": "<p>参考代码</p>\n<pre class=\"language-python\"><code>ls = [123, \"456\", 789, \"123\", 456, \"789\"]\ns = 0\nfor item in ls:\n    if type(item) == type(123):\n        s += item\nprint(s)\n</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:01:11.595Z",
+                    "2023-06-06T06:01:48.184Z",
+                    "2023-06-06T06:01:48.399Z"
+                ],
+                "_id": 5111,
+                "commits_count": 3,
+                "score": 10,
+                "score_at": "2023-06-06T06:01:11.595Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/5111"
+        },
+        {
+            "_id": 5114,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1534243731548,
+                    "hide_output": false,
+                    "show": false,
+                    "output": "13",
+                    "input": "2\n3\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1534244772166,
+                    "hide_output": false,
+                    "show": false,
+                    "output": "106",
+                    "input": "9\n5\n"
+                }
+            ],
+            "name": "【函数的参数传递】基本操作题17",
+            "content": "<h3><strong>基本操作题 17</strong></h3>\n<p>类型：<code>Python 函数和代码复用</code></p>\n<hr>\n<p>如下函数返回两个数的平方和，请补充横线处代码‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬。</p>\n<pre class=\"language-python\"><code class=\"language-python\"><span class=\"token keyword\">def</span> <span class=\"token function\">psum</span><span class=\"token punctuation\">(</span>___①_  _<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n   ___②___ a<span class=\"token operator\">**</span><span class=\"token number\">2</span> <span class=\"token operator\">+</span> b<span class=\"token operator\">**</span><span class=\"token number\">2</span>\n\na<span class=\"token operator\">=</span><span class=\"token builtin\">eval</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">input</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\nb<span class=\"token operator\">=</span><span class=\"token builtin\">eval</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">input</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>psum<span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">,</span>b<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n</code></pre>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：\"\n<span class=\"token number\">2</span>\n<span class=\"token number\">3</span>\n\"\n输出：<span class=\"token string\">\"13\"</span>\n</code></pre>\n<p><strong>注意</strong>：这是一个自动评阅题目，请补充&quot;编程模板&quot;中横线内容，横线不保留。</p>\n",
+            "explanation_content": "<p>参考代码</p>\n<pre class=\"language-python\"><code>def psum(a, b):\n   return a**2 + b**2\n\na=eval(input())\nb=eval(input())\nprint(psum(a,b))​</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:02:18.928Z",
+                    "2023-06-06T06:02:19.184Z",
+                    "2023-06-06T06:02:50.978Z",
+                    "2023-06-06T06:02:51.270Z",
+                    "2023-06-06T06:03:04.067Z",
+                    "2023-06-06T06:03:04.304Z"
+                ],
+                "_id": 5114,
+                "commits_count": 6,
+                "score": 10,
+                "score_at": "2023-06-06T06:02:18.928Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/5114"
+        },
+        {
+            "_id": 5431,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1531792689254,
+                    "show": true,
+                    "output": "平均值为： 4.25",
+                    "input": "[2,3,5,7]\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1531792754704,
+                    "hide_output": false,
+                    "show": false,
+                    "output": "平均值为： 25.0",
+                    "input": "[10,20,30,40]\n"
+                }
+            ],
+            "name": "基础编程-组合数据类型《二级.第一季》（3）",
+            "content": "<h1 style=\"text-align: center;\"><span style=\"font-size: 32px;\">基本操作题（3）</span></h1>\n<h2><span style=\"font-size: 18pt;\"><strong>描述</strong></span></h2>\n<p><span style=\"font-size: 14pt;\">参照代码模板，完善代码，实现功能：从键盘输入一个列表，计算输出列表元素的平均值。示例如下：</span></p>\n<p>&nbsp;</p>\n<p><span style=\"font-size: 18pt;\"><strong>输入</strong></span></p>\n<p><span style=\"font-size: 14pt;\">[2,3,5,7]</span></p>\n<p>&nbsp;</p>\n<p><span style=\"font-size: 18pt;\"><strong>输出</strong></span></p>\n<p><span style=\"font-size: 14pt;\">平均值为： 4.25</span>&nbsp;</p>\n<p>&nbsp;</p>\n<p><span style=\"font-size: 14pt;\">本题目支持自动评阅。</span></p>\n<p>&nbsp;</p>\n<h2><span style=\"font-size: 18pt;\"><strong>输入输出示例</strong></span></h2>\n<p style=\"color: #ff0000;\">&nbsp;</p>\n<table style=\"height: 153px; width: 100%; background-color: white; border-color: whitesmoke;\" border=\"1\">\n<tbody>\n<tr style=\"height: 18px;\">\n<td style=\"width: 100px; height: 18px;\">&nbsp;</td>\n<td style=\"width: 275px; height: 18px;\"><span style=\"font-size: 12pt;\"><strong>输入</strong></span></td>\n<td style=\"width: 332px; height: 18px;\"><span style=\"font-size: 12pt;\"><strong>输出</strong></span></td>\n</tr>\n<tr style=\"height: 109.875px;\">\n<td style=\"width: 100px; height: 109.875px; text-align: center;\"><span style=\"font-size: 14pt;\">示例 1</span></td>\n<td style=\"width: 275px; height: 109.875px;\">\n<p>[2,3,5,7]</p>\n</td>\n<td style=\"width: 332px; height: 109.875px;\">\n<p>平均值为： 4.25</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p><span style=\"font-size: 14pt;\">&nbsp;</span></p>",
+            "explanation_content": "<pre class=\"language-python\"><code>def mean(numlist):\n    s = 0.0\n    for num in numlist:\n        s = s + num\n    return s/len(numlist)\n#请输入一个列表：\nls = eval(input(\"\"))\nprint(\"平均值为：\",mean(ls))</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 8,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:04:24.177Z",
+                    "2023-06-06T06:04:24.541Z"
+                ],
+                "_id": 5431,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:04:24.177Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/5431"
+        },
+        {
+            "_id": 5450,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 120003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第一季》单选题",
+            "content": "[[1,\"<p>2 4 6 8 10</p>\"],[2,\"<p>0 2 4 6 8 10</p>\"],[3,\"<p>12345678910</p>\"],[4,\"<p>9 8 7 6 5 4 3 2 1 0</p>\"]]",
+            "description": "<p>以下程序的输出结果是：&nbsp;</p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">for</span> i <span class=\"token keyword\">in</span> reversed<span class=\"token punctuation\">(</span>range<span class=\"token punctuation\">(</span><span class=\"token number\">10</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">2</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span> \n   <span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>i<span class=\"token punctuation\">,</span>end<span class=\"token operator\">=</span><span class=\"token string\">\" \"</span><span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，3.5字符串类型及其操作，4.4程序的循环结构，到pycharm或IDLE上做实验</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5450"
+        },
+        {
+            "_id": 5533,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【函代复用】《二级.第一季》单选题",
+            "content": "[[1,\"函数的简单数据类型全局变量在函数内部使用的时候，需要在显式声明为全局变量\\n\"],[2,\"函数的全局变量是列表类型的时候，函数内部不可以直接引用该全局变量\\n\"],[3,\"如果函数内部定义了跟外部的全局变量同名的组合数据类型的变量，则函数内部引用的变量不确定\\n\"],[4,\"python 的函数里引用一个组合数据类型变量，就会创建一个该类型对象\\n\"]]",
+            "description": "以下关于函数的描述，正确的是： \n",
+            "explanation_content": "<div data-v-55573663=\"\">\n<div class=\"options\" data-v-55573663=\"\">\n<div class=\"content content\" data-v-55573663=\"\">\n<div class=\"mce-content-body\">函数的全局变量是列表类型的时候，函数内部可以直接引用该全局变量</div>\n</div>\n</div>\n</div>\n<div data-v-55573663=\"\">\n<div class=\"options\" data-v-55573663=\"\"><br />\n<div class=\"content content\" data-v-55573663=\"\">\n<div class=\"mce-content-body\">如果函数内部创建跟外部的全局变量同名的组合数据类型的变量，则函数内部引用的就是这个局部变量</div>\n</div>\n</div>\n</div>\n<div data-v-55573663=\"\">\n<div class=\"options\" data-v-55573663=\"\"><br />\n<div class=\"content content\" data-v-55573663=\"\">\n<div class=\"mce-content-body\">python 的函数里如果没有创建同名变量，则可以直接引用和修改同名的全局变量</div>\n<div class=\"mce-content-body\">&nbsp;</div>\n</div>\n</div>\n</div>\n<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，5.1函数的基本使用，5.2 函数的参数传递，到pycharm或IDLE上做实验</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5533"
+        },
+        {
+            "_id": 5534,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 110003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【基数类型】《二级.第一季》单选题",
+            "content": "[[1,\"<p>QQ********====Wechat</p>\"],[2,\"<p>********QQWechat====</p>\"],[3,\"<p>QQWechat</p>\"],[4,\"<p>********QQ Wechat====</p>\"]]",
+            "description": "<p>以下程序的输出结果是：</p><pre class=\"language-python\" contenteditable=\"false\">s1 <span class=\"token operator\">=</span><span class=\"token string\">\"QQ\"</span>\n\ns2 <span class=\"token operator\">=</span><span class=\"token string\">\"Wechat\"</span>\n\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"{:*&lt;10}{:=&gt;10}\"</span><span class=\"token punctuation\">.</span>format<span class=\"token punctuation\">(</span>s1<span class=\"token punctuation\">,</span>s2<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>&nbsp;{:*&lt;10}中的*表示空白处用* 填充，&lt;表示数据左靠边，10表示槽的长度是10</p>\n<p>{:=&gt;10}中的*表示空白处用= 填充，&gt;表示数据右靠边，10表示槽的长度是10</p>\n<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，3.5字符串类型及其操作，到pycharm或IDLE上做实验</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5534"
+        },
+        {
+            "_id": 5582,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第一季》if语句",
+            "content": "[[1,\"min = x if x &lt; y else y\\n\"],[2,\"max = x &gt;y ? x : y\\n\"],[3,\"if(x&gt;y)  print(x)\\n\"],[4,\"while True: pass\\n\"]]",
+            "description": "设 x = 10；y = 20，下列语句能正确运行结束的是：\n",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第100页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5582"
+        },
+        {
+            "_id": 5694,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 120003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【组数类型】《二级.第一季》",
+            "content": "[[1,\"<p>[[7, 8, 9], [4, 5, 6], [1, 2, 3]]</p>\"],[2,\"<p>[[1, 2, 3], [4, 5, 6]]</p>\"],[3,\"<p>[[7, 8, 9]]</p>\"],[4,\"<p>[[1,2,3],[4,5,6],[7,8,9]]</p>\"]]",
+            "description": "<p>以下程序的输出结果是：</p><pre class=\"language-python\" contenteditable=\"false\">frame <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span><span class=\"token number\">3</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span><span class=\"token number\">5</span><span class=\"token punctuation\">,</span><span class=\"token number\">6</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token number\">7</span><span class=\"token punctuation\">,</span><span class=\"token number\">8</span><span class=\"token punctuation\">,</span><span class=\"token number\">9</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span>\n\nrgb <span class=\"token operator\">=</span> frame<span class=\"token punctuation\">[</span><span class=\"token punctuation\">:</span><span class=\"token punctuation\">:</span><span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>rgb<span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，6.2列表类型和操作，到pycharm或IDLE上做实验</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5694"
+        },
+        {
+            "_id": 5836,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【Python基础】《二级.第一季》标识符命名",
+            "content": "[[1,\"3.14\\n\"],[2,\"__Name__\\n\"],[3,\"Pi\\n\"],[4,\"姓名\\n\"]]",
+            "description": "以下选项中不可用作Python标识符的是\n",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第38页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5836"
+        },
+        {
+            "_id": 5838,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【Python基础】《二级.第一季》Python语言特点",
+            "content": "[[1,\"Python语言是解释型语言\\t\\t\\t\\t\\t\\t\\t\\n\"],[2,\"Python语言是编译型语言\\n\"],[3,\"Python语言不支持面向对象\\t\\t\\t\\t\\t\\t        \\n\"],[4,\"Python语言是非跨平台语言\\n\"]]",
+            "description": "关于Python语言的特点，以下选项描述正确的是\n",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第12页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5838"
+        },
+        {
+            "_id": 5858,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【基数类型】《二级.第一季》单选题",
+            "content": "[[1,\"<p>3.14159</p>\"],[2,\"<p>3.141593</p>\"],[3,\"<p>Pi=3.14</p>\"],[4,\"<p>3.1416</p>\"]]",
+            "description": "<p>下面代码的输出结果是：&nbsp;</p><table class=\"MsoNormalTable\" border=\"1\" style=\"margin-left: 5.4pt; background: #E5E5E5; mso-shading: windowtext; mso-pattern: gray-10 auto; border-collapse: collapse; border: none; mso-border-alt: solid #00B050 .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid #00B050; mso-border-insidev: .5pt solid #00B050;\" data-mce-style=\"margin-left: 5.4pt; background: #E5E5E5; mso-shading: windowtext; mso-pattern: gray-10 auto; border-collapse: collapse; border: none; mso-border-alt: solid #00B050 .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid #00B050; mso-border-insidev: .5pt solid #00B050;\"><tbody><tr style=\"mso-yfti-irow: 0; mso-yfti-firstrow: yes; mso-yfti-lastrow: yes;\" data-mce-style=\"mso-yfti-irow: 0; mso-yfti-firstrow: yes; mso-yfti-lastrow: yes;\"><td width=\"577\" valign=\"top\" style=\"width: 433.05pt; border: solid #00B050 1.0pt; mso-border-alt: solid #00B050 .5pt; padding: 0cm 5.4pt 0cm 5.4pt;\" data-mce-style=\"width: 433.05pt; border: solid #00B050 1.0pt; mso-border-alt: solid #00B050 .5pt; padding: 0cm 5.4pt 0cm 5.4pt;\"><p class=\"MsoNormal\" style=\"line-height: 150%; vertical-align: baseline;\" data-mce-style=\"line-height: 150%; vertical-align: baseline;\"><span style=\"font-family: Consolas; mso-fareast-font-family: 等线;\" data-mce-style=\"font-family: Consolas; mso-fareast-font-family: 等线;\">&gt;&gt;&gt; TempStr = \"Pi=3.141593\"</span></p><p class=\"MsoNormal\" style=\"line-height: 150%; vertical-align: baseline;\" data-mce-style=\"line-height: 150%; vertical-align: baseline;\"><span style=\"font-family: Consolas; mso-fareast-font-family: 等线;\" data-mce-style=\"font-family: Consolas; mso-fareast-font-family: 等线;\">&gt;&gt;&gt; eval(TempStr[3:-1])</span></p></td></tr></tbody></table>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5858"
+        },
+        {
+            "_id": 5860,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第一季》结构-分支",
+            "content": "[[1,\"仅循环正常结束后执行\\n\"],[2,\"仅循环非正常结束后执行（以break结束）\\n\"],[3,\"总会执行\\n\"],[4,\"永不执行\\n\"]]",
+            "description": "for或者while与else搭配使用时，关于执行else语句块描述正确的是 \n",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第100页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/5860"
+        },
+        {
+            "_id": 6444,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【Python基础】《二级.第二季》print输出",
+            "content": "[[1,\"<p>π：3.141593<br data-mce-bogus=\\\"1\\\"></p>\"],[2,\"<p>3.141593：π<br data-mce-bogus=\\\"1\\\"></p>\"],[3,\"<p>3.14159：π<br data-mce-bogus=\\\"1\\\"></p>\"],[4,\"<p>π：3.14159</p>\"]]",
+            "description": "<p>下面代码的输出结果是</p><pre class=\"language-markup\" contenteditable=\"false\">print(\"{1}：{0:.6f}\".format(3.1415926,\"π\"))</pre>",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第85页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/6444"
+        },
+        {
+            "_id": 6480,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【组合数类】《二级.第二季》元组",
+            "content": "[[1,\"<p>元组是可变对象</p>\"],[2,\"<p>元组是用圆括号定义的。</p>\"],[3,\"<pre class=\\\"language-markup\\\" contenteditable=\\\"false\\\">colors = ('red', 'green', 'blue')\\ncolors.append('purple')</pre><p>执行代码会导致错误。</p>\"],[4,\"<p>定义好元组，可以像访问列表那样访问元组元素，并且可以使用 for 循环。</p>\"]]",
+            "description": "<p>关于元组的描述，错误的选项是</p>",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第154页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/6480"
+        },
+        {
+            "_id": 6759,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 110001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【组合数类】《二级.第二季》",
+            "content": "[[1,\"<p>34</p>\"],[2,\"<p>‘34’</p>\"],[3,\"<p>max(lss)</p>\"],[4,\"<p>[12,34,25]</p>\"]]",
+            "description": "<p>执行以下程序，输出结果是：</p><p>lss = [12,34,25] </p><p>print(eval('max(lss)'))</p>",
+            "explanation_content": "<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，第2.2Python程序语法元素分析，3.2数字类型的操作，6.2 列表类型和操作，到pycharm或IDLE上做实验</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/6759"
+        },
+        {
+            "_id": 6808,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1538913060021,
+                    "type": "dynamic",
+                    "show": true,
+                    "output": "1.53",
+                    "input": "5"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1538913070105,
+                    "type": "dynamic",
+                    "show": true,
+                    "output": "0.75",
+                    "input": "4"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 1000,
+                    "_id": 1538913085658,
+                    "type": "static",
+                    "input": "\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1538913106298,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "1.68",
+                    "input": "7"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1538913133006,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "0.92",
+                    "input": "6"
+                }
+            ],
+            "name": "基础编程-基本数据类型《二级.第一季》",
+            "content": "<h1 style=\"text-align: center;\"><span style=\"font-size: 24pt;\"><strong>基本编程题2</strong></span></h1>\n<h2><span style=\"font-size: 18pt;\"><strong>描述</strong></span></h2>\n<p><span style=\"font-size: 24px;\">请参考编程模板，完成以下功能。输入一个自然数n，如果n为奇数，输出表达式1+1/3+.....+1/n的值；如果n为偶数,输出表达式1/2+1/4+....+1/n的值；输出表达式结果保留2位小数。本题目支持自动评阅。</span>&nbsp;</p>\n<h2><span style=\"font-size: 18pt;\"><strong>输入输出示例</strong></span></h2>\n<p style=\"color: #ff0000;\">&nbsp;</p>\n<table style=\"height: 153px; width: 100%; background-color: white; border-color: whitesmoke;\" border=\"1\">\n<tbody>\n<tr style=\"height: 18px;\">\n<td style=\"width: 100px; height: 18px;\">&nbsp;</td>\n<td style=\"width: 275px; height: 18px;\"><span style=\"font-size: 14pt;\">输入</span></td>\n<td style=\"width: 332px; height: 18px;\"><span style=\"font-size: 14pt;\">输出</span></td>\n</tr>\n<tr style=\"height: 109.875px;\">\n<td style=\"width: 100px; height: 109.875px; text-align: center;\"><span style=\"font-size: 14pt;\">示例 1</span></td>\n<td style=\"width: 275px; height: 109.875px;\">5</td>\n<td style=\"width: 332px; height: 109.875px;\">1.53</td>\n</tr>\n<tr style=\"height: 109.875px;\">\n<td style=\"width: 100px; height: 109.875px; text-align: center;\"><span style=\"font-size: 14pt;\">示例 1</span></td>\n<td style=\"width: 275px; height: 109.875px;\">4</td>\n<td style=\"width: 332px; height: 109.875px;\">0.75</td>\n</tr>\n</tbody>\n</table>\n<p><span style=\"font-size: 14pt;\">&nbsp;</span></p>",
+            "explanation_content": "<pre class=\"language-python\"><code>def f(n):\n    sum = 0.0\n    if n%2 == 1:\n        for i in range(1, n+1, 2):\n            sum += 1/i\n    else:\n        for i in range(2, n+1, 2):\n            sum += 1/i\n    return sum\n\nn = int(input())\nprint(\"{:.2f}\".format(f(n)))</code></pre>\n<p>（1）sum = 0.0 给赋初值</p>\n<p>（2）%取余运算符</p>\n<p>（3）print(\"{:.2f}\".format(f(n))) 为保留2位小数输出</p>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:05:34.711Z",
+                    "2023-06-06T06:05:35.115Z",
+                    "2023-06-06T06:05:40.654Z",
+                    "2023-06-06T06:05:41.061Z"
+                ],
+                "_id": 6808,
+                "commits_count": 4,
+                "score": 10,
+                "score_at": "2023-06-06T06:05:34.711Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/6808"
+        },
+        {
+            "_id": 7302,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【函代复用】《二级.第二季》函数",
+            "description": "下列关于函数的描述，错误的是",
+            "explanation_content": "<p>详见《全国计算机等级考试二级教程--Python语言程序设计》P177</p>",
+            "content": "[[1,\"函数定义后，可以直接运行，不需要经过调用\"],[2,\"函数是一段具有特定功能的、可重用的语句组。\"],[3,\"函数包括两个部分：函数的定义和函数的使用。\"],[4,\"使用函数主要有两个目的：降低编程难度和增加代码复用。\"]]",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/7302"
+        },
+        {
+            "_id": 7650,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 110003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第二季》",
+            "explanation_content": "<p>一般情况下，for, while循环如果在计数器用尽跳出时，用不用else语句对结果都是没有影响的，所以只有在for, while循环非正常结束时，才会体现出效果，比如：通过break跳出循环，这时也会跳过else语句块，直接执行else之后的语句。可以在else语句块中写一些不通过break语句跳出时才执行的代码，不用像其他语言，在这种情况下，还要专门写一个判断。</p>\n<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，3.2数值类型的操作，4.2分支结构，4.4循环结构，到pycharm或IDLE上做实验</p>",
+            "content": "[[1,\"<p>found it! i = 3</p>\"],[2,\"<p>found it! i = 3</p><p>not found it ...</p>\"],[3,\"<p>not found it ...</p>\"],[4,\"<p>None</p>\"]]",
+            "description": "<p>以下程序的输出结果是：</p><p>for i in range(5):</p><p>&nbsp; &nbsp; if i == 3:</p><p>&nbsp; &nbsp; &nbsp; &nbsp; print('found it! i = ', i)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; break</p><p>else:</p><p>&nbsp; &nbsp; print('not found it ...')</p><p>&nbsp;</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/7650"
+        },
+        {
+            "_id": 7653,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 130003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【函代复用】《二级.第二季》",
+            "explanation_content": "<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，5.2节函数的参数，6.2节列表类型和操作，到pycharm或IDLE上做实验</p>",
+            "content": "[[1,\"<p>[1, 2, 4]</p>\"],[2,\"<p>[1, 2, 3]</p>\"],[3,\"<p>[1, 2]</p>\"],[4,\"<p>[1, 2, 1]</p>\"]]",
+            "description": "<p>以下程序的输出结果是：</p><pre class=\"language-markup\" contenteditable=\"false\">s = [1,2] \ndef fun(a,b=3): \n   s.append(a+b) \n   return s \nprint(fun(1))</pre>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/7653"
+        },
+        {
+            "_id": 8291,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【函代复用】《二级.第二季》",
+            "content": "[[1,\"<p>['a', 'b', 'c', [1, 2, 3, 4]]</p><p>['a', 'b', 'c', [1, 2, 3, 4]]</p>\"],[2,\"<p>['a', 'b', 'c', [1, 2, 3, 4]]<br data-mce-bogus=\\\"1\\\"></p>\"],[3,\"<p>['a', 'b', 'c', 1, 2, 3, 4]<br data-mce-bogus=\\\"1\\\"></p>\"],[4,\"<p>['a', 'b', 'c', 1, 2, 3, 4]<br data-mce-bogus=\\\"1\\\"></p><p>['a', 'b', 'c', 1, 2, 3, 4]<br data-mce-bogus=\\\"1\\\"></p>\"]]",
+            "description": "<p>下面代码的执行结果是</p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">def</span> <span class=\"token function\">change</span><span class=\"token punctuation\">(</span>mylist<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    mylist<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span><span class=\"token number\">4</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n    <span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>mylist<span class=\"token punctuation\">)</span>\n    <span class=\"token keyword\">return</span>\n\nmylist <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">\"a\"</span><span class=\"token punctuation\">,</span><span class=\"token string\">\"b\"</span><span class=\"token punctuation\">,</span><span class=\"token string\">\"c\"</span><span class=\"token punctuation\">]</span>\nchange<span class=\"token punctuation\">(</span>mylist<span class=\"token punctuation\">)</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>mylist<span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第124页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/8291"
+        },
+        {
+            "_id": 8304,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【Python基础】《二级.第二季》",
+            "content": "[[1,\"global\"],[2,\"PI\"],[3,\"pi\"],[4,\"_name_\"]]",
+            "description": "以下选项中变量定义不合法的是",
+            "explanation_content": "<p>详见《Python语言程序设计基础》（第2版）P38</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:00:40.836Z"
+                ],
+                "_id": 8304,
+                "answer": "1",
+                "commits_count": 1
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/8304"
+        },
+        {
+            "_id": 8975,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【组合数类】《二级.第二季》",
+            "description": "<p>以下程序的输出结果是：</p><pre class=\"language-python\" contenteditable=\"false\">img1 <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token string\">'北京'</span><span class=\"token punctuation\">,</span><span class=\"token number\">98</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token string\">'上海'</span><span class=\"token punctuation\">,</span><span class=\"token number\">80</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span> \nimg1<span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">90</span> \n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>img1<span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>深入理解，请学习《Python程序设计语言基础-第二版》-嵩天，7.4一二维数据的格式化和处理，到pycharm或IDLE上做实验</p>",
+            "content": "[[1,\"<p><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">[['</span><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">北京<span>', 98], 90]</span></span></p>\"],[2,\"<p><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">[['</span><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">北京<span>',98],['</span>上海<span>',80]]</span></span></p>\"],[3,\"<p><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">[['</span><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">北京<span>',98],['</span>上海<span>',90]]</span></span></p>\"],[4,\"<p><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">[['</span><span style=\\\"font-size: 12pt; font-family: 宋体;\\\" data-mce-style=\\\"font-size: 12pt; font-family: 宋体;\\\">北京<span>',98]]</span></span></p>\"]]",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/8975"
+        },
+        {
+            "_id": 9643,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 512,
+                    "time_limit": 2000,
+                    "input": "两个黄鹂鸣翠柳\n",
+                    "output": "['两个', '黄鹂', '鸣翠柳']",
+                    "show": true,
+                    "type": "dynamic",
+                    "_id": 1602582996232
+                },
+                {
+                    "weight": 1,
+                    "memory": 512,
+                    "time_limit": 2000,
+                    "input": "一代天骄，成吉思汗，只识弯弓射大雕。\n",
+                    "output": "['一代', '天骄', '，', '成吉思汗', '，', '只识', '弯弓', '射大雕', '。']",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602583099103
+                },
+                {
+                    "weight": 1,
+                    "memory": 512,
+                    "time_limit": 2000,
+                    "input": "退一步海阔天空\n",
+                    "output": "['退一步', '海阔天空']",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602842574749
+                }
+            ],
+            "name": "【jieba库的使用】基本操作题37",
+            "content": "<h3><strong>基本操作题 37</strong></h3>\n<p>类型：<code>Python 组合数据类型</code></p>\n<hr>\n<p>输入字符串，使用中文分词库输出精确模式的中文分词结果。请完善代码。‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬</p>\n<pre class=\"language-python\"><code class=\"language-python\"><span class=\"token keyword\">import</span> jieba\nTempstr <span class=\"token operator\">=</span> <span class=\"token builtin\">input</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\nls <span class=\"token operator\">=</span> __①___\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>ls<span class=\"token punctuation\">)</span>\n</code></pre>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：<span class=\"token string\">\"两个黄鹂鸣翠柳\"</span>\n输出：<span class=\"token string\">\"['两个', '黄鹂', '鸣翠柳']\"</span>\n</code></pre>\n<p><strong>注意</strong>：这是一个自动评阅题目，请补充&quot;编程模板&quot;中横线内容，横线不保留。</p>\n",
+            "explanation_content": "<pre class=\"language-python\"><code>import jieba\nTempstr = input()\nls = jieba.lcut(Tempstr)\nprint(ls)\n</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:06:39.604Z",
+                    "2023-06-06T06:07:14.388Z",
+                    "2023-06-06T06:07:18.044Z"
+                ],
+                "_id": 9643,
+                "commits_count": 3,
+                "score": 10,
+                "score_at": "2023-06-06T06:06:39.604Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/9643"
+        },
+        {
+            "_id": 9650,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "",
+                    "output": "durian:20",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602587937459
+                }
+            ],
+            "name": "【字典类型的操作】基本操作题40",
+            "content": "<h3><strong>基本操作题 40</strong></h3>\n<p>类型：<code>Python 组合数据类型</code></p>\n<hr>\n<p>输出字典 <code>fruits</code> 中键值最大的键值对。请完善代码。‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬</p>\n<pre class=\"language-python\"><code class=\"language-python\">fruits <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span><span class=\"token string\">\"apple\"</span><span class=\"token punctuation\">:</span><span class=\"token number\">10</span><span class=\"token punctuation\">,</span><span class=\"token string\">\"mango\"</span><span class=\"token punctuation\">:</span><span class=\"token number\">12</span><span class=\"token punctuation\">,</span><span class=\"token string\">\"durian\"</span><span class=\"token punctuation\">:</span><span class=\"token number\">20</span><span class=\"token punctuation\">,</span><span class=\"token string\">\"banana\"</span><span class=\"token punctuation\">:</span><span class=\"token number\">5</span><span class=\"token punctuation\">}</span>\nm <span class=\"token operator\">=</span> <span class=\"token string\">'apple'</span>\n<span class=\"token keyword\">for</span> key <span class=\"token keyword\">in</span> fruits<span class=\"token punctuation\">.</span>keys<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n<span class=\"token comment\">#此段代码请完善</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">'{}:{}'</span><span class=\"token punctuation\">.</span><span class=\"token builtin\">format</span><span class=\"token punctuation\">(</span>m<span class=\"token punctuation\">,</span>fruits<span class=\"token punctuation\">[</span>m<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n</code></pre>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：无\n输出：<span class=\"token string\">\"python:123\"</span>\n</code></pre>\n<p><strong>注意</strong>：这是一个自动评阅题目，请补充&quot;编程模板&quot;中横线内容，横线不保留。示例仅是输入输出格式样例，不是程序输出结果。</p>\n",
+            "explanation_content": "<pre class=\"language-python\"><code>fruits = {\"apple\":10,\"mango\":12,\"durian\":20,\"banana\":5}\nm = 'apple'\nfor key in fruits.keys():\n    if fruits[m] &lt; fruits[key]:\n        m = key\nprint('{}:{}'.format(m,fruits[m]))\n</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:07:40.207Z",
+                    "2023-06-06T06:07:40.437Z",
+                    "2023-06-06T06:08:21.582Z",
+                    "2023-06-06T06:08:21.775Z",
+                    "2023-06-06T06:08:41.195Z",
+                    "2023-06-06T06:08:41.370Z"
+                ],
+                "_id": 9650,
+                "commits_count": 6,
+                "score": 10,
+                "score_at": "2023-06-06T06:07:40.207Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/9650"
+        },
+        {
+            "_id": 9705,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "66666\n",
+                    "output": "请输入数字：            66,666            ",
+                    "show": true,
+                    "type": "dynamic",
+                    "_id": 1602595191003
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "2485325\n",
+                    "output": "请输入数字：          2,485,325           ",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602595264814
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "13145134.22\n",
+                    "output": "请输入数字：        13,145,134.22         ",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602595277367
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "4354345398454.23\n",
+                    "output": "请输入数字：     4,354,345,398,454.23     ",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1602595287014
+                }
+            ],
+            "name": "【字符串格式化】基本操作题44",
+            "content": "<h3><strong>基本操作题 44</strong></h3>\n<p>类型：<code>Python 基本数据类型</code></p>\n<hr>\n<p>获得用户输入的一个数字，增加数字的千位分隔符，以 30 字符宽度居中输出。请完善代码。‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬</p>\n<pre class=\"language-python\"><code class=\"language-python\">n <span class=\"token operator\">=</span> <span class=\"token builtin\">input</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"请输入数字：\"</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"{_____①_____}\"</span><span class=\"token punctuation\">.</span><span class=\"token builtin\">format</span><span class=\"token punctuation\">(</span>_____②_____<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n</code></pre>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：<span class=\"token string\">\"66666\"</span>\n输出：<span class=\"token string\">\"请输入数字：            66,666            \"</span>\n</code></pre>\n<p><strong>注意</strong>：这是一个自动评阅题目，请补充&quot;编程模板&quot;中横线内容，横线不保留。</p>\n",
+            "explanation_content": "<pre class=\"language-python\"><code>n = input(\"请输入数字：\")\nprint(\"{:^30,}\".format(eval(n)))</code></pre>",
+            "language": "python",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:09:08.980Z",
+                    "2023-06-06T06:09:09.367Z"
+                ],
+                "_id": 9705,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:09:08.980Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/9705"
+        },
+        {
+            "_id": 10333,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 110101,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 256,
+                    "time_limit": 2000,
+                    "_id": 1549455286891,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "8B358A",
+                    "input": "10\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 256,
+                    "time_limit": 2000,
+                    "_id": 1549455302822,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "E44F21",
+                    "input": "100\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 256,
+                    "time_limit": 2000,
+                    "_id": 1549455319901,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "GA6BFH",
+                    "input": "15\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 256,
+                    "time_limit": 2000,
+                    "_id": 1549455337125,
+                    "type": "dynamic",
+                    "show": true,
+                    "output": "9I16A4",
+                    "input": "5\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "1",
+                    "output": "E8CID5",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1637558312710
+                }
+            ],
+            "name": "生成快递自提柜取件码（quiz-train-ss）",
+            "content": "<h3><strong>生成快递自提柜取件码</strong></h3>\n<p>类型：<code>随机数</code></p>\n<hr>\n<p><strong>描述</strong>\nimport random</p>\n<p>random.seed(n)</p>\n<p>很多校园都放置了大量的快递自提柜，放入快递时生成一个取件码发给用户，用户凭取件码自行提取货物。取件码的字符包括：数字0-9和字母A、B、C、D、E、F、G、H、I、J。每次从以上字符串 'ABCDEFGHIJ0123456789'中随机取一个字符，重复6次， 生成一个形如“9I16A4”的取件码，各字符的使用次数无限制。随机数种子 n 由用户输入。</p>\n<p><strong>输入格式</strong></p>\n<p>输入一个正整数</p>\n<p><strong>输出格式</strong></p>\n<p>输出一个包含 6 个字符的字符串</p>\n<p><strong>示例</strong></p>\n<pre class=\"language-Text\"><code class=\"language-Text\">输入：5\t\n输出：9I16A4\n</code></pre>\n",
+            "explanation_content": "<pre>import random<br /><br />n = input()<br />random.seed(int(n))  #随机数种子n由用户输入<br />Sn = ''              #空字符串<br />characters = 'ABCDEFGHIJ0123456789'<br />for i in range(6):<br />    Sn = Sn + random.choice(characters) #生成的字符连接到字符串上<br />print(Sn)</pre>",
+            "language": "python",
+            "description": "随机数、循环",
+            "index": 0,
+            "score": 6,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:10:31.275Z",
+                    "2023-06-06T06:10:31.775Z"
+                ],
+                "_id": 10333,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:10:31.275Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/10333"
+        },
+        {
+            "_id": 11444,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第二季》分支语句简化",
+            "content": "[[1,\"<pre class=\\\"language-markup\\\" contenteditable=\\\"false\\\">x = eval(input())\\ny = eval(input())\\nmin = x if x &lt; y  = y\\nprint(min)\\n</pre>\"],[2,\"<pre class=\\\"language-markup\\\" contenteditable=\\\"false\\\">x = eval(input())\\ny = eval(input())\\nmin = x if x &lt; y else y\\nprint(min)</pre>\"],[3,\"<pre class=\\\"language-markup\\\" contenteditable=\\\"false\\\">x = eval(input())\\ny = eval(input())\\nmin = x if x &lt; y ? y\\nprint(min)\\n</pre>\"],[4,\"<pre class=\\\"language-markup\\\" contenteditable=\\\"false\\\">x = eval(input())\\ny = eval(input())\\nif ( x &gt; y) print y</pre>\"]]",
+            "description": "<p>以下选项符合Python语法要求且能够正确执行的是</p>",
+            "explanation_content": "<p>请查看《全国计算机等级考试二级教程Python语言程序设计》2019版 第66页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/11444"
+        },
+        {
+            "_id": 11556,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 120003,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【函代复用】《二级.第二季》",
+            "content": "[[1,\"<p>4 5</p>\"],[2,\"<p>5 4</p>\"],[3,\"<p>2 3</p>\"],[4,\"<p>3 2</p>\"]]",
+            "description": "<p>以下程序的输出结果是：&nbsp;</p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">def</span> <span class=\"token function\">fun</span><span class=\"token punctuation\">(</span>x <span class=\"token operator\">=</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span>y <span class=\"token operator\">=</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span> \n    <span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>x<span class=\"token punctuation\">,</span>y<span class=\"token punctuation\">)</span> \nfun<span class=\"token punctuation\">(</span>y<span class=\"token operator\">=</span><span class=\"token number\">5</span><span class=\"token punctuation\">,</span>x<span class=\"token operator\">=</span><span class=\"token number\">4</span><span class=\"token punctuation\">)</span></pre>",
+            "explanation_content": "<p>深入理解，请学习《<span>Python</span>程序设计语言基础<span>-</span>第二版》<span>-</span>嵩天，<span>5.2</span>节函数的参数传递，到<span>pycharm</span>或<span>IDLE</span>上做实验</p>\n<p>&nbsp;</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/11556"
+        },
+        {
+            "_id": 11595,
+            "type": "choice",
+            "auto_judge": false,
+            "difficulty": 100000,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [],
+            "name": "【控制结构】《二级.第二季》for循环",
+            "content": "[[1,\"<p>Hel</p>\"],[2,\"<p>Hell</p>\"],[3,\"<p>He</p>\"],[4,\"<p>Hello</p>\"]]",
+            "description": "<p>下面代码的输出结果是</p><pre class=\"language-python\" contenteditable=\"false\"><span class=\"token keyword\">for</span> a <span class=\"token keyword\">in</span> <span class=\"token string\">\"Hello\"</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">,</span>end<span class=\"token operator\">=</span><span class=\"token string\">\"\"</span><span class=\"token punctuation\">)</span>\n    <span class=\"token keyword\">if</span> a <span class=\"token operator\">==</span> <span class=\"token string\">\"l\"</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword\">break</span></pre>",
+            "explanation_content": "<p>请查看《Python语言程序设计基础》（第2版）第107页</p>",
+            "language": "python",
+            "index": 0,
+            "score": 1,
+            "srcurl": "/student/courses/8584/groups/124197/problems/11595"
+        },
+        {
+            "_id": 12021,
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 100001,
+            "blank_answer": {
+                "type": 0
+            },
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1552032624748,
+                    "type": "dynamic",
+                    "show": true,
+                    "output": "i am a student.\nI AM A STUDENT.",
+                    "input": "I am a student.\n"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1552032653193,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "python\nPYTHON",
+                    "input": "PYtHoN"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1552032734266,
+                    "type": "dynamic",
+                    "hide_output": false,
+                    "show": false,
+                    "output": "l333@qq.com\nL333@QQ.COM",
+                    "input": "L333@qQ.com"
+                }
+            ],
+            "name": "英文字符串大小写（quiz-train-s） ",
+            "content": "<h3><strong>英文字符串大小写</strong></h3>\n<p>类型：<code>字符串</code></p>\n<hr>\n<p><strong>描述</strong></p>\n<p>将输入的英文句子，全部改为小写和大写分别输出。</p>\n<p><strong>输入格式</strong></p>\n<p>输入一个英文字符串</p>\n<p><strong>输出格式</strong></p>\n<p>第一行将输出转为小字输出</p>\n<p>第二行将输入转为大写输出</p>\n<p>无</p>\n<p><strong>示例1</strong></p>\n<pre class=\"language-Text\"><code class=\"language-Text\">输入：\nI am a student.\t\n输出：\ni am a student.\n\nI AM A STUDENT.\n</code></pre>\n<p></p>\n",
+            "language": "python",
+            "description": "字符串方法",
+            "explanation_content": "<pre class=\"language-python\"><code>s=input()\r\nprint(str.lower(s))\r\nprint(str.upper(s))\r\n</code></pre>",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:10:56.436Z",
+                    "2023-06-06T06:10:56.834Z"
+                ],
+                "_id": 12021,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:10:56.436Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/12021"
+        },
+        {
+            "_id": 99866,
+            "blank_answer": {
+                "type": 0
+            },
+            "type": "programming",
+            "auto_judge": true,
+            "difficulty": 110102,
+            "name": "【文数格1】传感器日志光照统计",
+            "content": "<h3><strong>传感器日志光照统计</strong></h3>\n<p>类型：<code>Python 文件</code></p>\n<hr>\n<p>本题目附件提供了一个传感器日志文件，为文本类型，共 1 千行，每行包含了日期、时间和 4 种传感器读数值。</p>\n<p>其中，4 种传感器读数值分别是：温度、湿度、光照和电压。</p>\n<p>在 Python123 中读取文件请假设题目对应文件在当前目录下，文件打开函数参考如下：</p>\n<pre class=\"language-python\"><code class=\"language-python\">f<span class=\"token operator\">=</span><span class=\"token builtin\">open</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"sensor-data-1k.txt\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"r\"</span><span class=\"token punctuation\">)</span>\n</code></pre>\n<p>编写程序，统计日志反应的光照平均值，保留小数点后 2 位。</p>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：无\n输出：<span class=\"token string\">\"43.24\"</span>\n</code></pre>\n<p><strong>注意</strong>：示例1 是一个输入输出示范样例，不是正确结果。</p>\n",
+            "description": "传感器日志系列：光照均值",
+            "explanation_content": "<p><span style=\"font-size: 14pt;\">【参考代码】</span></p>\n<pre class=\"language-python\"><code>f = open(\"sensor-data-1k.txt\", \"r\")\nsum, cnt = 0, 0\nfor line in f:\n    ls = line.split()\n    cnt += 1\n    sum += eval(ls[4])\nprint(\"{:.2f}\".format(sum/cnt))\nf.close()</code></pre>\n<p><span style=\"font-size: 14pt;\">line.split() 根据空格将每行信息分割成多个元素，保存在列表中，其中序号 4 为光照值。</span></p>\n<p><span style=\"font-size: 18.6667px;\">可以观察一下光照值在日志中的内容，可以发现，与温度湿度不同，这个值变化非常大。</span></p>",
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1533542266791,
+                    "hide_output": true,
+                    "show": true,
+                    "output": "217.29",
+                    "input": "\n"
+                }
+            ],
+            "language": "python",
+            "index": 0,
+            "score": 8,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:12:05.758Z",
+                    "2023-06-06T06:12:05.972Z"
+                ],
+                "_id": 99866,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:12:05.758Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/99866"
+        },
+        {
+            "_id": 100450,
+            "blank_answer": {
+                "type": 0
+            },
+            "language": "python",
+            "type": "programming",
+            "auto_judge": true,
+            "testcases": [
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "_id": 1571742776608,
+                    "type": "dynamic",
+                    "show": true,
+                    "output": "321",
+                    "input": "123"
+                },
+                {
+                    "weight": 1,
+                    "memory": 64,
+                    "time_limit": 2000,
+                    "input": "487424343\n",
+                    "output": "343424784",
+                    "show": false,
+                    "hide_output": false,
+                    "type": "dynamic",
+                    "_id": 1600333296708
+                }
+            ],
+            "name": "【基数型1】逆序",
+            "content": "<h3><strong>逆序</strong></h3>\n<p>类别：<code>Python 基本数据类型</code></p>\n<hr>\n<p>获得输入正整数 <code>N</code>，反转输出该正整数，不考虑异常情况。</p>\n<p><strong>示例1：</strong></p>\n<pre class=\"language-python\"><code class=\"language-python\">输入：<span class=\"token string\">\"123\"</span>\n输出：<span class=\"token string\">\"321\"</span>\n</code></pre>\n",
+            "difficulty": 100000,
+            "explanation_content": "<pre class=\"language-python\"><code>s=input()\nprint(s[::-1])</code></pre>",
+            "index": 0,
+            "score": 4,
+            "record": {
+                "commits": [
+                    "2023-06-06T06:12:35.102Z",
+                    "2023-06-06T06:12:35.348Z"
+                ],
+                "_id": 100450,
+                "commits_count": 2,
+                "score": 10,
+                "score_at": "2023-06-06T06:12:35.102Z"
+            },
+            "srcurl": "/student/courses/8584/groups/124197/problems/100450"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd"
+>
+    <!-- scope="singleton"实例化为单例模式 -->
+    <bean 
+        id="myBookDao_id1" 
+        name="book_alies1 book_alies2,book_alies3;book_alies4" 
+        class="com.example.dao.impl.BookDaoImpl"  
+        scope="singleton"
+    />
+    <!-- scope="singleton"实例化为原型模式 -->
+    <bean 
+        id="myService_id2" 
+        name="server_alies1 server_alies2,server_alies3;server_alies4" 
+        class="com.example.service.impl.ServiceImp" 
+        scope="prototype" 
+    >
+        <property name="bookDao" ref="book_alies4" ></property>
+    </bean>
+</beans>

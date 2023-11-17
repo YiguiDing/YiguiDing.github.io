@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans ./spring-beans.xsd
+        http://www.springframework.org/schema/context ./spring-context.xsd
+        "
+>
+    <!-- 
+        1.添加xml命名空间和schemaLocation  
+            - xmlns:context="http://www.springframework.org/schema/context" 
+            - xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+    -->
+    <!-- 2.在命名空间中写配置文件的路径
+        - 写法1,单配置文件： <context:property-placeholder location="jdbcConfig.properties" />
+        - 写法2,多配置文件： <context:property-placeholder location="./A.prop,./B.prop" />
+        - 写法3,通配符匹配： <context:property-placeholder location="*.properties" />
+        - 写法3,专业写法：加载classpath路径下的配置： <context:property-placeholder location="classpath:*.properties" />
+        - 写法4,加载classpath和jar包中的配置： <context:property-placeholder location="classpath*:*.properties" />
+    -->
+    <!-- 3.将bean的property标签的value属性写成模板字符串：${jdbcConfig.driverClassName} -->
+    <!-- 4.注意，
+            - 多个配置文件会互相覆盖，
+                比如
+                    文件 A.properties 中写 name=1 
+                    文件 B.properties 中写 name=2 
+                    则后加载的文件会覆盖先加载的配置文件，
+                    所以一般使用配置文件的文件名作为命名空间，如
+                        A.name = 1
+                        B.name = 2
+            - 另外，所有的属性默认会被系统的环境变量覆盖，如username=电脑操作系统的用户名
+                - 解决方法，不加载系统环境配置：
+                    - `<context:property-placeholder location="jdbcConfig.properties" system-properties-mode="NEVER"/>`
+     -->
+    <context:property-placeholder location="jdbcConfig.properties" />
+
+    <bean id="myGruid" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbcConfig.driverClassName}" />
+        <property name="url" value="${jdbcConfig.url}" />
+        <property name="username" value="${jdbcConfig.username}"></property>
+        <property name="password" value="${jdbcConfig.password}"></property>
+    </bean>
+    <bean id="MyJDBCforTest" class="com.example.MyJDBC">
+        <property name="driverClassName" value="${jdbcConfig.driverClassName}" />
+    </bean>
+</beans>

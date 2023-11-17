@@ -1,0 +1,7 @@
+2023-06-18 02:21:38.278  INFO 31952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2023-06-18 02:21:38.388  INFO 31952 --- [main] com.example.demo.Application             : Started Application in 8.699 seconds (JVM running for 9.302)
+2023-06-18 02:22:05.474  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-18 02:22:05.479  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-18 02:22:05.491  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-18 02:22:05.906  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-18 02:22:06.482  INFO 31952 --- [http-nio-0.0.0.0-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

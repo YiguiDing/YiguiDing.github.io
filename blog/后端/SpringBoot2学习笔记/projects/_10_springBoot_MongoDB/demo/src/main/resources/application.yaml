@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://172.30.64.71/mydb1 # wsl 地址
+      
+      

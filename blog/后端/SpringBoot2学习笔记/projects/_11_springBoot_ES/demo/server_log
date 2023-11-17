@@ -1,0 +1,3 @@
+2023-06-18 02:57:28.183  WARN 29048 --- [http-nio-0.0.0.0-80-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2023-06-18 02:57:52.021  WARN 29048 --- [http-nio-0.0.0.0-80-exec-8] c.e.demo.controller.BookController       : 这是warn日志
+2023-06-18 02:57:52.023 ERROR 29048 --- [http-nio-0.0.0.0-80-exec-8] c.e.demo.controller.BookController       : 这是error日志
