@@ -1,3 +1,0 @@
-import{_ as o,o as n,c as t,a as e,b as s}from"./app-8da63f05.js";const r={},l=e("h1",{id:"browserify-example",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#browserify-example","aria-hidden":"true"},"#"),s(" Browserify example")],-1),d=e("p",null,"Two steps need to be done for this to work",-1),c=e("p",null,"In the project root",-1),i=e("pre",null,[e("code",null,`npm install
-`)],-1),_=e("p",null,"In this folder",-1),a=e("pre",null,[e("code",null,`../../node_modules/.bin/browserify main.js -o bundle.js
-`)],-1),h=[l,d,c,i,_,a];function p(u,f){return n(),t("div",null,h)}const x=o(r,[["render",p],["__file","index.html.vue"]]);export{x as default};
