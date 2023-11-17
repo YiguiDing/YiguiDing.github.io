@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-ae0131b8","path":"/%E9%A1%B9%E7%9B%AE/","title":"项目","lang":"zh-CN","frontmatter":{"title":"项目","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0,"words":1},"filePathRelative":null,"excerpt":"","copyright":{"author":"丁毅桂","license":"MIT"}}');export{e as data};

@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-73197d7b","path":"/%E5%89%8D%E7%AB%AF/","title":"前端","lang":"zh-CN","frontmatter":{"title":"前端","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0,"words":1},"filePathRelative":null,"excerpt":"","copyright":{"author":"丁毅桂","license":"MIT"}}');export{e as data};
