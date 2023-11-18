@@ -166,3 +166,7 @@ git add . && git commit -m "update"
 # 强制推送
 git push --force origin master 
 ```
+
+**实现效果**
+
+![Alt text](./images/image2.png)

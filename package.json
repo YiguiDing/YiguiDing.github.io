@@ -18,6 +18,7 @@
     "commitizen_install": "npm install commitizen -D",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
     "commit": "git cz",
+    "publish:save": "git add . && git commit -m 'update'",
     "publish": "git add . && git commit -m 'update' && git push --force origin master"
   },
   "devDependencies": {
