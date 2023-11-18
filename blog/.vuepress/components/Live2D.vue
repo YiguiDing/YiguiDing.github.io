@@ -1,10 +1,8 @@
 <script setup>
-import { onMounted, ref } from "vue";
-let VueLive2D = ref(undefined);
+import { onMounted, shallowRef } from "vue";
+let VueLive2D = shallowRef(null);
 onMounted(async () => {
-  // 保证其只在浏览器环境被导入
-  VueLive2D.value = (await import("vue-live2d")).default;
-  console.log(VueLive2D.value);
+  VueLive2D.value = (await import("./vue-live2d/src/index.vue")).default;
 });
 </script>
 <template>
@@ -23,8 +21,7 @@ onMounted(async () => {
     }"
     :homePage="'/'"
     direction="right"
-    width="300"
-    height="300"
+    size="300"
     apiPath="/live2d_models/indexes"
     :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
   />

@@ -1,6 +1,8 @@
 import { defineUserConfig } from "vuepress";
 import { themeConfig } from "./themeConfig";
 import { pluginsConfig } from "./pluginsConfig";
+import { getDirname, path } from "@vuepress/utils";
+const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
   // 基本信息
@@ -19,4 +21,6 @@ export default defineUserConfig({
   plugins: pluginsConfig,
   // 主题配置
   theme: themeConfig,
+  // 如果使用vuepress-plugin-pwa2插件，推荐在 VuePress 配置文件中设置 shouldPrefetch: false
+  shouldPrefetch: false,
 });

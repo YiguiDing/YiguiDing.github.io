@@ -34,9 +34,11 @@ export const themeConfig = hopeTheme({
     // 用户信息，头像，格言
     name: "Yigui-Ding",
     avatar: "/images/author_icon.jpg",
+    roundAvatar: true,
     intro: "/网站/关于",
-    timeline: "莫等闲，白了少年头，空悲切！",
     description: '"枉少年","生当作人杰";<br>"莫等闲","自古英雄多磨难";',
+    // 时间线文字
+    timeline: "莫等闲，白了少年头，空悲切！",
     // 社交
     medias: {
       GitHub: "https://github.com/YiguiDing",
@@ -51,12 +53,11 @@ export const themeConfig = hopeTheme({
       Steam: "https://steamcommunity.com/profiles/76561198860211659/",
       Wechat: "https://u.wechat.com/MH91sJy7fFJmV5WVsHOa7ho",
     },
-    articlePerPage: 20,
+    articlePerPage: 5,
   },
   // 其他
   themeColor: true,
   fullscreen: true,
-
   plugins: {
     // 自动目录页生成
     autoCatalog: true,

@@ -1,0 +1,3 @@
+[submodule "blog/.vuepress/components/vue-live2d"]
+	path = blog/.vuepress/components/vue-live2d
+	url = git@github.com:YiguiDing/vue-live2d.git

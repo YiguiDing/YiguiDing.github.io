@@ -2,13 +2,13 @@
 home: true 
 layout: BlogHome
 index: false
-heroText: 欢迎来到我的新blog小站!!!
-# tagline: 副标题
+heroText: 在绝望中坚持真理 在荒诞中奋起反抗
+tagline: 欢迎来到我的新blog小站
 # heroImage: "/images/author_icon.jpg"
-
 # 背景图
 # bgImage: "/images/websit_background.jpg"
-bgImage: /assets/bg/3-light.svg
+# bgImage: /assets/bg/2-light.svg
+bgImage: /images/pexels.com/pexels-peter-de-vink-849403.jpg
 heroFullScreen: true
 # 项目展示
 projects: [

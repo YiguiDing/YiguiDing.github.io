@@ -5,8 +5,13 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
-  deploy-static-pages:
+  build-static-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,31 +20,54 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          run_install: true
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: pnpm
+          cache: npm
 
       - name: Build Blog
-        env:
-          NODE_OPTIONS: --max_old_space_size=4096
-        run: pnpm run build
+        run: |
+          npm install
+          npm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          # 将目录下代码推送到某个分支
+          folder: blog/.vuepress/dist
           branch: static-pages
-          folder: src/.vuepress/dist
 
-  deploy-server:
+  deploy-to-github-pages:
+    needs: build-static-pages
     runs-on: ubuntu-latest
-    needs: deploy-static-pages
+    environment:
+      name: github-pages
+      # https://YiguiDing.github.io/
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: static-pages
+          fetch-depth: 0
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # Upload entire repository
+          path: './'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+  deploy-to-server:
+    needs: build-static-pages
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
