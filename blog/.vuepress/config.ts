@@ -2,6 +2,7 @@ import { defineUserConfig } from "vuepress";
 import { themeConfig } from "./themeConfig";
 import { pluginsConfig } from "./pluginsConfig";
 import { getDirname, path } from "@vuepress/utils";
+import { viteBundlerConfig } from "./viteBdrConfig";
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
@@ -23,4 +24,6 @@ export default defineUserConfig({
   theme: themeConfig,
   // 如果使用vuepress-plugin-pwa2插件，推荐在 VuePress 配置文件中设置 shouldPrefetch: false
   shouldPrefetch: false,
+  // viteBundler配置
+  bundler: viteBundlerConfig,
 });
