@@ -93,6 +93,7 @@ export const themeConfig = hopeTheme({
     },
     pwa: {
       maxSize: 10240,
+      maxPicSize: 10240,
       manifest: {
         name: "Yigui-Ding的Blog小站",
         short_name: "Yigui-Ding的Blog小站",
