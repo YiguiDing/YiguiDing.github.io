@@ -92,6 +92,7 @@ export const themeConfig = hopeTheme({
       categoryId: "DIC_kwDOKtsDVc4Ca96V",
     },
     pwa: {
+      maxSize: 10240,
       manifest: {
         name: "Yigui-Ding的Blog小站",
         short_name: "Yigui-Ding的Blog小站",
