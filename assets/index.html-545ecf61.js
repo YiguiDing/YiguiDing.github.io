@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-463f4b4d","path":"/%E7%BD%91%E7%AB%99/","title":"网站","lang":"zh-CN","frontmatter":{"title":"网站","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0,"words":1},"filePathRelative":null,"excerpt":"","copyright":{"author":"丁毅桂","license":"MIT"}}');export{e as data};

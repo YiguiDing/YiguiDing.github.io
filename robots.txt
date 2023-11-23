@@ -1,4 +1,7 @@
 User-agent: *
 
 Allow: /
+User-agent:*
+Disallow:
+
 Sitemap: https://dingdingdang.online/sitemap.xml

@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-6e5136c8","path":"/%E7%94%B5%E5%AD%90/","title":"电子","lang":"zh-CN","frontmatter":{"title":"电子","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0,"words":1},"filePathRelative":null,"excerpt":"","copyright":{"author":"丁毅桂","license":"MIT"}}');export{e as data};

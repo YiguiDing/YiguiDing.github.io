@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-1eff21f6","path":"/%E5%89%8D%E7%AB%AF/%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D/","title":"移动适配","lang":"zh-CN","frontmatter":{"title":"移动适配","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0,"words":1},"filePathRelative":null,"excerpt":"","copyright":{"author":"丁毅桂","license":"MIT"}}');export{e as data};
