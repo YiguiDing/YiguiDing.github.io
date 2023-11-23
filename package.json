@@ -13,7 +13,6 @@
     "lint": "prettier --check --write .",
     "lint:check": "prettier --check .",
     "lint-md": "markdownlint **/*.md --ignore node_modules --fix",
-    "clean": "find ./blog -name \"node_modules\" -o -name \"dist\" -o -name \"target\" -type d -exec rm -rf '{}' +",
     "build:live2d": "cd blog/.vuepress/public/live2d_models  && node ./scripts/build-live2d.js",
     "commitizen_install": "npm install commitizen -D",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",

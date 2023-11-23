@@ -15,7 +15,8 @@ export default defineUserConfig({
     "**/*.md",
     "**/*.vue",
     "!**/.vuepress/**",
-    "!node_modules",
+    "!**/node_modules/**",
+    "!**/projs/**",
     "!草稿/**",
   ],
   // 插件配置

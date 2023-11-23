@@ -4,6 +4,7 @@ import { sidebarConfig } from "./sidebarConfig";
 import { encryptConfig } from "./encryptConfig";
 
 export const themeConfig = hopeTheme({
+  hostname: "https://dingdingdang.online",
   // 图标
   favicon: "/images/favicon_icon.jpg",
   // 默认作者
@@ -145,6 +146,18 @@ export const themeConfig = hopeTheme({
     //   rss: true,
     //   rssOutputFilename: "rss.xml",
     // },
+    seo: {
+      customHead: function (head, page, app) {
+        head.push([
+          "meta",
+          {
+            name: "baidu-site-verification",
+            content: "codeva-PwE9Ts6nMl",
+          },
+        ]);
+      },
+    },
+    sitemap: true,
   },
   hotReload: true,
 });
