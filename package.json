@@ -13,7 +13,6 @@
     "lint": "prettier --check --write .",
     "lint:check": "prettier --check .",
     "lint-md": "markdownlint **/*.md --ignore node_modules --fix",
-    "build:live2d": "cd blog/.vuepress/public/live2d_models  && node ./scripts/build-live2d.js",
     "commitizen_install": "npm install commitizen -D",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
     "commit": "git cz",
@@ -24,7 +23,6 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "execa": "^8.0.1",
-    "live2d-static-api": "github:evgo2017/live2d-static-api",
     "markdownlint-cli": "^0.37.0",
     "postcss-preset-env": "^9.3.0",
     "prettier": "^3.1.0"

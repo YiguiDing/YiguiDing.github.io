@@ -22,7 +22,7 @@ onMounted(async () => {
     :homePage="'/'"
     direction="right"
     size="300"
-    apiPath="/live2d_models/indexes"
+    apiPath="/live2d-static-api/indexes"
     :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
   />
 </template>
