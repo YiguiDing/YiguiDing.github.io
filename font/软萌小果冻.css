@@ -2,7 +2,12 @@
     https://www.fonts.net.cn/font-41895387610.html
 */
 @font-face {
-    font-family: '软萌小果冻';
-    src:
-        url(./软萌小果冻/RuanMengXiaoGuoDong-2.ttf) format('truetype');
+  font-family: "软萌小果冻";
+  src:
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.woff2) format("woff2"),
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.woff) format("woff"),
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.ttf) format("truetype"),
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.otf) format("opentype"),
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.eot) format("embedded-opentype"),
+    url(./软萌小果冻/RuanMengXiaoGuoDong-2.svg) format("svg");
 }
