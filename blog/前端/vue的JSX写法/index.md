@@ -3,6 +3,7 @@ title: vue中的jsx写法格式
 date: 2023-11-21T19:51:00+08:00
 tag: [jsx,vue]
 category: 前端
+star: true
 ---
 
 # vue中的jsx写法格式

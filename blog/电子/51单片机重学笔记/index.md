@@ -4,6 +4,7 @@ cover: ./cover/51单片机重学笔记.png
 date: 2023-06-23T14:05:42+08:00
 tag: [电路]
 category: 电子
+star: true
 ---
 
 # 51单片机重学笔记

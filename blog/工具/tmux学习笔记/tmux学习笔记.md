@@ -4,6 +4,7 @@ date: 2022-11-23 03:17:00+08:00
 cover: ./cover/default_cover.jpg
 tag: [tmux]
 category: 工具
+star: true
 # ---article: false--- # 在主页中隐藏
 ---
 

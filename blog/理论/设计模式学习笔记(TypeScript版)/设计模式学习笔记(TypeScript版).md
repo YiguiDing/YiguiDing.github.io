@@ -4,7 +4,7 @@ date: 2023-01-11 05:21:00+08:00
 cover: ./cover/23种设计模式学习笔记.png
 tag: [笔记,设计模式,design pattens,typescript]
 category: 笔记
-
+star: true
 ---
 
 # 设计模式学习笔记(TypeScript版)

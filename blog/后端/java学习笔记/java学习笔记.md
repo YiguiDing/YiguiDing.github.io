@@ -4,6 +4,7 @@ date: 2022-10-22T16:22:00+08:00
 cover: ./cover/java学习笔记.png
 tag: [笔记,java]
 category: 笔记
+star: true
 ---
 
 # java学习笔记

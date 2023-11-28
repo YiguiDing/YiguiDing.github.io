@@ -4,6 +4,7 @@ title: SSM框架学习笔记
 cover: ./cover/SSM框架学习笔记.png
 tag: [SSM]
 category: 后端
+star: true
 ---
 
 # SSM 框架学习笔记

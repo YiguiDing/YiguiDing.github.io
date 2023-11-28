@@ -5,6 +5,7 @@ cover: ./cover/MySql笔记.png
 tag: [笔记,MySql]
 # ---article: false---
 category: 笔记
+star: true
 ---
 
 

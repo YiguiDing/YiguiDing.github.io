@@ -4,6 +4,7 @@ date: 2023-10-19 14:52:00+08:00
 cover: ./cover/最近写的一个小工具dwt-utils.png
 tag: [笔记]
 category: 笔记
+star: true
 # ---article: false---
 ---
 

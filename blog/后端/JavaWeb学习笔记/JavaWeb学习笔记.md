@@ -5,6 +5,7 @@ endDate: 2022-12-04 0:28:00+08:00
 cover: ./cover/JavaWeb学习笔记.png 
 tag: [笔记]
 category: 笔记
+star: true
 # article: false # 在主页中隐藏
 # id: #自定义文章id
 # imageMin: true # 图像压缩

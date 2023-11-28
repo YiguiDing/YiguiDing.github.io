@@ -4,6 +4,7 @@ date: 2022-12-27T12:17:00+08:00
 cover: ./cover/typescript学习笔记.png
 tag: [笔记]
 category: 笔记
+star: true
 
 ---
 

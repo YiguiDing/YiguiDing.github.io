@@ -4,6 +4,7 @@ date: 2023-04-20 08:08:00
 cover: /cover/SpringBoot2学习笔记.png
 tag: [笔记,SpringBoot2,Java]
 category: [笔记,后端]
+star: true
 ---
 
 # SpringBoot2学习笔记

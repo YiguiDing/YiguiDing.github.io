@@ -8,6 +8,7 @@ coverWidth: 1915
 coverHeight: 895
 tag: [笔记,git]
 category: 工具
+star: true
 # ---article: false--- # 在主页中隐藏
 ---
 

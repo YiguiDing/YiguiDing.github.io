@@ -6,6 +6,7 @@ cover: ./cover/default_cover.jpg
 tag: [SQL]
 # ---article: false---
 category: 笔记
+star: true
 ---
 
 

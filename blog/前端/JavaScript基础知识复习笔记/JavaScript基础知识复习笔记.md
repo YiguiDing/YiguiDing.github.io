@@ -8,6 +8,7 @@ cover: ./cover/JavaScript基础知识复习笔记.png
 tag: [JavaScript,前端]
 # article: false
 category: 笔记
+star: true
 ---
 
 
