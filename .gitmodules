@@ -1,6 +1,6 @@
-[submodule "blog/.vuepress/components/vue-live2d"]
-	path = blog/.vuepress/components/vue-live2d
-	url = git@github.com:YiguiDing/vue-live2d.git
-[submodule "blog/.vuepress/public/live2d-static-api"]
-	path = blog/.vuepress/public/live2d-static-api
-	url = git@github.com:YiguiDing/live2d-static-api.git
+[submodule "blog/.vuepress/public/vue3-live2d-static-api"]
+	path = blog/.vuepress/public/vue3-live2d-static-api
+	url = git@github.com:YiguiDing/vue3-live2d-static-api.git
+[submodule "blog/.vuepress/components/vue3-live2d"]
+	path = blog/.vuepress/components/vue3-live2d
+	url = git@github.com:YiguiDing/vue3-live2d.git
