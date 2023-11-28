@@ -19,7 +19,6 @@ onMounted(async () => {
       zIndex: 99,
       // 返回顶部 100
     }"
-    :homePage="'/'"
     width="300"
     height="300"
     resolution="3"
