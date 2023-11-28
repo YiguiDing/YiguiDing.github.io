@@ -2,7 +2,7 @@
 import { onMounted, shallowRef } from "vue";
 let VueLive2D = shallowRef(null);
 onMounted(async () => {
-  VueLive2D.value = (await import("./vue-live2d/src/index.vue")).default;
+  VueLive2D.value = (await import("vue3-live2d")).default;
 });
 </script>
 <template>
@@ -23,7 +23,7 @@ onMounted(async () => {
     width="300"
     height="300"
     resolution="3"
-    apiPath="/live2d-static-api/indexes"
+    apiPath="/vue3-live2d-static-api/indexes"
     :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
   />
 </template>

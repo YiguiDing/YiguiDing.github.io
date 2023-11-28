@@ -30,12 +30,13 @@
   },
   "dependencies": {
     "@vue/repl": "^2.7.0",
-    "@vuepress/bundler-vite": "^2.0.0-beta.68",
+    "@vuepress/bundler-vite": "2.0.0-rc.0",
     "axios": "^1.6.2",
     "katex": "^0.16.9",
-    "vuepress": "^2.0.0-beta.68",
-    "vuepress-plugin-search-pro": "^2.0.0-beta.251",
-    "vuepress-theme-hope": "^2.0.0-beta.251"
+    "vue3-live2d": "^0.0.1",
+    "vuepress": "2.0.0-rc.0",
+    "vuepress-plugin-search-pro": "2.0.0-rc.1",
+    "vuepress-theme-hope": "2.0.0-rc.1"
   },
   "config": {
     "commitizen": {

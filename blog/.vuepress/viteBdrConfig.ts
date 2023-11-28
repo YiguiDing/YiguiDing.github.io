@@ -6,7 +6,7 @@ import { viteBundler } from "@vuepress/bundler-vite";
 export const viteBundlerConfig = viteBundler({
   viteOptions: {
     build: {
-      target: ['es2015', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+      target: ["es2015", "edge88", "firefox78", "chrome87", "safari14"],
     },
     css: {
       postcss: {
@@ -18,5 +18,10 @@ export const viteBundlerConfig = viteBundler({
       },
     },
   },
-  vuePluginOptions: {},
+  vuePluginOptions: {
+    script: {
+      defineModel: true,
+      propsDestructure: true,
+    },
+  },
 });
