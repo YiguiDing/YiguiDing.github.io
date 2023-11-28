@@ -20,8 +20,9 @@ onMounted(async () => {
       // 返回顶部 100
     }"
     :homePage="'/'"
-    direction="right"
-    size="300"
+    width="300"
+    height="300"
+    resolution="3"
     apiPath="/live2d-static-api/indexes"
     :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
   />
