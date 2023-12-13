@@ -53,6 +53,7 @@ export const themeConfig = hopeTheme({
       Telegram: "https://t.me/Yigui_Ding",
       Steam: "https://steamcommunity.com/profiles/76561198860211659/",
       Wechat: "https://u.wechat.com/MH91sJy7fFJmV5WVsHOa7ho",
+      Rss: "/rss.xml",
     },
     articlePerPage: 5,
   },
@@ -142,10 +143,10 @@ export const themeConfig = hopeTheme({
       },
       // mathjax: true,
     },
-    // feed: {
-    //   rss: true,
-    //   rssOutputFilename: "rss.xml",
-    // },
+    feed: {
+      rss: true,
+      rssOutputFilename: "rss.xml",
+    },
     seo: {
       customHead: function (head, page, app) {
         head.push([
