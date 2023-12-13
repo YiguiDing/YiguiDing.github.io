@@ -94,8 +94,12 @@ export const themeConfig = hopeTheme({
       categoryId: "DIC_kwDOKtsDVc4Ca96V",
     },
     pwa: {
-      maxSize: 10240,
-      maxPicSize: 10240,
+      // 提示用户他可能在阅读已过时的内容
+      update: "hint",
+      // cachePic: true,
+      // cacheHTML: true,
+      // maxSize: 10240,
+      // maxPicSize: 10240,
       manifest: {
         name: "Yigui-Ding的Blog小站",
         short_name: "Yigui-Ding的Blog小站",
