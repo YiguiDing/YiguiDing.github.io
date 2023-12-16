@@ -120,6 +120,10 @@ export const themeConfig = hopeTheme({
       gfm: true,
       // 文字高亮
       mark: true,
+      // 选项卡
+      tabs: true,
+      // 代码选项卡
+      codetabs: true,
       // 任务列表
       tasklist: true,
       // 图片懒加载(设置为true时会和图片预览插件冲突)
