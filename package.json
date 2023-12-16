@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "submodule_install": "git submodule update --init --recursive",
-    "update": "npx vp-update",
+    "vp-update": "npx vp-update",
+    "ncu": "npx npm-check-updates -u",
     "dev": "vuepress dev blog",
     "dev:clean-dev": "vuepress dev blog --clean-cache",
     "build": "vuepress build blog",
@@ -25,12 +26,13 @@
     "cz-conventional-changelog": "^3.3.0",
     "execa": "^8.0.1",
     "less": "^4.2.0",
-    "markdownlint-cli": "^0.37.0",
+    "markdownlint-cli": "^0.38.0",
+    "npm-check-updates": "^16.14.12",
     "postcss-preset-env": "^9.3.0",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.1"
   },
   "dependencies": {
-    "@vue/repl": "^2.7.0",
+    "@vue/repl": "^3.0.0",
     "@vuepress/bundler-vite": "2.0.0-rc.0",
     "axios": "^1.6.2",
     "katex": "^0.16.9",
@@ -38,8 +40,8 @@
     "vp-update": "^0.5.0",
     "vue3-live2d": "^0.0.1",
     "vuepress": "2.0.0-rc.0",
-    "vuepress-plugin-search-pro": "2.0.0-rc.1",
-    "vuepress-theme-hope": "2.0.0-rc.1"
+    "vuepress-plugin-search-pro": "2.0.0-rc.4",
+    "vuepress-theme-hope": "2.0.0-rc.4"
   },
   "config": {
     "commitizen": {
