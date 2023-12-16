@@ -455,6 +455,15 @@ function B(...args) {
     - (not isntanceof Object) 基本类型（字符串、数值、...）、函数、null、undefined
 - ![](./images/2023-10-23-14-08-36.png)
 
+```ts
+function myNew(constructor,...args){
+  let obj = {}
+  obj.__proto__ = constructor.prototype
+  let result = constructor.apply(obj,args);
+  return result
+}
+```
+
 ### js如何实现继承？
 
 - 原型链继承
