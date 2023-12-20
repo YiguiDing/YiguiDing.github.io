@@ -1,0 +1,22 @@
+import { intrepreter } from "../index";
+
+async function test_intrepreter() {
+  intrepreter(
+    `(
+      print
+      (
+        add
+        "hello world!!!" "\n"
+        "1+1=" (add 1 1) "\n"
+        "2-2=" (sub 2 2) "\n"
+        "3*3=" (mut 3 3) "\n"
+        "4/4=" (div 4 4) "\n"
+      )
+    )`
+  );
+}
+
+async function main() {
+  test_intrepreter();
+}
+main();

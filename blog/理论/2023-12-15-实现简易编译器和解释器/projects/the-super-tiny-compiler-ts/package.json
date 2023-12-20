@@ -1,0 +1,11 @@
+{
+  "name": "the-super-tiny-compiler-ts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npm run test_compiler && npm run test_intrepreter",
+    "test_compiler": "npx ts-node ./src/test/test_compiler.ts > test_compiler_output.txt",
+    "test_intrepreter": "npx ts-node ./src/test/test_intrepreter.ts > test_intrepreter_output.txt"
+  },
+  "license": "CC-BY-4.0",
+  "main": "./src/index.ts"
+}
