@@ -1,0 +1,228 @@
+源代码:
+
+      def fbnq(def max){
+        def a=1,b=1,c;
+        while(a<max){
+          print(a);
+          c = b;
+          b = a + b;
+          a = c;
+        }
+      };
+
+      def main(){
+        fbnq(200); // 输出200以内斐波那契数列
+      };
+      main();
+    
+解释器执行结果:
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+源代码词法分析结果:
+[
+  { type: 'def', value: 'def' },
+  { type: 'Identifier', value: 'fbnq' },
+  { type: '(', value: '(' },
+  { type: 'def', value: 'def' },
+  { type: 'Identifier', value: 'max' },
+  { type: ')', value: ')' },
+  { type: '{', value: '{' },
+  { type: 'def', value: 'def' },
+  { type: 'Identifier', value: 'a' },
+  { type: 'AssignOpSimple', value: '=' },
+  { type: 'Number', value: '1' },
+  { type: ',', value: ',' },
+  { type: 'Identifier', value: 'b' },
+  { type: 'AssignOpSimple', value: '=' },
+  { type: 'Number', value: '1' },
+  { type: ',', value: ',' },
+  { type: 'Identifier', value: 'c' },
+  { type: ';', value: ';' },
+  { type: 'while', value: 'while' },
+  { type: '(', value: '(' },
+  { type: 'Identifier', value: 'a' },
+  { type: 'EqualityOp', value: '<' },
+  { type: 'Identifier', value: 'max' },
+  { type: ')', value: ')' },
+  { type: '{', value: '{' },
+  { type: 'Identifier', value: 'print' },
+  { type: '(', value: '(' },
+  { type: 'Identifier', value: 'a' },
+  { type: ')', value: ')' },
+  { type: ';', value: ';' },
+  { type: 'Identifier', value: 'c' },
+  { type: 'AssignOpSimple', value: '=' },
+  { type: 'Identifier', value: 'b' },
+  { type: ';', value: ';' },
+  { type: 'Identifier', value: 'b' },
+  { type: 'AssignOpSimple', value: '=' },
+  { type: 'Identifier', value: 'a' },
+  { type: 'AddOp', value: '+' },
+  { type: 'Identifier', value: 'b' },
+  { type: ';', value: ';' },
+  { type: 'Identifier', value: 'a' },
+  { type: 'AssignOpSimple', value: '=' },
+  { type: 'Identifier', value: 'c' },
+  { type: ';', value: ';' },
+  { type: '}', value: '}' },
+  { type: '}', value: '}' },
+  { type: ';', value: ';' },
+  { type: 'def', value: 'def' },
+  { type: 'Identifier', value: 'main' },
+  { type: '(', value: '(' },
+  { type: ')', value: ')' },
+  { type: '{', value: '{' },
+  { type: 'Identifier', value: 'fbnq' },
+  { type: '(', value: '(' },
+  { type: 'Number', value: '200' },
+  { type: ')', value: ')' },
+  { type: ';', value: ';' },
+  { type: '}', value: '}' },
+  { type: ';', value: ';' },
+  { type: 'Identifier', value: 'main' },
+  { type: '(', value: '(' },
+  { type: ')', value: ')' },
+  { type: ';', value: ';' }
+]
+源代码文法分析结果:
+{
+  type: 'Program',
+  statements: [
+    {
+      type: 'IdentifierDeclarationsStatement',
+      declarations: [
+        {
+          type: 'FunctionDeclaration',
+          name: 'fbnq',
+          FormedArguments: [
+            {
+              type: 'VariableDeclaration',
+              name: 'max',
+              value: undefined
+            }
+          ],
+          statements: {
+            type: 'BlockStatement',
+            statements: [
+              {
+                type: 'IdentifierDeclarationsStatement',
+                declarations: [
+                  {
+                    type: 'VariableDeclaration',
+                    name: 'a',
+                    value: { type: 'NumberLiteral', value: '1' }
+                  },
+                  {
+                    type: 'VariableDeclaration',
+                    name: 'b',
+                    value: { type: 'NumberLiteral', value: '1' }
+                  },
+                  {
+                    type: 'VariableDeclaration',
+                    name: 'c',
+                    value: undefined
+                  }
+                ]
+              },
+              {
+                type: 'WhileStatement',
+                condition: {
+                  type: 'BineryExpression',
+                  operator: '<',
+                  left: { type: 'Identifier', name: 'a' },
+                  right: { type: 'Identifier', name: 'max' }
+                },
+                statement: {
+                  type: 'BlockStatement',
+                  statements: [
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'FunctionCall',
+                        calee: { type: 'Identifier', name: 'print' },
+                        args: [ { type: 'Identifier', name: 'a' } ]
+                      }
+                    },
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'AssignExpression',
+                        operator: '=',
+                        left: { type: 'Identifier', name: 'c' },
+                        right: { type: 'Identifier', name: 'b' }
+                      }
+                    },
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'AssignExpression',
+                        operator: '=',
+                        left: { type: 'Identifier', name: 'b' },
+                        right: {
+                          type: 'BineryExpression',
+                          operator: '+',
+                          left: { type: 'Identifier', name: 'a' },
+                          right: { type: 'Identifier', name: 'b' }
+                        }
+                      }
+                    },
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'AssignExpression',
+                        operator: '=',
+                        left: { type: 'Identifier', name: 'a' },
+                        right: { type: 'Identifier', name: 'c' }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      type: 'IdentifierDeclarationsStatement',
+      declarations: [
+        {
+          type: 'FunctionDeclaration',
+          name: 'main',
+          FormedArguments: [],
+          statements: {
+            type: 'BlockStatement',
+            statements: [
+              {
+                type: 'ExpressionStatement',
+                expression: {
+                  type: 'FunctionCall',
+                  calee: { type: 'Identifier', name: 'fbnq' },
+                  args: [ { type: 'NumberLiteral', value: '200' } ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'FunctionCall',
+        calee: { type: 'Identifier', name: 'main' },
+        args: []
+      }
+    }
+  ]
+}
