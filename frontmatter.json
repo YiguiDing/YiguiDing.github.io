@@ -1,0 +1,46 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": true,
+      "previewPath": "./blog/.vuepress/public/",
+      "fields": [
+        {
+          "title": "文章标题",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "创建时间",
+          "name": "date",
+          "type": "datetime"
+        },
+        {
+          "title": "文章封面",
+          "name": "cover",
+          "type": "string",
+          "isPreviewImage": true
+        },
+        {
+          "title": "标签",
+          "name": "tag",
+          "type": "tags"
+        },
+        {
+          "title": "分类",
+          "name": "category",
+          "type": "categories"
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.id": "other",
+  "frontMatter.content.publicFolder": "./blog/.vuepress/public/",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/blog/"
+    }
+  ]
+}
