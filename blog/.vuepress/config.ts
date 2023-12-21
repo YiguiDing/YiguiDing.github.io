@@ -17,6 +17,7 @@ export default defineUserConfig({
     "!**/.vuepress/**",
     "!**/node_modules/**",
     "!**/projs/**",
+    "!**/.*/**", // 忽略所有隐藏文件和文件夹
     "!草稿/**",
   ],
   // 插件配置
