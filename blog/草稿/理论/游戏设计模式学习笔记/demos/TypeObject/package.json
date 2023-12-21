@@ -1,0 +1,12 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "ts-node ./src/index.ts > output.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

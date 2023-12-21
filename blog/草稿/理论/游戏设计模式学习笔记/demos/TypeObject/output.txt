@@ -1,0 +1,36 @@
+Monster{
+  "parent": null,
+  "health": 25,
+  "attack_type": "攻击方式1",
+  "name": "Troll"
+}
+attack:
+攻击方式1
+Monster{
+  "parent": {
+    "parent": null,
+    "health": 25,
+    "attack_type": "攻击方式1",
+    "name": "Troll"
+  },
+  "health": 123,
+  "attack_type": "攻击方式1",
+  "name": "Troll_Archer",
+  "parent_name": "Troll"
+}
+attack:
+攻击方式1
+Monster{
+  "parent": {
+    "parent": null,
+    "health": 25,
+    "attack_type": "攻击方式1",
+    "name": "Troll"
+  },
+  "health": 111,
+  "attack_type": "攻击方式3",
+  "name": "Troll_Wizard",
+  "parent_name": "Troll"
+}
+attack:
+攻击方式3

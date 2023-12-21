@@ -1,8 +1,12 @@
 ---
-title: 《游戏设计模式（game-programming-patterns）》学习笔记
+title: 《游戏设计模式》学习笔记
+description: 《游戏设计模式(game-programming-patterns)》学习笔记
 date: 2023-12-13T21:21:00+08:00
 cover: /cover/gameprogrammingpatterns.png
-tag: [笔记, 游戏, 设计模式]
+tag:
+  - 笔记
+  - 游戏
+  - 设计模式
 category: 笔记
 ---
 
@@ -23,7 +27,7 @@ category: 笔记
     - [命令模式](#命令模式)
       - [配置输入](#配置输入)
       - [使用命令模式改写优化](#使用命令模式改写优化)
-      - [角色说明](#角色说明)
+      - [和玩家解耦](#和玩家解耦)
       - [通过命令模式完成撤销操作](#通过命令模式完成撤销操作)
       - [对多重撤销操作的支持](#对多重撤销操作的支持)
       - [闭包函数与命令模式](#闭包函数与命令模式)
@@ -44,7 +48,8 @@ category: 笔记
   - [序列模式](#序列模式)
     - [双缓冲模式](#双缓冲模式)
   - [行为模式](#行为模式)
-    - [类型对象](#类型对象)
+    - [类型对象（Type Object）](#类型对象type-object)
+      - [从JSON配置中加载并构建物种](#从json配置中加载并构建物种)
 
 ## 前言：架构，性能和游戏
 
@@ -178,9 +183,9 @@ class InputHandler {
 ![](./images/command-buttons-two.png)
 :::
 
-#### 角色说明
+#### 和玩家解耦
 
-> 之前的写法其实是假设execute函数能够直接操作玩家  
+> 之前的写法其实是假设在execute()函数能够直接操作玩家  
 > 现在要进一步解耦，使得命令可以操作除玩家自己之外的角色
 
 ```ts
@@ -1664,7 +1669,7 @@ class RunningOnGround extends OnGroundState {
 
 ## 行为模式
 
-### 类型对象
+### 类型对象（Type Object）
 
 **存粹通过继承来实现游戏中物种多样性存在的问题**
 
@@ -1672,22 +1677,26 @@ class RunningOnGround extends OnGroundState {
 - 即使你可以通过继承一个功能完备的基类来省去大量代码的编写，你仍然要编写这个类。
 - 修改成本很高，某物种的某属性值需要改变，你不得不重新编译整个游戏。
 
-::: tip 虽然不完美，但足够简单
+**通过继承来实现物种多样性的具体案例：**
 
-其实如果你的游戏足够简单，你完全不用担心这些，下面这种写法足够了。
-
-:::
-
-**具体案例：**
-
-::: tabs
+:::::: tabs
 
 @tab 继承关系图
 
-![](images/type-object-subclasses.png)
+::: warning
 
-> - 当你需要的物种越多，需要定义的类就越多。
-> - 当你需要修改某参数，须重新编译整个游戏。
+- 当你需要的物种越多，需要定义的类就越多。
+- 当你需要修改某参数，须重新编译整个游戏。
+
+:::
+
+::: tip 虽然不完美，但足够简单
+
+其实我感觉，如果你的游戏足够简单，完全不用担心这些，这种写法足够了。
+
+:::
+
+![](images/type-object-subclasses.png)
 
 @tab Monster.cpp
 
@@ -1734,12 +1743,29 @@ public:
 };
 ```
 
-:::
+::::::
+
+**为类型建类（A class for a class）**
+
+> 为了解决上述提到的问题，这里作者给了一种方案，我简单总结为：
+>
+> - 创建一个怪物类，让其拥有大量属性和方法；
+> - 创建一个物种类，用于加载配置文件；配置的参数不同，代表的物种就不同。
+> - 怪物类需要通过物种类来初始化其参数，使用不同的物种类，就能得到不同物种的怪物。
+> - 这样就仅通过两个类实现了不同物种的怪物。
+
+:::tabs
+
+@tab 类图
+
+![images/type-object-breed.png](images/type-object-breed.png)
+
+@tab 简易实现
 
 ```ts
-// 物种
+// 物种（类型对象）
 class Species {
-  constructor(health: number, attack: attackType) {
+  constructor(health: number, attack: AttackType) {
     this.health = health;
     this.attack = attack;
   }
@@ -1762,3 +1788,172 @@ class Monster {
   }
 }
 ```
+
+@tab 使用
+
+```ts
+// 现在这样使用
+Monster monster = new Monster(someBreed);
+```
+
+@tab 私有构造器
+
+```ts
+class Breed {
+  // 作者称：`That’s our “constructor” factory method.`
+  newMonster() {
+    return new Monster(this);
+  }
+
+  // 其实我感觉物种类不需要实例对象，他应该只负责加载物种配置文件，
+  // 把参数存到静态变量上，所以方法也应该写成静态的：
+  static newMonster() {
+    return new Monster(Breed);
+  }
+  // 不对，这样加载第二个配置文件不就把第一个给覆盖了吗？
+}
+```
+
+```cpp
+// 这里其实是用了c++的概念，难以翻译成ts,作者其实就是想让Monster只能被Breed类实例化。
+class Monster {
+  // 表示Breed是Monster的友元。
+  friend: class Breed;
+  // 私有化构造器，使得只有友元能调用构造器。
+  private: Monster(Breed breed){}
+  private: Breed breed;
+}
+```
+
+其实没太理解这部分，似乎Monster可以直接舍弃掉？直接由Breed加载配置，然后实例化？
+
+不对，这样每实例化一个Breed就都要加载一次配置文件啊！
+
+@tab 使用
+
+```ts
+// 现在只有某个物种的实例对象能创建Monster
+Monster monster = someBreed.newMonster();
+```
+
+:::
+
+:::tip 优点
+
+如果你的游戏需要支持资料包，而资料包有新的怪物品种，这种模式可以很好的支持
+
+- 可能有未知的类型将在后续添加
+- 不必改变代码并重新编译
+
+:::
+
+:::tip 缺点
+
+- 现在游戏中只有Monster的实例对象，在开发中若想则必须手动追踪一个物种。
+- 更难为每个物种定义行为，
+  - 因为你写到配置文件中的只能字符串，只能预定义一些行为，然后填写行为的id。
+  - 如果需要让不同的物种行为是不同的AI,也只能预定义一些AI,然后填写其编号。
+  - 否则考虑行为模式中的解释器和字节码模式。
+
+:::
+
+**两种实现继承的方法**
+
+:::tabs
+
+@tab 方法一：动态地从父类上获取
+
+> 这种方式使得运行过程中，父类物种发生了改变，子类中也会同步的改变。缺点显然就是效率会低一些。
+
+```ts
+class Species {
+  constructor(parent: Species, health: number, attack: AttackType) {
+    this.parent = parent;
+    this.health = health;
+    this.attack = attack;
+  }
+  // 下面的两种写法其实是一个意思。
+  getHealth() {
+    // 自己没有该属性，但有父类，就问父类要
+    if (this.health == undefined && this.parent) return this.parent.getHealth();
+    else return this.health;
+  }
+  getAttack() {
+    // 没有父类，或者拥有该属性，就用自己的
+    if (!this.parent || this.attack) return this.attack;
+    else return this.parent.getAttack();
+  }
+}
+```
+
+@tab 方法二：在初始化时从父类获取
+
+> 这种方式使得配置文件中没有为子类定义的属性，子类会在初始化时就自动的去从父类中寻找值来初始化，且只会寻找一次。
+
+```ts
+class Species {
+  constructor(parent: Species, health: number, attack: AttackType) {
+    // 优先用传给自己的值，否则到父级上去获取。
+    this.health = health || parent?.getHealth();
+    this.attack = attack || parent?.getAttack();
+    // 现在不再需要给父品种字段了,因为已经拷贝了它的所有属性。
+    // this.parent = parent;
+  }
+  getHealth() {
+    return this.health;
+  }
+  getAttack() {
+    return this.attack;
+  }
+}
+```
+
+:::
+
+#### 从JSON配置中加载并构建物种
+
+假设游戏引擎从品种的JSON文件加载设置然后创建类型。它看上去是这样的：
+
+这描述三个物种之间的继承关系，由于派生类的血量为0，所以其血量会从父类继承，这也意味这改变父类的血量将影响到所有子类的血量，这就非常完美。
+
+```json
+{
+  "Troll": {
+    "health": 25,
+    "attack": "The troll hits you!"
+  },
+  "Troll Archer": {
+    "parent": "Troll",
+    "health": 0,
+    "attack": "The troll archer fires an arrow!"
+  },
+  "Troll Wizard": {
+    "parent": "Troll", // 这表示父类是谁
+    "health": 0, // 这表示该字段的值将从父类继承
+    "attack": "The troll wizard casts a spell on you!"
+  }
+}
+```
+
+**尝试实现**
+
+> 以下是我尝试在ts中实现的根据JSON字符串自动构建物种实例的案例，实现了:
+>
+> - 通过SpeciesFactory来加载配置文件
+> - 通过SpeciesFactory来构建物种
+> - 构建物种时如果需要继承某个父类，则需要预先构建其父类。
+
+:::code-tabs
+@tab config.ts
+@[code ts](./demos/TypeObject/src/config.ts)
+@tab Species.ts
+@[code ts](./demos/TypeObject/src/Species.ts)
+@tab SpeciesFactory.ts
+@[code ts](./demos/TypeObject/src/SpeciesFactory.ts)
+@tab Monster.ts
+@[code ts](./demos/TypeObject/src/Monster.ts)
+@tab index.ts
+@[code ts](./demos/TypeObject/src/index.ts)
+@tab output.txt
+@[code sh](./demos/TypeObject/output.txt)
+:::
