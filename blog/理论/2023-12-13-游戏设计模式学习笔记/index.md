@@ -12,7 +12,7 @@ category: 笔记
 
 # 《游戏设计模式（game-programming-patterns）》学习笔记
 
-![Alt text](cover/gameprogrammingpatterns.png)
+![](cover/gameprogrammingpatterns.png)
 
 **关于原书作者**
 
@@ -50,6 +50,12 @@ category: 笔记
   - [行为模式](#行为模式)
     - [类型对象（Type Object）](#类型对象type-object)
       - [从JSON配置中加载并构建物种](#从json配置中加载并构建物种)
+  - [解耦模式](#解耦模式)
+    - [组件模式](#组件模式)
+    - [事件队列](#事件队列)
+    - [服务定位器](#服务定位器)
+  - [优化模式](#优化模式)
+    - [数据局部性](#数据局部性)
 
 ## 前言：架构，性能和游戏
 
@@ -1957,3 +1963,629 @@ class Species {
 @tab output.txt
 @[code sh](./demos/TypeObject/output.txt)
 :::
+
+## 解耦模式
+
+### 组件模式
+
+这里的组件模式，我简单总结为：
+
+为了避免一个函数中太多不相关的部分（物理、渲染、声音等）交织在一起，可以将这些部分拆分为组件，分别管理。
+
+**比如**
+
+```ts
+class Hero {
+  update() {
+    // 物理，渲染，声音....在此处产生了耦合
+    // 这使得理解代码变得困难
+    // 也使得某些函数的实现不能轻易修改
+    if (collidingWithFloor() && getRenderState() != INVISIBLE) {
+      playSound(HIT_FLOOR);
+    }
+  }
+}
+```
+
+**组件模式**
+
+- 优点
+  - 组件现在可以复用到其他的类中，
+  - 组件甚至可以通过继承来实现更强大的功能。
+- 组合优于继承。
+  - 考虑一个案例：
+  - 装饰：玩家可见，不可交互的部分。灌木 ，杂物。`渲染组件`
+  - 区域：看不见，但可互动。`物理组件`
+  - 道具：可见，可交互。箱子，树木。`渲染组件 + 物理组件`
+
+```ts
+// GameObject基类，包含位置和方向之类的通用部分。
+class GameObject {
+  pos: Vector2D;
+  input: InputComponent | null;
+  sounds: SoundsComponent | null;
+  physics: PhysicsComponent | null;
+  graphics: GraphicsComponent | null;
+}
+// 物理组件
+class PhysicsComponent {
+  update(obj: GameObject) {}
+}
+// 渲染组件
+class GraphicsComponent {
+  update(obj: GameObject) {}
+}
+// 音效组件
+class SoundsComponent {
+  update(obj: GameObject) {}
+}
+// 输入组件
+class InputComponent {
+  update(obj: GameObject) {}
+}
+```
+
+::: warning 复杂度的提升和性能的降低
+
+- 对象的实例化变复杂了，组件间的沟通变得复杂了
+- 对于大型游戏，为了解耦和重用，这种付出是值得的
+- 使用这种模式导致多了一层函数调用，这将导致性能降低
+- 要防止过度设计，要考虑是否真的需要这种模式
+
+:::
+
+**伪代码案例**
+
+```ts
+class Hero extends GameObject {
+  pos: Vendor2d; // 位置
+  dir: Vendor2d; // 方向
+  vel: Vendor2d; // 速度
+  // 面向接口编程
+  input: InputComponent;
+  physics = new PhysicsComponent();
+  graphics = new GraphicsComponent();
+  comstructor(input: InputComponent) {
+    // 这使得双人游戏、演示模式可以很好的实现
+    this.input = input;
+  }
+  update(world: World, graphics: Graphics, dt: number) {
+    // 这样就防止了不同部分的代码全部挤在这里的update方法里。
+    input.update(this);
+    physics.update(this, world, dt);
+    graphics.update(this, graphics);
+  }
+}
+class HeroPhysicsComponent extends PhysicsComponent {
+  volume: number;
+  update(hero: Hero, world: World, dt: number) {
+    // 获取当前位置的速度衰减系数
+    let k = world.getDecFactor(hero.pos);
+    // 速度衰减 v(t) = v(t0) * e^(-kt)
+    this.vel.mul(Math.pow(Math.E, -1 * k * dt));
+    // 计算位移
+    hero.pos.add(hero.vel.mut(dt));
+    // 处理碰撞
+    world.resolveCollision(volume, hero.pos, hero.velocity);
+  }
+}
+class HeroGraphicsComponent extends GraphicsComponent {
+  sprites = [spriteStand, spriteWalkLeft, spriteWalkRight];
+  update(hero: Hero, ctx: Graphics) {
+    let sprite = sprites[0];
+    if (hero.vel.len() < 0) {
+      sprite = sprites[1];
+    } else if (hero.vel.len() > 0) {
+      sprite = sprites[2];
+    }
+    ctx.draw(sprite, hero.pos);
+  }
+}
+class HeroInputComponent extends InputComponent {
+  WALK_ACCELERATION = 1;
+  update(hero: Hero) {
+    switch (Controller.getJoystickDirection()) {
+      case DIR_LEFT:
+        hero.vel.add(-WALK_ACCELERATION);
+        break;
+      case DIR_RIGHT:
+        hero.vel.add(+WALK_ACCELERATION);
+        break;
+    }
+  }
+}
+```
+
+**演示模式**
+
+```ts
+// 玩家操作
+hero = new Hero(new HeroInputComponent());
+// 演示模式
+hero = new Hero(new DemoInputComponent());
+```
+
+**删掉Hero**
+
+上述写法显然使得Hero类成了一个空壳子，这使得移除这个类成为可能。
+
+另外，就像在上一章“类型对象”中说讨论的那样，移除类有很多优点，可以使得游戏从由代码驱动转变为由数据驱动。
+
+```ts
+class GameObject {
+  pos: Vendor2d; // 位置
+  dir: Vendor2d; // 方向
+  vel: Vendor2d; // 速度
+  input: InputComponent;
+  physics: PhysicsComponent;
+  graphics: GraphicsComponent;
+  private comstructor(
+    input: InputComponent,
+    physics: PhysicsComponent,
+    graphics: GraphicsComponent
+  ) {
+    this.input = input;
+    this.physics = physics;
+    this.graphics = graphics;
+  }
+  update(world: World, graphics: Graphics, dt: number) {
+    input.update(this);
+    physics.update(this, world, dt);
+    graphics.update(this, graphics);
+  }
+}
+
+class GameObject {
+  // 这样只要传入相应的组件，就能创建游戏对象。
+  static creat(
+    input: InputComponent,
+    physics: PhysicsComponent,
+    graphics: GraphicsComponent
+  ) {
+    return new GameObject(input, physics, graphics);
+  }
+}
+```
+
+**组件初始化的时机**
+
+- 一旦选择将单个对象拆分成多个分离的组件，就需要考虑什么时候来初始化组件的问题。
+- 有类自己初始化自己所需的组件。
+  - 这保证了类一定能拿到自己所需的组件
+  - 但如果要替换其中的组件需要做额外的操作。
+- 由外部初始化类的组件
+  - 这使得对象更灵活，可以通过多种不同的组合方式得到不同特性的对象。
+  - 对象和具体的类型解耦了，因为此时对象的组件一定是面向接口编程的。
+
+**几种组件间的通信方式**
+
+> 拆分组件前，这些组件属于一个整体，就已经说明了他们可能需要互相协作。
+
+1. 共享容器对象的状态。
+   - 比如：输入处理组件修改角色的速度，物理组件根据速度重新计算位置。
+   - 优点：**保持了组件之间的解耦**，输入组件和物理组件都不知道互相的存在。
+   - 缺点：
+     - **浪费内存空间**：因为这使得只要任何两组件间需要交流，就需要在父组件中新定义一个状态，如果组件是可以替换的话，甚至有可能使得存在一个状态但却不被任何组件使用的情况。
+     - **依赖执行顺序**：假设类中存在一个组件去修改某个状态，称之为状态生产者，有两个组件读取该状态，称为状态消耗者。在一帧之内的更新中，如果消耗状态组件的更新函数在生产状态的之后调用，那么在这一帧之内，如果第一个状态消耗组件在消耗状态后初始化状态，那么第二个状态消耗组件就不能接收到这条消息。
+   - 使用场景：对于容器中本身就必然存在的状态就可以使用这种方式，比如位置，速度，方向。
+2. **让组件互相引用**
+   - 比如，渲染组件在更新时需要询问物理组件玩家是否在地面，那就在渲染组件初始化时，直接把物理组件传给他（有时不用传，如果物理组件在容器对象上，组件可以获取到容器对象。），然后直接调用物理组件上的方法来询问。
+   - 优点，简单，高效
+   - 缺点，使得组件之间产生了耦合。
+   - 使用场景：对于动画和渲染，输入和AI,物理和粒子，这些组件虽然被拆分为单独的部分，但联系仍然紧密，互相引用会比较方便。
+3. **发送消息**
+   - 在容器类中建小的消息系统，允许组件相互发送消息。
+   - 优点：
+     - 同级组件解耦：这里所谓的解耦是相对于上面说的"让组件相互引用"的方法。
+     - 使得容器类简洁：所谓的简洁，也是相对于上面所说的"共享容器对象的状态"的方法
+   - 使用场景：对于不重要的通信很有用，比如物理组件、输入组件通知音效组件播放音效。
+
+**发送消息**
+
+```ts
+// class GameObject{
+class ContainerObject {
+  components = new Array<Component>();
+  // 像所有组件发送消息
+  boadcast(msg: Message | number) {
+    this.components.forEach((comp) => comp.receive(msg));
+  }
+}
+interface Component {
+  void receive(msg: Message | number);
+}
+```
+
+**我猜应该这么使用：**
+
+```ts
+class Hero extends ContainerObject {
+  components = [new HeroPhysicsComponent(), new HeroGraphicsComponent()];
+  update(ctx: Context) {
+    this.components.forEach((comp) => comp.update(this, ctx));
+  }
+}
+class HeroPhysicsComponent {
+  update(hero: Hero, physics: PhysicsEngin) {
+    if (physics.collision(hero)) {
+      // 通知组件，发生了碰撞
+      hero.boadcast(COLLISION);
+    }
+  }
+}
+class HeroGraphicsComponent {
+  update(){
+    // ...
+  }
+  void receive(msg: Message | number){
+    switch(msg){
+      // 收到消息发生了碰撞
+      case COLLISION:
+        // 切换动画
+        sprite = COLLISION_SPRITE;
+        break;
+    }
+  }
+}
+```
+
+### 事件队列
+
+:::tip 总结
+
+- 其本质为观察者模式的异步实现。类似与go语言中的“channel通信”
+- 实现方式：添加一个队列
+- 要点：不要让程序的其他部分直接操作队列
+- 优点：
+  - 可以方便的拆分到单独的线程
+  - 解决了同步函数阻塞游戏循环的问题。
+
+:::
+
+**为什么需要事件队列？**
+
+> 或者说，直接调用函数播放声音有什么问题？
+
+- **同步阻塞和波形叠加：**
+  - 如果播放音频的操作是同步的（就是说播放完毕前函数不会返回），则会导致阻塞，使得游戏卡住
+  - 如果播放音频不是同步的，这也存在两个声音在一帧之内同时播放导致波形叠加，声音刺耳的问题。
+- **线程安全问题：**
+  - 一般来说游戏引擎在多核处理器上运行时会存在渲染线程、物理线程等的多个线程，
+  - 这些线程可能同时调用该函数，但该函数是没有锁的，无法保证执行顺序，可能造成潜在的问题；
+  - 但如果单独为声音分配一个线程，这又可能导致，在其他线程都忙于处理各种任务时，音频线程可能会无所作为，无法充分利用多核机器的优势。
+- **立即执行在多线程环境中存在的问题：**
+  - 调用者准备好调用声音播放函数了，但是被调用者可能没有准备好。
+  - 比如说正在被另一个线程所调用。如果有锁，则当前线程需要等待，如果没锁，则会造成线程安全问题。
+
+**不使用事件队列，直接调用函数播放声音的案例**
+
+```ts
+class Audio {
+  static PlaySound(id: SoundId, volume: number) {
+    let resource: ResourceId = loadSound(id);
+    let channel: number = findOpenChannel();
+    if (channel == -1) return;
+    startSound(resource, channel, volume);
+  }
+}
+
+class Menu {
+  onSelect(index: number) {
+    Audio.playSound(SOUND_BLOOP, VOL_MAX);
+    // ......
+    // ...
+  }
+  update() {
+    if (鼠标移入选项框) {
+      this.onSelect();
+    }
+  }
+}
+```
+
+**事件队列示例代码**
+
+- 原文中使用固定长度数组实现了一个循环消息队列，这个不难；
+- 但我这里直接使用js的列表了，因为方便和清晰明了。
+
+```ts
+class Audio {
+  queue = new Array<PlayMessage>();
+  playSound(id: SoundId, volume: int) {
+    queue.enQueue({ id, volume }); // 入队
+  }
+  update() {
+    if (queue.length == 0) return;
+    let playMessage = queue.deQueue(); // 出队
+    // 播放
+    play(playMessage.id);
+  }
+}
+```
+
+**合并请求:防止声音波形叠加**
+
+- 注意这里是在请求入队时合并，而不是处理时。
+  - 在入队时判断则只需要判断入队消息是否和其他重复，时间复杂度O(N)
+  - 在处理时判断，需要判断所有消息是否两两不重复，时间复杂度O(N^2)
+
+```ts
+class Audio {
+  queue = new Array<PlayMessage>();
+  playSound(id: SoundId, volume: int) {
+    // 根据id去重，防止声音波形叠加
+    // 当有两个请求播放同一音频时，将它们合并成只保留声音最大的请求。
+    for (let idx = 0; i < queue.lenght; idx++) {
+      let item = queue[idx];
+      if (item.id == id) {
+        item.volume = max(item.volume, volume);
+        return;
+      }
+    }
+    queue.enQueue({ id, volume }); // 入队
+  }
+}
+```
+
+:::warning 注意
+
+- 如果队列很长，入队操作会因合并操作导致耗时较长，
+  - 解决方法：
+    - 可能在update中合并较为合理
+    - 可以通过其他数据结构，比如hashMap来优化，或者双链表+Map来优化。
+- 另外：
+  - 队列长度、请求的处理速度，会影响合并的频率，
+  - 因为请求速度慢就会导致消息堆积在队列中，队列过长就允许了过多的消息，就有更多的合并机会，更高的合并频率。
+  - 所以这个参数可能需要合理的设置
+
+:::
+
+**中心事件队列**
+
+- 就是一个全局的消息队列
+- 好处是，游戏中所有对象都能收到消息
+- 坏处是，尽管队列被作为一个属性封装在一个类中，但它仍然是全局可访问的，全局对象存在各种问题，比如线程安全。
+
+**事件队列中的状态可能是滞后的**
+
+- **事件消息中应该包含足够多的信息**
+- 如果游戏中事件发生的非常频繁，这就可能导致事件的积压；当被积压的消息被处理时，游戏中各种状态可能已经改变了，这使得消息是滞后于实际游戏状态的。
+- 事件消息中应该尽可能提供多的信息，比如怪物被击杀时，消息中应包含怪物的各种属性，以便在"计算处理经验加成的系统"收到消息时可以直接根据这些属性来计算，否则就需要再从新去找到那个怪物单位，但是由于消息的滞后性，处理消息时怪物可能已经消失了。
+
+**消息闭环**
+
+- 如果A发生消息给B,B处理消息后又发送消息给A,A收到消息后又向B响应，这就会导致消息闭环。
+- 如果消息是同步的，这会造成栈溢出。
+- 如果消息是异步的，游戏仍然能运行。
+- 避免消息闭环的发生，就要避免在处理消息时发送消息。
+
+**将音频处理拆分到单独的线程**
+
+- 当前消息的发送者和消息的接受处理者在同一个线程，如果播放音频的API是同步的，这将导致游戏主循环阻塞卡顿。
+- 所以，也是一般来说，音频处理会被拆分到一个单独的线程。
+- 目前，在这种事件队列的设计模式下，可以比较轻松的完成。因为：
+  1. **请求播放音频的代码和实际执行播放音频的代码是分离的。** A线程调用请求播放音频不用担心被阻塞，因为播放音频的代码在B线程被执行。
+  2. **队列充当了缓冲区**，队列的存在帮助管理并发问题，确保请求的有序处理。
+  3. **队列是和程序的其他部分隔离的**
+- 唯一需要做的操作可能就是：**给队列加锁**，因为可能有多个线程同时调用请求播放音频的代码，这会操作队列，音频线程也可能在这时去读取队列,这就需要保证线程安全。
+
+### 服务定位器
+
+**为什么需要服务定位器？**
+
+> 传统方式访问服务点的缺点?
+
+考虑音频作为例子。 它要接触一大堆游戏系统。
+
+- 滚石撞击地面（物理）。
+- NPC开枪（AI）。
+- 用户选择菜单项时的反馈（UI）。
+
+每处都需要用像下面这样的东西调用音频系统：
+
+```c++
+// 使用静态函数
+AudioSystem::playSound(VERY_LOUD_BANG);
+// 使用单例
+AudioSystem::instance()->playSound(VERY_LOUD_BANG);
+```
+
+每个调用音频系统的游戏部分直接引用了具体的AudioSystem类，和依赖访问它的机制(静态类or单例?)。
+
+需要耦合到某些东西上来播放声音， 但是**直接接触到具体的音频实现，就好像给了一百个陌生人你家的地址，只是为了让他们在门口放一封信。 这不仅仅是隐私问题，在你搬家后，需要告诉每个人新地址是个更加痛苦的问题。**
+
+**模式**
+
+- 服务 类定义了一堆操作的抽象接口。
+- 具体的服务提供者实现这个接口。
+- 分离的服务定位器提供了通过查询获取服务的方法，同时隐藏了服务提供者的具体细节和定位它的过程。
+
+**案例代码**
+
+```ts
+interface Audio {
+  playSound(soundID: int);
+  stopSound(soundID: int);
+  stopAllSounds();
+}
+class NullAudio implements Audio {
+  playSound(soundID: int) {
+    /* 什么也不做 */
+  }
+  stopSound(soundID: int) {
+    /* 什么也不做 */
+  }
+  stopAllSounds() {
+    /* 什么也不做 */
+  }
+}
+class ConsoleAudio implements Audio {
+  playSound(soundID: int) {
+    // 使用主机音频API播放声音……
+  }
+  stopSound(soundID: int) {
+    // 使用主机音频API停止声音……
+  }
+  stopAllSounds() {
+    // 使用主机音频API停止所有声音……
+  }
+}
+```
+
+```ts
+class Locator {
+  static service = new NullAudio();
+  static getAudio() {
+    return service;
+  }
+  static provide(service: Audio) {
+    // 防止service为空
+    this.service = service || new NullAudio();
+  }
+}
+```
+
+```ts
+class Game{
+  init(){
+    if(isDevMode){
+      Locator::provide(new ConsoleAudio());
+    }else{
+      Locator::provide(new RealAudio());
+    }
+    Locator::getAudio().playSound(GAME_INIT_DONE);
+  }
+}
+```
+
+## 优化模式
+
+### 数据局部性
+
+- **目的：** 加速内存读取
+- **方法：** 通过合理组织数据，充分利用CPU缓存
+- **原因：** 芯片速度递增，但RAM读取速度增长缓慢，导致数据获取成为性能瓶颈。
+
+**CPU和RAM性能极度不匹配的问题：**
+
+- 从1980年到2010年，CPU速度迅速增长，而RAM速度增长相对缓慢。
+- 硬件巨头未强调数据获取速度的不足，导致软件无法充分利用硬件性能提升。
+- ![](images/data-locality-chart.png)
+
+**CPU缓存：**
+
+- **缓存工作原理：**
+  - 芯片内部有小块高速存储器（缓存），比RAM读取速度更快。
+  - 缓存分为多层，每一层更大但速度更慢。
+  - 缓存通过加载一整块内存（cache line）提高效率。
+- **缓存不命中：**
+  - 缓存不命中会导致CPU等待几百个周期直到从RAM获取数据。
+  - CPU在缓存不命中时空转，影响性能。
+
+**什么是数据局部性？**
+
+- 数据局部性是指在程序执行过程中，对同一块内存区域的重复访问。
+- 数据局部性的概念是为了更有效地利用计算机内存层次结构中的缓存系统而提出的。
+  - 计算机的缓存系统通常按照块（cache line）的方式工作，即一次性加载一块内存数据到缓存中
+- 在设计程序时考虑并利用数据局部性，可以减少缓存未命中的发生，进而提高程序的执行效率和性能。
+- 在许多算法和数据结构的设计中，都考虑了数据局部性以优化内存访问模式。
+- 有两种主要的数据局部性：
+  - **时间局部性（Temporal Locality）：** 如果一个数据在最近的过去被访问过，那么在短期内它很可能会再次被访问。这种情况下，程序倾向于多次使用相同的数据。时间局部性是指程序在时间维度上对同一数据的重复访问。
+  - **空间局部性（Spatial Locality）：** 如果一个数据被访问，那么与该数据相邻的数据也很可能会被访问。在空间局部性中，程序倾向于访问相邻的数据，即使这些数据不是直接相关的。空间局部性是指程序在空间维度上对相邻数据的重复访问。
+
+**数据的组织方式直接影响性能：**
+
+- 因为芯片总是获取一整块cache line，如果数据的组织方式不合理，就会导致缓存不命中，就会导致CPU缓存不命中，影响性能。
+- 所以在组织数据的存储方式的时候，应当使即将被处理的数据紧密相邻，以提高读取速度。
+
+**在单线程和多线程环境下如何组织数据？**
+
+- 在单线程环境下，应当使得数据使其在同一cache line上紧密排列。
+- 在多线程环境中，可能需要考虑让相邻数据在多个cache line上，以避免线程争夺同一cache line的问题。
+
+**完全不考虑数据局部性,导致缓存频繁不命中的案例：**
+
+:::code-tabs
+
+@tab **游戏主循环**
+
+```cpp
+while (!gameOver) {
+  // 处理AI
+  for (int i = 0; i < numEntities; i++) {
+    entities[i]->ai()->update();
+  }
+  // 更新物理
+  for (int i = 0; i < numEntities; i++) {
+    entities[i]->physics()->update();
+  }
+  // 绘制屏幕
+  for (int i = 0; i < numEntities; i++) {
+    entities[i]->render()->render();
+  }
+  // 其他和时间有关的游戏循环机制……
+}
+```
+
+@tab **游戏实体**
+
+```cpp
+class GameEntity {
+public:
+  GameEntity(AIComponent* ai,
+             PhysicsComponent* physics,
+             RenderComponent* render):
+          ai_(ai),
+          physics_(physics),
+          render_(render)
+  {}
+  AIComponent* ai() { return ai_; }
+  PhysicsComponent* physics() { return physics_; }
+  RenderComponent* render() { return render_; }
+private:
+  AIComponent* ai_;
+  PhysicsComponent* physics_;
+  RenderComponent* render_;
+};
+```
+
+@tab **接口定义**
+
+```cpp
+class AIComponent {
+public:
+  void update() { /* 处理并修改状态…… */ }
+private:
+  // 目标，情绪，等等……
+};
+
+class PhysicsComponent {
+public:
+  void update() { /* 处理并修改状态…… */ }
+private:
+  // 刚体，速度，质量，等等……
+};
+
+class RenderComponent {
+public:
+  void render() { /* 处理并修改状态…… */ }
+private:
+  // 网格，纹理，着色器，等等……
+};
+```
+
+:::
+
+上面的案例中，缓存不命中频繁发生，导致性能降低：
+
+- 游戏实体的数组存储的是指针，所以为了获取游戏实体，得转换指针。缓存不命中。
+- 然后游戏实体有组件的指针。又一次缓存不命中。
+- 然后我们更新组件，然后循环，回到第一步。
+- 实体和组件在内存中的分布是随机的：
+  - 随着实体的分配和释放，堆的组织会变乱。
+  - 一堆杂乱的对象散布在内存的各处，使用指针彼此相连。
+  - ![](images/data-locality-pointer-chasing.png)
+
+
+**优化**
+
