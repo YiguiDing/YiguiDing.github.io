@@ -61,6 +61,9 @@ export const themeConfig = hopeTheme({
   themeColor: true,
   fullscreen: true,
   plugins: {
+    searchPro: {
+      indexContent: false,
+    },
     // 自动目录页生成
     autoCatalog: true,
     // 启用博客主题
