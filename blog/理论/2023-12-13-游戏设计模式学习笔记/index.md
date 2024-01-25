@@ -14,10 +14,6 @@ category: 笔记
 
 ![](cover/gameprogrammingpatterns.png)
 
-**关于原书作者**
-
-> Bob Nystrom。在EA工作的8年, 他在EA工作时，就开始写这本书了。
-
 ## 目录
 
 - [《游戏设计模式（game-programming-patterns）》学习笔记](#游戏设计模式game-programming-patterns学习笔记)
@@ -56,6 +52,10 @@ category: 笔记
     - [服务定位器](#服务定位器)
   - [优化模式](#优化模式)
     - [数据局部性](#数据局部性)
+      - [什么是数据局部性？](#什么是数据局部性)
+      - [不考虑数据局部性导致影响性能的案例](#不考虑数据局部性导致影响性能的案例)
+      - [考虑数据局部性的优化方法：使用数组](#考虑数据局部性的优化方法使用数组)
+      - [考虑数据局部性的优化方法：打包数据](#考虑数据局部性的优化方法打包数据)
 
 ## 前言：架构，性能和游戏
 
@@ -111,7 +111,7 @@ category: 笔记
 
 一个用命令模式优化的案例
 
-![](./images/command-buttons-one.png)
+![](./assets/images/command-buttons-one.png)
 
 ```ts
 // 这个函数通常在游戏循环中每帧调用一次
@@ -186,7 +186,7 @@ class InputHandler {
 
 这样，相比于之前的硬编码导致每个输入直接调用函数，现在可以修改按键实际所执行的操作：
 
-![](./images/command-buttons-two.png)
+![](./assets/images/command-buttons-two.png)
 :::
 
 #### 和玩家解耦
@@ -259,7 +259,7 @@ class AI{
 - 控制器或者AI，产生一系列命令放入流中
 - 调度器或者角色自身，调用并消耗命令
 
-![](images/command-stream.png)
+![](assets/images/command-stream.png)
 
 #### 通过命令模式完成撤销操作
 
@@ -319,7 +319,7 @@ cmd.undo()
 
 支持多重的撤销也不太难。 我们不单单记录最后一条指令，还要记录指令列表，然后用一个引用指向 “当前” 的那个。 当玩家执行一条命令，我们将其添加到列表，然后将代表 “当前” 的指针指向它。
 
-![](images/command-undo.png)
+![](assets/images/command-undo.png)
 
 #### 闭包函数与命令模式
 
@@ -383,7 +383,7 @@ class Tree {
 };
 ```
 
-![](images/flyweight-trees.png)
+![](assets/images/flyweight-trees.png)
 
 @tab **另一种表示方式**
 
@@ -409,7 +409,7 @@ class Tree {
 };
 ```
 
-![](images/flyweight-tree-model.png)
+![](assets/images/flyweight-tree-model.png)
 
 :::
 
@@ -607,7 +607,7 @@ interface Observer{
 
 **总的来说**，就是在物理引擎检测到发生了什么事件之后，调用notify()函数，遍历所有观察者，通知所有观察者这个事件发生了。
 
-![images/observer-list.png](images/observer-list.png)
+![images/observer-list.png](assets/images/observer-list.png)
 
 **优点**
 
@@ -631,7 +631,7 @@ interface Observer{
 **链式观察者**
 
 单链表结构的链式观察者
-![images/observer-linked.png](images/observer-linked.png)
+![images/observer-linked.png](assets/images/observer-linked.png)
 
 单链表结构的链式观察者
 ::: tabs
@@ -745,7 +745,7 @@ class Observer {
 > 为了解决上述问题，链式观察者的实现方式会使得一个观察者只能观察一个对象，这里的解决方案就是，定义一个链表节点对象，让其指针域指向真正的观察者，这样一个观察者可以被多个节点对象所指，那他就可以在多条链上，就可以观察多个对象。  
 > 这样,避免频繁动态分配就变得简单了，现在每个链表节点的大小就是固定的了，可以预先在对象池中分配它们。以便重用、随用随取
 
-![images/observer-nodes.png](images/observer-nodes.png)
+![images/observer-nodes.png](assets/images/observer-nodes.png)
 
 **销毁被观察者或观察者对另一半的影响**
 
@@ -830,7 +830,7 @@ class Sorcerer_Spawner extends Spawner {
 
 #### 使用原型模式重构
 
-![](images/prototype-spawner.png)
+![](assets/images/prototype-spawner.png)
 
 :::tabs
 
@@ -940,7 +940,7 @@ Spawner ghostSpawner = new Spawner(spawnGhost);
 
 基于类的面向对象实际上是把实例对象的状态和方法分来存储的
 
-![](images/prototype-class.png)
+![](assets/images/prototype-class.png)
 
 **Self语言**
 
@@ -948,11 +948,11 @@ Spawner ghostSpawner = new Spawner(spawnGhost);
 
 Self语言将一个对象的状态和方法绑定在了一起
 
-![](images/prototype-object.png)
+![](assets/images/prototype-object.png)
 
 Self中通过委托来实现继承，一个对象获取一个属性或方法，先在对象内部找，找不到就去父级找，直到没有父对象为止。
 
-![](images/prototype-delegate.png)
+![](assets/images/prototype-delegate.png)
 
 **Self语言的优点**
 
@@ -1011,7 +1011,7 @@ Weapon.prototype.attack = function (target) {
 let sword = new Weapon(10, 16);
 ```
 
-![images/prototype-weapon.png](images/prototype-weapon.png)
+![images/prototype-weapon.png](assets/images/prototype-weapon.png)
 
 **new 操作所作的事**
 
@@ -1265,7 +1265,7 @@ class Heroine{
 
 给英雄每件能做的事情都画了一个盒子：站立，跳跃，俯卧，跳斩。 当角色在能响应按键的状态时，你从那个盒子画出一个箭头，标记上按键，然后连接到她变到的状态。
 
-![](images/state-flowchart.png)
+![](assets/images/state-flowchart.png)
 
 **状态机的要点**
 
@@ -1637,7 +1637,7 @@ class RunningOnGround extends OnGroundState {
 - 笨的办法就是创建大量在状态：站立开火，奔跑开火，跳跃开火，松开按键后回到原先状态
 - 更高效的办法是，将新状态压入栈，栈顶为当前状态，弹出栈顶为销毁状态，然后就回到了原先的状态。
 
-![images/state-pushdown.png](images/state-pushdown.png)
+![images/state-pushdown.png](assets/images/state-pushdown.png)
 
 :::tip 状态机的局限性和使用场景
 
@@ -1702,7 +1702,7 @@ class RunningOnGround extends OnGroundState {
 
 :::
 
-![](images/type-object-subclasses.png)
+![](assets/images/type-object-subclasses.png)
 
 @tab Monster.cpp
 
@@ -1764,7 +1764,7 @@ public:
 
 @tab 类图
 
-![images/type-object-breed.png](images/type-object-breed.png)
+![images/type-object-breed.png](assets/images/type-object-breed.png)
 
 @tab 简易实现
 
@@ -2122,7 +2122,7 @@ class GameObject {
   private comstructor(
     input: InputComponent,
     physics: PhysicsComponent,
-    graphics: GraphicsComponent
+    graphics: GraphicsComponent,
   ) {
     this.input = input;
     this.physics = physics;
@@ -2140,7 +2140,7 @@ class GameObject {
   static creat(
     input: InputComponent,
     physics: PhysicsComponent,
-    graphics: GraphicsComponent
+    graphics: GraphicsComponent,
   ) {
     return new GameObject(input, physics, graphics);
   }
@@ -2470,7 +2470,7 @@ class Game{
 
 - 从1980年到2010年，CPU速度迅速增长，而RAM速度增长相对缓慢。
 - 硬件巨头未强调数据获取速度的不足，导致软件无法充分利用硬件性能提升。
-- ![](images/data-locality-chart.png)
+- ![](assets/images/data-locality-chart.png)
 
 **CPU缓存：**
 
@@ -2482,7 +2482,7 @@ class Game{
   - 缓存不命中会导致CPU等待几百个周期直到从RAM获取数据。
   - CPU在缓存不命中时空转，影响性能。
 
-**什么是数据局部性？**
+#### 什么是数据局部性？
 
 - 数据局部性是指在程序执行过程中，对同一块内存区域的重复访问。
 - 数据局部性的概念是为了更有效地利用计算机内存层次结构中的缓存系统而提出的。
@@ -2502,6 +2502,8 @@ class Game{
 
 - 在单线程环境下，应当使得数据使其在同一cache line上紧密排列。
 - 在多线程环境中，可能需要考虑让相邻数据在多个cache line上，以避免线程争夺同一cache line的问题。
+
+#### 不考虑数据局部性导致影响性能的案例
 
 **完全不考虑数据局部性,导致缓存频繁不命中的案例：**
 
@@ -2576,16 +2578,191 @@ private:
 
 :::
 
-上面的案例中，缓存不命中频繁发生，导致性能降低：
+这张图反映了上面的代码的实质：**过多的指针运算**
 
-- 游戏实体的数组存储的是指针，所以为了获取游戏实体，得转换指针。缓存不命中。
-- 然后游戏实体有组件的指针。又一次缓存不命中。
-- 然后我们更新组件，然后循环，回到第一步。
-- 实体和组件在内存中的分布是随机的：
-  - 随着实体的分配和释放，堆的组织会变乱。
+![](assets/images/data-locality-pointer-chasing.png)
+
+上面的案例中，缓存不命中频繁发生，导致性能降低
+
+- 缓存不命中的主要原因是因为程序在频繁对指针执行**解引用运算符（dereference operator）运算**
+- 在游戏主循环中，由于遍历的实体数组实际上是实体的指针，要获取实体，就要对指针做解引用运算，也就是从内存中去加载这个游戏实体，这导致缓存不命中，CPU空转。
+- 当得到了游戏实体对象后，需要执行游戏实体上的组件的更新函数，但由于这些组件也是指针，于是又要到内存去加载他们，缓存不命中，CPU空转。
+- 然后来到第二个游戏实体的指针，上述步骤循环......
+- 随着实体在内存中的分布变得混乱，缓存不命中的几率将会加剧
+  - 实体和组件在内存中的分布是随机的，随着实体的分配和释放，堆的组织会变乱。
   - 一堆杂乱的对象散布在内存的各处，使用指针彼此相连。
-  - ![](images/data-locality-pointer-chasing.png)
 
+#### 考虑数据局部性的优化方法：使用数组
 
-**优化**
+> 直接遍历组件的数组，而不是组件的指针的数组
 
+![](assets/images/data-locality-component-arrays.png.png)
+
+:::code-tabs
+
+@tab **定义组件的数组**
+
+```cpp
+// 使用组件数组，而不是组件的指针的数组
+AIComponent aiComponents[] = new AIComponent[MAX_ENTITIES];
+PhysicsComponent physicsComponents[] = new PhysicsComponent[MAX_ENTITIES];
+RenderComponent renderComponents[] = new RenderComponent[MAX_ENTITIES];
+```
+
+@tab **游戏主循环**
+
+```cpp
+while (!gameOver) {
+  // 处理AI
+  for (int i = 0; i < numEntities; i++) {
+    aiComponents[i].update();
+  }
+  // 更新物理
+  for (int i = 0; i < numEntities; i++) {
+    physicsComponents[i]->physics()->update();
+  }
+  // 绘制屏幕
+  for (int i = 0; i < numEntities; i++) {
+    renderComponents[i].update();
+  }
+  // 其他和时间有关的游戏循环机制……
+}
+```
+
+@tab **游戏实体**
+
+```cpp
+// 游戏实体依然可以保持良好的封装
+
+class GameEntity {
+public:
+  GameEntity(AIComponent* ai,
+             PhysicsComponent* physics,
+             RenderComponent* render){}
+private:
+  AIComponent* ai_;
+  PhysicsComponent* physics_;
+  RenderComponent* render_;
+};
+```
+
+:::
+
+#### 考虑数据局部性的优化方法：打包数据
+
+:::code-tabs
+
+@tab **ParticleSystem类**
+
+```ts
+class Particle {
+  update() {}
+}
+
+class ParticleSystem {
+  static MAX_PARTICLES = 100000;
+  particles = new Particle[MAX_PARTICLES]();
+  numParticles = 0;
+
+  // 写法1：基本的写法
+  update_base() {
+    for (let i = 0; i < numParticles; i++) {
+      particles_[i].update();
+    }
+  }
+  // 写法2：部分更新的写法
+  update_v2() {
+    for (let i = 0; i < numParticles; i++) {
+      // 但是这样写的缺点就在于仍然可能导致大量不需要被更新的数据被加载到缓存
+      if (particles_[i].isActive()) {
+        particles_[i].update();
+      }
+    }
+  }
+  // 写法3：让整个数组有序，活跃的粒子始终靠前
+  update_v3() {
+    for (let i = 0; i < numActive; i++) {
+      particles_[i].update();
+    }
+  }
+  // 保持数组有序：激活一个粒子
+  activateParticle(index: number) {
+    // 将它和第一个未激活的粒子交换
+    let temp = particles_[numActive_];
+    particles_[numActive_] = particles_[index];
+    particles_[index] = temp;
+    // 现在多了一个激活粒子
+    numActive_++;
+  }
+  // 保持数组有序：反激活一个粒子
+  deactivateParticle(index: number) {
+    // 现在少了一个激活粒子
+    numActive_--;
+    // 将它和最后一个激活粒子交换
+    let temp = particles_[numActive_];
+    particles_[numActive_] = particles_[index];
+    particles_[index] = temp;
+  }
+}
+```
+
+@tab **游戏主循环**
+
+```ts
+let particleSystem = new ParticleSystem();
+while (true) {
+  particleSystem.update();
+}
+```
+
+:::
+
+**缺点：**
+
+上述写法放弃了一定的面向对象思想，Particle类的实例对象不能激活或反激活自己。
+
+这种写法不知道能不能解决这种缺点
+
+```cpp
+class Particle {
+  int idx = 0;
+  void update() {}
+  void active(){
+    Particle::active(this.idx);
+  }
+  void deActive(){
+    Particle::deActive(this.idx);
+  }
+  // 粒子系统的逻辑：
+  static const int = MAX_SIZE = 10000;
+  static int activeNum = 0;
+  static Particle *particels = new Particle[MAX_SIZE];
+  static Particle getParticle(){
+    if(activeNum==MAX_SIZE) return null;
+    Particle particel = particels[activeNum];
+    particel.setIdx(idx);
+    activeNum++;
+    return particel;
+  }
+  static void active(int idx){
+    // 移到最后，然后改变activeNum指针
+    // 把idx和最后一个交换
+    Particle temp = particels[activeNum];
+    particels[activeNum] = particels[idx];
+    particels[idx] = temp;
+    activeNum++;
+  }
+  static void deActive(int idx){
+    // 移动activeNum,然后把idx放到最后的位置。
+    activeNum--;
+    Particle temp = particels[activeNum];
+    particels[activeNum] = particels[idx];
+    particels[idx] = temp;
+  }
+  static void update(){
+    for(int idx =0;idx<activeNum;idx++){
+      particels[idx].update();
+    }
+  }
+}
+```
