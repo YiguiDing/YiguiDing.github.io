@@ -56,6 +56,8 @@ category: 笔记
       - [不考虑数据局部性导致影响性能的案例](#不考虑数据局部性导致影响性能的案例)
       - [考虑数据局部性的优化方法：使用数组](#考虑数据局部性的优化方法使用数组)
       - [考虑数据局部性的优化方法：打包数据](#考虑数据局部性的优化方法打包数据)
+      - [冷热分隔](#冷热分隔)
+      - [设计决策](#设计决策)
 
 ## 前言：架构，性能和游戏
 
@@ -2717,52 +2719,43 @@ while (true) {
 
 :::
 
+
 **缺点：**
 
 上述写法放弃了一定的面向对象思想，Particle类的实例对象不能激活或反激活自己。
 
-这种写法不知道能不能解决这种缺点
+#### 冷热分隔
 
-```cpp
-class Particle {
-  int idx = 0;
-  void update() {}
-  void active(){
-    Particle::active(this.idx);
-  }
-  void deActive(){
-    Particle::deActive(this.idx);
-  }
-  // 粒子系统的逻辑：
-  static const int = MAX_SIZE = 10000;
-  static int activeNum = 0;
-  static Particle *particels = new Particle[MAX_SIZE];
-  static Particle getParticle(){
-    if(activeNum==MAX_SIZE) return null;
-    Particle particel = particels[activeNum];
-    particel.setIdx(idx);
-    activeNum++;
-    return particel;
-  }
-  static void active(int idx){
-    // 移到最后，然后改变activeNum指针
-    // 把idx和最后一个交换
-    Particle temp = particels[activeNum];
-    particels[activeNum] = particels[idx];
-    particels[idx] = temp;
-    activeNum++;
-  }
-  static void deActive(int idx){
-    // 移动activeNum,然后把idx放到最后的位置。
-    activeNum--;
-    Particle temp = particels[activeNum];
-    particels[activeNum] = particels[idx];
-    particels[idx] = temp;
-  }
-  static void update(){
-    for(int idx =0;idx<activeNum;idx++){
-      particels[idx].update();
-    }
-  }
-}
-```
+总结成一句话，就是可能某个游戏实体的组件中存在一些属性，而这些属性在游戏主循环中并不常用，那么可以将这些属性封装到一个结构体中，并且只存储一个指针，这样可以防止大量不必要的数据被加载到cpu缓存中，提高cpu缓存的利用率。比如说玩家死亡后掉落什么物品，这些数据就可以做冷热分割。
+
+
+#### 设计决策
+
+如何处理多态？
+
+- 多态是有用工具，但多态的动态调用总会带来一些代价。
+- 最简单的解决方案：**不使用多态**
+  - 优点
+    - 简洁，安全。所有类在内存中占用的字节数是相同的。
+    - 更快。多态的动态调用意味着在跳转表中寻找方法，然后跟着指针寻找特定的代码，这种消耗在不同硬件上区别很大，但动态调用总会带来一些代价。
+  - 缺点
+    - 不灵活
+- 使用多态，但把他们**按类型放在独自的数组中**。`ChildClassA[] childs`
+  - 优点
+    - 仍然可以保证同类型的对象在内存中紧密排列
+    - 静态调度。这种方式就是已经知道了对象的类型，不必再使用多态：`ChildClassA a=childs[idx]; a.update();`
+  - 缺点：
+    - 麻烦，需要为子类分别管理独立的数组。
+    - 必须关注每个子类单独的集合，无法解耦他们。多态原本的优点就是可以这样写：`Parent child[]`
+- **使用指针的集合**，只用指针类型的数组，指向基类或接口就获得了想要的多态。
+  - 优点: 灵活，可以支持任何子类或者接口的实现。
+  - 缺点：对缓存不友好，因为存在频繁的指针跳转。
+
+如何定义组织游戏实体？
+
+- 当在游戏中使用这种模式，即把游戏组件实体类放入连续数组的做法，这将使得游戏实体类变得看起来可有可无。
+- 但实际上，游戏代码的其他部分可能仍然期待获得一个游戏实体，所以仍然需要一个概念上的实体。
+- 第一种：让游戏实体拥有组件的地址
+  - 优点：
+    - 可以将游戏实体存放到连续数组中。
+    - 
