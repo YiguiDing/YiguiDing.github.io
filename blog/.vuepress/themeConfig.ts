@@ -55,7 +55,7 @@ export const themeConfig = hopeTheme({
       Wechat: "https://u.wechat.com/MH91sJy7fFJmV5WVsHOa7ho",
       Rss: "/rss.xml",
     },
-    articlePerPage: 5,
+    articlePerPage: 20,
   },
   // 其他
   themeColor: true,
@@ -131,6 +131,8 @@ export const themeConfig = hopeTheme({
       tasklist: true,
       // 图片懒加载(设置为true时会和图片预览插件冲突)
       imgLazyload: false,
+      // 属性 支持
+      attrs: true,
       // 允许在markdown中导入展示其他文件代码，格式： <!-- @include: filename{start-end} -->
       include: true,
       // 组件支持
@@ -142,11 +144,11 @@ export const themeConfig = hopeTheme({
       // flowchart: true, // 流程图
       // mermaid:true, // 流程图，类图，....
       // 代码演示
+      demo: true,
       playground: {
         presets: ["vue", "ts"],
       },
       vuePlayground: true,
-      // demo: true,
       // 数学表达式支持
       katex: {
         copy: true,
