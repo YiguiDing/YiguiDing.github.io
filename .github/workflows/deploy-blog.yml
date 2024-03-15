@@ -11,9 +11,9 @@ permissions:
   id-token: write
 
 jobs:
-- build-static-pages:
-  - runs-on: ubuntu-latest
-  - steps:
+  build-static-pages:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v4
       with:
         submodules: true
@@ -35,14 +35,14 @@ jobs:
         # 将目录下代码推送到某个分支
         folder: blog/.vuepress/dist
         branch: static-pages
-- deploy-to-github-pages:
-  - needs: build-static-pages
-  - runs-on: ubuntu-latest
-  - environment:
-    - name: github-pages
+  deploy-to-github-pages:
+    needs: build-static-pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
       # https://YiguiDing.github.io/
-    - url: ${{ steps.deployment.outputs.page_url }}
-  - steps:
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
     - uses: actions/checkout@v4
       with:
         ref: static-pages
@@ -53,8 +53,8 @@ jobs:
         # Upload entire repository
         path: "./"
       id: deployment
-      uses: actions/deploy-pages@v2
-- deploy-to-server:
+    - uses: actions/deploy-pages@v2
+  deploy-to-server:
     needs: build-static-pages
     runs-on: ubuntu-latest
     steps:
