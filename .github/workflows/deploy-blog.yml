@@ -11,83 +11,65 @@ permissions:
   id-token: write
 
 jobs:
-  build-static-pages:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
-
-      - name: Build Blog
-        run: |
-          # binary package for node_modules/rollup
-          npm i -D @rollup/rollup-linux-x64-gnu
-          npm install
-          npm run build
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          # 将目录下代码推送到某个分支
-          folder: blog/.vuepress/dist
-          branch: static-pages
-
-  deploy-to-github-pages:
-    needs: build-static-pages
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
+- build-static-pages:
+  - runs-on: ubuntu-latest
+  - steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8.14.3
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'pnpm'
+    - run: |
+        # binary package for node_modules/rollup
+        pnpm i -D @rollup/rollup-linux-x64-gnu
+        pnpm install
+        pnpm run build
+    - uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        # 将目录下代码推送到某个分支
+        folder: blog/.vuepress/dist
+        branch: static-pages
+- deploy-to-github-pages:
+  - needs: build-static-pages
+  - runs-on: ubuntu-latest
+  - environment:
+    - name: github-pages
       # https://YiguiDing.github.io/
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: static-pages
-          fetch-depth: 0
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload entire repository
-          path: "./"
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-
-  deploy-to-server:
+    - url: ${{ steps.deployment.outputs.page_url }}
+  - steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: static-pages
+        fetch-depth: 0
+    - uses: actions/configure-pages@v3
+    - uses: actions/upload-pages-artifact@v2
+      with:
+        # Upload entire repository
+        path: "./"
+      id: deployment
+      uses: actions/deploy-pages@v2
+- deploy-to-server:
     needs: build-static-pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: static-pages
-          fetch-depth: 0
-
-      - name: Configuration environment
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy
-        run: |
-          ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
-          git config --global user.name 'YiguiDing'
-          git config --global user.email '2449695354@qq.com'
-          ssh git@dingdingdang.online "git config --global --add safe.directory /var/www/vuepress2-blog-root/"
-          ssh git@dingdingdang.online "git config --global --add receive.denyCurrentBranch ignore"
-          git push -f git@dingdingdang.online:/var/www/vuepress2-blog-root/ static-pages
-          ssh git@dingdingdang.online "cd /var/www/vuepress2-blog-root/  && git reset --hard HEAD"
+    - uses: actions/checkout@v4
+      with:
+        ref: static-pages
+        fetch-depth: 0
+    - uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - run: |
+        ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
+        git config --global user.name 'YiguiDing'
+        git config --global user.email '2449695354@qq.com'
+        ssh git@dingdingdang.online "git config --global --add safe.directory /var/www/vuepress2-blog-root/"
+        ssh git@dingdingdang.online "git config --global --add receive.denyCurrentBranch ignore"
+        git push -f git@dingdingdang.online:/var/www/vuepress2-blog-root/ static-pages
+        ssh git@dingdingdang.online "cd /var/www/vuepress2-blog-root/  && git reset --hard HEAD"
