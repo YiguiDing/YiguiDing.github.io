@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
-    "moduleResolution": "Node",
-    "target": "ES2022",
+    "module": "ES6",
+    "moduleResolution": "Bundler",
+    "target": "ES6",
     "allowJs": true
   },
   "include": ["./blog/.vuepress/**/*.ts"]

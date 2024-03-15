@@ -36,7 +36,7 @@ export const themeConfig = hopeTheme({
     name: "Yigui-Ding",
     avatar: "/images/author_icon.jpg",
     roundAvatar: true,
-    intro: "/网站/关于",
+    intro: "/网站/关于/",
     description: '"枉少年","生当作人杰";<br>"莫等闲","自古英雄多磨难";',
     // 时间线文字
     timeline: "莫等闲，白了少年头，空悲切！",
@@ -65,11 +65,13 @@ export const themeConfig = hopeTheme({
       indexContent: false,
     },
     // 自动目录页生成
-    autoCatalog: true,
+    catalog: {
+      level: 1,
+    },
     // 启用博客主题
     blog: {
       // 摘要最大长度
-      excerptLength: 20,
+      excerptLength: 0,
       hotReload: true,
     },
     // 代码块

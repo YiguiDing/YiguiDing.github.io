@@ -1,4 +1,4 @@
-import { defineClientConfig } from "@vuepress/client";
+import { defineClientConfig } from "vuepress/client";
 import Live2D from "./components/Live2D.vue";
 import Spacecraft from "./components/Spacecraft.vue";
 

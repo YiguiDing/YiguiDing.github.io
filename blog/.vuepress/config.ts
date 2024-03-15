@@ -1,9 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import { themeConfig } from "./themeConfig";
 import { pluginsConfig } from "./pluginsConfig";
-import { getDirname, path } from "@vuepress/utils";
 import { viteBundlerConfig } from "./viteBdrConfig";
-const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
   // 基本信息
@@ -17,6 +15,7 @@ export default defineUserConfig({
     "!**/.vuepress/**",
     "!**/node_modules/**",
     "!**/projs/**",
+    "!**/assets/**",
     "!**/.*/**", // 忽略所有隐藏文件和文件夹
     "!草稿/**",
   ],

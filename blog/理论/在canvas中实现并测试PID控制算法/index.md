@@ -62,4 +62,4 @@ import Demo2App from "@source/理论/在canvas中实现并测试PID控制算法/
 
 ## 算法代码
 
-@[code ts](./assets/projects/demo2/App.vue)
+@[code vue](./assets/projects/demo2/App.vue)
