@@ -14,36 +14,41 @@ category: [笔记, 电子]
 
 - [STM32及标准库学习笔记](#stm32及标准库学习笔记)
   - [目录](#目录)
-  - [STM32F103C8T6简介](#stm32f103c8t6简介)
-  - [STM32F1X的片上资源/外设](#stm32f1x的片上资源外设)
+  - [F103C8T6简介](#f103c8t6简介)
+  - [F1X片上资源](#f1x片上资源)
   - [系统结构](#系统结构)
   - [引脚定义](#引脚定义)
-  - [BOOT启动配置](#boot启动配置)
-  - [工程架构和项目结构](#工程架构和项目结构)
-  - [寄存器点灯和标准库点灯的案例](#寄存器点灯和标准库点灯的案例)
-  - [标准外设库目录结构及作用笔记](#标准外设库目录结构及作用笔记)
-  - [RCC复位和时钟控制外设](#rcc复位和时钟控制外设)
+  - [启动配置](#启动配置)
+  - [工程架构](#工程架构)
+  - [Hello\_World](#hello_world)
+  - [标准外设库](#标准外设库)
+  - [RCC](#rcc)
     - [基本介绍](#基本介绍)
-    - [stm32f10x\_rcc.h标准外设库的使用](#stm32f10x_rcch标准外设库的使用)
+    - [常用函数](#常用函数)
   - [GPIO](#gpio)
     - [基本介绍](#基本介绍-1)
     - [stm32f10x\_gpio.h](#stm32f10x_gpioh)
-    - [案例](#案例)
-      - [基本点灯](#基本点灯)
+    - [案例代码：点灯](#案例代码点灯)
   - [中断](#中断)
     - [基本概念](#基本概念)
     - [STM32的中断](#stm32的中断)
     - [EXTI外部中断](#exti外部中断)
-    - [案例代码](#案例代码)
+    - [案例代码：光电计数器触发外部中断](#案例代码光电计数器触发外部中断)
   - [TIM定时器](#tim定时器)
+    - [概念](#概念)
+    - [基本、通用、高级定时器](#基本通用高级定时器)
       - [基本定时器](#基本定时器)
       - [通用定时器](#通用定时器)
       - [高级定时器](#高级定时器)
-    - [基本定时中断](#基本定时中断)
-    - [定时输出比较——输出PWM波形](#定时输出比较输出pwm波形)
-    - [定时器输出捕获——测量方波](#定时器输出捕获测量方波)
+    - [案例：定时中断](#案例定时中断)
+      - [基本结构](#基本结构)
+      - [基本步骤](#基本步骤)
+      - [通过内部时钟源——实现`setInterval(callback,ms)`](#通过内部时钟源实现setintervalcallbackms)
+      - [通过外部时钟源——实现`setInterval(callback,times)`](#通过外部时钟源实现setintervalcallbacktimes)
+    - [案例：定时输出比较——输出PWM波形](#案例定时输出比较输出pwm波形)
+    - [案例：定时器输出捕获——测量方波](#案例定时器输出捕获测量方波)
 
-## STM32F103C8T6简介
+## F103C8T6简介
 
 - 系列：主流系列STM32F1
 - 内核：ARM Cortex-M3
@@ -56,7 +61,7 @@ category: [笔记, 电子]
 
 ![Alt text](assets/images/image-23.png)
 
-## STM32F1X的片上资源/外设
+## F1X片上资源
 
 | 英文缩写 |        名称        |                       笔记                        |
 | :------: | :----------------: | :-----------------------------------------------: |
@@ -145,14 +150,14 @@ category: [笔记, 电子]
 - 默认复用功能：该端口支持的其他功能
 - 重定义功能：可将该端口上的功能重新映射到其他端口上
 
-## BOOT启动配置
+## 启动配置
 
 - `BOOT1=x BOOT0=0` 从主闪存中加载程序并执行
 - `BOOT1=0 BOOT0=1` 从系统存储器加载BootLoader程序并执行,该程序把从串口接收的数据写入主闪存，完成程序的烧录
 - `BOOT1=1 BOOT0=1` 从内置SRAM启动，用于程序调试
 - ![Alt text](assets/images/image-4.png)
 
-## 工程架构和项目结构
+## 工程架构
 
 **工程架构**
 
@@ -184,7 +189,7 @@ category: [笔记, 电子]
 |   \---stm32f10x_it.c # 各种中断函数
 ```
 
-## 寄存器点灯和标准库点灯的案例
+## Hello_World
 
 **寄存器点灯**
 
@@ -229,7 +234,7 @@ int main(void)
 }
 ```
 
-## 标准外设库目录结构及作用笔记
+## 标准外设库
 
 ```bash
 - STM32F10x_StdPeriph_Lib_V3.5.0
@@ -294,9 +299,11 @@ int main(void)
 | startup_stm32f10x_xl.s    | XL(Extra Large)       | 加大容量产品       | 大于512K | STM32F101/102/103 |
 | startup_stm32f10x_cl.s    | CL(Connectivity Line) | 互联型产品         | -        | STM32F105/107     |
 
-## RCC复位和时钟控制外设
+## RCC
 
 ### 基本介绍
+
+> RCC复位和时钟控制外设
 
 **在系统结构中的位置**
 
@@ -316,9 +323,56 @@ int main(void)
 - 备份域控制寄存器 `RCC_BDCR`
 - 控制/状态寄存器 `RCC_CSR`
 
-### stm32f10x_rcc.h标准外设库的使用
+### 常用函数
 
 > 大部分功能都用不到，这里只粘贴几个最常用的函数的使用方法。
+
+:::code-tabs
+
+@tab RCC_APB2PeriphClockCmd
+
+```cpp
+/**
+  * @brief  启用或禁用高速APB2外设时钟
+  * @param  RCC_APB2Periph: 指定哪一个APB2外设获得时钟
+  *   这个参数可以是以下任何参数的结合:
+  *     @arg RCC_APB2Periph_AFIO, RCC_APB2Periph_GPIOA, RCC_APB2Periph_GPIOB,
+  *          RCC_APB2Periph_GPIOC, RCC_APB2Periph_GPIOD, RCC_APB2Periph_GPIOE,
+  *          RCC_APB2Periph_GPIOF, RCC_APB2Periph_GPIOG, RCC_APB2Periph_ADC1,
+  *          RCC_APB2Periph_ADC2, RCC_APB2Periph_TIM1, RCC_APB2Periph_SPI1,
+  *          RCC_APB2Periph_TIM8, RCC_APB2Periph_USART1, RCC_APB2Periph_ADC3,
+  *          RCC_APB2Periph_TIM15, RCC_APB2Periph_TIM16, RCC_APB2Periph_TIM17,
+  *          RCC_APB2Periph_TIM9, RCC_APB2Periph_TIM10, RCC_APB2Periph_TIM11
+  * @param  NewState: 指定外设时钟的新状态.
+  *   This parameter can be: ENABLE or DISABLE.
+  * @retval None
+  */
+void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
+```
+
+@tab RCC_APB1PeriphClockCmd
+
+```cpp
+/**
+  * @brief  启用或禁用低速APB1外设时钟
+  * @param  RCC_APB1Periph: 指定哪一个APB1外设获得时钟
+  *   这个参数可以是以下任何参数的结合:
+  *     @arg RCC_APB1Periph_TIM2, RCC_APB1Periph_TIM3, RCC_APB1Periph_TIM4,
+  *          RCC_APB1Periph_TIM5, RCC_APB1Periph_TIM6, RCC_APB1Periph_TIM7,
+  *          RCC_APB1Periph_WWDG, RCC_APB1Periph_SPI2, RCC_APB1Periph_SPI3,
+  *          RCC_APB1Periph_USART2, RCC_APB1Periph_USART3, RCC_APB1Periph_USART4,
+  *          RCC_APB1Periph_USART5, RCC_APB1Periph_I2C1, RCC_APB1Periph_I2C2,
+  *          RCC_APB1Periph_USB, RCC_APB1Periph_CAN1, RCC_APB1Periph_BKP,
+  *          RCC_APB1Periph_PWR, RCC_APB1Periph_DAC, RCC_APB1Periph_CEC,
+  *          RCC_APB1Periph_TIM12, RCC_APB1Periph_TIM13, RCC_APB1Periph_TIM14
+  * @param  NewState: 指定外设时钟的新状态.
+  *   This parameter can be: ENABLE or DISABLE.
+  * @retval None
+  */
+void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
+```
+
+@tab RCC_AHBPeriphClockCmd
 
 ```cpp
 /**
@@ -358,45 +412,7 @@ int main(void)
 void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState);
 ```
 
-```cpp
-/**
-  * @brief  启用或禁用高速APB2外设时钟
-  * @param  RCC_APB2Periph: 指定哪一个APB2外设获得时钟
-  *   这个参数可以是以下任何参数的结合:
-  *     @arg RCC_APB2Periph_AFIO, RCC_APB2Periph_GPIOA, RCC_APB2Periph_GPIOB,
-  *          RCC_APB2Periph_GPIOC, RCC_APB2Periph_GPIOD, RCC_APB2Periph_GPIOE,
-  *          RCC_APB2Periph_GPIOF, RCC_APB2Periph_GPIOG, RCC_APB2Periph_ADC1,
-  *          RCC_APB2Periph_ADC2, RCC_APB2Periph_TIM1, RCC_APB2Periph_SPI1,
-  *          RCC_APB2Periph_TIM8, RCC_APB2Periph_USART1, RCC_APB2Periph_ADC3,
-  *          RCC_APB2Periph_TIM15, RCC_APB2Periph_TIM16, RCC_APB2Periph_TIM17,
-  *          RCC_APB2Periph_TIM9, RCC_APB2Periph_TIM10, RCC_APB2Periph_TIM11
-  * @param  NewState: 指定外设时钟的新状态.
-  *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
-  */
-void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
-```
-
-```cpp
-/**
-  * @brief  启用或禁用低速APB1外设时钟
-  * @param  RCC_APB1Periph: 指定哪一个APB1外设获得时钟
-  *   这个参数可以是以下任何参数的结合:
-  *     @arg RCC_APB1Periph_TIM2, RCC_APB1Periph_TIM3, RCC_APB1Periph_TIM4,
-  *          RCC_APB1Periph_TIM5, RCC_APB1Periph_TIM6, RCC_APB1Periph_TIM7,
-  *          RCC_APB1Periph_WWDG, RCC_APB1Periph_SPI2, RCC_APB1Periph_SPI3,
-  *          RCC_APB1Periph_USART2, RCC_APB1Periph_USART3, RCC_APB1Periph_USART4,
-  *          RCC_APB1Periph_USART5, RCC_APB1Periph_I2C1, RCC_APB1Periph_I2C2,
-  *          RCC_APB1Periph_USB, RCC_APB1Periph_CAN1, RCC_APB1Periph_BKP,
-  *          RCC_APB1Periph_PWR, RCC_APB1Periph_DAC, RCC_APB1Periph_CEC,
-  *          RCC_APB1Periph_TIM12, RCC_APB1Periph_TIM13, RCC_APB1Periph_TIM14
-  * @param  NewState: 指定外设时钟的新状态.
-  *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
-  */
-void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
-```
-
+:::
 **RCC外设所有函数功能描述**
 
 > 感觉大概知道下有哪些功能就行了
@@ -510,10 +526,6 @@ void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
   - 肖特基触发器开启，仍然能够读取数字输入
 - ![Alt text](assets/images/image-10.png)
 
-```c++
-
-```
-
 ### stm32f10x_gpio.h
 
 ```cpp
@@ -588,9 +600,7 @@ void GPIO_EXTILineConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource);
 void GPIO_ETH_MediaInterfaceConfig(uint32_t GPIO_ETH_MediaInterface);
 ```
 
-### 案例
-
-#### 基本点灯
+### 案例代码：点灯
 
 **步骤**
 
@@ -720,7 +730,7 @@ int main(void)
 - 下图的主要意思就是**EXTIO只能是PA0~PG0中的其中一个**，具体选择哪一个，由AFIO来控制
 - ![Alt text](assets/images/image-16.png)
 
-### 案例代码
+### 案例代码：光电计数器触发外部中断
 
 **基本步骤**
 
@@ -814,6 +824,8 @@ void EXTI15_10_IRQHandler()
 
 ## TIM定时器
 
+### 概念
+
 - TIM（Timer）定时器
 - 定时器可以对**输入的时钟**进行**计数**，并在计数值达到设定值时触发中断
   - **输入时钟可以是系统时钟、外部输入**
@@ -837,6 +849,8 @@ void EXTI15_10_IRQHandler()
 | 高级定时器 | TIM1、TIM8             | APB2 | 拥有通用定时器全部功能，并额外具有重复计数器、死区生成、互补输出、刹车输入等功能                     |
 | 通用定时器 | TIM2、TIM3、TIM4、TIM5 | APB1 | 拥有基本定时器全部功能，并额外具有内外时钟源选择、输入捕获、输出比较、编码器接口、主从触发模式等功能 |
 | 基本定时器 | TIM6、TIM7             | APB1 | 拥有定时中断、主模式触发DAC的功能                                                                    |
+
+### 基本、通用、高级定时器
 
 #### 基本定时器
 
@@ -906,12 +920,288 @@ void EXTI15_10_IRQHandler()
   - `BRK刹车输入功能`：当从外部引脚BKIN得到刹车信号时，或者时钟信号失效事件发生时，控制电路将自动切断电机的输出，防止意外发生。
 - ![Alt text](assets/images/image-21.png)
 
-### 基本定时中断
+### 案例：定时中断
 
-**基本结构**
+#### 基本结构
 
 ![Alt text](assets/images/image-22.png)
 
-### 定时输出比较——输出PWM波形
+#### 基本步骤
 
-### 定时器输出捕获——测量方波
+1. 通过 RCC 开启相关外设时钟
+2. 为时基单元选择时钟源：内部时钟源、外部时钟模式、编码器模式
+3. 配置时基单元：预分频器、自动重装器、计数模式
+4. 配置输出中断控制: 允许输出中断到NVIC
+5. 配置NVIC: 打开定时中断通道、分配中断优先级
+6. 运行控制：使能计数器
+
+#### 通过内部时钟源——实现`setInterval(callback,ms)`
+
+setInterval是一个在前端开发中经常使用的函数，这里尝试实现一下
+
+:::code-tabs
+
+@tab `main.cpp`
+
+```c
+#include "stm32f10x.h"
+#include "OLED.h"
+#include "Timer2.h"
+
+uint16_t num = 0;
+void update_callback()
+{
+    num++;
+}
+
+int main(void)
+{
+    OLED_Init();
+    Timer2_setInterval(update_callback, 1000);
+    while (1)
+    {
+        OLED_ShowString(1, 1, "Hello World!!!");
+        OLED_ShowNum(2, 1, num, 10);
+    }
+}
+```
+
+@tab `Timer2.c`
+
+```c
+#include "stm32f10x.h"
+#include "Timer2.h"
+#include <stddef.h>
+
+void (*callback)() = NULL;
+
+/**
+ * @arg _callback 回调函数
+ * @arg ms 毫秒 取值范围 [1,0xffff/10+1]
+ */
+void Timer2_setInterval(void (*_callback)(), uint16_t ms)
+{
+    // 步骤
+    // 1. 通过 RCC 开启相关外设时钟
+    // 2. 为时基单元选择时钟源：内部时钟源、外部时钟模式、编码器模式
+    // 3. 配置时基单元：预分频器、自动重装器、计数模式
+    // 4. 配置输出中断控制: 允许输出中断到NVIC
+    // 5. 配置NVIC: 打开定时中断通道、分配中断优先级
+    // 6. 运行控制：使能计数器
+
+    // 1开启Tim2外设时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    // 2为TIM2时基单元选择内部时钟（可不写，默认使用内部时钟）
+    TIM_InternalClockConfig(TIM2);
+
+    // 3配置时基单元
+    // CK_CNT_OV计数器溢出频率 = CK_CNT定时器时钟/(ARR重装值+1) = CK_PSC内部时钟/(PSC预分频器+1)/(ARR重装值+1)
+    // 溢出频率
+    //      1s => 72Mhz / 7.2k / 10k => 1s
+    //      1ms => 72Mhz / 7.2k / 10  => 1ms
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
+    TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;     // 采样点数，外部时钟信号滤波器的一个参数，这里填一分频，也就是不分频，那么就会以（内部时钟频率/1）的频率对外部时钟信号进行采样，这里用不到，随便写
+    TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up; // 计数模式，向上计数
+    TIM_TimeBaseInitStruct.TIM_Prescaler = 7200 - 1;             // 预分频器
+    TIM_TimeBaseInitStruct.TIM_Period = 10 * ms - 1;             // 自动重装器
+    TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;            // 重复计数器，高级定时器才有
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
+
+    // 上面配置时基单元的函数为了让写入预分频器和自动重装器的值立即生效，
+    // 手动触发了更新事件，这里要清除一下，否则中断函数也会立即执行一次
+    TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+
+    // 4把TIM2的更新中断连接到NVIC
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+    // 5配置NVIC优先级
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    NVIC_InitTypeDef NVIC_InitStruct;
+    NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQn;           // 定时器2中断通道
+    NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;           // 启用
+    NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级
+    NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;        // 响应优先级
+    NVIC_Init(&NVIC_InitStruct);
+
+    // 回调
+    callback = _callback;
+    // 6启动定时器
+    TIM_Cmd(TIM2, ENABLE);
+}
+
+/**
+ * 重写中断函数
+ */
+void TIM2_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET)
+    {
+        if (callback)
+            callback();
+        // 清除更新中断Pending标志
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+    }
+}
+```
+
+@tab `Timer2.h`
+
+```c
+#ifndef __Timer2_H__
+#define __Timer2_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void Timer2_setInterval(void (*_callback)(), uint16_t ms);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+```
+
+:::
+
+#### 通过外部时钟源——实现`setInterval(callback,times)`
+
+:::code-tabs
+
+@tab `main.cpp`
+
+```c
+#include "stm32f10x.h"
+#include "OLED.h"
+#include "Timer2.h"
+
+uint16_t num = 0;
+void update_callback()
+{
+    num++;
+}
+
+int main(void)
+{
+    OLED_Init();
+    Timer2_setInterval(update_callback, 2);
+    while (1)
+    {
+        OLED_ShowString(1, 1, "Hello World!!!");
+        OLED_ShowNum(2, 1, num, 10);
+    }
+}
+
+```
+
+@tab `Timer2.c`
+
+```c
+#include "stm32f10x.h"
+#include "Timer2.h"
+#include <stddef.h>
+
+void (*callback)() = NULL;
+
+/**
+ * @brief 外部触发times次后执行传入的_callback函数
+ * @arg _callback 回调函数
+ * @arg times 计数次数 取值范围 [1,0xffff-1]
+ */
+void Timer2_setInterval(void (*_callback)(), uint16_t times)
+{
+    // 步骤
+    // 1. 通过 RCC 开启相关外设时钟
+    // 2. 为时基单元选择时钟源：内部时钟源、外部时钟模式、编码器模式
+    // 3. 配置时基单元：预分频器、自动重装器、计数模式
+    // 4. 配置输出中断控制: 允许输出中断到NVIC
+    // 5. 配置NVIC: 打开定时中断通道、分配中断优先级
+    // 6. 运行控制：使能计数器
+
+    // 1开启Tim2外设时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    // 2为TIM2时基单元选择外部时钟
+    // 2.1 PA0默认复用功能是TIM2_CH1_ETR,这里要配置PA0
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStruct = {GPIO_Pin_0, GPIO_Speed_50MHz, GPIO_Mode_IPU};
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
+    // 2.2 配置外部时钟2
+    TIM_ETRClockMode2Config(
+        TIM2,                        // 配置TIM2
+        TIM_ExtTRGPSC_OFF,           // 外部时钟分频
+        TIM_ExtTRGPolarity_Inverted, // 下降沿触发
+        0x00                         // 滤波器配置
+    );
+
+    // 3配置时基单元
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
+    TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;     // 采样点数，外部时钟信号滤波器的一个参数，这里填一分频，也就是不分频，那么就会以（内部时钟频率/1）的频率对外部时钟信号进行采样，这里用不到，随便写
+    TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up; // 计数模式，向上计数
+    TIM_TimeBaseInitStruct.TIM_Prescaler = 1 - 1;                // 预分频器
+    TIM_TimeBaseInitStruct.TIM_Period = times - 1;               // 自动重装器
+    TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;            // 重复计数器，高级定时器才有
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
+
+    // 上面配置时基单元的函数为了让写入预分频器和自动重装器的值立即生效，
+    // 手动触发了更新事件，这里要清除一下，否则中断函数也会立即执行一次
+    TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+
+    // 4把TIM2的更新中断连接到NVIC
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+    // 5配置NVIC优先级
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    NVIC_InitTypeDef NVIC_InitStruct;
+    NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQn;           // 定时器2中断通道
+    NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;           // 启用
+    NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级
+    NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;        // 响应优先级
+    NVIC_Init(&NVIC_InitStruct);
+
+    // 回调
+    callback = _callback;
+    // 6启动定时器
+    TIM_Cmd(TIM2, ENABLE);
+}
+
+/**
+ * 重写中断函数
+ */
+void TIM2_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET)
+    {
+        if (callback)
+            callback();
+        // 清除更新中断Pending标志
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+    }
+}
+```
+
+@tab `Timer2.h`
+
+```c
+#ifndef __Timer2_H__
+#define __Timer2_H__
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+    void Timer2_setInterval(void (*_callback)(), uint16_t times);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+```
+
+### 案例：定时输出比较——输出PWM波形
+
+### 案例：定时器输出捕获——测量方波
