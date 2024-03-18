@@ -8,6 +8,7 @@ tag:
   - 游戏
   - 设计模式
 category: 笔记
+star: true
 ---
 
 # 《游戏设计模式（game-programming-patterns）》学习笔记

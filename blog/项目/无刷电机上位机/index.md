@@ -5,7 +5,7 @@ date: 2024-03-18 12:05:00+08:00
 cover: ./assets/cover/无刷电机上位机.png
 tag: [笔记]
 category: 笔记
-# star: true
+star: true
 # order: 1
 article: false
 ---

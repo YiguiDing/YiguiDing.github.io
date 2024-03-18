@@ -4,6 +4,7 @@ date: 2024-02-16 07:00:00+08:00
 cover: ./assets/cover/STM32及标准库学习笔记.png
 tag: [stm32]
 category: [笔记, 电子]
+star: true
 ---
 
 # STM32及标准库学习笔记

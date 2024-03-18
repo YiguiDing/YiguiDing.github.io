@@ -4,6 +4,7 @@ date: 2023-01-10 13:57:00+08:00
 cover: ./cover/TypeScript写的2D游戏的实现细节笔记.gif
 tag: [笔记]
 category: 笔记
+star: true
 # order: 3
 ---
 

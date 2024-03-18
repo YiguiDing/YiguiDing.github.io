@@ -4,6 +4,7 @@ date: 2024-03-14 18:45:00+08:00
 cover: ./assets/cover/在canvas中实现并测试PID控制算法.png
 tag: []
 category: 笔记
+star: true
 ---
 
 # 在canvas中实现并测试PID控制算法
