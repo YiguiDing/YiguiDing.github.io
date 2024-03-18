@@ -95,6 +95,10 @@ class Demo {
     this.ctx2d = canvas.getContext("2d");
     canvas.width = this.WIDTH;
     canvas.height = this.HEIGHT;
+    let autoResize = () => canvas.width = this.WIDTH = this.canvas.parentElement?.clientWidth || this.WIDTH
+    setTimeout(autoResize, 2000);
+    window.addEventListener('load', autoResize)
+    window.addEventListener('resize', autoResize)
     this.animate();
   }
   update(dt) {
