@@ -25,6 +25,7 @@ export const themeConfig = hopeTheme({
     center: [],
     end: ["Links", "Language", "Repo", "Outlook", "Search"],
   },
+  lastUpdated: false,
   navbarAutoHide: "none",
   hideSiteNameOnMobile: true,
   // 加密配置
