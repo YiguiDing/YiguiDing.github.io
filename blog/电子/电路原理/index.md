@@ -428,7 +428,7 @@ star: true
 
 **推广：分压器**
 
-- 串联电路，$\frac{电压}{总电压}/=\frac{电阻}{总电阻}$
+- 串联电路，$\frac{\text{电压}}{\text{总电压}}/=\frac{\text{电阻}}{\text{总电阻}}$
 - ![](./images/2023-01-20-19-40-09.png)
 - $$ \frac{u_1}{u} = \frac{r_1*i_1}{r*i} = \frac{r_i}{r} $$
 - $$u_1=\frac{r_1}{r}u$$
@@ -461,7 +461,7 @@ star: true
 
 **推广:分流器**
 
-- 并联电导，$\frac{电流}{总电流}/=\frac{电导}{总电导}$
+- 并联电导，$\frac{\text{电流}}{\text{总电流}}/=\frac{\text{电导}}{\text{总电导}}$
 - ![](./images/2023-01-20-20-31-42.png)
 - $$ \frac{i_1}{i} = \frac{g_1*u_1}{g*u} = \frac{g_i}{g} $$
 - $$i_1=\frac{g_1}{g}i$$

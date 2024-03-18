@@ -17,6 +17,7 @@ export default defineUserConfig({
     "!**/projs/**",
     "!**/assets/**",
     "!**/.*/**", // 忽略所有隐藏文件和文件夹
+    "!**/_*/**",
     "!草稿/**",
   ],
   // 插件配置

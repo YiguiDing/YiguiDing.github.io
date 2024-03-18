@@ -16,6 +16,8 @@ export const themeConfig = hopeTheme({
   iconAssets: "fontawesome-with-brands",
   // 侧边栏
   sidebar: sidebarConfig,
+  // 优先按order排序，然后按时间降序排序
+  sidebarSorter: ["order", "date-desc", "filename"],
   // 导航条
   navbar: navbarConfig,
   navbarLayout: {
