@@ -58,7 +58,7 @@ export const themeConfig = hopeTheme({
       Wechat: "https://u.wechat.com/MH91sJy7fFJmV5WVsHOa7ho",
       Rss: "/rss.xml",
     },
-    articlePerPage: 20,
+    articlePerPage: 10,
   },
   // 其他
   themeColor: true,

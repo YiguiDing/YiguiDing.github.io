@@ -4,11 +4,10 @@
 title: "miniconda备忘笔记"
 date: 2022-01-29 13:52:00+08:00
 cover: ./cover/miniconda备忘笔记.png
-tag: [笔记,miniconda]
+tag: [笔记, miniconda]
 # ---article: false---
 category: 工具
 ---
-
 
 # miniconda命令备忘笔记
 
@@ -60,5 +59,18 @@ category: 工具
 
 ## 源
 
+- 默认的conda channel是defaults，但其代码包不全。
+- conda-forge
+  - 该channel有强大的社区支持，提供了大多数安装包，且更新及时
+- 创建.condarc文件。这是conda channel的配置文件，在安装conda之后并不会生成这个文件。在terminal中使用conda config指令可以创建该文件
+  - `conda config`
+- 查看现在的channel状态和优先级
+  - `conda config --get channels`
+- 添加conda-forge channel并设置为最高优先级
+  - `conda config --add channels conda-forge`
 - 恢复默认配置（删除家目录的配置文件）
-  - rm ~/.condarc
+  - `rm ~/.condarc`
+- 清华源
+  - `https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/`
+  - `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
+  - `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/`

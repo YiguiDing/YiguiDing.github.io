@@ -1030,7 +1030,15 @@ void Timer2_setInterval(void (*_callback)(), uint16_t ms)
     // 6启动定时器
     TIM_Cmd(TIM2, ENABLE);
 }
-
+/**
+ * 清除定时器
+ */
+void Timer2_ClearInterval()
+{
+    TIM_Cmd(TIM2, DISABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
+    callback = NULL;
+}
 /**
  * 重写中断函数
  */
@@ -1056,7 +1064,8 @@ void TIM2_IRQHandler()
 extern "C" {
 #endif
 
-void Timer2_setInterval(void (*_callback)(), uint16_t ms);
+    void Timer2_setInterval(void (*_callback)(), uint16_t ms);
+    void Timer2_ClearInterval();
 
 #ifdef __cplusplus
 }
@@ -1167,7 +1176,16 @@ void Timer2_setInterval(void (*_callback)(), uint16_t times)
     // 6启动定时器
     TIM_Cmd(TIM2, ENABLE);
 }
-
+/**
+ * 清除定时器
+ */
+void Timer2_ClearInterval()
+{
+    TIM_Cmd(TIM2, DISABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, DISABLE);
+    callback = NULL;
+}
 /**
  * 重写中断函数
  */
@@ -1195,6 +1213,7 @@ extern "C"
 #endif
 
     void Timer2_setInterval(void (*_callback)(), uint16_t times);
+    void Timer2_ClearInterval();
 
 #ifdef __cplusplus
 }
