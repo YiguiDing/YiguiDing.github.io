@@ -25,28 +25,29 @@ star: true
   - [标准外设库](#标准外设库)
   - [RCC](#rcc)
     - [基本介绍](#基本介绍)
-    - [常用函数](#常用函数)
+    - [RCC时钟树](#rcc时钟树)
+    - [标准库函数](#标准库函数)
   - [GPIO](#gpio)
     - [基本介绍](#基本介绍-1)
-    - [stm32f10x\_gpio.h](#stm32f10x_gpioh)
     - [案例代码：点灯](#案例代码点灯)
-  - [中断](#中断)
-    - [基本概念](#基本概念)
+  - [中断与NVIC](#中断与nvic)
+    - [基本介绍](#基本介绍-2)
     - [STM32的中断](#stm32的中断)
     - [EXTI外部中断](#exti外部中断)
     - [案例代码：光电计数器触发外部中断](#案例代码光电计数器触发外部中断)
   - [TIM定时器](#tim定时器)
     - [概念](#概念)
-    - [基本、通用、高级定时器](#基本通用高级定时器)
-      - [基本定时器](#基本定时器)
-      - [通用定时器](#通用定时器)
-      - [高级定时器](#高级定时器)
+    - [基本定时器](#基本定时器)
+    - [通用定时器](#通用定时器)
+    - [高级定时器](#高级定时器)
+    - [时基单元](#时基单元)
+    - [输出比较](#输出比较)
     - [案例：定时中断](#案例定时中断)
-      - [基本结构](#基本结构)
-      - [基本步骤](#基本步骤)
-      - [通过内部时钟源——实现`setInterval(callback,ms)`](#通过内部时钟源实现setintervalcallbackms)
-      - [通过外部时钟源——实现`setInterval(callback,times)`](#通过外部时钟源实现setintervalcallbacktimes)
-    - [案例：定时输出比较——输出PWM波形](#案例定时输出比较输出pwm波形)
+      - [案例：利用内部时钟源实现`setInterval(callback,ms)`](#案例利用内部时钟源实现setintervalcallbackms)
+      - [案例：利用外部时钟源实现`setInterval(callback,times)`](#案例利用外部时钟源实现setintervalcallbacktimes)
+    - [案例：LED呼吸灯](#案例led呼吸灯)
+    - [案例：舵机驱动](#案例舵机驱动)
+        - [直流电机与驱动电路](#直流电机与驱动电路)
     - [案例：定时器输出捕获——测量方波](#案例定时器输出捕获测量方波)
 
 ## F103C8T6简介
@@ -324,94 +325,75 @@ int main(void)
 - 备份域控制寄存器 `RCC_BDCR`
 - 控制/状态寄存器 `RCC_CSR`
 
-### 常用函数
+### RCC时钟树
 
-> 大部分功能都用不到，这里只粘贴几个最常用的函数的使用方法。
+**时钟树**
 
-:::code-tabs
+- 时钟树就是STM32内部产生和配置时钟并把配置好的时钟发送到各个外设的系统。
+- 时钟是所有外设运行的基础，所以时钟也是最先需要配置的东西
+- 在启动文件中,main函数之前，还有一个SystemInit()函数，该函数用于配置时钟树。
 
-@tab RCC_APB2PeriphClockCmd
+**时钟产生流程**
 
-```cpp
-/**
-  * @brief  启用或禁用高速APB2外设时钟
-  * @param  RCC_APB2Periph: 指定哪一个APB2外设获得时钟
-  *   这个参数可以是以下任何参数的结合:
-  *     @arg RCC_APB2Periph_AFIO, RCC_APB2Periph_GPIOA, RCC_APB2Periph_GPIOB,
-  *          RCC_APB2Periph_GPIOC, RCC_APB2Periph_GPIOD, RCC_APB2Periph_GPIOE,
-  *          RCC_APB2Periph_GPIOF, RCC_APB2Periph_GPIOG, RCC_APB2Periph_ADC1,
-  *          RCC_APB2Periph_ADC2, RCC_APB2Periph_TIM1, RCC_APB2Periph_SPI1,
-  *          RCC_APB2Periph_TIM8, RCC_APB2Periph_USART1, RCC_APB2Periph_ADC3,
-  *          RCC_APB2Periph_TIM15, RCC_APB2Periph_TIM16, RCC_APB2Periph_TIM17,
-  *          RCC_APB2Periph_TIM9, RCC_APB2Periph_TIM10, RCC_APB2Periph_TIM11
-  * @param  NewState: 指定外设时钟的新状态.
-  *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
-  */
-void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
-```
+- AHB左侧为时钟产生电路、右侧为时钟分配电路
+- 在时钟产生电路，有四个震荡源
+  - 内部8Mhz高速RC振荡器（提供系统时钟）
+  - 外部4~16Mhz高速石英晶振（提供系统时钟；一般8M）
+  - 外部32.768khz低速晶振（给RTC电路提供时钟）
+  - 内部40Khz低速RC振荡器（给看门狗提供时钟）
+- 高速晶振用于提供系统时钟，AHB、APB1、APB2的时钟来源
+- 内外高速时钟的选择
+  - 内外的高速晶振都可使用，只是石英振荡器比RC更稳定，
+  - 系统简单、不需要精确时钟则可使用内部RC振荡器
+- SystemInit()默认配置时钟的流程
+  - 时钟产生
+    - 启动内部8Mhz
+    - 选择内部时钟为系统时钟，暂时以内部8Mhz运行
+    - ![Alt text](assets/images/image-26.png)
+    - 启动外部时钟，
+    - 配置外部时钟进入PLLMUL锁相环进行倍频得到8x9=72Mhz时钟
+    - 待锁相环输出稳定后，选择锁相环输出为系统时钟。
+    - ![Alt text](assets/images/image-27.png)
+    - 这样系统时钟就从8Mhz切换到了72Mhz
+  - 时钟分配
+    - 系统时钟SYSCLK（72Mhz or 8Mhz）进入AHB总线预分频器
+    - 配置的预分频器系数为1，所以AHB得到时钟为SYSCLK/1=72Mhz
+    - ![Alt text](assets/images/image-28.png)
+    - AHB得到的时钟再分配给`APB1`总线预分频器
+    - 配置的预分频器系数为2，所以APB1得到时钟为SYSCLK/2=36Mhz
+    - ![Alt text](assets/images/image-29.png)
+  - 经过APB1预分频器后得到的时钟会再分配给通用定时器和基本定时器（定时器2~7）
+    - 分配之前会做判断，
+      - APB1预分配系数为1则直接分配，
+      - 否则x2再分配`（这里就是这种情况）`
+      - 保证定时器得到的系统时钟为72Mhz
+    - ![Alt text](assets/images/image-30.png)
+  - AHB得到的时钟再分配给`APB2`总线内部预分频器
+  - 配置的预分频器系数为1，所以APB2得到时钟为SYSCLK/1=72Mhz
+  - ![Alt text](assets/images/image-31.png)
+  - 经过APB2预分配器后得到的时钟最终会送至高级定时器定时器1和8
+    - 分配之前会做判断，
+      - APB2预分配系数为1则直接分配，`（这里就是这种情况）`
+      - 否则x2再分配
+      - 保证定时器得到的系统时钟为72Mhz
+    - ![Alt text](assets/images/image-32.png)
 
-@tab RCC_APB1PeriphClockCmd
+**可能出现的问题**
 
-```cpp
-/**
-  * @brief  启用或禁用低速APB1外设时钟
-  * @param  RCC_APB1Periph: 指定哪一个APB1外设获得时钟
-  *   这个参数可以是以下任何参数的结合:
-  *     @arg RCC_APB1Periph_TIM2, RCC_APB1Periph_TIM3, RCC_APB1Periph_TIM4,
-  *          RCC_APB1Periph_TIM5, RCC_APB1Periph_TIM6, RCC_APB1Periph_TIM7,
-  *          RCC_APB1Periph_WWDG, RCC_APB1Periph_SPI2, RCC_APB1Periph_SPI3,
-  *          RCC_APB1Periph_USART2, RCC_APB1Periph_USART3, RCC_APB1Periph_USART4,
-  *          RCC_APB1Periph_USART5, RCC_APB1Periph_I2C1, RCC_APB1Periph_I2C2,
-  *          RCC_APB1Periph_USB, RCC_APB1Periph_CAN1, RCC_APB1Periph_BKP,
-  *          RCC_APB1Periph_PWR, RCC_APB1Periph_DAC, RCC_APB1Periph_CEC,
-  *          RCC_APB1Periph_TIM12, RCC_APB1Periph_TIM13, RCC_APB1Periph_TIM14
-  * @param  NewState: 指定外设时钟的新状态.
-  *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
-  */
-void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
-```
+> 如果外部时钟出现问题，那么系统时钟就无法从8Mhz切换到72Mhz，系统时钟就比预期慢了9倍，定时1秒，实际为9秒。
 
-@tab RCC_AHBPeriphClockCmd
+**CSS(Clock Security System-时钟安全系统)**
 
-```cpp
-/**
-  * @brief  启用或禁用AHB(先进高性能)总线外设时钟
-  *
-  * @param  RCC_AHBPeriph: 指定哪一个AHB外设可以获得时钟
-  *
-  *   对于其他STM32互联型设备，这个参数可以是以下任何值的结合
-  *   For @b STM32_Connectivity_line_devices, this parameter can be any combination
-  *   of the following values:
-  *     @arg RCC_AHBPeriph_DMA1
-  *     @arg RCC_AHBPeriph_DMA2
-  *     @arg RCC_AHBPeriph_SRAM
-  *     @arg RCC_AHBPeriph_FLITF
-  *     @arg RCC_AHBPeriph_CRC
-  *     @arg RCC_AHBPeriph_OTG_FS
-  *     @arg RCC_AHBPeriph_ETH_MAC
-  *     @arg RCC_AHBPeriph_ETH_MAC_Tx
-  *     @arg RCC_AHBPeriph_ETH_MAC_Rx
-  *
-  *   对于其他STM32设备，这个参数可以是以下任何值的结合
-  *   For @b other_STM32_devices, this parameter can be any combination of the
-  *   following values:
-  *     @arg RCC_AHBPeriph_DMA1
-  *     @arg RCC_AHBPeriph_DMA2
-  *     @arg RCC_AHBPeriph_SRAM
-  *     @arg RCC_AHBPeriph_FLITF
-  *     @arg RCC_AHBPeriph_CRC
-  *     @arg RCC_AHBPeriph_FSMC
-  *     @arg RCC_AHBPeriph_SDIO
-  * @note SRAM 和 FLITF 的时钟只能在睡眠模式被关闭
-  *
-  * @param  NewState: 新的状态
-  *     @arg ENABLE
-  *     @arg DISABLE
-  */
-void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState);
-```
+- 负责检测外部运行状态，
+- 当外部时钟失效，就把外部时钟切换为内部时钟
+- 在高级定时器中，
+  - 当CSS检测到外部时钟失效时，
+  - 将发送一个时钟失效事件给高级定时器的刹车控制电路，
+  - 控制输出比较电路控制的电机立即停止，防止出现意外。
+
+![Alt text](assets/images/image-25.png)
+
+### 标准库函数
 
 :::
 **RCC外设所有函数功能描述**
@@ -527,80 +509,6 @@ void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState);
   - 肖特基触发器开启，仍然能够读取数字输入
 - ![Alt text](assets/images/image-10.png)
 
-### stm32f10x_gpio.h
-
-```cpp
-// -----------------------------------------------------
-// 接口描述：
-    void GPIO_DeInit(GPIO_TypeDef* GPIOx);
-// 说明：
-    复位指定GPIO
-// 示例：
-    GPIO_DeInit(GPIOA);
-// -----------------------------------------------------
-// 接口描述：
-    void GPIO_AFIODeInit(void);
-// 说明：
-    复位AFIO外设
-// 示例：
-    GPIO_AFIODeInit(void);
-// -----------------------------------------------------
-// 接口描述：
-    void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
-// 说明：
-    用结构体的参数来复位指定IO口
-// 示例：
-    GPIO_InitTypeDef GPIO_InitStruct;
-    // 配置Pin
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0;// GPIO_Pin_[0,15] And GPIO_Pin_All
-    // 配置速度
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz; // GPIO_Speed_10MHz,GPIO_Speed_2MHz,GPIO_Speed_50MHz
-    // 配置模式：
-    // GPIO_Mode_AIN模拟输入
-    // GPIO_Mode_IN_FLOATING 悬空数字输入 GPIO_Mode_IPD上拉数字输入
-    // GPIO_Mode_Out_OD 开漏输出 GPIO_Mode_Out_PP推挽输出
-    // GPIO_Mode_AF_OD复用开漏输出  GPIO_Mode_AF_PP复用推挽输出
-    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &GPIO_InitStruct);
-// -----------------------------------------------------
-// 接口描述：
-    void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
-// 说明：
-    给接口体初始化(赋默认值)
-// 示例：
-    GPIO_InitTypeDef GPIO_InitStruct;
-    GPIO_StructInit(&GPIO_InitStruct);
-// -----------------------------------------------------
-// 四个读取函数
-    // 读取输入寄存器某位
-    uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    // 读取输入寄存器
-    uint16_t GPIO_ReadInputData(GPIO_TypeDef* GPIOx);
-    // 读取输出寄存器某位
-    uint8_t GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    // 读取输出寄存器
-    uint16_t GPIO_ReadOutputData(GPIO_TypeDef* GPIOx);
-// -----------------------------------------------------
-// 四个写入函数
-    // 给指定的某些位写入1
-    void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    // 给指定的某些位写入0
-    void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    // 给指定的某些位写入1-Bit_SET或0-Bit_RESET
-    void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
-    // 给指定端口写入16位数据
-    void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal);
-// -----------------------------------------------------
-// 锁定端口配置
-    void GPIO_PinLockConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-// -----------------------------------------------------
-void GPIO_EventOutputConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource);
-void GPIO_EventOutputCmd(FunctionalState NewState);
-void GPIO_PinRemapConfig(uint32_t GPIO_Remap, FunctionalState NewState);
-void GPIO_EXTILineConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource);
-void GPIO_ETH_MediaInterfaceConfig(uint32_t GPIO_ETH_MediaInterface);
-```
-
 ### 案例代码：点灯
 
 **步骤**
@@ -628,9 +536,9 @@ int main(void)
 }
 ```
 
-## 中断
+## 中断与NVIC
 
-### 基本概念
+### 基本介绍
 
 - **中断：** 在主程序运行过程中，出现了特定的**中断触发条件**（中断源），使得CPU暂停当前正在运行的程序，转而去处理**中断程序**，处理完成后又返回原来被暂停的位置继续运行
 - **中断优先级：** 当有多个中断源同时申请中断时，CPU会根据中断源的轻重缓急进行裁决，优先响应更加紧急的中断源
@@ -645,20 +553,7 @@ int main(void)
 **介绍**
 
 - 68个可屏蔽中断通道，包含EXTI、TIM、ADC、USART、SPI、I2C、RTC等多个外设
-- 使用NVIC统一管理中断，每个中断通道都拥有**16**个可编程的优先等级，可对优先级进行分组，进一步设置抢占优先级和响应优先级
-
-**STM32中断向量表**
-
-- 分类
-  - 灰色的都是内核的中断，一般用不到。
-    - Reset复位中断，当产生复位事件时程序就会自动执行复位中断。
-  - 其余部分为外设中断
-- 中断地址
-  - 外设申请中断时，会跳转到相应的中断地址执行程序
-  - 而中断跳转只能跳转到固定的地址
-  - 用户定义的中断处理函数在编译器编译后，其地址是不固定的
-  - 这就需要在跳转到中断地址后再次跳转到用户定义的中断函数，这部分工作将会由编译器自动完成（定义在了setup汇编文件中）。
-- ![Alt text](assets/images/image-13.png)
+- 使用**NVIC**统一管理中断，每个中断通道都拥有**16**个可编程的优先等级，可对优先级进行分组，进一步设置抢占优先级和响应优先级
 
 **NVIC-嵌套中断向量控制器**
 
@@ -686,6 +581,19 @@ int main(void)
 |  分组2   | 2位，取值为0~3  | 2位，取值为0~3  |
 |  分组3   | 3位，取值为0~7  | 1位，取值为0~1  |
 |  分组4   | 4位，取值为0~15 |  0位，取值为0   |
+
+**STM32中断向量表**
+
+- 分类
+  - 灰色的都是内核的中断，一般用不到。
+    - Reset复位中断，当产生复位事件时程序就会自动执行复位中断。
+  - 其余部分为外设中断
+- 中断地址
+  - 外设申请中断时，会跳转到相应的中断地址执行程序
+  - 而中断跳转只能跳转到固定的地址
+  - 用户定义的中断处理函数在编译器编译后，其地址是不固定的
+  - 这就需要在跳转到中断地址后再次跳转到用户定义的中断函数，这部分工作将会由编译器自动完成（定义在了setup汇编文件中）。
+- ![Alt text](assets/images/image-13.png)
 
 ### EXTI外部中断
 
@@ -735,14 +643,14 @@ int main(void)
 
 **基本步骤**
 
-- 开启GPIOx时钟
-- 配置GPIOx_Pinx
-- 开启AFIO时钟
-- 配置AFIO，使GPIOx_Pinx通向 EXTIx中断信号
-- 配置EXTI，启用EXTI_Linex
-- 配置NVIC,设置EXTIxx_IRQn中断函数优先级
-- 定义中断函数EXTIxx_IRQn
-  - 在中断执行完毕后清除请求挂起寄存器对应的位
+1. 开启GPIOx时钟
+2. 配置GPIOx_Pinx
+3. 开启AFIO时钟
+4. 配置AFIO，使GPIOx_Pinx通向 EXTIx中断信号
+5. 配置EXTI，启用EXTI_Linex
+6. 配置NVIC,设置EXTIxx_IRQn中断函数优先级
+7. 定义中断函数EXTIxx_IRQn
+   - 在中断执行完毕后清除请求挂起寄存器对应的位
 
 **配置GPIO_G_Pin_13口外部中断的示例代码**
 
@@ -851,9 +759,7 @@ void EXTI15_10_IRQHandler()
 | 通用定时器 | TIM2、TIM3、TIM4、TIM5 | APB1 | 拥有基本定时器全部功能，并额外具有内外时钟源选择、输入捕获、输出比较、编码器接口、主从触发模式等功能 |
 | 基本定时器 | TIM6、TIM7             | APB1 | 拥有定时中断、主模式触发DAC的功能                                                                    |
 
-### 基本、通用、高级定时器
-
-#### 基本定时器
+### 基本定时器
 
 **基本定时器框图**
 
@@ -873,7 +779,7 @@ void EXTI15_10_IRQHandler()
 - **主模式触发DAC:** 可以把定时器的更新事件，映射到TRGO（Trigger Oout）触发输出，然后再接到DAC的触发转换引脚上，实现定时触发DAC转换输出模拟量，不需要CPU参与，实现硬件自动化
 - ![Alt text](assets/images/image-18.png)
 
-#### 通用定时器
+### 通用定时器
 
 **通用定时器框图**
 
@@ -910,7 +816,7 @@ void EXTI15_10_IRQHandler()
 
 - ![Alt text](assets/images/image-19.png)
 
-#### 高级定时器
+### 高级定时器
 
 **高级定时器框图**
 
@@ -921,13 +827,97 @@ void EXTI15_10_IRQHandler()
   - `BRK刹车输入功能`：当从外部引脚BKIN得到刹车信号时，或者时钟信号失效事件发生时，控制电路将自动切断电机的输出，防止意外发生。
 - ![Alt text](assets/images/image-21.png)
 
+### 时基单元
+
+**延迟更新的预分频器**
+
+- 一句话总结：修改预分频器参数时，不会立即生效，而是会在计数器达到目标值后，产生更新事件，进入下一轮计数时生效。
+- 时序过程
+  - `预分频控制寄存器`是供读写的寄存器，不直接决定分频系数，
+  - `预分频缓存器`是真正决定预分频参数的寄存器
+  - 在一个计数的过程中，用户对`预分频控制寄存器`写入分频系数，写入的分频系数不生效，**计数频率将保持不变**，
+  - 直到本轮计数完成，更新事件产生，该系数才会写入`预分频缓存器`，进入下一轮计数时，写入的分频系数生效,**计数频率才会改变**。
+  - ![Alt text](assets/images/image-33.png)
+  - `计数器计数频率CK_CN`
+  - `= CK_PSC定时器时钟/(PSC预分频器系数 + 1)`
+- 这里的预分频缓冲器，是为了防止计数中途更改数值造成错误而设计的。
+
+**更新事件的产生时序**
+
+- 一句话总结：更新事件不是在计数器达到目标时立即产生的，而是在达到目标值后的下一个定时器周期，计数器溢出时产生的。
+- ![Alt text](assets/images/image-34.png)
+- `计数器溢出频率CK_CNT_OV`
+  - `= CK_CNT计数器/(ARR自动重装寄存器+1)`
+  - `= [CK_PSC定时器时钟/(PSC预分频器系数+1)]/(ARR自动重装寄存器+1)`
+- 更新中断标志置1后，会申请中断，在中断处理函数中需要手动清除该标志位。
+- 这里的ARR自动重装寄存器，也有一个缓冲寄存器，或者叫影子寄存器，是否使用是可以设置的。当使用时，会有和预分频器一样延迟生效的作用。
+  - ![Alt text](assets/images/image-35.png)
+
+### 输出比较
+
+**OC（Output Compare）输出比较**
+
+- 输出比较可以通过比较`CNT计数器`与`CCR捕获比较寄存器`值的关系，来对输出电平进行置1、置0或翻转的操作，用于输出一定频率和占空比的PWM波形
+- 每个高级定时器和通用定时器都拥有4个输出比较通道
+- 高级定时器的前3个通道额外拥有死区生成和互补输出的功能
+- ![Alt text](assets/images/image-36.png)
+- tips
+  - OC（Output Compare）输出比较
+  - IC（Input Compare）输入比较
+  - CC (Capture Compare) 输入捕获和输出比较的单元
+
+**PWM**
+
+- PWM（Pulse Width Modulation）脉冲宽度调制
+- 在**具有惯性的系统**中，可以通过对一系列脉冲的宽度进行调制，来等效地获得所需要的模拟参量，常应用于电机控速等领域
+- PWM参数：
+  - 频率 = 1 / TS
+    - 一般为几k~几十khz
+  - 占空比 = TON / TS
+  - 分辨率 = 占空比变化步距
+    - 形容的是占空比的精度
+      - 比如 1% 2% 3% 分辨率为1%
+      - 比如 1.1% 1.2% 1.3% 分辨率为0.1%
+- ![Alt text](assets/images/image-37.png)
+
+**捕获比较通道输出部分**
+
+- `OC1M[2:0]` 负责控制输出模式控制器的输出逻辑
+- `CC1P` 用于实现极性选择的控制，用来实现波形的翻转
+- `CC1E` 输出使能
+- 通用定时器的比较输出通道
+  - ![Alt text](assets/images/image-38.png)
+  - ![Alt text](assets/images/image-39.png)
+- 高级定时器的比较输出通道
+  - 相比于通用定时器，多了一个互补的输出端口，用于控制上下MOS管的导通与截止。
+  - 死区生成电路用来防止上下管同时导通，防止上下管截至时，由于器件的不理想导致不完全截至，而同时另一个管又导通，这将使得上下管同时导通发生短路。
+  - ![Alt text](assets/images/image-43.png)
+
+**输出模式控制器的模式选择**
+
+| 模式             | 描述                                                                                                                             | xxx                                                                              |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| 冻结             | CNT=CCR时，REF保持为原状态                                                                                                       | （输出保持不变）                                                                 |
+| 匹配时置有效电平 | CNT=CCR时，REF置有效电平                                                                                                         | （输出保持高电平）                                                               |
+| 匹配时置无效电平 | CNT=CCR时，REF置无效电平                                                                                                         | （输出保持低电平）                                                               |
+| 匹配时电平翻转   | CNT=CCR时，REF电平翻转                                                                                                           | （输出50%PWM方波，频率为计数频率的一半） ![Alt text](assets/images/image-40.png) |
+| 强制为无效电平   | CNT与CCR无效，REF强制为无效电平                                                                                                  | （强制输出低电平）                                                               |
+| 强制为有效电平   | CNT与CCR无效，REF强制为有效电平                                                                                                  | （强制输出高电平）                                                               |
+| PWM模式1         | 向上计数：CNT<CCR时，REF置有效电平，CNT≥CCR时，REF置无效电平 <br/> 向下计数：CNT >CCR时，REF置无效电平，CNT≤CCR时，REF置有效电平 |                                                                                  |
+| PWM模式2         | 向上计数：CNT<CCR时，REF置无效电平，CNT≥CCR时，REF置有效电平 <br/> 向下计数：CNT >CCR时，REF置有效电平，CNT≤CCR时，REF置无效电平 | PWM模式的取反                                                                    |
+
+**PWM模式1的输出波形**
+
+![Alt text](assets/images/image-41.png)
+![Alt text](assets/images/image-42.png)
+
 ### 案例：定时中断
 
-#### 基本结构
+**定时中断基本结构**
 
 ![Alt text](assets/images/image-22.png)
 
-#### 基本步骤
+**实现定时中断的基本步骤**
 
 1. 通过 RCC 开启相关外设时钟
 2. 为时基单元选择时钟源：内部时钟源、外部时钟模式、编码器模式
@@ -936,7 +926,7 @@ void EXTI15_10_IRQHandler()
 5. 配置NVIC: 打开定时中断通道、分配中断优先级
 6. 运行控制：使能计数器
 
-#### 通过内部时钟源——实现`setInterval(callback,ms)`
+#### 案例：利用内部时钟源实现`setInterval(callback,ms)`
 
 setInterval是一个在前端开发中经常使用的函数，这里尝试实现一下
 
@@ -1076,7 +1066,7 @@ extern "C" {
 
 :::
 
-#### 通过外部时钟源——实现`setInterval(callback,times)`
+#### 案例：利用外部时钟源实现`setInterval(callback,times)`
 
 :::code-tabs
 
@@ -1222,6 +1212,358 @@ extern "C"
 #endif
 ```
 
-### 案例：定时输出比较——输出PWM波形
+:::
+
+### 案例：LED呼吸灯
+
+:::code-tabs
+
+@tab `PWM.c`
+
+```cpp
+#include "PWM.h"
+/**
+ * 产生PWM波，精度1% 频率1k 占空比默认50% 可调
+ */
+void Timer2_PWM_Init()
+{
+    // 步骤
+    // 1. 通过 RCC 开启相关外设时钟
+    // 2. 为时基单元选择时钟源：内部时钟源
+    // 3. 配置时基单元：预分频器、自动重装器、计数模式
+    // 4. 初始化输出比较单元
+    // 5. 配置GPIO
+    // 6. 运行控制：使能计数器
+
+    // 1开启Tim2外设时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    // 2为TIM2时基单元选择内部
+    TIM_InternalClockConfig(TIM2);
+
+    // 3配置时基单元
+    // 72Mhz -> /720 = 100khz  -> /100 -> 1khz
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
+    TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;     // 采样点数，外部时钟信号滤波器的一个参数，这里填一分频，也就是不分频，那么就会以（内部时钟频率/1）的频率对外部时钟信号进行采样，这里用不到，随便写
+    TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up; // 计数模式，向上计数
+    TIM_TimeBaseInitStruct.TIM_Prescaler = 720 - 1;              // 预分频器 PSC
+    TIM_TimeBaseInitStruct.TIM_Period = 100 - 1;                 // 自动重装器 ARR
+    TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;            // 重复计数器，高级定时器才有
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
+
+    // 4. 初始化输出比较单元
+    TIM_OCInitTypeDef TIM_OCInitStruct;
+    // 初始化结构体，赋默认值，因为该结构体中有些属性是生效于高级定时器的，
+    // 这里没有为这些属性赋值，又由于这里是局部变量，那么这些属性的值就是不确定的，
+    // 这些未赋值的属性可能会对高级定时器的输出造成影响
+    TIM_OCStructInit(&TIM_OCInitStruct);
+
+    // 占空比
+    TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1;             // 设置输出比较模式
+    TIM_OCInitStruct.TIM_OCPolarity = TIM_OCPolarity_High;     // 设置输出比较极性
+    TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable; // 设置输出使能
+    TIM_OCInitStruct.TIM_Pulse = 0;                            // 设置CCR捕获比较寄存器的值 [0x0000 and 0xFFFF]
+    // OC1 是对ch1通道初始化
+    TIM_OC1Init(TIM2, &TIM_OCInitStruct);
+
+    // 5.1 配置AFIO
+    // 端口重映射
+    // RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);      // 开启AFIO时钟
+    // GPIO_PinRemapConfig(GPIO_PartialRemap1_TIM2, ENABLE);     // 配置TIM2重映射1，这样tim2_ch1就用重映射到PA15上
+    // GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); // 配置关闭Jtag调试端口重映射，这样PA15 PB3 PB4三个端口就成为了GPIO口
+
+    // 5.2 配置GPIO,
+    // 根据手册 Timer2的ch1输出比较通道连接在了GPIO_A0上
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStruct = {
+        GPIO_Pin_0  // Timer2_ch1 ==默认==> GPIO_A0
+        // | GPIO_Pin_15 // Timer2_ch1 ==重映射==> GPIO_A15
+        ,
+        GPIO_Speed_50MHz,
+        GPIO_Mode_AF_PP // 必须设置复用推挽输出，引脚的输出控制才会和输出数据寄存器断开，和片上外设复用功能输出连接
+    };
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // 6启动定时器
+    TIM_Cmd(TIM2, ENABLE);
+}
+/**
+ * 设置占空比（0~100）
+ */
+void Timer2_PWM_SetDuty(uint8_t duty)
+{
+    TIM_SetCompare1(TIM2, duty);
+}
+
+```
+
+@tab `PWM.h`
+
+```cpp
+#ifndef __PWM_H__
+#define __PWM_H__
+#include "stm32f10x.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+    void Timer2_PWM_Init();
+    void Timer2_PWM_SetDuty(uint8_t duty);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+```
+
+@tab `main.cpp`
+
+```cpp
+#include "stm32f10x.h"
+#include "OLED.h"
+#include "Delay.h"
+#include "PWM.h"
+
+int8_t step = 1;
+uint16_t duty = 0;
+
+int main(void)
+{
+    OLED_Init();
+    Timer2_PWM_Init();
+    OLED_ShowString(1, 1, "Duty:");
+    while (1)
+    {
+        OLED_ShowNum(1, 6, duty, 3);
+        Timer2_PWM_SetDuty(duty);
+        Delay_ms(5);
+        duty += step;
+        if (duty == 0) step = 1;
+        if (duty == 100) step = -1;
+    }
+}
+```
+
+:::
+
+### 案例：舵机驱动
+
+- 舵机是一种根据输入PWM信号占空比来控制输出角度的装置
+- 执行逻辑：
+  - PWM输入到控制板，给控制板一个目标角度
+  - 通过点位器检测输出轴的当前角度
+  - 大于目标角度，电机反转
+  - 小于目标角度，电机正转
+- SG90舵机
+  - PWM要求：
+    - 周期:20ms（50Hz），
+    - 高电平宽度为:0.5ms~2.5ms
+      - `0.5ms -> -90°` 占空比：0.5/20 -> 2.5%
+      - `1.5ms -> 0°` 占空比：1.5/20 -> 7.5%
+      - `2.5ms -> +90°` 占空比：2.5/20 -> 12.5%
+  - ![Alt text](assets/images/image-44.png)
+  - ![Alt text](assets/images/image-45.png)
+
+:::code-tabs
+
+@tab `PWM.c`
+
+```cpp
+#include "PWM.h"
+/**
+ * 产生PWM波，精度1% 频率1k 占空比默认50% 可调
+ */
+void Timer2_PWM_Init()
+{
+    // 步骤
+    // 1. 通过 RCC 开启相关外设时钟
+    // 2. 为时基单元选择时钟源：内部时钟源
+    // 3. 配置时基单元：预分频器、自动重装器、计数模式
+    // 4. 初始化输出比较单元
+    // 5. 配置GPIO
+    // 6. 运行控制：使能计数器
+
+    // 1开启Tim2外设时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    // 2为TIM2时基单元选择内部
+    TIM_InternalClockConfig(TIM2);
+
+    // 3配置时基单元
+    // 72Mhz -> /72 = 1M  -> /20k -> 50hz
+
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
+    TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;     // 采样点数，外部时钟信号滤波器的一个参数，这里填一分频，也就是不分频，那么就会以（内部时钟频率/1）的频率对外部时钟信号进行采样，这里用不到，随便写
+    TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up; // 计数模式，向上计数
+    TIM_TimeBaseInitStruct.TIM_Prescaler = 72 - 1;               // 预分频器 PSC
+    TIM_TimeBaseInitStruct.TIM_Period = 20000 - 1;               // 自动重装器 ARR
+    TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;            // 重复计数器，高级定时器才有
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
+
+    // 4. 初始化输出比较单元
+    TIM_OCInitTypeDef TIM_OCInitStruct;
+    // 初始化结构体，赋默认值，因为该结构体中有些属性是生效于高级定时器的，
+    // 这里没有为这些属性赋值，又由于这里是局部变量，那么这些属性的值就是不确定的，
+    // 这些未赋值的属性可能会对高级定时器的输出造成影响
+    TIM_OCStructInit(&TIM_OCInitStruct);
+
+    // 占空比
+    TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1;             // 设置输出比较模式
+    TIM_OCInitStruct.TIM_OCPolarity = TIM_OCPolarity_High;     // 设置输出比较极性
+    TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable; // 设置输出使能
+    TIM_OCInitStruct.TIM_Pulse = 0;                            // 设置CCR捕获比较寄存器的值 [0x0000 and 0xFFFF]
+    // OC1 是对ch1通道初始化
+    TIM_OC1Init(TIM2, &TIM_OCInitStruct);
+
+    // 5 配置GPIO,
+    // 根据手册 Timer2的ch1输出比较通道连接在了GPIO_A0上
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStruct = {
+        GPIO_Pin_0 // Timer2_ch1 ==默认==> GPIO_A0
+        ,
+        GPIO_Speed_50MHz,
+        GPIO_Mode_AF_PP // 必须设置复用推挽输出，引脚的输出控制才会和输出数据寄存器断开，和片上外设复用功能输出连接
+    };
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // 6启动定时器
+    TIM_Cmd(TIM2, ENABLE);
+}
+/**
+ * 设置角度[0,180]
+ */
+void Timer2_PWM_SetDegree(float degree)
+{
+    // 20ms -> 20k
+    // 0°：     0.5ms -> 0.5k
+    // +90°：   1.5ms -> 1.5k
+    // +180°：  2.5ms -> 2.5k
+
+    // 1deg -> 0.5k + 1k/90
+    TIM_SetCompare1(TIM2,500+degree*(1000/90.0));
+}
+```
+
+@tab `PWM.h`
+
+```cpp
+#ifndef __PWM_H__
+#define __PWM_H__
+#include "stm32f10x.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+    void Timer2_PWM_Init();
+    void Timer2_PWM_SetDegree(float degree);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+```
+
+@tab `main.cpp`
+
+```cpp
+#include "stm32f10x.h"
+#include "OLED.h"
+#include "Delay.h"
+#include "PWM.h"
+#include <math.h>
+
+float degree = 0;
+
+float random(float from,float to){
+    float rand_0_1 = (float)rand() / RAND_MAX;
+    return rand_0_1 * (to - from) + from;
+}
+
+int main(void)
+{
+    OLED_Init();
+    Timer2_PWM_Init();
+    OLED_ShowString(1, 1, "Degree:");
+    while (1)
+    {
+        OLED_ShowSignedNum(1, 7, degree, 5);
+        Timer2_PWM_SetDegree(degree);
+        Delay_ms(1000);
+        degree = random(0,180);
+    }
+}
+```
+
+:::
+
+##### 直流电机与驱动电路
+
+- 直流电机是一种将电能转换为机械能的装置，有两个电极，当电极正接时，电机正转，当电极反接时，电机反转
+- 直流电机属于大功率器件，GPIO口无法直接驱动，需要配合电机驱动电路来操作
+
+**TB6612**
+
+- TB6612是一款双路H桥型的直流电机驱动芯片，
+- 可以驱动两个直流电机并且控制其转速和方向
+- ![Alt text](assets/images/image-46.png)
+- ![Alt text](assets/images/image-47.png)
+  - MV脚电压功率可以和电机功率保持一致
+  - VCC脚电压可以和单片机供电电压保持一致
+  - STBY(Stand By)待机控制脚，低电平芯片不工作
+- ![Alt text](assets/images/image-48.png)
+
+`TB6612FNG.pdf` **Features:**
+
+- Power supply voltage ； VM=15V（Max.）
+- Output current ； Iout=1.2A(ave) / 3.2A (peak)
+- Output low ON resistor； 0.5Ω (upper＋lower Typ. @VM≧
+  5V)
+- Standby (Power save) system
+- CW/CCW/short brake/stop function modes
+- Built-in thermal shutdown circuit and low voltage detecting circuit
+- Small faced package（SSOP24：0.65mm Lead pitch）
+- Response to Pb free packaging
+- ![Alt text](assets/images/image-49.png)
+
+**接线图：**
+
+**示例代码：**
+
+:::
+
+@tab `main.cpp`
+
+```c
+#include "stm32f10x.h"
+#include "OLED.h"
+#include "Delay.h"
+#include "PWM.h"
+
+int8_t step = 1;
+uint16_t duty = 0;
+
+int main(void)
+{
+    OLED_Init();
+    Timer2_PWM_Init();
+    OLED_ShowString(1, 1, "Duty:");
+    while (1)
+    {
+        OLED_ShowNum(1, 6, duty, 3);
+        Timer2_PWM_SetDuty(duty);
+        duty += 5;
+        Delay_ms(100);
+        duty %= 100;
+    }
+}
+```
+
+:::
 
 ### 案例：定时器输出捕获——测量方波
