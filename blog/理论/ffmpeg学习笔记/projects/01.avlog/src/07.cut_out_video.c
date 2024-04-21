@@ -5,74 +5,167 @@
 int main(int argc, char **argv)
 {
 
+  // 设置log级别
   av_log_set_level(AV_LOG_DEBUG);
-  if (argc < 2)
+
+  // 判断参数个数
+  if (argc < 5)
   {
-    av_log(NULL, AV_LOG_ERROR, "usage: %s <filename.mp4>\n", argv[0]);
+    av_log(NULL, AV_LOG_ERROR, "usage: %s <in_filename.mp4> <start_time_s> <end_time_s> <out_filename.mp4>\n", argv[0]);
+    return -1;
   }
 
   char *inFileName = argv[1];
+  char *outFileName = argv[4];
+  int startTimeS = atoi(argv[2]);
+  int endTimeS = atoi(argv[3]);
 
-  // 打开输入
+  // 打开输入流并读取头
+  AVFormatContext *inFmtCtx = NULL;
   // Open an input stream and read the header.
-  AVFormatContext *format_ctx = NULL;
-  avformat_open_input(&format_ctx, inFileName, NULL, NULL);
-
-  // 获取流信息
-  // Read packets of a media file to get stream information.
-  avformat_find_stream_info(format_ctx, NULL);
-
-  // 输出封装的input的详细信息
-  // Print detailed information about the input or output format
-  av_dump_format(format_ctx, 0, inFileName, 0);
-
-  //  ffmpeg 内部时间基
-  av_log(NULL, AV_LOG_INFO, "ffmpeg internal time base: %d / %d\n", AV_TIME_BASE_Q.num, AV_TIME_BASE_Q.den); // AV_TIME_BASE_Q 表示的是时间基,值为 1/1000000 秒
-
-  // 时间基x时间戳=时间
-  av_log(NULL, AV_LOG_INFO, "input format duration(timestamp):%lld\n", format_ctx->duration);                 // duration表征的是时间戳
-  av_log(NULL, AV_LOG_INFO, "input format duration(s):%lf\n", format_ctx->duration * av_q2d(AV_TIME_BASE_Q)); // av_q2d将分数转换成小数
-
-  for (uint8_t idx = 0; idx < format_ctx->nb_streams; idx++)
+  int ret = avformat_open_input(&inFmtCtx, inFileName, NULL, NULL);
+  if (ret < 0)
   {
-    AVStream *stream = format_ctx->streams[idx];
-    if (stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO)
-    {
-      // 视频流的时间基
-      AVRational videoTimeBase = stream->time_base;
-      av_log(NULL, AV_LOG_INFO, "video stream time base: %d / %d\n", videoTimeBase.num, videoTimeBase.den);
-    }
-    if (stream->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
-    {
-      // 音频流的时间基
-      AVRational audioTimeBase = stream->time_base;
-      av_log(NULL, AV_LOG_INFO, "audio stream time base: %d / %d\n", audioTimeBase.num, audioTimeBase.den);
-    }
+    av_log(NULL, AV_LOG_ERROR, "avformat_open_input failed.\n");
+    return -1;
   }
+
+  // 读取流的头信息
+  // Read packets of a media file to get stream information.
+  ret = avformat_find_stream_info(inFmtCtx, NULL);
+  if (ret < 0)
+  {
+    av_log(NULL, AV_LOG_ERROR, "avformat_find_stream_info failed.\n");
+    return -1;
+  }
+
+  // Allocate an AVFormatContext for an output format
+  AVFormatContext *outFmtCtx = NULL;
+  ret = avformat_alloc_output_context2(&outFmtCtx, NULL, NULL, outFileName);
+  if (ret < 0)
+  {
+    av_log(NULL, AV_LOG_ERROR, "avformat_alloc_output_context2 failed.\n");
+    return -1;
+  }
+
+  // 创建流到输出文件
+  for (uint8_t idx = 0; idx < inFmtCtx->nb_streams; idx++)
+  {
+    AVStream *inStream = inFmtCtx->streams[idx];
+    AVStream *outStream = avformat_new_stream(outFmtCtx, NULL); //  Add a new stream to a media file.
+    // Copy the contents of src to dst.
+    ret = avcodec_parameters_copy(outStream->codecpar, inStream->codecpar);
+    if (ret < 0)
+    {
+      av_log(NULL, AV_LOG_ERROR, "avcodec_parameters_copy failed.\n");
+      return -1;
+    }
+    outStream->codecpar->codec_tag = 0;
+  }
+
+  // 检测标志位
+  if (outFmtCtx->flags & AVFMT_NOFILE)
+  {
+    av_log(NULL, AV_LOG_ERROR, "AVFMT_NOFILE flag is set in iformat/oformat.flags. In this a case, the (de)muxer will handle I/O in some other way and this field(outFmtCtx->pb) will be NULL.\n");
+    return -1;
+  }
+
+  // 打开输入（创建输入输出环境AVIOContext）
+  ret = avio_open(&outFmtCtx->pb, outFileName, AVIO_FLAG_WRITE);
+  if (ret < 0)
+  {
+    av_log(NULL, AV_LOG_ERROR, "avio_open failed.\n");
+    return -1;
+  }
+  // 写入文件头
+  ret = avformat_write_header(outFmtCtx, NULL);
+  if (ret < 0)
+  {
+    av_log(NULL, AV_LOG_ERROR, "avformat_write_header failed.\n");
+    return -1;
+  }
+
+  // 定位到关键帧
+  // Seek to the keyframe at timestamp
+  ret = av_seek_frame(
+      inFmtCtx,                  // media file handle
+      -1,                        //  流的id,-1为默认流
+      startTimeS * AV_TIME_BASE, // 时间戳，如果指定了具体流，则填基于流时间基的时间戳；如果未指定具体流（-1），则填基于AV_TIME_BASE时间基的时间戳
+      AVSEEK_FLAG_ANY            // seek to any frame, even non-keyframes
+  );
+  if (ret < 0)
+  {
+    av_log(NULL, AV_LOG_ERROR, "av_seek_frame failed.\n");
+    return -1;
+  }
+
+  // 记录流的开始时间戳
+  int firstPTS[inFmtCtx->nb_streams];
+  int firstDTS[inFmtCtx->nb_streams];
+  memset(firstPTS, -1, sizeof(firstPTS));
+  memset(firstDTS, -1, sizeof(firstDTS));
 
   AVPacket *packet = av_packet_alloc();
-  while (av_read_frame(format_ctx, packet) == 0)
+  while (av_read_frame(inFmtCtx, packet) == 0)
   {
-    AVStream *mediaStream = format_ctx->streams[packet->stream_index];
-    AVRational streamTimeBase = mediaStream->time_base;
+    AVStream *inStream = inFmtCtx->streams[packet->stream_index];
+    AVStream *outStream = outFmtCtx->streams[packet->stream_index];
+    // pts渲染时间戳 x 流的时间基 = 播放时间
+    int curTimeS = packet->pts * av_q2d(inStream->time_base);
+    if (curTimeS > endTimeS)
+      break;
 
-    av_log(NULL, AV_LOG_INFO, "stream index: %d\n", packet->stream_index);
-    av_log(NULL, AV_LOG_INFO, "\t stream time base: %d / %d\n", streamTimeBase.num, streamTimeBase.den);
+    // 记录流的开始时间戳
+    if (firstPTS[packet->stream_index] == -1)
+      firstPTS[packet->stream_index] = packet->pts;
+    if (firstDTS[packet->stream_index] == -1)
+      firstDTS[packet->stream_index] = packet->dts;
 
-    av_log(NULL, AV_LOG_INFO, "\t packet pts渲染时间戳: %lld\n", packet->pts);
-    av_log(NULL, AV_LOG_INFO, "\t packet ptsTime渲染时间: %lf\n", packet->pts * av_q2d(streamTimeBase));
-    
-    av_log(NULL, AV_LOG_INFO, "\t packet dts解码时间戳: %lld\n", packet->dts);
-    av_log(NULL, AV_LOG_INFO, "\t packet ptsTime解码时间: %lf\n", packet->dts * av_q2d(streamTimeBase));
+    // 重新计算渲染时间戳
+    packet->pts = av_rescale_q(packet->pts - firstPTS[packet->stream_index], inStream->time_base, outStream->time_base);
+    if (packet->pts < 0)
+      packet->pts = 0;
+    // 重新计算解码时间戳
+    packet->dts = av_rescale_q(packet->dts - firstDTS[packet->stream_index], inStream->time_base, outStream->time_base);
+    if (packet->dts < 0)
+      packet->dts = 0;
+    // 重新计算时长
+    packet->duration = av_rescale_q(packet->duration, inStream->time_base, outStream->time_base);
+    // 位置位置
+    packet->pos = -1;
 
-    av_log(NULL, AV_LOG_INFO, "\t packet duration时间戳: %lld\n", packet->duration);
-    av_log(NULL, AV_LOG_INFO, "\t packet duration时间: %lf\n", packet->duration * av_q2d(streamTimeBase));
-
-
-    // 释放buffer内存
+    // 由于I P B 三个帧的存在，pts和dts的值可能不一样，这里根据时间范围暴力截取packet时，可能导致pts<dts的情况发生，那么后续的校验会不通过
+    if (packet->pts < packet->dts)
+    {
+      continue;
+    }
+    // 写入封装
+    // av_interleaved_write_frame 相比于 write_packet 前者会对pts、dts、stream_index做校验，且前者依赖于后者
+    ret = av_interleaved_write_frame(outFmtCtx, packet);
+    if (ret < 0)
+    {
+      av_log(NULL, AV_LOG_ERROR, "av_interleaved_write_frame failed.\n");
+      return -1;
+    }
+    // 释放packet中buffer内存
     av_packet_unref(packet);
   }
+  // 释放packet内存
   av_packet_free(&packet);
 
+  // 写文件尾
+  // Write the stream trailer to an output media file and free the file private data
+  av_write_trailer(outFmtCtx);
+
+  // 释放内存
+  if (inFmtCtx)
+  {
+    avformat_close_input(&inFmtCtx);
+  }
+  if (outFmtCtx)
+  {
+    avio_close(outFmtCtx->pb);
+    avformat_close_input(&outFmtCtx);
+  }
   return 0;
 }

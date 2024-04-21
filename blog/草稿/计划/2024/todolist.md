@@ -20,10 +20,14 @@ tag: [to-do-list]
   - [⬜总结使用makefile实现c/cpp混合编译和烧录的方法和注意事项](#总结使用makefile实现ccpp混合编译和烧录的方法和注意事项)
   - [⬜学习node-addon相关技术](#学习node-addon相关技术)
   - [⬜结合ffmpeg和node-addon实现node-decoder](#结合ffmpeg和node-addon实现node-decoder)
+  - [⬜学习NW.js](#学习nwjs)
   - [⬜学习C++标准库常用函数](#学习c标准库常用函数)
   - [⬜学习汇编语言](#学习汇编语言)
   - [⬜学习电机控制原理](#学习电机控制原理)
-  - [⬜清华大学电路原理课程剩余部分学习日志](#清华大学电路原理课程剩余部分学习日志)
+  - [实现无感无刷直流电机驱动](#实现无感无刷直流电机驱动)
+  - [学习FOC算法原理](#学习foc算法原理)
+  - [⬜阅读华中科技大学电子技术基础](#阅读华中科技大学电子技术基础)
+  - [⬜学习清华大学电路原理课程剩余部分](#学习清华大学电路原理课程剩余部分)
   - [⬜建模与3D打印相关技术学习日志](#建模与3d打印相关技术学习日志)
   - [⬜尝试制作一个穿越机](#尝试制作一个穿越机)
   - [⬜油管控制理论学习日志](#油管控制理论学习日志)
@@ -55,7 +59,18 @@ tag: [to-do-list]
 - `2024-04-02` 搭建ffmpeg开发环境，编写makefile，实现通过ffmpeg提供的接口打印输出日志、视频metadata、提取AAC音频流、提取H264视频流
 - `2024-04-03` 提取AAC音频流(ADTS格式，VLC可播放)、提取H264视频流(annexb格式、VLC可播放)
 - `2024-04-04` 实现对mp4中音视频流的提取,重新封装为flv
-- `2024-04-07` 学习理解ffmpeg中时间戳、时间基的概念；编码实现；
+- `2024-04-07` 学习理解ffmpeg中时间戳、时间基的概念；编写代码实现；
+- `2024-04-08` 学习使用ffmpeg截取视频的过程并编写代码实现；
+- `2024-04-09` 了解RGB、YUV的各种格式
+- `2024-04-13` 搞清YUV444、YUV422、YUV421三种格式的区别、实现解码YUV420
+- `2024-04-14` 学习并实现修改视频分辨率、修改解码格式为RGB24、实现保存RGB24为位图文件。
+- `2024-04-16` 学习并实现将yuv420编码为h264
+- `2024-04-19` 学习并实现将AAC解码为PCM
+- `2024-04-20` 学习并实现将PCM编码为AAC
+
+<http://dranger.com/ffmpeg>
+
+<https://ffmpeg.xianwaizhiyin.net/api-ffmpeg/>
 
 ## ⬜总结在electron中实现播放rtsp流的几种方式
 
@@ -65,7 +80,17 @@ tag: [to-do-list]
 
 ## ⬜学习node-addon相关技术
 
+- `2024-04-16` 了解、学习、总结`Node-API`、`nan`、`node-addon-api`的区别
+- `2024-04-20` 
+  - 学习总结node-addons开发环境的安装和配置，创建和编写hello_world.cc插件项目并测试,
+  - 编写 `00.addon/`  `01.function/` 的示例代码
+- `2024-04-21` 编写`02.function_arguments/`  `03.callback/`  `04.factory_of_object/`  `05.factory_of_function/` `06.objectWrap/`  `07.factory_of_objectWrap/` 的示例代码
+
 ## ⬜结合ffmpeg和node-addon实现node-decoder
+
+- `2024-04-14` 创建media-decoder的npm包和GitHub仓库
+
+## ⬜学习NW.js
 
 ## ⬜学习C++标准库常用函数
 
@@ -75,12 +100,27 @@ tag: [to-do-list]
 
 **直流无刷电机PWM驱动**
 
-> https://www.bilibili.com/video/BV1hv4y1g7s3
+> <https://www.bilibili.com/video/BV1hv4y1g7s3>
 
 - `2024-04-05` 无刷直流电机驱动控制原理:六步换相、反向电动势无感位置检测
 - `2024-04-06` 无刷直流电机驱动控制原理:霍尔有感位置检测 了解开源驱动方案:EFM8BB21+FD6288+BLHeli_S
 
-## ⬜清华大学电路原理课程剩余部分学习日志
+## 实现无感无刷直流电机驱动
+
+> https://www.bilibili.com/video/BV1SQ4y117mq
+> 
+> https://github.com/Ncerzzk/datasheet/blob/master/电气工程-电机与电器/无感无刷直流电机之电调设计全攻略.pdf
+
+
+## 学习FOC算法原理
+
+> https://www.bilibili.com/video/BV1cj411M7Xu
+
+## ⬜阅读华中科技大学电子技术基础
+
+- `2024-04-07T03:40` 数字部分 第一章 读完
+
+## ⬜学习清华大学电路原理课程剩余部分
 
 ## ⬜建模与3D打印相关技术学习日志
 

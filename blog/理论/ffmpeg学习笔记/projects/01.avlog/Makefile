@@ -17,7 +17,7 @@ OUTPUT_DIR = output
 C_CPP_DEFS = 
 
 C_SOURCES =  \
-	src/06.time_base_and_timestamp.c
+	src/14.encode_PCM_to_AAC.c
 vpath %.c $(sort $(dir $(C_SOURCES)))
 
 CPP_SOURCES = \
@@ -29,7 +29,7 @@ C_CPP_INCLUDES =  \
 	-I src/lib/
 	
 LIBDIR = \
-	-L D:/app/ffmpeg-6.1.1-full_build-shared/lib  -l avutil -l avformat -l avcodec \
+	-L D:/app/ffmpeg-6.1.1-full_build-shared/lib  -l avutil -l avformat -l avcodec -l swscale \
 	-l stdc++ \
 
 DLL_SOURCES = \

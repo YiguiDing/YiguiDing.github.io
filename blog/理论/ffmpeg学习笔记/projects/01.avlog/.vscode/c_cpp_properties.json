@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${vcpkgRoot}/x64-windows/include",
-                "D:\\app\\ffmpeg-6.1.1-full_build-shared\\include"
+                "D:\\app\\ffmpeg-6.1.1-full_build-shared\\include",
+                "D:\\app\\ffmpeg-6.1.1-full_build-shared\\src\\"
             ],
             "defines": [
                 "_DEBUG",
