@@ -22,7 +22,7 @@ imageMin: true # 图像压缩
 
 **代码**
 
-```c++
+```cpp
     int preocess_color(double rate)//[0.0 ~ 1.0]  -> struct rgb[char red,char green,char blue]
     {
         int R=0;
@@ -76,7 +76,7 @@ imageMin: true # 图像压缩
 
 ## 计算互补色
 
-```c++
+```cpp
     //计算互补色180°
     int process_another_color(int in_color)
     {

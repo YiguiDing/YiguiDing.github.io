@@ -416,7 +416,7 @@ star: true
 
 **大整数乘小整数模板**
 
-```c++
+```cpp
 // C = A * b, A >= 0, b >= 0
 vector<int> mul(vector<int> &A, int b){
     vector<int> C;
@@ -437,7 +437,7 @@ vector<int> mul(vector<int> &A, int b){
 
 高精度除以低精度 —— 模板题 AcWing 794. 高精度除法
 
-```c++
+```cpp
 // A / b = C ... r, A >= 0, b > 0
 vector<int> div(vector<int> &A, int b, int &r)
 {
@@ -3786,7 +3786,7 @@ bitset
 
 #### vector
 
-```c++
+```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -3825,7 +3825,7 @@ int main()
 
 #### pair
 
-```c++
+```cpp
 #include <iostream>
 using namespace std;
 int main()
@@ -3843,7 +3843,7 @@ int main()
 
 #### string
 
-```c++
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -6144,7 +6144,7 @@ public class _18_二分图_匈牙利算法 {
 
 **试除法判断质数暴力版**
 
-```c++
+```cpp
 bool isSu(int x){
  for(int i=2;i<=n-1;i++){
   if(x%i==0)return true;
@@ -6155,7 +6155,7 @@ bool isSu(int x){
 
 **试除法判断质数优化版**
 
-```c++
+```cpp
 bool isSu(int x){
  // 如果写成 i*i<=n 可能导致溢出
  // 如果写成 i<=sqrt(n) 将导致耗时的函数调用
@@ -6177,7 +6177,7 @@ bool isSu(int x){
 
 **试除法分解质因数暴力版**
 
-```c++
+```cpp
 bool divide(int n) {
 if(n<=1) return false;
     int res=1;
@@ -6198,7 +6198,7 @@ if(n<=1) return false;
 
 **试除法分解质因数优化版**
 
-```c++
+```cpp
 #include<iostream>
 using namespace std;
 void divide(int n) {
@@ -6337,7 +6337,7 @@ void divide(int n) {
  
 ```
 
-```c++
+```cpp
 /*
 提交状态AC
 输入8
@@ -6393,7 +6393,7 @@ int main(){
 
 ![](./images/2023-05-24-11-56-30.png)
 
-```c++
+```cpp
 /*
 提交状态AC
 输入8
@@ -6445,7 +6445,7 @@ int main(){
 
 ![](./images/2023-05-24-11-55-50.png)
 
-```c++
+```cpp
 /**
 提交状态：AC
  */
@@ -6490,7 +6490,7 @@ int main(){
 
 ![](./images/2023-05-24-11-55-30.png)
 
-```c++
+```cpp
 /**
 提交状态：AC
  */
@@ -6569,7 +6569,7 @@ int main(){
 
 ![](./images/2023-05-24-13-56-11.png)
 
-```c++
+```cpp
 /**
  * 提交状态：AC
  */
@@ -6629,7 +6629,7 @@ int main(){
 ![](./images/2023-05-27-19-00-28.png)
 </details>
 
-```c++
+```cpp
 /**
  * 提交状态：AC
  */
@@ -6678,7 +6678,7 @@ int main(){
 ![](./images/2023-05-28-15-05-22.png)
 </details>
 
-```c++
+```cpp
 /**
  * 提交状态：AC
 */
@@ -6767,7 +6767,7 @@ a、p互质，且p是质数，$a^{φ(p)}≡1( \mod p)$
 
 **三种写法**
 
-```c++
+```cpp
 #include<iostream>
 typedef long long ll;
 using namespace std;
@@ -6852,7 +6852,7 @@ $b^{p-2} \mod 5 = 3^3\mod 5 = 27\mod 5 = 2$
 - 当b是p的倍数时，一定无解，因为b*x也一定是p的倍数，那么模p一定为0
 - 当b不是p的倍数时，由于p是质数，那么b和p一定互质，那么根据费马定理，一定存在$b^{p-1}≡1 (\mod p)=b* b^{p-2}≡1 (\mod p)$,一定存在逆元。
 
-```c++
+```cpp
 // 条件结果：AC
 #include<iostream>
 using namespace std;
@@ -6904,7 +6904,7 @@ x、y不唯一。
 ![](./images/2023-05-30-14-13-39.png)
 </details>
 
-```c++
+```cpp
 #include<iostream>
 using namespace std;
 int exgcd(int a,int b,int &x,int &y){
@@ -6969,7 +6969,7 @@ int main(){
 ![](./images/2023-05-30-14-11-37.png)
 </details>
 
-```c++
+```cpp
 #include <iostream>
 using namespace std;
 typedef long long ll;
@@ -7140,7 +7140,7 @@ int main(){
 }
 ```
 
-```c++
+```cpp
 // 提交状态：AC
 #include<iostream>
 #include<algorithm>

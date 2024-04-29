@@ -38,8 +38,8 @@ export const themeConfig = hopeTheme({
     // 用户信息，头像，格言
     name: "Yigui-Ding",
     avatar: "/images/author_icon.jpg",
-    roundAvatar: true,
-    intro: "/网站/关于/",
+    // roundAvatar: true,
+    intro: "/网站/关于.md",
     description: '"枉少年","生当作人杰";<br>"莫等闲","自古英雄多磨难";',
     // 时间线文字
     timeline: "莫等闲，白了少年头，空悲切！",
@@ -147,7 +147,7 @@ export const themeConfig = hopeTheme({
       // echarts: true,
       // 流程图
       // flowchart: true, // 流程图
-      // mermaid:true, // 流程图，类图，....
+      mermaid:true, // 流程图，类图，....
       // 代码演示
       demo: true,
       playground: {

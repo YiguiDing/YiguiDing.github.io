@@ -25,10 +25,11 @@ tag: [to-do-list]
   - [⬜学习汇编语言](#学习汇编语言)
   - [⬜学习电机控制原理](#学习电机控制原理)
   - [实现无感无刷直流电机驱动](#实现无感无刷直流电机驱动)
-  - [学习FOC算法原理](#学习foc算法原理)
+  - [⬜学习FOC算法原理](#学习foc算法原理)
   - [⬜阅读华中科技大学电子技术基础](#阅读华中科技大学电子技术基础)
   - [⬜学习清华大学电路原理课程剩余部分](#学习清华大学电路原理课程剩余部分)
   - [⬜建模与3D打印相关技术学习日志](#建模与3d打印相关技术学习日志)
+    - [⬜重学blender，只学建模，不学材质](#重学blender只学建模不学材质)
   - [⬜尝试制作一个穿越机](#尝试制作一个穿越机)
   - [⬜油管控制理论学习日志](#油管控制理论学习日志)
   - [⬜RTOS操作系统学习日志](#rtos操作系统学习日志)
@@ -80,11 +81,46 @@ tag: [to-do-list]
 
 ## ⬜学习node-addon相关技术
 
+> <https://nodejs.org/docs/latest/api/addons.html>
+> <https://github.com/nodejs/node-addon-api>
+> <https://github.com/nodejs/node-addon-examples>
+> <https://nodejs.github.io/node-addon-examples>
+
 - `2024-04-16` 了解、学习、总结`Node-API`、`nan`、`node-addon-api`的区别
-- `2024-04-20` 
+- `2024-04-20`
   - 学习总结node-addons开发环境的安装和配置，创建和编写hello_world.cc插件项目并测试,
-  - 编写 `00.addon/`  `01.function/` 的示例代码
-- `2024-04-21` 编写`02.function_arguments/`  `03.callback/`  `04.factory_of_object/`  `05.factory_of_function/` `06.objectWrap/`  `07.factory_of_objectWrap/` 的示例代码
+  - 编写编写案例代码
+    - `4月 21 10:51 00.addon/`
+    - `4月 21 00:48 01.function/`
+- `2024-04-21` 编写案例代码
+  - `4月 21 11:21 02.function_arguments/`
+  - `4月 21 11:35 03.callback/`
+  - `4月 21 11:52 04.factory_of_object/`
+  - `4月 21 14:28 05.factory_of_function/`
+  - `4月 21 16:40 06.objectWrap/`
+  - `4月 21 21:44 07.factory_of_objectWrap/`
+- `2024-04-22` 编写案例代码
+  - `4月 22 16:26 08.passing_wrapped_obj_to_native/`
+  - `4月 22 17:04 09.passing_array_buffer_to_native/`
+  - `4月 22 21:45 10.passing_typed_array_to_native/`
+- `2024-04-26` 修改、编写案例代码
+  - 修改：`09.passing_array_buffer_to_native/`
+  - 编写：`4月 26 21:17 11.context-awareness/`
+- `2024-04-27`
+  - 学习AsyncWorker
+  - 编写案例代码
+    - 编写：`4月 28 07:15 12.my-async-worker/`
+- `2024-04-28`
+  - 编写案例代码
+    - `4月 28 18:12 13.async_worker_call_js_function/`
+    - `4月 28 22:44 14.async_worker_promise/`
+- `2024-04-29`
+  - 学习Reference、function_reference、线程安全函数threadsafe_function
+  - 编写案例代码
+    - `4月 29 11:26 15.function_reference/`
+    - `4月 29 20:46 16.thread_safe_function_demo/`
+  - 补充笔记
+    - function、Object、ArrayBuffer、TypedArray、AsyncWorker、threadsafe_function文档翻译
 
 ## ⬜结合ffmpeg和node-addon实现node-decoder
 
@@ -107,14 +143,13 @@ tag: [to-do-list]
 
 ## 实现无感无刷直流电机驱动
 
-> https://www.bilibili.com/video/BV1SQ4y117mq
-> 
-> https://github.com/Ncerzzk/datasheet/blob/master/电气工程-电机与电器/无感无刷直流电机之电调设计全攻略.pdf
+> <https://www.bilibili.com/video/BV1SQ4y117mq>
+>
+> <https://github.com/Ncerzzk/datasheet/blob/master/电气工程-电机与电器/无感无刷直流电机之电调设计全攻略.pdf>
 
+## ⬜学习FOC算法原理
 
-## 学习FOC算法原理
-
-> https://www.bilibili.com/video/BV1cj411M7Xu
+> <https://www.bilibili.com/video/BV1cj411M7Xu>
 
 ## ⬜阅读华中科技大学电子技术基础
 
@@ -123,6 +158,10 @@ tag: [to-do-list]
 ## ⬜学习清华大学电路原理课程剩余部分
 
 ## ⬜建模与3D打印相关技术学习日志
+
+### ⬜重学blender，只学建模，不学材质
+
+
 
 ## ⬜尝试制作一个穿越机
 

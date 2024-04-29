@@ -78,6 +78,7 @@ Napi::Object MyObject::NewInstance(Napi::Env env, Napi::Value arg)
   Napi::Object obj = funRef->New({napi_value(arg)});
 
   // 为了得到能够逃离局部作用域后仍然能够存活的对象
+  // https://github.com/nodejs/node-addon-api/blob/main/doc/escapable_handle_scope.md
   Napi::EscapableHandleScope scope(env);
   Napi::Object escapableObj = scope.Escape(napi_value(obj)).ToObject();
 

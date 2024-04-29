@@ -314,7 +314,7 @@ public class _01_快速排序 {
 
 **AC代码**
 
-```c++
+```cpp
 /*
 提交状态: AC
 输入
@@ -3488,7 +3488,7 @@ public class _01_Dijkstra_朴素版_邻接表法 {
 
 ```
 
-```c++
+```cpp
 // 复习
 // 提交状态：AC
 #include<iostream>

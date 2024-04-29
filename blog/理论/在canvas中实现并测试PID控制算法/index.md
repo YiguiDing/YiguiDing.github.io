@@ -13,7 +13,7 @@ star: true
 
 <Demo2App />
 
-<script setup lang="ts">
+<script setup>
 import Demo2App from "@source/理论/在canvas中实现并测试PID控制算法/assets/projects/demo2/App.vue";
 </script>
 
