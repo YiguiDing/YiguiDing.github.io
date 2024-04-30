@@ -1744,6 +1744,7 @@ Node.js 使用 libuv 库，后者维护了一个工作线程池来执行异步�
 
 @tab `src/addon.cc`
 @[code cpp](./projects/14.async_worker_promise/src/addon.cc)
+:::
 
 ## 线程安全函数threadsafe_function
 
