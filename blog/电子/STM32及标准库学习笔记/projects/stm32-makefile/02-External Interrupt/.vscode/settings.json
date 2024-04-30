@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "**/frontmatter.json": "jsonc",
+        "**/.frontmatter/config/*.json": "jsonc",
+        "*.md": "markdown",
+        "*.gyp": "json",
+        "stm32f10x.h": "c",
+        "delay.h": "c",
+        "encoder.h": "c",
+        "oled.h": "c",
+        "*.x": "c",
+        "test.h": "c"
+    }
+}

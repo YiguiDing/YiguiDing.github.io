@@ -1518,12 +1518,13 @@ int main(void)
   - STBY(Stand By)待机控制脚，低电平芯片不工作
 - ![Alt text](assets/images/image-48.png)
 
-`TB6612FNG.pdf` **Features:**
+`TB6612FNG.pdf`
+
+**Features:**
 
 - Power supply voltage ； VM=15V（Max.）
 - Output current ； Iout=1.2A(ave) / 3.2A (peak)
-- Output low ON resistor； 0.5Ω (upper＋lower Typ. @VM≧
-  5V)
+- Output low ON resistor； 0.5Ω (upper＋lower Typ. @VM≧5V)
 - Standby (Power save) system
 - CW/CCW/short brake/stop function modes
 - Built-in thermal shutdown circuit and low voltage detecting circuit

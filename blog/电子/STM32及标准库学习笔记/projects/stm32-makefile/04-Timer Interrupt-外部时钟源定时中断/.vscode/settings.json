@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "**/frontmatter.json": "jsonc",
+        "**/.frontmatter/config/*.json": "jsonc",
+        "*.md": "markdown",
+        "*.gyp": "json",
+        "stm32f10x.h": "c",
+        "delay.h": "c",
+        "encoder.h": "c",
+        "oled.h": "c",
+        "*.x": "c",
+        "test.h": "c",
+        "timer.h": "c",
+        "stm32f10x_conf.h": "c",
+        "stm32f10x_rcc.h": "c",
+        "stm32f10x_tim.h": "c",
+        "stdint.h": "c",
+        "stddef.h": "c",
+        "timer2.h": "c"
+    }
+}
