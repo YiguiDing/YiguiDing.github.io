@@ -42,6 +42,7 @@ star: true
     - [高级定时器](#高级定时器)
     - [时基单元](#时基单元)
     - [输出比较](#输出比较)
+    - [输入比较](#输入比较)
     - [案例：定时中断](#案例定时中断)
       - [案例：利用内部时钟源实现`setInterval(callback,ms)`](#案例利用内部时钟源实现setintervalcallbackms)
       - [案例：利用外部时钟源实现`setInterval(callback,times)`](#案例利用外部时钟源实现setintervalcallbacktimes)
@@ -49,6 +50,9 @@ star: true
     - [案例：舵机驱动](#案例舵机驱动)
         - [直流电机与驱动电路](#直流电机与驱动电路)
     - [案例：定时器输出捕获——测量方波](#案例定时器输出捕获测量方波)
+    - [编码器接口](#编码器接口)
+    - [编码器测位置、测速案例](#编码器测位置测速案例)
+  - [ADC模拟/数字转化器](#adc模拟数字转化器)
 
 ## F103C8T6简介
 
@@ -740,14 +744,14 @@ void EXTI15_10_IRQHandler()
   - **输入时钟可以是系统时钟、外部输入**
   - **对高精度时钟计数，实际就是计时**
     - 对系统时钟72Mhz计数72次，就是1us
-- **预分频器**、**16位计数器**、**自动重装寄存器**的时基单元，在72MHz计数时钟下可以实现最大59.65s的定时
-  - 预分频器，可以对时钟进行分频，
-  - 16位计数器,用来执行计数定时的计数器，每来一个时钟，计数器加1
+- 由**预分频器**、**16位计数器**、**自动重装寄存器**组成的时基单元，在72MHz计数时钟下可以实现最大59.65s的定时
+  - **预分频器**，可以对时钟进行分频，
+  - **16位计数器**,用来执行计数定时的计数器，每来一个时钟，计数器加1
   - 单个定时器最大定时时长： `(1/72Mhz) * 65536 * 65536 = 59.65232355555556 s`
   - 两个定时器级联最大定时时长：`59.65s * 65536 * 65536 ≈ 8千多年`
   - 三个定时器级联最大定时时长：`8K * 65536 * 65536 ≈ 34万亿年`
-- 不仅具备基本的**定时中断功能**，而且还包含**内外时钟源选择**、**输入捕获**、**输出比较**、编码器接口、主从触发模式等多种功能
-- 根据复杂度和应用场景分为了高级定时器、通用定时器、基本定时器三种类型
+- 具备基本的**定时中断功能**，而且还包含**内外时钟源选择**、**输入捕获**、**输出比较**、编码器接口、主从触发模式等多种功能
+- 根据复杂度和应用场景分为了**高级定时器**、**通用定时器**、**基本定时器**三种类型
 
 **定时器类型**
 
@@ -763,7 +767,7 @@ void EXTI15_10_IRQHandler()
 
 **基本定时器框图**
 
-- **`CK_PSC`时钟：** 一般直接使用`CK_INT`内部时钟72Mhz作为定时器时钟
+- **`CK_PSC`时钟：** 一般直接使用`CK_INT`（内部时钟72Mhz）作为定时器时钟
 - **时基单元：** 预分频器+计数器+自动重装寄存器
   - **预分频器：** 对时钟进行降频
     - 写0 输出 72/1 Mhz （不分频/也叫1分频）
@@ -857,10 +861,11 @@ void EXTI15_10_IRQHandler()
 
 **OC（Output Compare）输出比较**
 
-- 输出比较可以通过比较`CNT计数器`与`CCR捕获比较寄存器`值的关系，来对输出电平进行置1、置0或翻转的操作，用于输出一定频率和占空比的PWM波形
+- 输出比较可以通过比较`CNT计数器`与`CCR捕获比较寄存器`值的关系，来对输出电平进行置1、置0或翻转的操作，
+- 用于输出一定频率和占空比的PWM波形。
 - 每个高级定时器和通用定时器都拥有4个输出比较通道
 - 高级定时器的前3个通道额外拥有死区生成和互补输出的功能
-- ![Alt text](assets/images/image-36.png)
+- ![Alt text](assets/images/image-52.png)
 - tips
   - OC（Output Compare）输出比较
   - IC（Input Compare）输入比较
@@ -895,7 +900,7 @@ void EXTI15_10_IRQHandler()
 
 **输出模式控制器的模式选择**
 
-| 模式             | 描述                                                                                                                             | xxx                                                                              |
+| 模式             | 描述                                                                                                                             | 笔记                                                                             |
 | :--------------- | :------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
 | 冻结             | CNT=CCR时，REF保持为原状态                                                                                                       | （输出保持不变）                                                                 |
 | 匹配时置有效电平 | CNT=CCR时，REF置有效电平                                                                                                         | （输出保持高电平）                                                               |
@@ -903,13 +908,102 @@ void EXTI15_10_IRQHandler()
 | 匹配时电平翻转   | CNT=CCR时，REF电平翻转                                                                                                           | （输出50%PWM方波，频率为计数频率的一半） ![Alt text](assets/images/image-40.png) |
 | 强制为无效电平   | CNT与CCR无效，REF强制为无效电平                                                                                                  | （强制输出低电平）                                                               |
 | 强制为有效电平   | CNT与CCR无效，REF强制为有效电平                                                                                                  | （强制输出高电平）                                                               |
-| PWM模式1         | 向上计数：CNT<CCR时，REF置有效电平，CNT≥CCR时，REF置无效电平 <br/> 向下计数：CNT >CCR时，REF置无效电平，CNT≤CCR时，REF置有效电平 |                                                                                  |
+| PWM模式1         | 向上计数：CNT<CCR时，REF置有效电平，CNT≥CCR时，REF置无效电平 <br/> 向下计数：CNT >CCR时，REF置无效电平，CNT≤CCR时，REF置有效电平 | ![Alt text](assets/images/image-50.png)                                          |
 | PWM模式2         | 向上计数：CNT<CCR时，REF置无效电平，CNT≥CCR时，REF置有效电平 <br/> 向下计数：CNT >CCR时，REF置有效电平，CNT≤CCR时，REF置无效电平 | PWM模式的取反                                                                    |
 
 **PWM模式1的输出波形**
 
 ![Alt text](assets/images/image-41.png)
 ![Alt text](assets/images/image-42.png)
+
+### 输入比较
+
+**IC（Input Capture）输入捕获**
+
+- 输入捕获模式下，当通道输入引脚出现指定电平跳变时，当前CNT的值将被锁存到CCR中，
+- 可用于测量PWM波形的频率、占空比、脉冲间隔、电平持续时间等参数。
+- ![Alt text](assets/images/image-51.png)
+- 每个高级定时器和通用定时器都拥有4个输入捕获通道
+- 可配置为PWMI模式，同时测量频率和占空比
+- 可配合主从触发模式（主模式、从模式），实现硬件全自动测量
+
+**框图详解**
+
+- ![Alt text](assets/images/image-53.png)
+- **异或门**
+  - 在当三个输入引脚电平发生翻转时输出引脚产生一次电平翻转，然后可以通过通道选择器，进入通道1
+  - 用于连接三相无刷电机的传感器检测转子的位置，根据位置换相。
+- **输入滤波器和边沿检测器**
+  - 输入滤波器可以对信号进行滤波，避免高频毛刺信号误触发。
+  - 边沿检测电路可以选择触发模式，上首页触发，下降沿触发等。
+  - 两套相同的电路
+    - 实际上有两套相同的电路，
+      - 如图，TI1FP1、TI1FP2就是这两套电路的输出，分别传递给IC1和IC2
+      - ![Alt text](assets/images/image-55.png)
+    - 目的：
+      - 1.可以灵活切换捕获电路的输入：后续电路配置保持不变，可以将信号输入从ch1切换到ch2
+      - 2.可以把一个引脚的输入，同时映射到两个捕获寄存器，
+        - PWMI模式
+          - 第一个通道使用上升沿触发，用于捕获周期
+          - 第二个通道使用下降沿触发，用于捕获占空比
+- **预分频器**
+  - 每个通道有一个，共四个，可以对前面的信号进行分频，
+  - 分频后的触发信号可以触发后续捕获电路工作
+- **捕获寄存器**
+  - 每从预分频器来一个触发信号,CNT寄存器的值就会向CCR寄存器转运一次。
+  - 转运的同时，会发生一个捕获事件，这个事件会在状态寄存器置标志位，同时产生中断。
+  - 如有需要，可开启该**捕获中断**。
+
+**捕获/比较通道框图**
+
+- ![Alt text](assets/images/image-54.png)
+- **滤波器**
+  - TI1(也就是CH1引脚)为滤波器的输入，
+  - TI1F为滤波器的输出
+  - FDTS为滤波器的采样时钟来源
+  - CCMR1寄存器的`ICF[3:0]`位可以控制滤波器的参数
+  - 滤波器工作原理：
+    - 以采样频率对输入信号采样，
+    - 当连项N个值都为高电平时输出才为高电平，
+    - 当连项N个值都为低电平时输出才为低电平，
+    - 如果信号出现高频抖动，导致连续的N个值不完全一样，那么输出就不会发生变化，就达到了滤波的效果。
+    - 采样频率越低，采样个数N越大，滤波效果就越好，但失真就越严重。
+    - ![Alt text](assets/images/image-56.png)
+- **边沿检测器**
+  - `TI1F`是边沿检测器的输入
+  - `TI1F_Rising`是边沿检测器的上升沿检测结果输出
+  - `TI1F_Falling`是边沿检测器的下降沿检测结果输出
+  - `TI1F_Rising`和`TI1F_Falling`通过数据选择器输出`TI1FP1`信号
+  - `CCER寄存器的CC1P位`用来控制数据选择器
+- **分频器**
+  - `TI1FP1`通过数据选择器进入分频器电路。
+    - `CC1S[1:0]`两个位用来控制数据选择器
+  - `ICPS[1:0]`可以配置分频器，决定使用1/2/4/8分频
+  - `CC1E`位控制输出使能或失能
+  - 使能后，`IC1PS`就能让CNT寄存器的值转运的到CCR寄存器中。
+- **CNT的清零**
+  - `TI1F_ED` 和 `TI1FP1`信号都还通向从模式控制器
+  - 在从模式的电路中，就可以完成CNT寄存器的清零工作
+
+**主模式、从模式、触发源选择**
+
+- ![Alt text](assets/images/image-57.png)
+- **主模式**
+  - 可以将定时器内部的信号映射到TRGO引脚，用于触发控制其他外设。
+- **从模式**
+  - 用于接收其他外设或自身外设的信号，用于实现受控于其他信号或外设。
+- **触发源选择**
+  - 用于选择从模式的触发信号源，可以认为是从模式的一部分。
+  - 选择指定的信号联通TRGI,TRGI再去触发从模式，从模式可以从列表中选择一个操作来自动执行。
+- 案例：
+  - 自动清零CNT寄存器
+    - 触发源选择`TI1FP1`,
+    - 从模式选择`Reset`，
+    - 即可实现自动清零CNT寄存器
+  - 定时器的级联
+    - 一个定时器使用主模式将更新信号输出到TRGO,
+    - 另一个定时器将触发源选择为前一个定时器的输出作为TRGI并将从模式选择为外部时钟模式1，
+    - 即可将前一个定时器的输出作为后一个定时器的外部时钟，实现了定时器的级联
 
 ### 案例：定时中断
 
@@ -1536,7 +1630,7 @@ int main(void)
 
 **示例代码：**
 
-:::
+:::code-tabs
 
 @tab `main.cpp`
 
@@ -1568,3 +1662,498 @@ int main(void)
 :::
 
 ### 案例：定时器输出捕获——测量方波
+
+**频率测量**
+
+- ![Alt text](assets/images/image-36.png)
+- 测频法：在闸门时间T内，对上升沿计次，得到N，则频率 $f_x=N/T$
+- 测周法：两个上升沿内，以标准频率fc计次，得到N ，则频率 $f_x=f_c/N$
+- 中界频率：测频法与测周法误差相等的频率点 $f_m=√f_c/T$
+
+**输入捕获基本结构**
+
+![Alt text](assets/images/image-58.png)
+
+**测频原理/流程**
+
+- 方波信号通过GPIO口进入输入捕获单元1，
+- 首先进入滤波器滤波，滤除高频杂波，
+- 然后经过边沿检测电路，检测上升沿信号，
+- 上升沿信号进入分频器，分频器配置为1分频，
+- 输出不分频的方波信号，
+- 在上升沿，触发实现将CNT寄存器的值搬运到CCR1寄存器，
+- 然后CNT寄存器被从模式Reset清零。
+- CNT被清零后重新计数
+- 当方波信号的下一个上升沿来到时，
+- CNT寄存器的值就代表了被测方波信号一个周期的时长，
+- 然后CNT寄存器的值再次被搬运到CCR1寄存器，
+- CNT被再次清零重新计数
+- 这样只要读取CCR1寄存器的值，就能计算出被测方波信号的频率
+- 具体计算方法为测周法的计算公式：被测方波频率=CNT计数频率/CCR1寄存器值
+
+**步骤**
+
+1. 配置GPIO
+   1. 通过RCC寄存器开启GPIO时钟
+   2. 初始化GPIO：配置为输入模式、上拉或浮空输入
+2. 配置AFIO(如果需要重映射的话)
+3. 配置定时器
+   1. 通过RCC寄存器开启TIM时钟
+   2. 配置时基单元（时钟源、预分频器、计数器自增模式、自动重装器）
+   3. 配置输入捕获单元（滤波器、边沿检测、通道直连或交叉、分频器）
+   4. 配置实现自动清零计数器
+      1. 配置从模式触发源（触发源为TI1FP1）
+      2. 配置触发操作（触发Reset操作）
+4. 开启定时器
+5. 获取频率
+   - N=CCR寄存器
+   - f_c = CNT计数频率
+   - Freq = f_c / N
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/08-Timer-输入比较-测PWM频率/User/main.cpp)
+
+@tab `/System/InputCompare.h`
+@[code cpp](./projects/stm32-makefile/08-Timer-输入比较-测PWM频率/System/InputCompare.h)
+
+@tab `/System/InputCompare.c`
+@[code cpp](./projects/stm32-makefile/08-Timer-输入比较-测PWM频率/System/InputCompare.c)
+
+@tab `/System/PWM.h`
+@[code cpp](./projects/stm32-makefile/08-Timer-输入比较-测PWM频率/System/PWM.h)
+
+@tab `/System/PWM.c`
+@[code cpp](./projects/stm32-makefile/08-Timer-输入比较-测PWM频率/System/PWM.c)
+:::
+
+**PWMI模式结构（同时测量频率和占空比）**
+
+![Alt text](assets/images/image-59.png)
+
+**测频原理/流程**
+
+- 通道1用于测频率，和上面说的原理一样
+- 通道2用于测占空比，
+- 原理是，当第一个上升沿来到是，CNT计数器清零并重新计数，
+- TIFP2配置为下降沿触发，那么当遇到方波中下降沿时，
+- 通道2的分频器触发实现将CNT的值搬运到CCR2寄存器，
+- 这个时候CNT的值记录的就是第一个上升沿到第一个下降沿之间的时常，也就能计算出占空比。
+- 当遇到第二个上升沿时，CNT被清零，重新开始计数。
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/User/main.cpp)
+
+@tab `/System/InputCompare.h`
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/InputCompare.h)
+
+@tab `/System/InputCompare.c`
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/InputCompare.c)
+
+@tab `/System/PWM.h`
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/PWM.h)
+
+@tab `/System/PWM.c`
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/PWM.c)
+:::
+
+### 编码器接口
+
+**EncoderInterface编码器接口**
+
+- 编码器接口可接收增量（正交）编码器的信号，根据编码器旋转产生的正交信号脉冲，自动控制CNT计数寄存器自增或自减，从而指示编码器的位置、旋转方向和旋转速度
+- 高级定时器和通用定时器都拥有1个编码器接口
+- ![Alt text](assets/images/image-62.png)
+
+**原理简图**
+
+- 两个输入引脚来自输入捕获的通道1和通道2
+- 不需要配置计数时钟和计数方向，因为增或减有编码器决定，
+- 可以配置预分频器
+- 可以配置ARR自动重装寄存器为0xffff，防止CNT过早溢出
+- CNT计数器
+  - 编码器读取到正转信号时，CNT自增，值为：0 1 2 3，可用来获取编码器位置
+  - 编码器读取到反转信号时，CNT自减：值为：0 0xffff 0xfffe 0xfffd 转换成int16为：0 -1 -2 -3
+- ![Alt text](assets/images/image-63.png)
+
+**正交信号波形**
+
+- 规律就是，
+  - 正转时，
+    - A相上升沿，B相低电平
+    - A相下降沿，B相高电平
+  - 反转时，
+    - A相上升沿，B相高电平
+    - A相下升沿，B相低电平
+![Alt text](assets/images/image-60.png)
+
+**编码器的三种工作模式**
+
+- 第一种模式就是只对通道1计数
+- 第二种模式就是只对通道2计数
+- 第三种模式就是对通道1和通道2计数
+- 计数的条件就是要看AB两相的波形是否满足条件，比如说，
+  - A相上升沿，B相低电平，则判断为编码器正转，计数器自增
+  - A相下升沿，B相高电平，则判断为编码器反转，计数器自减
+- ![Alt text](assets/images/image-61.png)
+
+**编码器模式下的计数器**
+
+- ![Alt text](assets/images/image-64.png)
+- 将其中任意一相波形反向，计数器增长方向也将发生改变
+- ![Alt text](assets/images/image-65.png)
+
+### 编码器测位置、测速案例
+
+**步骤**
+
+- 配置GPIO
+  - 通过RCC寄存器开启GPIO外设时钟
+  - 配置IO口为输入模式，上拉 下拉 或 浮空
+- 配置TIM定时器
+  - 通过RCC寄存器开启TIM定时器外设时钟
+  - 配置时基单元
+    - 预分频器可以不分频
+    - 自动重装器可以配置为0xffff
+  - 配置输入捕获单元
+    - 配置滤波器
+    - 配置边沿检测(极性选择器)，
+    - 配置编码器接口模式
+- 启动定时器
+- 位置
+  - 读取CNT计数器的值，转换成int16，代表了位置
+- 速度
+  - 方法1
+    - 两次读取的位置值的差，比上两次读取的时间间隔，就是速度
+    - V = (上一次读取的位置值-当前位置值) / 两次读取的时间间隔
+    - = dP/dt
+    - 但是这里的dt不能太大，否则会丢失精度，读取频率的周期要大于旋转速度
+  - 方法2
+    - 以一定的时间间隔t去读取计数器的值p，然后清空计数器
+    - V = p/t
+    - t不能太大
+  - 方法3
+    - 定时时间t,中断读取计数器的值p,然后清空计数器
+    - V = p/t
+    - t不能太大
+  - 第一种方法可以同时得到位置信息和速度信息
+  - 后两种方法要清空计数器，会丢失位置信息
+
+:::code-tabs
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/10-Timer-编码器模式-测位置-测速度/User/main.cpp)
+
+@tab `System/EncoderInterface.c`
+@[code cpp](./projects/stm32-makefile/10-Timer-编码器模式-测位置-测速度/System/EncoderInterface.c)
+
+@tab `System/EncoderInterface.h`
+@[code cpp](./projects/stm32-makefile/10-Timer-编码器模式-测位置-测速度/System/EncoderInterface.h)
+
+:::
+
+## ADC模拟/数字转化器
+
+**ADC简介**
+
+- ADC（Analog-Digital Converter）模拟-数字转换器
+- 可将引脚的模拟电压转换数字量
+- 12位逐次逼近型ADC，最快1us转换时间
+- 输入电压范围：0~3.3V，转换结果范围：0~4095
+- 18个输入通道，可测量16个外部和2个内部信号源
+- 规则组和注入组两个转换单元
+- 模拟看门狗自动监测输入电压范围
+
+> STM32F103C8T6 ADC资源：ADC1、ADC2，10个外部输入通道
+
+**ADC原理图：ADC0809芯片框图**
+
+- ADC0809是比较过去比较常用的ADC芯片
+- 8位逐次逼近型ADC
+- 通道选择
+  - IN0~7为8个输入通道
+  - ADDA~C为3bit的地址信号，用来选择通道
+  - ALE为锁存信号，用来锁定通道。
+- 开始转换
+  - START为开始转换信号
+  - CLOCK为推动逐次比较过程的时钟
+- 逐次逼近
+  - 电压比较器的两个输入分别来自通道选择器和DAC模拟数字转换器。
+  - Vref为DAC的参考电压
+    - 当Vref=5v时,0~255对应0~5v
+  - SAR寄存器的值给到DAC,DAC输出电压到比较器,通过比较器输出电压的高低来判断SAR寄存器的值是偏大还是偏小，逐渐逼近实际被测电压。
+  - 由于二进制的特性，逼近过程可以使用逐位比较（折半查找、二分查找）实现，总共从高到低需要比较8次，转换结束后，SAR寄存器的值就是未知电压的编码。
+- 结束转换
+  - EOC为结束转换信号（End Of Convert）
+![Alt text](assets/images/image-66.png)
+
+**ADC原理框图**
+
+- **模拟多路开关**：
+  - 用于实现将16路GPIO通道和另外两路通道连接至ADC
+  - 可以同时选中最多4路，连接至ADC的注入通道
+  - 可以同时选中最多16路，连接至ADC的规则通道
+- **模拟至数字转换器**：
+  - 用于实现将注入通道和规则通道的模拟量转换成数字量
+  - 转换结果存放至**注入通道数据寄存器**或**规则通道数据寄存器**
+  - **规则通道**
+    - 最多可以同时转换16路通道，
+    - 其数据寄存器有1个
+  - **注入通道**
+    - 最多可以同时转换4路通道，
+    - 其数据寄存器有4个
+- **规则通道数据寄存器**
+  - 1x16位寄存器
+  - 最好配合DMA实现，将转换结果转运，否则数据会被覆盖
+- **注入通道数据寄存器**
+  - 4x16位寄存器
+  - 不用担心数据覆盖的问题
+- **注入组的开始触发信号**
+  - JEXTTRIG，用来实现软件触发开启ADC转换的位
+  - JEXTSEL，用来选中触发开启转换的外部事件
+  - ADCx_ETRGINJ_REMAP,用来选中外部引脚来实现触发开启转换
+- **规则组的开始触发信号**
+  - 略
+- Vref
+  - 模数转换器所需的参考电压
+  - 芯片内部已经将Vref+和Vdda连接在一起了
+- ADCCLK
+  - 来自于ADC预分频器的时钟，用来驱动模数转换器工作
+    - 需要参考RCC时钟树框图
+  - 最大频率不能超过14Mhz
+  - 当主频为72M时，ADC预分频器只能设置6或8，即12M或9Mhz
+- 模拟看门狗
+  - 可以存一个最大电压和最小电压
+  - 然后选择指定通道看门
+  - 到通道电压超出设置的电压范围时，将产生**模拟看门中断事件**
+- 标志位
+  - EOC转换结束信号，当注入通道**或**规则通道转换结束后触发
+  - JEOC注入转换结束信号，当注入通道转换结束后触发
+  
+![Alt text](assets/images/image-67.png)
+
+**ADC简化框图**
+
+![Alt text](assets/images/image-68.png)
+
+**18个ADC通道**
+> 具体参考引脚功能表
+
+|  通道  |     ADC1     | ADC2  | ADC3  |
+| :----: | :----------: | :---: | :---: |
+| 通道0  |     PA0      |  PA0  |  PA0  |
+| 通道1  |     PA1      |  PA1  |  PA1  |
+| 通道2  |     PA2      |  PA2  |  PA2  |
+| 通道3  |     PA3      |  PA3  |  PA3  |
+| 通道4  |     PA4      |  PA4  |  PF6  |
+| 通道5  |     PA5      |  PA5  |  PF7  |
+| 通道6  |     PA6      |  PA6  |  PF8  |
+| 通道7  |     PA7      |  PA7  |  PF9  |
+| 通道8  |     PB0      |  PB0  | PF10  |
+| 通道9  |     PB1      |  PB1  |
+| 通道10 |     PC0      |  PC0  |  PC0  |
+| 通道11 |     PC1      |  PC1  |  PC1  |
+| 通道12 |     PC2      |  PC2  |  PC2  |
+| 通道13 |     PC3      |  PC3  |  PC3  |
+| 通道14 |     PC4      |  PC4  |
+| 通道15 |     PC5      |  PC5  |
+| 通道16 |  温度传感器  |
+| 通道17 | 内部参考电压 |
+
+
+**四种转换模式**
+- 单次转换，非扫描模式
+  - 单次，只转换一次，每次转换都需要触发信号
+  - 非扫描，只对序列1转换，转换前需要将通道x放到序列1的位置
+  - ![Alt text](assets/images/image-69.png)
+- 连续转换，非扫描模式
+  - 连续，第一次转换需要触发信号，然后其转换结束信号会作为下一次转换的触发信号
+  - 非扫描，只对序列1转换。
+  - ![Alt text](assets/images/image-70.png)
+- 单次转换，扫描模式
+  - 单次，只转换一次
+  - 扫描，对多个序列进行转换，
+  - ![Alt text](assets/images/image-71.png)
+- 连续转换，扫描模式
+  - 连续，EOF信号作为下一次转换的开始转换信号
+  - 扫描，对多个序列接连转换
+  - ![Alt text](assets/images/image-72.png)
+
+**规则通道外部触发**
+- 外部引脚/定时器的选择需要配合AFIO来完成
+![Alt text](assets/images/image-73.png)
+
+
+**数据对齐方式**
+- 由于ADC是12bit,所以转换结果也是12bit
+- 左对齐，然后读取高8bit，可以读取到低精度的单字节数据。
+- ![Alt text](assets/images/image-74.png)
+
+
+
+**转换时间**
+- AD转换的步骤：采样，保持，量化，编码
+  - 采样保持，
+    - 用小容量电容来存储待测电压，然后测量电容上的电压
+    - 电容开始充电和停止充电的时间间隔就是采样保持的时间
+  - 量化编码，
+    - 逐次逼近，逐位比较过程所花费的时间
+- STM32 ADC的总转换时间为：
+	- TCONV = 采样时间 + 12.5个ADC周期
+- 例如：当ADCCLK=14MHz，采样时间为1.5个ADC周期
+	- TCONV = 1.5 + 12.5 = 14个ADC周期 = 1μs
+
+
+**校准**
+
+- ADC内置自校准模式。
+- 校准可大幅减小因内部电容器组的变化而造成的准精度误差。
+- 校准期间，在每个电容器上都会计算出一个误差修正码(数字值)，这个码用于消除在随后的转换中每个电容器上产生的误差
+- 建议在每次上电后执行一次校准
+- 启动校准前， ADC必须处于关电状态超过至少两个ADC时钟周期
+
+
+**基本步骤**
+- 配置GPIO
+  - 通过RCC寄存器开启GPIO外设时钟
+- 配置多路开关
+  - 把GPIO等的通道接入ADC的规则组或注入组
+- 配置ADC
+  - 通过RCC寄存器配置ADCCLK预分频器
+  - 配置ADC转换模式（单次转换连续转换，扫描模式或非扫描模式，通道数、触发源、数据对齐方向）
+- 配置模拟看门狗（如果有需要）
+  - 配置阈值
+  - 配置监测通道
+- 开启中断（如果有需要）
+  - ITConfig开启对应的输出
+  - NVIC配置中断优先级
+- 开启ADC
+  - ADC_Cmd
+  - 校准ADC
+
+
+**标准库相关函数**
+
+```cpp
+// "stm32f10x_rcc.h"
+
+// 配置ADCCLK预分频器系数：2 4 6 8
+// 实现对APB2的72Mhz时钟分频后输出到ADCCLK
+void RCC_ADCCLKConfig(uint32_t RCC_PCLK2);
+```
+
+
+```cpp
+// "stm32f10x_adc.h"
+
+// 恢复默认配置
+void ADC_DeInit(ADC_TypeDef* ADCx);
+// 初始化ADC
+void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct);
+// 初始化结构体
+void ADC_StructInit(ADC_InitTypeDef* ADC_InitStruct);
+// ADC开关
+void ADC_Cmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+// 开启DMA输出信号
+void ADC_DMACmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+// ADC中断输出控制,用来控制中断信号能否通向NVIC
+void ADC_ITConfig(ADC_TypeDef* ADCx, uint16_t ADC_IT, FunctionalState NewState);
+// 复位校准
+void ADC_ResetCalibration(ADC_TypeDef* ADCx);
+// 获取复位校准状态
+FlagStatus ADC_GetResetCalibrationStatus(ADC_TypeDef* ADCx);
+// 开始校准
+void ADC_StartCalibration(ADC_TypeDef* ADCx);
+// 获取开始校准状态
+FlagStatus ADC_GetCalibrationStatus(ADC_TypeDef* ADCx);
+// 软件触发AD转换
+void ADC_SoftwareStartConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+// 获取软件开始转换状态（SWSTART的状态）（实际上获取不到，
+// 具体参考源码，其是通过检查SWSTART位来判断状态，但手册上说，SWSTART被软件置1后会被硬件立即清0）
+// 所以其返回值不能反应转换是否结束
+FlagStatus ADC_GetSoftwareStartConvStatus(ADC_TypeDef* ADCx);
+// 配置间断模式
+// 每隔几个通道间断检测
+void ADC_DiscModeChannelCountConfig(ADC_TypeDef* ADCx, uint8_t Number);
+// 是否启用间断模式
+void ADC_DiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+// 规则组通道配置，如序列1 和 通道2
+void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime);
+// 是否允许外部触发转换控制
+void ADC_ExternalTrigConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+// 获取转换结果
+uint16_t ADC_GetConversionValue(ADC_TypeDef* ADCx);
+// 获取双ADC模式转换结果
+uint32_t ADC_GetDualModeConversionValue(void);
+// Injected都是注入组相关函数
+void ADC_AutoInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+void ADC_InjectedDiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+void ADC_ExternalTrigInjectedConvConfig(ADC_TypeDef* ADCx, uint32_t ADC_ExternalTrigInjecConv);
+void ADC_ExternalTrigInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+void ADC_SoftwareStartInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
+FlagStatus ADC_GetSoftwareStartInjectedConvCmdStatus(ADC_TypeDef* ADCx);
+void ADC_InjectedChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime);
+void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length);
+void ADC_SetInjectedOffset(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel, uint16_t Offset);
+uint16_t ADC_GetInjectedConversionValue(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel);
+// 模拟看门狗配置函数
+// 是否启动
+void ADC_AnalogWatchdogCmd(ADC_TypeDef* ADCx, uint32_t ADC_AnalogWatchdog);
+// 配置高低阈值
+void ADC_AnalogWatchdogThresholdsConfig(ADC_TypeDef* ADCx, uint16_t HighThreshold, uint16_t LowThreshold);
+// 配置看门狗通道
+void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel);
+// 开启温度传感器/内部参考电压
+void ADC_TempSensorVrefintCmd(FunctionalState NewState);
+// 获取标志位状态，第二个参数传EOC,可以判断是否转换结束
+FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG);
+// 清除标志位
+void ADC_ClearFlag(ADC_TypeDef* ADCx, uint8_t ADC_FLAG);
+// 获取中断位
+ITStatus ADC_GetITStatus(ADC_TypeDef* ADCx, uint16_t ADC_IT);
+// 清除中断挂起位
+void ADC_ClearITPendingBit(ADC_TypeDef* ADCx, uint16_t ADC_IT);
+```
+
+
+**案例：软件触发，单次转换，非扫描模式，**
+
+:::code-tabs
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/11-ADC-规则组-单次转换-非扫描模式-软件触发/User/main.cpp)
+
+@tab `AD.c`
+@[code cpp](./projects/stm32-makefile/11-ADC-规则组-单次转换-非扫描模式-软件触发/System/AD.c)
+
+@tab `AD.h`
+@[code cpp](./projects/stm32-makefile/11-ADC-规则组-单次转换-非扫描模式-软件触发/System/AD.h)
+
+:::
+
+**案例：软件触发，读取多通道，单次转换，非扫描模式**
+
+:::code-tabs
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/12-ADC-规则组-单次转换-非扫描模式-软件触发-读取多通道/User/main.cpp)
+
+@tab `AD.c`
+@[code cpp](./projects/stm32-makefile/12-ADC-规则组-单次转换-非扫描模式-软件触发-读取多通道/System/AD.c)
+
+@tab `AD.h`
+@[code cpp](./projects/stm32-makefile/12-ADC-规则组-单次转换-非扫描模式-软件触发-读取多通道/System/AD.h)
+
+:::
+
+**案例：软件触发，连续转换，非扫描模式**
+
+:::code-tabs
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/13-ADC-规则组-连续转换-非扫描模式-软件触发/User/main.cpp)
+
+@tab `AD.c`
+@[code cpp](./projects/stm32-makefile/13-ADC-规则组-连续转换-非扫描模式-软件触发/System/AD.c)
+
+:::

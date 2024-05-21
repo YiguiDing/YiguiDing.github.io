@@ -1,1 +1,19 @@
 // index.scss 注入额外的 CSS 样式
+
+.vp-blogger-info {
+    .vp-blogger {
+        .vp-blogger-avatar {
+            width: 160px;
+            height: 160px;
+            margin-top: 20px;
+            border-radius: 50%;
+
+            transition: transform 0.5s;
+            transform: rotate(-360deg);
+
+            &:hover {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
