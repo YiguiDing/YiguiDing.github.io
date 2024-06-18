@@ -1,0 +1,33 @@
+* {
+  /*清除样式*/
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+
+html,
+body,
+#app {
+  /* 设置宽高 */
+  width: 100vw;
+  height: 100vh;
+}
+
+
+#app {
+  /* 居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 背景色 */
+  background-color: black;
+
+  canvas {
+    /* 限制最大宽高 */
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+}

@@ -1,5 +1,5 @@
 import { Input } from "./Input";
-import { MenuScene } from "./scene/MenuScene";
+import { SceneManager } from "./scene/SceneManager";
 import "./style.less";
 
 const Width = 1920;
@@ -15,10 +15,8 @@ function main() {
   context.canvas.width = Width;
   context.canvas.height = Height;
 
-  let input = new Input();
-  let scene = new MenuScene();
-  scene.onEnter(); // 进入场景
-
+  let input = Input.instance;
+  let sceneManager = SceneManager.instance;
   let prevTime = Date.now(),
     curTime = Date.now();
 
@@ -27,17 +25,11 @@ function main() {
     let dt = prevTime - curTime;
 
     while (!input.isEmpty()) {
-      // 场景处理输入
-      scene.onInput(input.peekMessage()!);
+      sceneManager.onInput(input.peekMessage()!);
     }
-
-    // 场景更新
-    scene.onUpdate();
-
+    sceneManager.onUpdate();
     context.clearRect(0, 0, Width, Height);
-    
-    // 场景绘制
-    scene.onDraw();
+    sceneManager.onDraw();
 
     context.fillStyle = "white";
     context.fillRect(0, 0, Width, Height);
