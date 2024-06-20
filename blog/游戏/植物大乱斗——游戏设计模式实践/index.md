@@ -105,8 +105,20 @@ date: 2024-06-18T15:19:00
 @[code ts](./projects/06_Timer定时器与相机抖动/src/scene/GameScene.ts)
 :::
 
-## 07\_主菜单界面和角色选择界面
+## 07\_主菜单界面和角色选择界面以及重构
 
 :::code-tabs
+@tab `/src/scene/MenuScene.ts`
+@[code ts](./projects/07_主菜单界面和角色选择界面/src/scene/MenuScene.ts)
+@tab `/src/scene/SelectorScene.ts`
+@[code ts](./projects/07_主菜单界面和角色选择界面/src/scene/SelectorScene.ts)
+@tab `/src/resources/index.ts`
+@[code ts](./projects/07_主菜单界面和角色选择界面/src/resources/index.ts)
+:::
 
+## 08_角色选择界面动态效果和交互
+
+:::code-tabs
+@tab `/src/scene/SelectorScene.ts`
+@[code ts](./projects/08_角色选择界面动态效果及交互/src/scene/SelectorScene.ts)
 :::

@@ -157,7 +157,7 @@ const resource_descriptions = {
     },
 
     {
-      name: "peashooter_idle_1",
+      name: "peashooter_idle",
       paths: [
         "/assets/peashooter_idle_1.png",
         "/assets/peashooter_idle_2.png",
