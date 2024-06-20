@@ -10,11 +10,11 @@ date: 2024-06-18T15:19:00
 :::code-tabs
 
 @tab `/index.html`
-@[code cpp](./projects/01_项目搭建/index.html)
+@[code ts](./projects/01_项目搭建/index.html)
 @tab `/src/main.ts`
-@[code cpp](./projects/01_项目搭建/src/main.ts)
+@[code ts](./projects/01_项目搭建/src/main.ts)
 @tab `/src/style.less`
-@[code cpp](./projects/01_项目搭建/src/style.less)
+@[code ts](./projects/01_项目搭建/src/style.less)
 
 :::
 
@@ -23,13 +23,13 @@ date: 2024-06-18T15:19:00
 :::code-tabs
 
 @tab /src/main.ts
-@[code cpp](./projects/02_场景设计/src/main.ts)
+@[code ts](./projects/02_场景设计/src/main.ts)
 @tab /scene/Scene.ts
-@[code cpp](./projects/02_场景设计/src/scene/Scene.ts)
+@[code ts](./projects/02_场景设计/src/scene/Scene.ts)
 @tab /scene/MenuScene.ts
-@[code cpp](./projects/02_场景设计/src/scene/MenuScene.ts)
+@[code ts](./projects/02_场景设计/src/scene/MenuScene.ts)
 @tab /scene/Input.ts
-@[code cpp](./projects/02_场景设计/src/Input.ts)
+@[code ts](./projects/02_场景设计/src/Input.ts)
 
 :::
 
@@ -38,14 +38,14 @@ date: 2024-06-18T15:19:00
 :::code-tabs
 
 @tab `/src/SceneManager.ts`
-@[code cpp](./projects/03_场景切换/src/scene/SceneManager.ts)
-@[code cpp](./projects/03_场景切换/src/scene/MenuScene.ts)
-@[code cpp](./projects/03_场景切换/src/scene/SelectorScene.ts)
-@[code cpp](./projects/03_场景切换/src/scene/GameScene.ts)
+@[code ts](./projects/03_场景切换/src/scene/SceneManager.ts)
+@[code ts](./projects/03_场景切换/src/scene/MenuScene.ts)
+@[code ts](./projects/03_场景切换/src/scene/SelectorScene.ts)
+@[code ts](./projects/03_场景切换/src/scene/GameScene.ts)
 @tab `/Input.ts`
-@[code cpp](./projects/03_场景切换/src/Input.ts)
+@[code ts](./projects/03_场景切换/src/Input.ts)
 @tab `/main.ts`
-@[code cpp](./projects/03_场景切换/src/main.ts)
+@[code ts](./projects/03_场景切换/src/main.ts)
 
 :::
 
@@ -53,10 +53,22 @@ date: 2024-06-18T15:19:00
 
 :::code-tabs
 
-@[code cpp](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/main.ts)
-@[code cpp](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/object/Atlas.ts)
-@[code cpp](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/object/GameObject.ts)
-@[code cpp](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/utils/index.ts)
-@[code cpp](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/resourceLoader.ts)
+@tab `src/utils/index.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/utils/index.ts)
+
+@tab `src/object/Atlas.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/object/Atlas.ts)
+
+@tab `src/object/Animation.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/object/Animation.ts)
+
+@tab `src/resources/index.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/resources/index.ts)
+
+@tab `src/scene/GameScene.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/scene/GameScene.ts)
+
+@tab `src/main.ts`
+@[code ts](./projects/04_Atlas图像资源容器与Animation图集渲染控制器/src/main.ts)
 
 :::

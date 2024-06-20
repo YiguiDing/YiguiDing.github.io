@@ -12,6 +12,7 @@ export class Animation {
     this.timer_ms = 0;
     this.frameIdx = 0;
   }
+
   setAtlas(newAtlas: Atlas) {
     this.reset();
     this.atlas = newAtlas;
@@ -49,6 +50,7 @@ export class Animation {
     }
   }
   onDraw(ctx: CanvasRenderingContext2D, x: number, y: number) {
-    ctx.drawImage(this.getFrame()!, x, y);
+    let frame = this.getFrame();
+    frame && ctx.drawImage(frame, x, y);
   }
 }

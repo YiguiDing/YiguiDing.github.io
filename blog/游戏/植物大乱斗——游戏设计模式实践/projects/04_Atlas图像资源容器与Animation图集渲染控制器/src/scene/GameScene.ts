@@ -1,6 +1,6 @@
 import { Message } from "../Input";
 import { Animation } from "../object/Animation";
-import { atlas_peashooter_run } from "../resourceLoader";
+import { resources } from "../resources";
 import { Scene } from "./Scene";
 import { SceneManager } from "./SceneManager";
 
@@ -11,8 +11,10 @@ export class GameScene implements Scene {
   }
   init(): void {
     console.log("游戏 初始化");
+
+    // 测试动画
     this.testAnimation = new Animation();
-    this.testAnimation.setAtlas(atlas_peashooter_run);
+    this.testAnimation.setAtlas(resources.atlas.get("peashooter_run_right")!);
     this.testAnimation.setInterval(1000 / 10);
     this.testAnimation.setLoop(true);
   }
@@ -24,10 +26,12 @@ export class GameScene implements Scene {
   }
   onUpdate(dt_ms: number): void {
     console.log("游戏 更新");
+    // 更新动画
     this.testAnimation.onUpdate(dt_ms);
   }
   onDraw(ctx: CanvasRenderingContext2D): void {
     console.log("游戏 绘制");
+    // 绘制动画
     this.testAnimation.onDraw(ctx, 100, 100);
   }
   onInput(message: Message): void {
