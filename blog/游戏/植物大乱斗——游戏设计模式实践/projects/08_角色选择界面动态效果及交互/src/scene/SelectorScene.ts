@@ -12,6 +12,7 @@ export enum PlayerType {
 }
 
 export class SelectorScene implements Scene {
+  // 资源
   img_VS = resources.images.get("VS")!;
   img_1P = resources.images.get("1P")!;
   img_2P = resources.images.get("2P")!;
@@ -30,58 +31,64 @@ export class SelectorScene implements Scene {
   img_2P_selector_btn_down_right = resources.images.get("2P_selector_btn_down_right")!;
   img_2P_selector_btn_down_left = resources.images.get("2P_selector_btn_down_left")!;
   audio_ui_switch = resources.audios.get("ui_switch")!;
-  img_peashooter_selector_background_left = resources.images.get(
-    "peashooter_selector_background_left",
-  )!;
-  img_peashooter_selector_background_right = resources.images.get(
-    "peashooter_selector_background_right",
-  )!;
-  img_sunflower_selector_background_left = resources.images.get(
-    "sunflower_selector_background_left",
-  )!;
-  img_sunflower_selector_background_right = resources.images.get(
-    "sunflower_selector_background_right",
-  )!;
+  img_peashooter_selector_background_left = resources.images.get("peashooter_selector_background_left")!;
+  img_peashooter_selector_background_right = resources.images.get("peashooter_selector_background_right")!;
+  img_sunflower_selector_background_left = resources.images.get("sunflower_selector_background_left")!;
+  img_sunflower_selector_background_right = resources.images.get("sunflower_selector_background_right")!;
   img_avatar_peashooter = resources.images.get("avatar_peashooter")!;
   img_avatar_sunflower = resources.images.get("avatar_sunflower")!;
 
-  left_scroll_background_offset_x = 0;
-  right_scroll_background_offset_x = 0;
-  animation_peashooter_right!: Animation;
-  animation_sunflower_right!: Animation;
-  animation_peashooter_left!: Animation;
-  animation_sunflower_left!: Animation;
-
+  // 角色类型
+  p1_player_type = PlayerType.Peashooter;
+  p2_player_type = PlayerType.Sunflower;
+  // 动画
+  p1_animations = new Array<Animation>();
+  p2_animations = new Array<Animation>();
+  // 滚动背景的偏移量
+  p1_scroll_bg_offset_x = 0;
+  p2_scroll_bg_offset_x = 0;
+  // 滚动背景
+  p1_scroll_backgrounds = new Array<HTMLImageElement>();
+  p2_scroll_backgrounds = new Array<HTMLImageElement>();
+  // 玩家按钮状态
   p1_press_left = false;
   p1_press_right = false;
-
   p2_press_left = false;
   p2_press_right = false;
-
-  player_p1_type = PlayerType.Peashooter;
-  player_p2_type = PlayerType.Sunflower;
-
   constructor(private sceneManager: SceneManager) {
     this.init();
   }
   init(): void {
     console.log("角色选择器 初始化");
-    this.animation_peashooter_right = new Animation();
-    this.animation_peashooter_right.setAtlas(resources.atlas.get("peashooter_idle_right")!);
-    this.animation_peashooter_right.setLoop(true);
-    this.animation_peashooter_right.setInterval(100);
-    this.animation_sunflower_right = new Animation();
-    this.animation_sunflower_right.setAtlas(resources.atlas.get("sunflower_idle_right")!);
-    this.animation_sunflower_right.setLoop(true);
-    this.animation_sunflower_right.setInterval(100);
-    this.animation_peashooter_left = new Animation();
-    this.animation_peashooter_left.setAtlas(resources.atlas.get("peashooter_idle_left")!);
-    this.animation_peashooter_left.setLoop(true);
-    this.animation_peashooter_left.setInterval(100);
-    this.animation_sunflower_left = new Animation();
-    this.animation_sunflower_left.setAtlas(resources.atlas.get("sunflower_idle_left")!);
-    this.animation_sunflower_left.setLoop(true);
-    this.animation_sunflower_left.setInterval(100);
+
+    // this.玩家1角色动画[玩家所选角色A] = 角色A动画
+    // this.玩家1角色动画[玩家所选角色B] = 角色B动画
+
+    this.p1_animations[PlayerType.Peashooter] = new Animation();
+    this.p1_animations[PlayerType.Peashooter].setAtlas(resources.atlas.get("peashooter_idle_left")!);
+    this.p1_animations[PlayerType.Peashooter].setLoop(true);
+    this.p1_animations[PlayerType.Peashooter].setInterval(100);
+
+    this.p1_animations[PlayerType.Sunflower] = new Animation();
+    this.p1_animations[PlayerType.Sunflower].setAtlas(resources.atlas.get("sunflower_idle_left")!);
+    this.p1_animations[PlayerType.Sunflower].setLoop(true);
+    this.p1_animations[PlayerType.Sunflower].setInterval(100);
+
+    this.p2_animations[PlayerType.Peashooter] = new Animation();
+    this.p2_animations[PlayerType.Peashooter].setAtlas(resources.atlas.get("peashooter_idle_right")!);
+    this.p2_animations[PlayerType.Peashooter].setLoop(true);
+    this.p2_animations[PlayerType.Peashooter].setInterval(100);
+
+    this.p2_animations[PlayerType.Sunflower] = new Animation();
+    this.p2_animations[PlayerType.Sunflower].setAtlas(resources.atlas.get("sunflower_idle_right")!);
+    this.p2_animations[PlayerType.Sunflower].setLoop(true);
+    this.p2_animations[PlayerType.Sunflower].setInterval(100);
+
+    this.p1_scroll_backgrounds[PlayerType.Sunflower] = this.img_sunflower_selector_background_left;
+    this.p1_scroll_backgrounds[PlayerType.Peashooter] = this.img_peashooter_selector_background_left;
+
+    this.p2_scroll_backgrounds[PlayerType.Sunflower] = this.img_sunflower_selector_background_right;
+    this.p2_scroll_backgrounds[PlayerType.Peashooter] = this.img_peashooter_selector_background_right;
   }
   destory(): void {
     console.log("角色选择器 销毁");
@@ -91,32 +98,22 @@ export class SelectorScene implements Scene {
   }
   onUpdate(dt_ms: number): void {
     console.log("角色选择器 更新");
-    this.animation_peashooter_right.onUpdate(dt_ms);
-    this.animation_sunflower_right.onUpdate(dt_ms);
-    this.animation_peashooter_left.onUpdate(dt_ms);
-    this.animation_sunflower_left.onUpdate(dt_ms);
+    this.p1_animations[this.p1_player_type].onUpdate(dt_ms);
+    this.p2_animations[this.p2_player_type].onUpdate(dt_ms);
 
-    this.left_scroll_background_offset_x += 5;
-    if (
-      this.left_scroll_background_offset_x >
-      this.img_sunflower_selector_background_left.width / 2
-    ) {
-      this.left_scroll_background_offset_x = 0;
+    this.p1_scroll_bg_offset_x += 5;
+    if (this.p1_scroll_bg_offset_x > this.p1_scroll_backgrounds[this.p1_player_type].width / 2) {
+      this.p1_scroll_bg_offset_x = 0;
     }
-    this.right_scroll_background_offset_x -= 5;
-    if (
-      this.right_scroll_background_offset_x <
-      -this.img_sunflower_selector_background_right.width / 2
-    ) {
-      this.right_scroll_background_offset_x = 0;
+    this.p2_scroll_bg_offset_x -= 5;
+    if (this.p2_scroll_bg_offset_x < -this.p2_scroll_backgrounds[this.p2_player_type].width / 2) {
+      this.p2_scroll_bg_offset_x = 0;
     }
   }
   onDraw(ctx: CanvasRenderingContext2D): void {
-    // 这部分代码简直不能看，这也叫设计模式？？？
-
     const screen_width = ctx.canvas.width;
     const screen_height = ctx.canvas.height;
-    console.log("角色选择器 绘制");
+    // 背景
     ctx.drawImage(
       this.img_selector_background,
       // 平铺
@@ -128,58 +125,65 @@ export class SelectorScene implements Scene {
       screen_height,
     );
 
-    let left_scroll_background =
-      this.player_p1_type == PlayerType.Peashooter
-        ? this.img_sunflower_selector_background_left
-        : this.img_peashooter_selector_background_left;
+    // 玩家1的背景
+    const p1_scroll_background = this.p1_scroll_backgrounds[this.p2_player_type];
     ctx.drawImage(
-      left_scroll_background,
-      -this.left_scroll_background_offset_x,
+      p1_scroll_background,
+      //
+      -this.p1_scroll_bg_offset_x,
       0,
-      left_scroll_background.width,
-      left_scroll_background.height,
+      p1_scroll_background.width,
+      p1_scroll_background.height,
+      //
       0,
       0,
       0.45 * screen_width,
       screen_height,
     );
     ctx.drawImage(
-      left_scroll_background,
-      left_scroll_background.width - this.left_scroll_background_offset_x,
+      p1_scroll_background,
+      //
+      p1_scroll_background.width - this.p1_scroll_bg_offset_x,
       0,
-      left_scroll_background.width,
-      left_scroll_background.height,
+      p1_scroll_background.width,
+      p1_scroll_background.height,
+      //
       0,
       0,
       0.45 * screen_width,
       screen_height,
     );
-    let right_scroll_background =
-      this.player_p2_type == PlayerType.Peashooter
-        ? this.img_sunflower_selector_background_right
-        : this.img_peashooter_selector_background_right;
+
+    // 玩家2的背景
+    const p2_scroll_background = this.p2_scroll_backgrounds[this.p1_player_type];
     ctx.drawImage(
-      right_scroll_background,
-      -this.right_scroll_background_offset_x,
+      p2_scroll_background,
+      //
+      -this.p2_scroll_bg_offset_x,
       0,
-      right_scroll_background.width,
-      right_scroll_background.height,
+      p2_scroll_background.width,
+      p2_scroll_background.height,
+      //
       0.55 * screen_width,
       0,
       0.5 * screen_width,
       screen_height,
     );
     ctx.drawImage(
-      right_scroll_background,
-      -right_scroll_background.width - this.right_scroll_background_offset_x,
+      p2_scroll_background,
+      //
+      -p2_scroll_background.width - this.p2_scroll_bg_offset_x,
       0,
-      right_scroll_background.width,
-      right_scroll_background.height,
+      p2_scroll_background.width,
+      p2_scroll_background.height,
+      //
       0.55 * screen_width,
       0,
       0.5 * screen_width,
       screen_height,
     );
+
+    // 左墓碑
     ctx.drawImage(
       this.img_gravestone_left,
       // left 20%
@@ -187,6 +191,7 @@ export class SelectorScene implements Scene {
       0.2 * screen_width - 0.5 * this.img_gravestone_left.width,
       0.5 * screen_height - 0.5 * this.img_gravestone_left.height,
     );
+    // 右墓碑
     ctx.drawImage(
       this.img_gravestone_right,
       // left 80%
@@ -195,10 +200,8 @@ export class SelectorScene implements Scene {
       0.5 * screen_height - 0.5 * this.img_gravestone_right.height,
     );
 
-    (this.player_p1_type == PlayerType.Peashooter
-      ? this.animation_peashooter_left
-      : this.animation_sunflower_left
-    ).onDraw(
+    // 玩家1[所选角色类型]的动画
+    this.p1_animations[this.p1_player_type].onDraw(
       ctx,
       // left 20%
       // top 50%
@@ -206,10 +209,8 @@ export class SelectorScene implements Scene {
       0.5 * screen_height - 0.5 * this.img_gravestone_left.height + 85,
     );
 
-    (this.player_p2_type == PlayerType.Peashooter
-      ? this.animation_peashooter_right
-      : this.animation_sunflower_right
-    ).onDraw(
+    // 玩家2[所选角色类型]的动画
+    this.p2_animations[this.p2_player_type].onDraw(
       ctx,
       // left 80%
       // top 50%
@@ -217,48 +218,44 @@ export class SelectorScene implements Scene {
       0.5 * screen_height - 0.5 * this.img_gravestone_right.height + 85,
     );
 
-    let img_1P_selector_btn_left = this.p1_press_left
-      ? this.img_1P_selector_btn_down_right
-      : this.img_1P_selector_btn_idle_right;
+    // 角色1 的左按钮
+    let p1_btn_left = this.p1_press_left ? this.img_1P_selector_btn_down_right : this.img_1P_selector_btn_idle_right;
     ctx.drawImage(
-      img_1P_selector_btn_left,
+      p1_btn_left,
       // left 10%
       // top 50%
-      0.1 * screen_width - 0.5 * img_1P_selector_btn_left.width,
-      0.5 * screen_height - 0.5 * img_1P_selector_btn_left.height,
+      0.1 * screen_width - 0.5 * p1_btn_left.width,
+      0.5 * screen_height - 0.5 * p1_btn_left.height,
     );
 
-    let img_1P_selector_btn_right = this.p1_press_right
-      ? this.img_1P_selector_btn_down_left
-      : this.img_1P_selector_btn_idle_left;
+    // 角色1 的右按钮
+    let p1_btn_right = this.p1_press_right ? this.img_1P_selector_btn_down_left : this.img_1P_selector_btn_idle_left;
     ctx.drawImage(
-      img_1P_selector_btn_right,
+      p1_btn_right,
       // left 30%
       // top 50%
-      0.3 * screen_width - 0.5 * img_1P_selector_btn_right.width,
-      0.5 * screen_height - 0.5 * img_1P_selector_btn_right.height,
+      0.3 * screen_width - 0.5 * p1_btn_right.width,
+      0.5 * screen_height - 0.5 * p1_btn_right.height,
     );
 
-    let img_2P_selector_btn_left = this.p2_press_left
-      ? this.img_2P_selector_btn_down_right
-      : this.img_2P_selector_btn_idle_right;
+    // 角色2 的左按钮
+    let p2_btn_left = this.p2_press_left ? this.img_2P_selector_btn_down_right : this.img_2P_selector_btn_idle_right;
     ctx.drawImage(
-      img_2P_selector_btn_left,
+      p2_btn_left,
       // left 70%
       // top 50%
-      0.7 * screen_width - 0.5 * img_2P_selector_btn_left.width,
-      0.5 * screen_height - 0.5 * img_2P_selector_btn_left.height,
+      0.7 * screen_width - 0.5 * p2_btn_left.width,
+      0.5 * screen_height - 0.5 * p2_btn_left.height,
     );
 
-    let img_2P_selector_btn_right = this.p2_press_right
-      ? this.img_2P_selector_btn_down_left
-      : this.img_2P_selector_btn_idle_left;
+    // 角色2 的右按钮
+    let p2_btn_right = this.p2_press_right ? this.img_2P_selector_btn_down_left : this.img_2P_selector_btn_idle_left;
     ctx.drawImage(
-      img_2P_selector_btn_right,
+      p2_btn_right,
       // left 90%
       // top 50%
-      0.9 * screen_width - 0.5 * img_2P_selector_btn_right.width,
-      0.5 * screen_height - 0.5 * img_2P_selector_btn_right.height,
+      0.9 * screen_width - 0.5 * p2_btn_right.width,
+      0.5 * screen_height - 0.5 * p2_btn_right.height,
     );
 
     ctx.drawImage(
@@ -326,52 +323,34 @@ export class SelectorScene implements Scene {
       }
     }
     if (message.type == "keyup") {
-      this.audio_ui_switch.currentTime = 0;
-      this.audio_ui_switch.play();
       switch (message.key) {
         case "A":
         case "a":
           this.p1_press_left = false;
-          this.player_p1_type--;
-          this.player_p1_type = restrict(
-            PlayerType.Peashooter,
-            this.player_p1_type,
-            PlayerType.Sunflower,
-          );
+          this.p1_player_type--;
           break;
         case "D":
         case "d":
           this.p1_press_right = false;
-          this.player_p1_type++;
-          this.player_p1_type = restrict(
-            PlayerType.Peashooter,
-            this.player_p1_type,
-            PlayerType.Sunflower,
-          );
+          this.p1_player_type++;
           break;
         case "ArrowLeft":
           this.p2_press_left = false;
-          this.player_p2_type--;
-          this.player_p2_type = restrict(
-            PlayerType.Peashooter,
-            this.player_p2_type,
-            PlayerType.Sunflower,
-          );
+          this.p2_player_type--;
           break;
         case "ArrowRight":
           this.p2_press_right = false;
-          this.player_p2_type++;
-          this.player_p2_type = restrict(
-            PlayerType.Peashooter,
-            this.player_p2_type,
-            PlayerType.Sunflower,
-          );
+          this.p2_player_type++;
           break;
         case "Enter":
           // 按下Enter键，进入游戏场景
           this.sceneManager.switchTo(SceneManager.SceneType.GameScene);
           break;
       }
+      this.audio_ui_switch.currentTime = 0;
+      this.audio_ui_switch.play();
+      this.p1_player_type = restrict(0, this.p1_player_type, 1);
+      this.p2_player_type = restrict(0, this.p2_player_type, 1);
     }
   }
   onExit(): void {
