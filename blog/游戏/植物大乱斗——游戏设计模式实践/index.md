@@ -105,7 +105,7 @@ date: 2024-06-18T15:19:00
 @[code ts](./projects/06_Timer定时器与相机抖动/src/scene/GameScene.ts)
 :::
 
-## 07\_主菜单界面和角色选择界面以及重构
+## 07\_主菜单界面和角色选择界面_重构部分代码
 
 :::code-tabs
 @tab `/src/scene/MenuScene.ts`
@@ -116,9 +116,62 @@ date: 2024-06-18T15:19:00
 @[code ts](./projects/07_主菜单界面和角色选择界面/src/resources/index.ts)
 :::
 
-## 08_角色选择界面动态效果和交互
+## 08_角色选择界面动态效果和交互_重构部分代码
 
 :::code-tabs
 @tab `/src/scene/SelectorScene.ts`
 @[code ts](./projects/08_角色选择界面动态效果及交互/src/scene/SelectorScene.ts)
+@tab `实现多线程加载资源`
+@[code ts](./projects/08_角色选择界面动态效果及交互/src/resources/index.ts)
+@tab `实现加载字体`
+@[code ts](./projects/08_角色选择界面动态效果及交互/src/utils/index.ts)
+:::
+
+## 09_游戏场景搭建和物理模拟基础_重构部分代码
+
+:::code-tabs
+@tab `/src/main.ts`
+@[code ts](./projects/09_游戏场景搭建和物理模拟基础/src/main.ts)
+@tab `/src/Render.ts`
+@[code ts](./projects/09_游戏场景搭建和物理模拟基础/src/Render.ts)
+@tab `/src/scene/GameScene.ts`
+@[code ts](./projects/09_游戏场景搭建和物理模拟基础/src/scene/GameScene.ts)
+
+:::
+
+## 10_玩家类设计和角色移动基础_重构部分代码
+
+:::code-tabs
+@tab `/src/player/Player.ts`
+@[code ts](./projects/10_玩家类设计和角色移动基础/src/player/Player.ts)
+@tab `/src/player/PeashooterPlayer.ts`
+@[code ts](./projects/10_玩家类设计和角色移动基础/src/player/PeashooterPlayer.ts)
+@tab `/src/player/SunflowerPlayer.ts`
+@[code ts](./projects/10_玩家类设计和角色移动基础/src/player/SunflowerPlayer.ts)
+@tab `/src/scene/SelectorScene.ts`
+@[code ts](./projects/10_玩家类设计和角色移动基础/src/scene/SelectorScene.ts)
+@tab `/src/scene/GameScene.ts`
+@[code ts](./projects/10_玩家类设计和角色移动基础/src/scene/GameScene.ts)
+:::
+
+## 11_平台单向碰撞检测和重力模拟
+
+:::code-tabs
+@tab `/src/object/Plantform.ts`
+@[code ts](./projects/11_平台单向碰撞检测和重力模拟/src/object/Plantform.ts)
+@tab `/src/player/Player.ts`
+@[code ts](./projects/11_平台单向碰撞检测和重力模拟/src/player/Player.ts)
+@tab `/src/scene/GameScene.ts`
+@[code ts](./projects/11_平台单向碰撞检测和重力模拟/src/scene/GameScene.ts)
+@tab `/src/math/Line.ts`
+@[code ts](./projects/11_平台单向碰撞检测和重力模拟/src/math/Line.ts)
+@tab `/src/math/Point.ts`
+@[code ts](./projects/11_平台单向碰撞检测和重力模拟/src/math/Point.ts)
+:::
+
+## 12_角色技能设计和子弹基类实现
+
+:::code-tabs
+@tab `/src/bullet/Bullet.ts`
+@[code ts](./projects/12_角色技能设计和子弹基类实现/src/bullet/Bullet.ts)
 :::

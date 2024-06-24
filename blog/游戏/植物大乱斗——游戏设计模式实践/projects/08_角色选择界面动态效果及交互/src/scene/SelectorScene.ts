@@ -37,7 +37,10 @@ export class SelectorScene implements Scene {
   img_sunflower_selector_background_right = resources.images.get("sunflower_selector_background_right")!;
   img_avatar_peashooter = resources.images.get("avatar_peashooter")!;
   img_avatar_sunflower = resources.images.get("avatar_sunflower")!;
+  font_IPix = resources.fonts.get("IPix")!;
 
+  // 角色名
+  actor_names = new Array<string>();
   // 角色类型
   p1_player_type = PlayerType.Peashooter;
   p2_player_type = PlayerType.Sunflower;
@@ -55,11 +58,15 @@ export class SelectorScene implements Scene {
   p1_press_right = false;
   p2_press_left = false;
   p2_press_right = false;
+
   constructor(private sceneManager: SceneManager) {
     this.init();
   }
   init(): void {
     console.log("角色选择器 初始化");
+
+    this.actor_names[PlayerType.Peashooter] = "豌豆射手";
+    this.actor_names[PlayerType.Sunflower] = "向日葵";
 
     // this.玩家1角色动画[玩家所选角色A] = 角色A动画
     // this.玩家1角色动画[玩家所选角色B] = 角色B动画
@@ -301,6 +308,21 @@ export class SelectorScene implements Scene {
       0.5 * screen_width - 0.5 * this.img_selector_tip.width,
       0.9 * screen_height - 0.5 * this.img_selector_tip.height,
     );
+
+    // 角色名称
+    ctx.font = `20px ${this.font_IPix.family}`;
+
+    const p1_actor_name = this.actor_names[this.p1_player_type];
+    ctx.fillStyle = "rgb(45,45,45)";
+    ctx.fillText(p1_actor_name, 0.15 * screen_width + 3, 0.6 * screen_height + 3);
+    ctx.fillStyle = "rgb(255,255,255)";
+    ctx.fillText(p1_actor_name, 0.15 * screen_width, 0.6 * screen_height);
+
+    const p2_actor_name = this.actor_names[this.p2_player_type];
+    ctx.fillStyle = "rgb(45,45,45)";
+    ctx.fillText(p2_actor_name, 0.75 * screen_width, 0.6 * screen_height);
+    ctx.fillStyle = "rgb(255,255,255)";
+    ctx.fillText(p2_actor_name, 0.75 * screen_width + 3, 0.6 * screen_height + 3);
   }
   onInput(message: Message): void {
     console.log("角色选择器 处理输入");
