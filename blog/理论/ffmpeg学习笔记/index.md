@@ -2,6 +2,38 @@
 title: ffmpeg音视频开发学习笔记
 date: 2024-04-02T00:01:00+08:00
 ---
+# ffmpeg音视频开发学习笔记
+
+## 目录
+
+- [ffmpeg音视频开发学习笔记](#ffmpeg音视频开发学习笔记)
+  - [目录](#目录)
+  - [ffmpeg简介](#ffmpeg简介)
+  - [开发环境搭建](#开发环境搭建)
+  - [日志系统](#日志系统)
+  - [编译命令](#编译命令)
+  - [打开输入](#打开输入)
+  - [解封装提取AAC音频](#解封装提取aac音频)
+  - [解封装提取H264视频](#解封装提取h264视频)
+  - [转封装——mp4-to-flv](#转封装mp4-to-flv)
+  - [时间基、时间戳、时长](#时间基时间戳时长)
+  - [截取封装](#截取封装)
+  - [RGB、YUV](#rgbyuv)
+    - [RGB](#rgb)
+    - [YUV](#yuv)
+  - [视频解码](#视频解码)
+  - [修改分辨率](#修改分辨率)
+  - [修改格式为RGB24](#修改格式为rgb24)
+  - [保存raw格式图像](#保存raw格式图像)
+  - [YUV\_to\_H264视频编码](#yuv_to_h264视频编码)
+  - [音频解码AAC\_PCM](#音频解码aac_pcm)
+  - [音频编码PCM\_to\_AAC](#音频编码pcm_to_aac)
+  - [音视频采集](#音视频采集)
+    - [视频采集](#视频采集)
+    - [音频采集](#音频采集)
+    - [同时采集视频和音频](#同时采集视频和音频)
+  - [音视频播放与显示](#音视频播放与显示)
+    - [SDL](#sdl)
 
 ## ffmpeg简介
 
@@ -95,23 +127,23 @@ OUTPUT_DIR = output
 C_CPP_DEFS =
 
 C_SOURCES =  \
-	src/main.c
+ src/main.c
 vpath %.c $(sort $(dir $(C_SOURCES)))
 
 CPP_SOURCES = \
-	$(wildcard src/lib/*.cpp) \
-	# src/main.cpp
+ $(wildcard src/lib/*.cpp) \
+ # src/main.cpp
 vpath %.cpp $(sort $(dir $(CPP_SOURCES)))
 
 C_CPP_INCLUDES =  \
-	-I D:/app/ffmpeg-6.1.1-full_build-shared/include \
-	-I src/lib/
+ -I D:/app/ffmpeg-6.1.1-full_build-shared/include \
+ -I src/lib/
 
 LIBDIR = \
-	-L D:/app/ffmpeg-6.1.1-full_build-shared/lib  -l avutil -l avformat -l avcodec
+ -L D:/app/ffmpeg-6.1.1-full_build-shared/lib  -l avutil -l avformat -l avcodec
 
 DLL_SOURCES = \
-	$(wildcard D:/app/ffmpeg-6.1.1-full_build-shared/bin/*.dll)
+ $(wildcard D:/app/ffmpeg-6.1.1-full_build-shared/bin/*.dll)
 #######################################
 # COMMAND
 #######################################
@@ -123,19 +155,19 @@ XX = g++
 C_CPP_FLAGS =  $(C_CPP_DEFS) $(C_CPP_INCLUDES)
 
 $(BUILD_DIR):
-	mkdir $@
+ mkdir $@
 
 C_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
 vpath %.o $(sort $(dir $(C_OBJECTS)))
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	$(CC) -c $(C_CPP_FLAGS) $< -o $@
+ $(CC) -c $(C_CPP_FLAGS) $< -o $@
 
 CPP_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
 vpath %.o $(sort $(dir $(CPP_OBJECTS)))
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
-	$(XX) -c $(C_CPP_FLAGS) $< -o $@
+ $(XX) -c $(C_CPP_FLAGS) $< -o $@
 
 #######################################
 # LINK
@@ -143,11 +175,11 @@ $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 LD_FLAGS = $(LIBDIR)
 
 $(OUTPUT_DIR):
-	mkdir $@
-	cp ${DLL_SOURCES} $@
+ mkdir $@
+ cp ${DLL_SOURCES} $@
 
 $(OUTPUT_DIR)/$(TARGET): $(C_OBJECTS) $(CPP_OBJECTS) | $(OUTPUT_DIR)
-	$(CC)  $(C_OBJECTS) $(CPP_OBJECTS) -o $@ $(LD_FLAGS)
+ $(CC)  $(C_OBJECTS) $(CPP_OBJECTS) -o $@ $(LD_FLAGS)
 
 #######################################
 # COMMAND
@@ -155,8 +187,8 @@ $(OUTPUT_DIR)/$(TARGET): $(C_OBJECTS) $(CPP_OBJECTS) | $(OUTPUT_DIR)
 all: $(OUTPUT_DIR)/$(TARGET)
 
 clean:
-	-rm -fR $(BUILD_DIR)
-	-rm -fR $(OUTPUT_DIR)
+ -rm -fR $(BUILD_DIR)
+ -rm -fR $(OUTPUT_DIR)
 
 ```
 
@@ -2139,13 +2171,13 @@ int main(int avc, char *argv[])
   - **量化：**指将采样后得到的离散信号映射到一组有限的离散量上的过程，如把0v~3.3v的模拟电压信号重新映射到0~255的范围。
   - **编码：**将采集和量化后的数据保存
 
-
 - **采样率(sampleRate) :** 每秒中采集样本的个数，如8KHz，表示每秒采样8000次。
   - 奈奎斯特定理: 按比声音最高频率高2倍以上的频率对声音进行采样；
   - 人耳能接受的频率范围为20Hz~20kHz，故采样率一般为44.1KHz较好，
   - 采样率越高，质量越高，但存储空间增大。
 - **量化格式 (sampleFormat):**
   - ffmpeg支持的量化格式: `ffmpeg -formats|grep PCM`
+
 ```bash
 $ ffmpeg -formats | grep PCM
  DE alaw            PCM A-law
@@ -2170,12 +2202,13 @@ $ ffmpeg -formats | grep PCM
  DE u8              PCM unsigned 8-bit
  DE vidc            PCM Archimedes VIDC
 ```
+
 - **声道数（channel）:**
   - 单声道（mono）
   - 双声道（stereo）
 
-
 **存储格式:**
+
 - 双声道音频文件
   - 采样数据按LRLR方式存储，存储的时候与字节序有关。
 - 单声道音频文件，
@@ -2183,27 +2216,31 @@ $ ffmpeg -formats | grep PCM
   - (有时也会用LRLR方式存储，但另一个声道数据为0)
 
 **存储格式**
+
 - Packed和Planner两种，
 - 对于双通道音频，Packed为两个声道的数据交错存储;Planner为两个声道数据分开存储:
   - Packed: LRLRLR
   - Planner: LLLRRR
 
-
 **在ffmpeg中的存储格式**
+
 - PCM数据存储在AVFrame中
 - 对于Packed格式的PCM数据，frame.data[0] 或 frame.extened_data[0]包含所有音频数据
 - 对于Planar格式的PCM数据，frame.data[i] 或 frame.extened_data[i]表示i声道的数据
 - 实际音频文件采用Packed格式，ffmpeg内部处理音频采用Planar格式。
 
 **大小计算:**
+
 - 以CD的音质为例:量化格式为16比特(2字节)，采样率为44100，声道数为2。
 - 比特率为:44100*16*2=1378.125kbps
 - 1分钟音频大小:1378.125*60/8/1024=10.09MB
 
 **ffmpeg提取pcm数据命令:**
+
 - ffmpeg -i break.aac -ar 48000 -ac 2 -f s16le out.pcm
 
 **ffplay播放pcm数据:**
+
 - ffplay -ar 48000 -ac 2 -fs16le outpcm
 
 ![Alt text](assets/images/image-45.png)
@@ -2356,6 +2393,7 @@ int main(int argc, char **argv)
 ## 音频编码PCM_to_AAC
 
 > ffmpeg -ac 2 -ar 48000 -fs16le -i s16le_48000_2_break.pcm -acodec libfdk_aac out1.aac
+>
 > - ac 音频通道数
 > - ar 音频采样率
 > - f 格式
@@ -2365,7 +2403,6 @@ int main(int argc, char **argv)
 ![Alt text](assets/images/image-46.png)
 > 这里是需要把PCM数据写入Frame，
 > 需要把音频的一些参数写入Frame
-
 
 ```c
 #include <libavutil/avutil.h>     // 工具函数
@@ -2517,10 +2554,12 @@ int main(int argc, char **argv)
 
 ## 音视频采集
 
+### 视频采集
+
 ![Alt text](assets/images/image-47.png)
 
-
 ```bash
+# 查看设备列表
 $ ffmpeg -devices
 
 Devices:
@@ -2536,3 +2575,509 @@ Devices:
  D  vfwcap          VfW video capture
 
 ```
+
+```bash
+# 查看dshow支持的参数
+$ ffmpeg -h demuxer=dshow
+
+Demuxer dshow [DirectShow capture]:
+dshow indev AVOptions:
+  -video_size        <image_size> .D......... set video size given a string such as 640x480 or hd720.
+  -pixel_format      <pix_fmt>    .D......... set video pixel format (default none)
+  -framerate         <string>     .D......... set video frame rate
+  -sample_rate       <int>        .D......... set audio sample rate (from 0 to INT_MAX) (default 0)
+  -sample_size       <int>        .D......... set audio sample size (from 0 to 16) (default 0)
+  -channels          <int>        .D......... set number of audio channels, such as 1 or 2 (from 0 to INT_MAX) (default 0)
+  -audio_buffer_size <int>        .D......... set audio device buffer latency size in milliseconds (default is the device's default) (from 0 to INT_MAX) (default 0)
+  -list_devices      <boolean>    .D......... list available devices (default false)
+  -list_options      <boolean>    .D......... list available options for specified device (default false)
+  -video_device_number <int>        .D......... set video device number for devices with same name (starts at 0) (from 0 to INT_MAX) (default 0)
+  -audio_device_number <int>        .D......... set audio device number for devices with same name (starts at 0) (from 0 to INT_MAX) (default 0)
+  -crossbar_video_input_pin_number <int>        .D......... set video input pin number for crossbar device (from -1 to INT_MAX) (default -1)
+  -crossbar_audio_input_pin_number <int>        .D......... set audio input pin number for crossbar device (from -1 to INT_MAX) (default -1)
+  -show_video_device_dialog <boolean>    .D......... display property dialog for video capture device (default false)
+  -show_audio_device_dialog <boolean>    .D......... display property dialog for audio capture device (default false)
+  -show_video_crossbar_connection_dialog <boolean>    .D......... display property dialog for crossbar connecting pins filter on video device (default false)
+  -show_audio_crossbar_connection_dialog <boolean>    .D......... display property dialog for crossbar connecting pins filter on audio device (default false)
+  -show_analog_tv_tuner_dialog <boolean>    .D......... display property dialog for analog tuner filter (default false)        
+  -show_analog_tv_tuner_audio_dialog <boolean>    .D......... display property dialog for analog tuner audio filter (default false)
+  -audio_device_load <string>     .D......... load audio capture filter device (and properties) from file
+  -audio_device_save <string>     .D......... save audio capture filter device (and properties) to file
+  -video_device_load <string>     .D......... load video capture filter device (and properties) from file
+  -video_device_save <string>     .D......... save video capture filter device (and properties) to file
+  -use_video_device_timestamps <boolean>    .D......... use device instead of wallclock timestamps for video frames (default true)
+```
+
+```bash
+# 查看支持的采集设备列表
+ffmpeg -f dshow -list_devices true -i dummy
+
+[dshow @ 00000242b296d600] "USB2.0 UVC HD Webcam" (video)
+[dshow @ 00000242b296d600]   Alternative name "@device_pnp_\\?\usb#vid_13d3&pid_5654&mi_00#6&3907f7b1&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global"
+[dshow @ 00000242b296d600] "麦克风 (Realtek High Definition Audio)" (audio)
+[dshow @ 00000242b296d600]   Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{4030643A-CF6B-43BC-99F6-7AB127C53A99}"
+```
+
+```bash
+# 采集画面
+ffmpeg -f dshow -i video='USB2.0 UVC HD Webcam' -framerate 30 -video_size 640x480 -pixel_format yuyv422  out.yuv
+# （指定的参数好像没有用
+```
+
+```bash
+# 播放画面
+ffplay -framerate 30 -video_size 640x480 -pixel_format yuyv422 out.yuv
+```
+
+![Alt text](assets/images/image-48.png)
+
+```c
+#include <stddef.h>
+#include <stdio.h>
+#include <libavutil/avutil.h>
+#include <libavutil/imgutils.h> // 计算视频大小
+#include <libavutil/log.h>      // ffmpeg的日志系统
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libavdevice/avdevice.h> // 设备
+#include <libswscale/swscale.h>   // 视频缩放
+
+int err;
+/**
+ * 列出当前所连设备
+ */
+void list_devices()
+{
+    // ffmpeg -f dshow -list_devices true -i dummy
+    const AVInputFormat *inputFmt = av_find_input_format("dshow");
+    if (inputFmt == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_input_format failed!!!\n");
+    }
+    AVDictionary *options = NULL;
+    av_dict_set(&options, "list_devices", "true", 0);
+    AVFormatContext *fmtCtx = avformat_alloc_context();
+    err = avformat_open_input(&fmtCtx, "dummy", inputFmt, &options);
+    if (err != 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avformat_open_input failed!!!\n");
+    }
+    /**
+        输出：
+            [dshow @ 000002572fc93000] "USB2.0 UVC HD Webcam" (video)
+            [dshow @ 000002572fc93000]   Alternative name "@device_pnp_\\?\usb#vid_13d3&pid_5654&mi_00#6&3907f7b1&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global"
+            [dshow @ 000002572fc93000] "麦克风 (Realtek High Definition Audio)" (audio)
+            [dshow @ 000002572fc93000]   Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{4030643A-CF6B-43BC-99F6-7AB127C53A99}"
+    */
+    if (fmtCtx)
+    {
+        avformat_close_input(&fmtCtx); // 关闭输入
+        avformat_free_context(fmtCtx); // 释放输入
+    }
+}
+void decodeVideoYUV420p(AVCodecContext *decoderCtx, struct SwsContext *swsCtx, AVPacket *packet, AVFrame *destFrame, FILE *dest)
+{
+    if (avcodec_send_packet(decoderCtx, packet) == 0)
+    {
+        AVFrame *srcframe = av_frame_alloc();
+        while (avcodec_receive_frame(decoderCtx, srcframe) >= 0)
+        {
+            sws_scale(swsCtx,                                                    // swscale上下文
+                      srcframe->data, srcframe->linesize, 0, decoderCtx->height, // 源Frame数据 源Frame宽度 起始位置 原始图片高度
+                      destFrame->data, destFrame->linesize                       // 目标Frame数据 目标Frame宽度
+            );
+            // yuv420p (packed format)
+            fwrite(destFrame->data[0], 1, decoderCtx->width * decoderCtx->height, dest);
+            fwrite(destFrame->data[1], 1, decoderCtx->width * decoderCtx->height / 4, dest);
+            fwrite(destFrame->data[2], 1, decoderCtx->width * decoderCtx->height / 4, dest);
+        }
+        av_frame_free(&srcframe);
+    }
+}
+void decodeVideo(AVCodecContext *decoderCtx, AVPacket *packet, FILE *dest)
+{
+    if (avcodec_send_packet(decoderCtx, packet) == 0)
+    {
+        AVFrame *frame = av_frame_alloc();
+        while (avcodec_receive_frame(decoderCtx, frame) >= 0)
+        {
+            // uyvu422 yuv422 (packed format)
+            fwrite(frame->data[0], 1, decoderCtx->width * decoderCtx->height * 2, dest);
+        }
+        av_frame_free(&frame);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    // 设置日志级别
+    av_log_set_level(AV_LOG_INFO);
+    // 注册所有device
+    avdevice_register_all();
+    if (argc < 3)
+    {
+        // 显示所有输入设备
+        list_devices();
+        // 显示用法
+        av_log(NULL, AV_LOG_ERROR, "useage: %s <deviceName> <output.yuv> <yuv420p.yuv>\n", argv[0]);
+        return -1;
+    }
+    // 打开设备
+    char *deviceName = argv[1];
+    char *outputName1 = argv[2];
+    char *outputNmae2 = argv[3];
+
+    // open file
+    FILE *dest1 = fopen(outputName1, "wb");
+    if (dest1 == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "fopen failed!!!");
+        goto end;
+    }
+    FILE *dest2 = fopen(outputNmae2, "wb");
+    if (dest2 == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "fopen failed!!!");
+        goto end;
+    }
+
+    // ffmpeg -f dshow -i video='USB2.0 UVC HD Webcam' -framerate 30 -video_size 640x480 -pixel_format yuyv422  out.yuv
+    // ffplay out.yuv -framerate 30 -video_size 640x480 -pixel_format yuyv422
+
+    const AVInputFormat *inputFmt = av_find_input_format("dshow");
+    if (inputFmt == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_input_format failed!!!");
+        goto end;
+    }
+
+    AVFormatContext *fmtCtx = avformat_alloc_context();
+    char inputName[256] = {0};
+    strcat(inputName, "video=");
+    strcat(inputName, deviceName);
+    av_log(NULL, AV_LOG_INFO, "input: %s\n", inputName);
+    AVDictionary *options = NULL;
+    // av_dict_set(&options, "framerate", "30", 0);
+    // av_dict_set(&options, "pixel_format", "yuyv422", 0);
+    // av_dict_set(&options, "video_size", "640x480", 0);
+    err = avformat_open_input(&fmtCtx, inputName, inputFmt, &options);
+    if (err)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avformat_open_input failed!!!");
+        goto end;
+    }
+    // 输出流信息
+    av_dump_format(fmtCtx, 0, deviceName, 0);
+    // 探测流
+    // get stream information
+    err = avformat_find_stream_info(fmtCtx, NULL);
+    if (err < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_best_stream failed!!!");
+        goto end;
+    }
+    // 找到视频流
+    // av_find_best_stream
+    int videoIndex = av_find_best_stream(fmtCtx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
+    if (videoIndex < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_best_stream failed!!!");
+        goto end;
+    }
+    // 分配编码器上下文
+    AVCodecContext *decoderCtx = avcodec_alloc_context3(NULL);
+    err = avcodec_parameters_to_context(decoderCtx, fmtCtx->streams[videoIndex]->codecpar);
+    if (err < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_parameters_to_context failed!!!");
+        goto end;
+    }
+    const AVCodec *decoder = avcodec_find_decoder(decoderCtx->codec_id);
+
+    if (decoder == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_find_decoder failed!!!");
+        goto end;
+    }
+    av_log(NULL, AV_LOG_INFO, "decoder name: %s\n", decoder->name);
+
+    err = avcodec_open2(decoderCtx, decoder, NULL);
+    if (err != 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_open2 failed!!!");
+        goto end;
+    }
+
+    // 获取源颜色空间
+    enum AVPixelFormat srcPixFmt = decoderCtx->pix_fmt;
+    enum AVPixelFormat destPixFmt = AV_PIX_FMT_YUV420P; // AV_PIX_FMT_YUV420P
+
+    // 获取swscale上下文
+    struct SwsContext *swsCtx = sws_getContext(
+        decoderCtx->width, decoderCtx->height, srcPixFmt,  // 源分辨率 源图像空间
+        decoderCtx->width, decoderCtx->height, destPixFmt, // 目标分辨率 目标图像空间
+        SWS_FAST_BILINEAR,                                 // 缩放算法
+        NULL,                                              // 源图像过滤器（前后图像滤波处理）
+        NULL,                                              // 目标图像滤波器
+        NULL                                               // 参数
+    );
+
+    if (swsCtx == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "sws_getContext failed");
+        goto end;
+    }
+    // 创建destFrame
+    AVFrame *destFrame = av_frame_alloc();
+    // 为destFrame的data分配内存
+    uint8_t *destBuffer = av_malloc(av_image_get_buffer_size(destPixFmt, decoderCtx->width, decoderCtx->height, 1));
+    // 把所分配内存的地址，通过计算，分别设置到Y:data[0] U:data[1] V:data[2] 中
+    av_image_fill_arrays(destFrame->data, destFrame->linesize, destBuffer, destPixFmt, decoderCtx->width, decoderCtx->height, 1);
+
+    AVPacket *packet = av_packet_alloc();
+    while (1)
+    {
+        if (av_read_frame(fmtCtx, packet) == 0)
+        {
+            if (packet->stream_index == videoIndex)
+            {
+                decodeVideo(decoderCtx, packet, dest1);
+                decodeVideoYUV420p(decoderCtx, swsCtx, packet, destFrame, dest2);
+            }
+        }
+        av_packet_unref(packet);
+    }
+    av_packet_free(&packet);
+    decodeVideo(decoderCtx, NULL, dest1);
+    decodeVideoYUV420p(decoderCtx, swsCtx, NULL, destFrame, dest2);
+
+end:
+    if (dest1)
+    {
+        fclose(dest1);
+    }
+    if (fmtCtx)
+    {
+        avformat_close_input(&fmtCtx); // 关闭输入
+        avformat_free_context(fmtCtx); // 释放输入
+    }
+    return 0;
+}
+```
+
+### 音频采集
+
+![Alt text](assets/images/image-49.png)
+
+```bash
+ffmpeg -f dshow -list_devices true -i dummy
+# 
+[dshow @ 000001fe0d72d340] "USB2.0 UVC HD Webcam" (video)
+[dshow @ 000001fe0d72d340]   Alternative name "@device_pnp_\\?\usb#vid_13d3&pid_5654&mi_00#6&3907f7b1&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global"    
+[dshow @ 000001fe0d72d340] "麦克风 (Realtek High Definition Audio)" (audio)
+[dshow @ 000001fe0d72d340]   Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{4030643A-CF6B-43BC-99F6-7AB127C53A99}"
+```
+
+```bash
+# 采集
+ffmpeg -f dshow -i audio="麦克风 (Realtek High Definition Audio)" -ar 44100 -ac 1 -f f32le output.pcm
+```
+
+```bash
+# 播放
+ffplay -ar 44100 -ac 1 -f f32le output.pcm
+```
+
+```c
+#include <stddef.h>
+#include <stdio.h>
+#include <libavutil/log.h> // ffmpeg的日志系统
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libavdevice/avdevice.h> // 设备
+#include <libswscale/swscale.h>   // 视频缩放
+
+int err;
+/**
+ * 列出当前所连设备
+ */
+void list_devices()
+{
+    // ffmpeg -f dshow -list_devices true -i dummy
+    const AVInputFormat *inputFmt = av_find_input_format("dshow");
+    if (inputFmt == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_input_format failed!!!\n");
+    }
+    AVDictionary *options = NULL;
+    av_dict_set(&options, "list_devices", "true", 0);
+    AVFormatContext *fmtCtx = avformat_alloc_context();
+    err = avformat_open_input(&fmtCtx, "dummy", inputFmt, &options);
+    if (err != 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avformat_open_input failed!!!\n");
+    }
+    /**
+        输出：
+            [dshow @ 000002572fc93000] "USB2.0 UVC HD Webcam" (video)
+            [dshow @ 000002572fc93000]   Alternative name "@device_pnp_\\?\usb#vid_13d3&pid_5654&mi_00#6&3907f7b1&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global"
+            [dshow @ 000002572fc93000] "麦克风 (Realtek High Definition Audio)" (audio)
+            [dshow @ 000002572fc93000]   Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{4030643A-CF6B-43BC-99F6-7AB127C53A99}"
+    */
+    if (fmtCtx)
+    {
+        avformat_close_input(&fmtCtx); // 关闭输入
+        avformat_free_context(fmtCtx); // 释放输入
+    }
+}
+void decodeAudio(AVCodecContext *decoderCtx, AVPacket *packet, FILE *dest)
+{
+    if (avcodec_send_packet(decoderCtx, packet) == 0)
+    {
+        AVFrame *frame = av_frame_alloc();
+        while (avcodec_receive_frame(decoderCtx, frame) >= 0)
+        {
+            // f32le packed
+            fwrite(frame->data[0], 1, frame->linesize[0], dest);
+        }
+        av_frame_free(&frame);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    // 设置日志级别
+    av_log_set_level(AV_LOG_INFO);
+    // 注册所有device
+    avdevice_register_all();
+    if (argc < 3)
+    {
+        // 显示所有输入设备
+        list_devices();
+        // 显示用法
+        av_log(NULL, AV_LOG_ERROR, "useage: %s <deviceName> <output_f32le.pcm>\n", argv[0]);
+        return -1;
+    }
+    // 打开设备
+    char *deviceName = argv[1];
+    char *outputName = argv[2];
+
+    // open file
+    FILE *dest = fopen(outputName, "wb");
+    if (dest == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "fopen failed!!!");
+        goto end;
+    }
+
+    // ffmpeg -f dshow -i audio="麦克风 (Realtek High Definition Audio)" -ar 44100 -ac 1 -f s16le output.pcm
+    // ffplay -ar 44100 -ac 2 -f s16le output.pcm
+
+    const AVInputFormat *inputFmt = av_find_input_format("dshow");
+    if (inputFmt == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_input_format failed!!!");
+        goto end;
+    }
+
+    AVFormatContext *fmtCtx = avformat_alloc_context();
+    char inputName[256] = {0};
+    strcat(inputName, "audio=");
+    strcat(inputName, deviceName);
+    av_log(NULL, AV_LOG_INFO, "input: %s\n", inputName);
+    AVDictionary *options = NULL;
+    av_dict_set(&options, "ar", "44100", 0);
+    av_dict_set(&options, "ac", "2", 0);
+    av_dict_set(&options, "f", "s16le", 0);
+    err = avformat_open_input(&fmtCtx, inputName, inputFmt, &options);
+    if (err)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avformat_open_input failed!!!");
+        goto end;
+    }
+    // 输出流信息
+    av_dump_format(fmtCtx, 0, deviceName, 0);
+    // 探测流
+    // get stream information
+    err = avformat_find_stream_info(fmtCtx, NULL);
+    if (err < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_best_stream failed!!!");
+        goto end;
+    }
+    // 找到音频流
+    // av_find_best_stream
+    int audioIndex = av_find_best_stream(fmtCtx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
+    if (audioIndex < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "av_find_best_stream failed!!!");
+        goto end;
+    }
+    // 分配编码器上下文
+    AVCodecContext *decoderCtx = avcodec_alloc_context3(NULL);
+    err = avcodec_parameters_to_context(decoderCtx, fmtCtx->streams[audioIndex]->codecpar);
+    if (err < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_parameters_to_context failed!!!");
+        goto end;
+    }
+    const AVCodec *decoder = avcodec_find_decoder(decoderCtx->codec_id);
+
+    if (decoder == NULL)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_find_decoder failed!!!");
+        goto end;
+    }
+    av_log(NULL, AV_LOG_INFO, "decoder name: %s\n", decoder->name);
+
+    err = avcodec_open2(decoderCtx, decoder, NULL);
+    if (err != 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "avcodec_open2 failed!!!");
+        goto end;
+    }
+
+    AVPacket *packet = av_packet_alloc();
+    while (1)
+    {
+        if (av_read_frame(fmtCtx, packet) == 0)
+        {
+            if (packet->stream_index == audioIndex)
+            {
+                decodeAudio(decoderCtx, packet, dest);
+            }
+        }
+        av_packet_unref(packet);
+    }
+    av_packet_free(&packet);
+    decodeAudio(decoderCtx, NULL, dest);
+
+end:
+    if (dest)
+    {
+        fclose(dest);
+    }
+    if (fmtCtx)
+    {
+        avformat_close_input(&fmtCtx); // 关闭输入
+        avformat_free_context(fmtCtx); // 释放输入
+    }
+    return 0;
+}
+```
+
+### 同时采集视频和音频
+
+```bash
+ffmpeg -f dshow -i video='USB2.0 UVC HD Webcam':audio="麦克风 (Realtek High Definition Audio)" out.mp4
+```
+
+```c
+
+```
+
+## 音视频播放与显示
+
+### SDL
+
+![Alt text](assets/images/image-50.png)

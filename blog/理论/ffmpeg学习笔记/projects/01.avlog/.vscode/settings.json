@@ -8,6 +8,9 @@
         "compare": "cpp",
         "cstdint": "cpp",
         "avformat.h": "c",
-        "avcodec.h": "c"
+        "avcodec.h": "c",
+        "avdevice.h": "c",
+        "log.h": "c",
+        "imgutils.h": "c"
     }
 }
