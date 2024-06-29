@@ -48,11 +48,50 @@ star: true
       - [案例：利用外部时钟源实现`setInterval(callback,times)`](#案例利用外部时钟源实现setintervalcallbacktimes)
     - [案例：LED呼吸灯](#案例led呼吸灯)
     - [案例：舵机驱动](#案例舵机驱动)
-        - [直流电机与驱动电路](#直流电机与驱动电路)
+      - [直流电机与驱动电路](#直流电机与驱动电路)
     - [案例：定时器输出捕获——测量方波](#案例定时器输出捕获测量方波)
     - [编码器接口](#编码器接口)
     - [编码器测位置、测速案例](#编码器测位置测速案例)
   - [ADC模拟/数字转化器](#adc模拟数字转化器)
+    - [ADC概念](#adc概念)
+    - [ADC原理](#adc原理)
+    - [STM32\_ADC原理](#stm32_adc原理)
+    - [ADC的标准库函数](#adc的标准库函数)
+    - [ADC案例](#adc案例)
+  - [DMA](#dma)
+    - [DMA简介](#dma简介)
+    - [DMA原理](#dma原理)
+    - [DMA案例](#dma案例)
+  - [USART串口通信](#usart串口通信)
+    - [通信](#通信)
+    - [串口通信简介](#串口通信简介)
+    - [USART外设](#usart外设)
+    - [USART标准库函数](#usart标准库函数)
+    - [案例：串口收发数据；实现printf](#案例串口收发数据实现printf)
+    - [案例：串口中断接收处理数据](#案例串口中断接收处理数据)
+    - [案例：实现简易通信协议](#案例实现简易通信协议)
+  - [I2C通信](#i2c通信)
+    - [简介](#简介)
+    - [硬件规定](#硬件规定)
+    - [时序规定](#时序规定)
+    - [I2C通信时序](#i2c通信时序)
+    - [I2C通信软件实现](#i2c通信软件实现)
+  - [MPU6050](#mpu6050)
+    - [简介](#简介-1)
+    - [可配置参数](#可配置参数)
+    - [芯片框图](#芯片框图)
+    - [芯片电器特性](#芯片电器特性)
+    - [时钟源的选择](#时钟源的选择)
+    - [主要寄存器](#主要寄存器)
+    - [主要寄存器详细说明](#主要寄存器详细说明)
+    - [基于软件I2C实现MPU6050驱动](#基于软件i2c实现mpu6050驱动)
+  - [I2C通信硬件实现](#i2c通信硬件实现)
+    - [简介](#简介-2)
+    - [功能框图](#功能框图)
+    - [功能简图](#功能简图)
+    - [收发时序](#收发时序)
+    - [封装](#封装)
+    - [基于硬件I2C实现MPU6050驱动](#基于硬件i2c实现mpu6050驱动)
 
 ## F103C8T6简介
 
@@ -107,7 +146,6 @@ star: true
   - `APB2` APB(先进外设)总线 连接一般外设 `频率一般72Mhz` `连接重要的外设` 如：高级定时器，GPIO，ADC
   - `APB1` APB(先进外设)总线 连接一般外设 `频率一般36Mhz` `连接次要的外设` 如：普通定时器，USB
 - `DMA总线` DMA(直接内存访问)总线 DMA外设可以通过该总线代替CPU完成数据搬运工作，如：从ADC模数转换外设中的读取数值复制到内存中
-
 - ![Alt text](assets/images/image-2.png)
 
 ## 引脚定义
@@ -399,7 +437,6 @@ int main(void)
 
 ### 标准库函数
 
-:::
 **RCC外设所有函数功能描述**
 
 > 感觉大概知道下有哪些功能就行了
@@ -1855,6 +1892,8 @@ int main(void)
 
 ## ADC模拟/数字转化器
 
+### ADC概念
+
 **ADC简介**
 
 - ADC（Analog-Digital Converter）模拟-数字转换器
@@ -1866,6 +1905,8 @@ int main(void)
 - 模拟看门狗自动监测输入电压范围
 
 > STM32F103C8T6 ADC资源：ADC1、ADC2，10个外部输入通道
+
+### ADC原理
 
 **ADC原理图：ADC0809芯片框图**
 
@@ -1887,6 +1928,8 @@ int main(void)
 - 结束转换
   - EOC为结束转换信号（End Of Convert）
 ![Alt text](assets/images/image-66.png)
+
+### STM32_ADC原理
 
 **ADC原理框图**
 
@@ -1961,8 +2004,8 @@ int main(void)
 | 通道16 |  温度传感器  |
 | 通道17 | 内部参考电压 |
 
-
 **四种转换模式**
+
 - 单次转换，非扫描模式
   - 单次，只转换一次，每次转换都需要触发信号
   - 非扫描，只对序列1转换，转换前需要将通道x放到序列1的位置
@@ -1981,18 +2024,18 @@ int main(void)
   - ![Alt text](assets/images/image-72.png)
 
 **规则通道外部触发**
+
 - 外部引脚/定时器的选择需要配合AFIO来完成
 ![Alt text](assets/images/image-73.png)
 
-
 **数据对齐方式**
+
 - 由于ADC是12bit,所以转换结果也是12bit
 - 左对齐，然后读取高8bit，可以读取到低精度的单字节数据。
 - ![Alt text](assets/images/image-74.png)
 
-
-
 **转换时间**
+
 - AD转换的步骤：采样，保持，量化，编码
   - 采样保持，
     - 用小容量电容来存储待测电压，然后测量电容上的电压
@@ -2000,10 +2043,9 @@ int main(void)
   - 量化编码，
     - 逐次逼近，逐位比较过程所花费的时间
 - STM32 ADC的总转换时间为：
-	- TCONV = 采样时间 + 12.5个ADC周期
+  - TCONV = 采样时间 + 12.5个ADC周期
 - 例如：当ADCCLK=14MHz，采样时间为1.5个ADC周期
-	- TCONV = 1.5 + 12.5 = 14个ADC周期 = 1μs
-
+  - TCONV = 1.5 + 12.5 = 14个ADC周期 = 1μs
 
 **校准**
 
@@ -2013,8 +2055,8 @@ int main(void)
 - 建议在每次上电后执行一次校准
 - 启动校准前， ADC必须处于关电状态超过至少两个ADC时钟周期
 
-
 **基本步骤**
+
 - 配置GPIO
   - 通过RCC寄存器开启GPIO外设时钟
 - 配置多路开关
@@ -2032,6 +2074,7 @@ int main(void)
   - ADC_Cmd
   - 校准ADC
 
+### ADC的标准库函数
 
 **标准库相关函数**
 
@@ -2042,7 +2085,6 @@ int main(void)
 // 实现对APB2的72Mhz时钟分频后输出到ADCCLK
 void RCC_ADCCLKConfig(uint32_t RCC_PCLK2);
 ```
-
 
 ```cpp
 // "stm32f10x_adc.h"
@@ -2116,6 +2158,7 @@ ITStatus ADC_GetITStatus(ADC_TypeDef* ADCx, uint16_t ADC_IT);
 void ADC_ClearITPendingBit(ADC_TypeDef* ADCx, uint16_t ADC_IT);
 ```
 
+### ADC案例
 
 **案例：软件触发，单次转换，非扫描模式，**
 
@@ -2156,4 +2199,1012 @@ void ADC_ClearITPendingBit(ADC_TypeDef* ADCx, uint16_t ADC_IT);
 @tab `AD.c`
 @[code cpp](./projects/stm32-makefile/13-ADC-规则组-连续转换-非扫描模式-软件触发/System/AD.c)
 
+:::
+
+## DMA
+
+### DMA简介
+
+- DMA（Direct Memory Access）直接存储器访问
+  - 存储器(运行内存SRAM、程序储存器FLASH、外设寄存器)
+- DMA可以提供外设（数据寄存器）和存储器（SRAM、FLASH）或者存储器和存储器之间的高速数据传输，无须CPU干预，节省了CPU的资源
+- 12个独立可配置的通道：
+  - DMA1（7个通道），
+  - DMA2（5个通道）
+- 每个通道都支持软件触发和特定的硬件触发
+  - 外设到存储器的数据转运一般使用硬件触发
+  - 存储器到存储器的数据转运一般使用软件触发
+
+> STM32F103C8T6 DMA资源：DMA1（7个通道），没有DMA2
+
+### DMA原理
+
+**存储器映像**
+
+| 类型  |  起始地址  |     存储器      |               用途               |
+| :---: | :--------: | :-------------: | :------------------------------: |
+|  ROM  | 0x08000000 | 程序存储器Flash |    存储C语言编译后的程序代码     |
+|  ROM  | 0x1FFFF000 |   系统存储器    |   存储BootLoader，用于串口下载   |
+|  ROM  | 0x1FFFF800 |    选项字节     | 存储一些独立于程序代码的配置参数 |
+|  RAM  | 0x20000000 |  运行内存SRAM   |     存储运行过程中的临时变量     |
+|  RAM  | 0x40000000 |   外设寄存器    |      存储各个外设的配置参数      |
+|  RAM  | 0xE0000000 | 内核外设寄存器  |    存储内核各个外设的配置参数    |
+
+**存储器映像框图**
+
+- 存储器地址范围：`0x0000 0000 ~ 0xffff ffff`,因为CPU是32位，寻址范围最大也是32位，最大可支持4GB内存的寻址。
+  - STM32存储器都是KB级别，寻址空间大部分不用，地址使用率不到百分之1。
+  - 灰色区域为Reserved区域，即保留区域
+- 六片存储区
+  - 1.别名区：程序会从`0x0000 0000`地址开始执行，但该地址实际上也没有使用，其会根据BOOT0和BOOT1的配置，把地址空间映射到Flash（程序）存储器执行用户程序，或映射到System（系统）存储器执行BootLoader程序，或映射到SRAM执行程序。
+  - 2.Flash区（0x0800 0000）,用于存储程序代码
+  - 3.系统存储区和选项字节（0x1fff f000）,存储了BootLoader程序，和一些配置参数
+  - 4.SRAM区（0x2000 0000）
+  - 5.外设寄存器区（0x4000 0000）,
+  - 6.内核外设寄存器区（0xE000 0000）
+- ![Alt text](assets/images/image-75.png)
+
+**DMA框图**
+
+- 总线矩阵的左侧是主动单元，拥有右侧存储器的访问权，右边是被动单元，只能被主动单元读写。
+- Flash,只读存储器，不能写入
+- SRAM,运行内存，可任意读写
+- 内核，主动单元，通过Dcode和系统总线访问右边的存储器，Dcode用于专门访问Flash
+- DMA,主动单元，通过DMA总线访问右侧存储器
+  - DMA仲裁器，DMA总线是分时复用的，产生冲突后，由仲裁器根据通道的优先级决定谁先用。
+    - 总线矩阵中也有仲裁器，当CPU和DMA要同时访问一个目标时，DMA会暂停CPU的访问，但会保证CPU得到一半的总线带宽。
+  - AHB从设备，DMA外设自身的配置寄存器，连接在总线矩阵的右侧，属于AHB总线的被动单元，CPU可以通过总线矩阵来配置该寄存器
+- DMA请求，来自外设的触发信号，如ADC转换完成，串口接收到数据
+![Alt text](assets/images/image-76.png)
+
+**DMA基本结构图**
+
+- 数据转运的两大站点
+  - 外设（寄存器）站点
+  - 存储器（Flash & SRAM）站点
+- 站点数据流向
+  - `SRAM | 外设 <==> SRAM`
+  - `SRAM | 外设 <=== Flash`
+  - > Flash 一般为只读存储器
+- 站点配置
+  - 起始地址：
+    - 可以给外设站点写存储器地址
+  - 数据宽度：
+    - 字节(1B) 半字(2B) 字(4B)，
+    - 也决定了地址自增多少
+  - 地址是否自增
+- 传输计数器
+  - 用来指定总共需要转运几次，是一个自减计数器
+  - 如果用来搬运数组，则填写数组长度
+  - 自减到0后便不在转运，同时站点配置寄存器中自增的地址也恢复成起始地址。
+- 自动重装器
+  - 用于实现当传输计数器自减到0后将`传输计数器`自动重装为初始值
+  - 决定了转运模式，不重装就是单次转运模式，重装就是循环转运模式。
+- M2M（Memory To Memory）
+  - 1：软件触发，直到传输计数器为0才停止
+  - 0：硬件触发，也就是连通ADC等外设的DMA请求信号。
+- 开关控制
+  - DMA_Cmd(Enable) 使能开启DMA
+- DMA工作流程
+  - 传输计数器>0
+  - 使能DMA
+  - 有触发信号，触发一次，转运一次，传输计数器自减一次。
+  - 直到传输计数器为0，且没有自动重装时，此时无论是否触发，都不会转运。
+  - 此时就必须DMA_Cmd(Disable)
+  - 关闭DMA才能重写传输计数器
+  - 然后再使能DMA
+  - 触发
+- ![Alt text](assets/images/image-77.png)
+
+**DMA请求映射**
+
+- 每个通道的硬件触发源不同。
+- ADC_DMACmd() 可以用来将ADC1的DMA请求联通至通道1的硬件触发源
+- TIM_DMACmd() TIM2_CH3 => 硬件请求1
+- 七个通道会进入仲裁器，根据优先级产生内部DMA1请求
+- 通道号越小，优先级越高，也可以在程序中配置。
+- ![Alt text](assets/images/image-78.png)
+
+**数据对齐方式**
+
+- 当PSIZE和MSIZE不相同时，DMA模块按照下表进行数据对齐。
+- 简单总结就是
+  - `多字节数据 => 单字节数据` 舍弃高位 补上00 保留低位。
+  - `单字节数据 => 多字节数据` 舍弃高位 补上00 保留低位。
+- ![Alt text](assets/images/image-79.png)
+
+**DMA数组转运**
+
+- 外设站点和存储器站点配置
+  - 起始地址：数组A和数组B首地址
+  - 数据宽度：单字节
+  - 地址自增：是
+- 转运方向：外设=>存储器
+- 传输计数器(转运次数)：数组A的长度
+- 自动重装器(触发模式)：单次触发
+- 触发方式(M2M)：软件触发(1)
+![Alt text](assets/images/image-80.png)
+
+### DMA案例
+
+**DMA数组转运编程实现**
+
+- 步骤
+  - RCC，开启DMA时钟
+  - DMA_Init，配置DMA
+    - 外设站点和存储器站点配置
+    - 转运方向
+    - 传输计数器
+    - 自动重装器
+    - 触发方式
+    - 优先级配置
+  - ADC_DMACmd，将ADC的中断请求联通值DMA的硬件触发
+  - DMA_ITCOnfig配置DMA中断（如果需要）
+  - DMA_Cmd，开启DMA
+  - 转运完成后重新启动
+    - 失能DMA
+    - 重写传输计数器
+    - 使能DMA
+
+:::code-tabs
+
+@tab `DMA1_Data_Transfer.c`
+@[code cpp](./projects/stm32-makefile/14-DMA-数据转运-拷贝数组数据/System/DMA1_Data_Transfer.c)
+
+@tab `DMA1_Data_Transfer.h`
+@[code cpp](./projects/stm32-makefile/14-DMA-数据转运-拷贝数组数据/System/DMA1_Data_Transfer.h)
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/14-DMA-数据转运-拷贝数组数据/User/main.cpp)
+:::
+
+**ADC扫描模式+DMA硬件触发**
+
+- ADC配置
+  - 规则通道
+  - 连续转换，扫描模式
+  - **配置将其`DMA请求`通向DMA**
+- DMA配置
+  - 外设站点配置
+    - 起始地址：ADC_DR数据寄存器地址
+    - 数据宽度：半字（2字节）
+    - 地址自增：否
+  - 存储器器站点配置
+    - 起始地址：自定义数组地址
+    - 数据宽度：半字（2字节）
+    - 地址自增：是
+  - 传输方向：外设站点 => 存储器站点
+  - 传输计数器(转运次数)：ADC转换的通道个数
+  - 自动重装器(触发模式)：
+    - 如果ADC配置为单次转换，则DMA自动重装器配置为不自动重装（单次触发）
+    - 如果ADC配置为连续转换，则DMA自动重装器配置为自动重装，
+      - 这样ADC进入下一轮转换时，DMA也进行下一轮的数据搬运。
+  - 触发方式
+    - 硬件触发
+- ![Alt text](assets/images/image-81.png)
+
+:::code-tabs
+
+@tab `AD_With_DMA.c`
+@[code cpp](./projects/stm32-makefile/15-DMA-AD单次转换-DMA硬件触发/System/AD_With_DMA.c)
+
+@tab `AD_With_DMA.h`
+@[code cpp](./projects/stm32-makefile/15-DMA-AD单次转换-DMA硬件触发/System/AD_With_DMA.h)
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/15-DMA-AD单次转换-DMA硬件触发/User/main.cpp)
+:::
+
+## USART串口通信
+
+### 通信
+
+- 通信目的：将一个设备的数据传送到另一个设备，扩展硬件系统
+  - 比如需要通过读写外部设备的寄存器来操作外部设备
+- 通信协议：通信的规则，通信双方按照规则进行数据收发
+
+**STM32支持的通信协议**
+
+- USART(串口)
+  - TX(TXD) Transmit Exchange 数据发送
+  - RX(RXD) Receive Exchange 数据接收
+- USART(串口)
+  - SCL(Serial Clock)时钟
+  - SDA(Serial Data)数据
+- SPI
+  - SCLK(Serial Clock),时钟
+  - MOSI(Master Output Slave Input) 主机输出，从机输入
+  - MISO(Master Input Slave Output) 主机输入，从机输出
+  - CS(Chip Select)片选，指定通信对象
+- CAN
+  - CAN_H
+  - CAN_L
+  - 两根线为差分信号
+- USB
+  - DP (D+)(Data Positive)
+  - DM (D-)(Data Minus)
+  - 两根线为差分信号
+- 全双工
+  - 通信双方能同时收发数据，
+  - 一般都有两根通信线路，一根收，一根发，互相不影响
+  - 如：USART,USB,SPI
+- 半双工
+  - 通信双方同时只能收或发数据
+  - 只有一根通信线路
+  - 如：I2C,CAN,USB
+- 单工
+  - 通信双方只能单向通信，如A->B
+- 时钟特性
+  - 同步：
+    - 有时钟线
+    - 在时钟信号的指导下采样读取数据
+  - 异步：
+    - 没有时钟
+    - 需要双方约定采样频率，添加帧头，帧尾，实现采样位置对齐。
+- 信号特性
+  - 单端信号，
+    - 信号电平是相对于GND的电压差
+    - 需要共地
+  - 差分信号
+    - 信号电平是依靠两根差分线的电压差来传输信号。
+    - 可以不需要地
+    - 差分信号抗干扰，传输速度和距离高
+- 设备特性
+  - 点对点：一对一
+  - 多设备：一对多，可以在总线上挂载多个设备
+
+| 名称  |         引脚         |  双工  | 时钟  | 电平  |  设备  |
+| :---: | :------------------: | :----: | :---: | :---: | :----: |
+| USART |        TX、RX        | 全双工 | 异步  | 单端  | 点对点 |
+|  I2C  |       SCL、SDA       | 半双工 | 同步  | 单端  | 多设备 |
+|  SPI  | SCLK、MOSI、MISO、CS | 全双工 | 同步  | 单端  | 多设备 |
+|  CAN  |     CAN_H、CAN_L     | 半双工 | 异步  | 差分  | 多设备 |
+|  USB  |        DP、DM        | 半双工 | 异步  | 差分  | 点对点 |
+
+### 串口通信简介
+
+- 串口是一种应用十分广泛的通讯接口，串口成本低、容易使用、通信线路简单，可实现两个设备的互相通信
+- 单片机的串口可以使单片机与单片机、单片机与电脑、单片机与各式各样的模块互相通信，极大地扩展了单片机的应用范围，增强了单片机系统的硬件实力
+- 在单片机领域，串口是较简单的通信接口，比I2C SPI简单。一般单片机都有串口硬件外设。
+- CH340 USB转TTL电平串口模块![Alt text](assets/images/image-82.png)
+
+**硬件电路**
+
+- 简单双向串口通信有两根通信线（发送端TX和接收端RX）
+  - 复杂串口通信还有时钟、硬件流控制引脚
+- TX与RX要交叉连接
+- 当只需单向的数据传输时，可以只接一根通信线
+- 当电平标准不一致时，需要加电平转换芯片
+- ![Alt text](assets/images/image-83.png)
+
+电平标准
+
+- 电平标准是数据1和数据0的表达方式，
+- 是传输线缆中人为规定的电压与数据的对应关系，
+- 串口常用的电平标准有如下三种：
+  - TTL电平：+3.3V或+5V表示1，0V表示0
+  - RS232电平：-3~-15V表示1，+3~+15V表示0（传输几十米）
+  - RS485电平：两线压差+2~+6V表示1，-2~-6V表示0（差分信号，可传输上千米）
+
+串口参数及时序
+
+- 波特率：串口通信的速率
+- 起始位：标志一个数据帧的开始，固定为低电平
+- 数据位：数据帧的有效载荷，1为高电平，0为低电平，低位先行
+- 校验位：用于数据验证，根据数据位计算得来
+- 停止位：用于数据帧间隔，固定为高电平
+- ![Alt text](assets/images/image-84.png)
+  - 空闲时为高电平，起始位为低电平，这么定义是为了产生一个下降沿，告诉对方即将发送数据
+  - 停止位为高电平，用来作为数据帧间隔，同时也是是为了恢复到空闲状态，这样在发送下一个字节时，就又要置低起始位。
+  - 奇偶校验
+    - 奇校验，算上校验位，保持1的个数为奇数
+    - 偶校验，算上校验位，保持1的个数为偶数
+
+**实测波形**
+
+![Alt text](assets/images/image-85.png)
+
+### USART外设
+
+- USART（Universal Synchronous/Asynchronous Receiver/Transmitter）通用同步/异步收发器
+  - 同步，
+    - 串口一般很少使用同步功能，
+    - STM32的同步也只是多了一个时钟输出引脚，不支持时钟输入，主要是为了兼容其他协议而设计
+  - 异步，
+    - 串口通信主要是异步通信
+    - UART,异步收发器
+- USART是STM32内部集成的硬件外设，可根据数据寄存器的一个字节数据自动生成数据帧时序，从TX引脚发送出去，也可自动接收RX引脚的数据帧时序，拼接为一个字节数据，存放在数据寄存器里
+- 自带波特率发生器，最高达4.5Mbits/s
+  - 实际上就是分频器，对72M主频分频后的时钟就是通信波特率
+- 可配置数据位长度（8/9）
+  - 第9位为停止校验位
+- 可配置停止位长度（0.5/1/1.5/2）
+  - 决定了帧的间隔，常用1
+- 可选校验位（无校验/奇校验/偶校验）
+- 支持
+  - 同步模式，就是多一个时钟引脚
+  - 硬件流控制，多一个引脚，在接收方无法及时处理收到的数据时反馈给发送方实现暂停发送数据防止数据丢失。
+  - DMA，如果有大量数据收发，可以使用DMA转运。
+  - 智能卡，
+  - IrDA，红外发射器和接收器
+  - LIN，局域网通信
+
+> STM32F103C8T6 USART资源： USART1（APB2）、 USART2(APB1)、 USART3(APB1)
+
+**原理框图**
+
+- DR数据寄存器
+  - 实际上是一个地址，两个寄存器。
+  - 写入DR操作是发送数据，实际操作的是TDR(Transmit DR)寄存器
+  - 读取DR操作是接收数据，实际操作的是RDR(Receive DR)寄存器
+- 发送数据
+  - 写入TDR后会检查移位寄存器是否正在移位，是则等待，否则立即把数据转运到发送移位寄存器，然后置标志位TXE（TX Empty）为1，表示TDR发送数据寄存器空，用于程序判断是否可以继续写入。
+  - 发送移位寄存器会在发送器控制的驱动下将数据右移发送到TX引脚。
+  - 移位完成后立即将TDR的数据转运，保证数据帧之间没有空闲。
+- 接收数据
+  - 数据从RX引脚通向接收移位寄存器。
+  - 在接收控制的驱动下，读取数据放入高位并右移，移动八次接收一个字节。
+  - 移位完成后，整个字节数据整体移动到RDR寄存器，
+  - 并置标志位RXNE(RX Not Empty)表示接收寄存器非空，用于检测是否有数据可以读取
+- 发送寄存器控制：控制发送寄存器工作
+- 接收寄存器控制：控制接收寄存器工作
+- 硬件数据流控
+  - 用于避免：发送端发送的太快，接收设备来不及处理，出现丢弃或覆盖数据的现象
+  - nRTS(Request To Send)请求发送数据，输入交
+  - nCTS(Clear To Send)清除发送，输入脚，接收对方的请求发送信号。
+  - n表示低电平有效。
+  - 两线交叉连接。
+- SCLK
+  - 产生同步的时钟信号，配合发送寄存器工作。
+  - 发送寄存器移位一次，同步时钟跳变一个周期。
+  - 仅支持输入时钟信号
+  - 用于兼容其他协议，如SPI
+  - 用于自适应波特率，通过测量时钟来计算波特率
+- 唤醒单元
+  - 用于实现1对多通信
+  - USART地址寄存器可以配置设备的id
+- 中断控制
+  - 用来实现将状态寄存器的信号通向NVIC
+- 波特率发生器
+  - 分频系数支持小数点后四位，用于实现精确的分频
+  - 除以16后是其实际采样频率
+![Alt text](assets/images/image-86.png)
+
+**简化框图**
+
+- 波特率发生器(实际是分频器)用于产生约定速率，时钟来源为PCLK2/1
+- 发送控制器和接收控制器，用于控制发送移位和接收移位
+- 发送数据寄存器TDR和发送移位寄存器相互配合，将数据移位发出。
+![Alt text](assets/images/image-87.png)
+
+**数据帧格式**
+
+- 9位字长（可以包含1位校验位）
+  - 1个起始位
+  - 8位数据
+  - 1位校验位
+  - 1位停止位
+  - 共11位。
+  - 时钟是同步模式时钟，上升沿位置在数据位中间。
+  - LBCL位用于控制最后一位校验位有没有时钟上升沿。
+  - 空闲帧和断开帧是局域网通信用的。
+- 8位字长（可以包含1位校验位）
+- ![Alt text](assets/images/image-88.png)
+
+**停止位长度**
+
+- 可选时长：0.5、1、1.5、2
+![Alt text](assets/images/image-89.png)
+
+**读取串口输入的策略**
+
+- 输入电路比输入电路复杂，输出电路只需要翻转高低电平，
+- 输入电路需要保证输入采样频率和波特率一致，要保证输入采样的位置正好在每一位的正中间，这样才最可靠，还要能判断是否有噪声。
+- 起始位检测
+  - 采样到1，高电平，空闲状态
+  - 采样到0，产生下降沿，
+    - 可能噪声，可能是起始位，
+    - 需要对之后的3、5、7进行一批采样，对8、9、10次进行一批。
+    - 噪声：每三位有两个1
+    - 起始位：
+      - 这两批采样应当全是0，
+      - 或者至少每3位有2个0（有轻微噪声），会给状态寄存器噪声标志位NE(Noise Error)置1。
+  - ![Alt text](assets/images/image-91.png)
+- 采样位对齐：
+  - 检测到起始位后，之后的数据位都在8，9，10次进行采样，保证采样位置在位的正中。
+  - 全为0则检测到0 全为1则检测到1
+  - 2个0 1个1 ，则检测到0，噪声标志位置1
+  - 2个1 1个0 ，则检测到1，噪声标志位置1
+  - ![Alt text](assets/images/image-90.png)
+
+**波特率发生器**
+
+- 发送器和接收器的波特率由波特率寄存器BRR里的DIV确定
+- 计算公式：波特率 = fPCLK2或1 / (16 * DIV)
+  - 16是因为内部所需的采样频率是波特率的16倍
+  - 即输出频率=波特率*16=时钟频率/DIV分频系数
+  - 所以：DIV=时钟频率/(波特率*16)
+  - 例：
+    - 波特率9600，时钟频率72M
+    - DIV= 72M/(9600*16) = 468.75 = (1 1101 0100 . 1100)_2
+- ![Alt text](assets/images/image-92.png)
+
+### USART标准库函数
+
+```cpp
+// 略
+void USART_DeInit(USART_TypeDef* USARTx);
+void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct);
+void USART_StructInit(USART_InitTypeDef* USART_InitStruct);
+
+// 配置同步时钟是否输出，相位、极性等
+void USART_ClockInit(USART_TypeDef* USARTx, USART_ClockInitTypeDef* USART_ClockInitStruct);
+void USART_ClockStructInit(USART_ClockInitTypeDef* USART_ClockInitStruct);
+
+// 略
+void USART_Cmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_ITConfig(USART_TypeDef* USARTx, uint16_t USART_IT, FunctionalState NewState);
+
+// 开启USART=>DMA触发通道
+void USART_DMACmd(USART_TypeDef* USARTx, uint16_t USART_DMAReq, FunctionalState NewState);
+
+// 设置USART地址,用来实现一对多通信的寻址。
+void USART_SetAddress(USART_TypeDef* USARTx, uint8_t USART_Address);
+
+// 唤醒
+void USART_WakeUpConfig(USART_TypeDef* USARTx, uint16_t USART_WakeUp);
+void USART_ReceiverWakeUpCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+
+// LIN
+void USART_LINBreakDetectLengthConfig(USART_TypeDef* USARTx, uint16_t USART_LINBreakDetectLength);
+void USART_LINCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+
+// 发送数据，写DR寄存器
+void USART_SendData(USART_TypeDef* USARTx, uint16_t Data);
+
+// 接收数据，读DR寄存器
+uint16_t USART_ReceiveData(USART_TypeDef* USARTx);
+
+// 略
+void USART_SendBreak(USART_TypeDef* USARTx);
+void USART_SetGuardTime(USART_TypeDef* USARTx, uint8_t USART_GuardTime);
+void USART_SetPrescaler(USART_TypeDef* USARTx, uint8_t USART_Prescaler);
+void USART_SmartCardCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_SmartCardNACKCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_HalfDuplexCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_OverSampling8Cmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_OneBitMethodCmd(USART_TypeDef* USARTx, FunctionalState NewState);
+void USART_IrDAConfig(USART_TypeDef* USARTx, uint16_t USART_IrDAMode);
+void USART_IrDACmd(USART_TypeDef* USARTx, FunctionalState NewState);
+
+// 标志位读取、设置相关函数
+FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG);
+void USART_ClearFlag(USART_TypeDef* USARTx, uint16_t USART_FLAG);
+ITStatus USART_GetITStatus(USART_TypeDef* USARTx, uint16_t USART_IT);
+void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
+```
+
+### 案例：串口收发数据；实现printf
+
+> - arm-none-eabi-gcc 默认情况下不会启用 printf 中的浮点支持。
+> - 要启用，需添加-u _printf_float到 LDFLAGS
+> - 即：`LDFLAGS += -u _printf_float`
+
+**步骤**
+
+- 开启时钟，USART、GPIO
+- 配置GPIO,RX数字输入，TX复用推挽输出
+- 配置USART
+- 如果需要接收数据，可能要配置DMA或中断
+
+:::code-tabs
+
+@tab `Serial.h`
+@[code cpp](./projects/stm32-makefile/16-USART串口发送测试/System/Serial.h)
+@tab `Serial.c`
+@[code cpp](./projects/stm32-makefile/16-USART串口发送测试/System/Serial.c)
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/16-USART串口发送测试/User/main.cpp)
+
+:::
+
+![Alt text](assets/images/image-93.png)
+
+### 案例：串口中断接收处理数据
+
+:::code-tabs
+
+@tab `Serial.h`
+@[code cpp](./projects/stm32-makefile/17-USART串口中断接收测试/System/Serial.h)
+@tab `Serial.c`
+@[code cpp](./projects/stm32-makefile/17-USART串口中断接收测试/System/Serial.c)
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/17-USART串口中断接收测试/User/main.cpp)
+
+:::
+
+### 案例：实现简易通信协议
+
+![Alt text](assets/images/image-94.png)
+
+:::code-tabs
+
+@tab `SimpleProtocol.h`
+@[code cpp](./projects/stm32-makefile/18-自定义协议/System/SimpleProtocol.h)
+@tab `SimpleProtocol.c`
+@[code cpp](./projects/stm32-makefile/18-自定义协议/System/SimpleProtocol.c)
+@tab `main.h`
+@[code cpp](./projects/stm32-makefile/18-自定义协议/User/main.cpp)
+
+:::
+
+## I2C通信
+
+### 简介
+
+- I²C（Inter-Integrated Circuit）集成电路之间的总线，
+- 是I²C Bus简称,
+- 中文:集成电路总线
+- 两根通信线：
+  - SCL（Serial Clock）串行时钟
+  - SDA（Serial Data）串行数据
+- 同步，半双工
+- 带数据应答
+- 支持总线挂载多设备
+  - 一主多从
+  - 多主多从
+- ![Alt text](assets/images/image-95.png)
+  - MPU6050
+  - 0.96 OLED
+  - AT24C02
+
+### 硬件规定
+
+- 所有I2C设备，SCL连在一起，SDA连在一起
+- 设备的SCL和SDA均要配置成**开漏输出模式**
+- SCL和SDA各添加一个上拉电阻，阻值一般为4.7KΩ左右
+- ![Alt text](assets/images/image-96.png)
+
+### 时序规定
+
+**通信的开始**
+
+- SCL高电平期间，SDA从高电平切换到低电平
+- ![Alt text](assets/images/image-97.png)
+
+**通信的结束**
+
+- SCL高电平期间，SDA从低电平切换到高电平
+- ![Alt text](assets/images/image-102.png)
+
+**字节数据的发送**
+
+- SCL低电平期间，
+- 主机将数据位放到SDA线上（高位先行），然后释放SCL，
+- 从机将在SCL高电平期间读取数据位，
+  - 所以SCL高电平期间SDA不允许有数据变化，
+- 依次循环上述过程8次，即可发送一个字节
+- ![Alt text](assets/images/image-98.png)
+
+**字节数据的接收**
+
+- SCL低电平期间，
+- 从机将数据位放到SDA线上（高位先行），然后释放SCL，
+- 主机将在SCL高电平期间读取数据位，
+  - 所以SCL高电平期间SDA不允许有数据变化，
+- 依次循环上述过程8次，
+- 即可接收一个字节（主机在接收之前，需要释放SDA）
+- ![Alt text](assets/images/image-99.png)
+
+**应答信号的发送**
+
+- 主机在接收完一个字节之后，
+- 在下一个时钟发送一位数据，
+- 数据0表示应答，数据1表示非应答
+- ![Alt text](assets/images/image-100.png)
+
+**应答信号的接收**
+
+- 主机在发送完一个字节之后，
+- 在下一个时钟接收一位数据，
+- 判断从机是否应答，数据0表示应答，数据1表示非应答（主机在接收之前，需要释放SDA）
+- ![Alt text](assets/images/image-101.png)
+
+**总结**
+
+- ![Alt text](assets/images/image-107.png)
+
+### I2C通信时序
+
+**地址寄存器**
+
+- 从设备中存在一个地址寄存器，
+- 该寄存器实际是一个指针，指向另一个寄存器
+- 初始值为0，
+- 读写从设备的数据，就是在读取指针(地址寄存器)指向的寄存器的数据
+- 每次读写从设备后，该寄存器的值都会自增。
+- 主设备读写从设备寄存器时，会发送要操作的寄存器地址，这个地址就会写入指针（地址寄存器）中
+- > 所以在进行连续多字节读/写时，只需要指定一次地址
+
+**单字节/多字节写入(指定地址)**
+
+- > 写入单字节可以看作是写入多字节的特殊情况
+- 主机发送开始通信信号
+- 主机发送从机地址和写标志位
+  - 7bit地址右移1位，或上1bit的写标志位0，共8bit数据
+- 从机发送ACK信号，表示成功接收
+- 主机发送要写入寄存器的地址
+- 从机发送ACK信号，表示成功接收
+- 写入数据(单字节或多字节)
+  - 主机发送要写入的8bit数据
+  - 从机发送ACK信号，表示成功接收
+  - 主机发送要写入的8bit数据
+  - 从机发送ACK信号，表示成功接收
+  - ......
+  - 主机发送要写入的8bit数据
+  - 从机发送ACK信号，表示成功接收
+- 主机发送结束通信信号
+- ![Alt text](assets/images/image-104.png)
+- ![Alt text](assets/images/image490.jpeg)
+
+**单字节/多字节读取（不指定地址）**
+
+- ![Alt text](assets/images/image-108.png)
+- ![Alt text](assets/images/image491.jpeg)
+
+**单字节/多字节读取（指定地址）**
+
+- > 读取单字节可以看作是读取多字节的特殊情况
+- 主机发送开始信号
+- 主机发送从机地址和写标志位
+  - 7bit地址右移1位，或上1bit的写标志位0，共8bit数据
+- 从机发送ACK信号，表示成功接收
+- 主机发送寄存器地址
+- 从机发送ACK信号，表示成功接收
+- 主机再次发送开始信号
+- 主机发送从机地址和读标志位
+  - 7bit地址右移1位，或上1bit的读标志位1，共8bit数据
+- 从机发送ACK信号，表示成功接收
+- 读取数据(单字节或多字节)
+  - 从机发送8bit数据，主机读取
+  - 主机发送ACK信号，表示成功接收
+  - 从机发送8bit数据，主机读取
+  - 主机发送ACK信号，表示成功接收
+  - ......
+  - 从机发送8bit数据，主机读取
+  - 主机发送NACK信号，表示读取完成（重要！！！）
+- 主机发送结束信号
+- ![Alt text](assets/images/image-103.png)
+- ![Alt text](assets/images/image492.jpeg)
+
+**总结**
+
+- ![Alt text](assets/images/image-106.png)
+
+### I2C通信软件实现
+
+:::code-tabs
+@tab `Soft_I2C.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/Soft_I2C.h)
+@tab `Soft_I2C.c`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/Soft_I2C.c)
+:::
+
+## MPU6050
+
+### 简介
+
+- MPU6050是一个6轴姿态传感器，
+  - 可以测量芯片自身X、Y、Z轴的**加速度**、**角速度**参数，
+  - 通过数据融合，可进一步得到**姿态角**。
+- 常应用于平衡车、飞行器等需要检测自身**姿态**的场景
+- 3轴加速度计（Accelerometer）：测量X、Y、Z轴的加速度
+- 3轴陀螺仪传感器（Gyroscope）：测量X、Y、Z轴的角速度
+- 9轴：加速度x3、角速度x3、磁场强度x3
+- 10轴：加速度x3、角速度x3、磁场强度x3(方向)、气压计x1(高度)
+- ![Alt text](assets/images/image-105.png)
+
+### 可配置参数
+
+- 16位ADC采集传感器的模拟信号，量化范围：-32768~32767
+- 加速度计满量程选择：±2、±4、±8、±16（g）
+- 陀螺仪满量程选择： ±250、±500、±1000、±2000（°/sec）
+  - 量程越小，精度越高
+- 可配置的数字低通滤波器
+- 可配置的时钟源
+- 可配置的采样分频
+- I2C从机地址：
+  - 可通过AD0引脚配置地址的最后一位
+  - `0x68 => 0110 1000（AD0=0）`
+  - `0x69 => 0110 1001（AD0=1）`
+
+### 芯片框图
+
+- ![Alt text](assets/images/image-109.png)
+- 加速度计x3,角速度计x3，温度传感器x1
+  - 输出的模拟信号，
+  - 通向各自的ADC（16位）进行模数转换
+  - 转换完成后放入各自的传感器数据寄存器中。
+  - 使用I2C协议读取寄存器，即可得到各自的值。
+- 自测单元
+  - 启动自测后，
+  - 内部会模拟外力施加在传感器上，
+  - 这将导致传感器输出一个较大值的模拟信号
+  - 自测响应：使能自测前寄存器值-使能自测后寄存器值
+  - 自测响应在数据手册给出的范围中，说明芯片正常。
+- 电荷泵
+  - 升压电路
+  - 用于给角速度传感器提供高压支持
+  - CPOUT需外接电容
+- 中断状态寄存器
+  - 可以控制芯片内部的某些事件输出到INT中断引脚
+- FIFO
+  - 先入先出寄存器
+  - 可对数据流缓存
+- 配置寄存器
+  - 配置芯片内部电路
+- 传感器寄存器
+  - 各个传感器的数据寄存器
+- 工厂校准
+  - 用来实现在出厂前对传感器进行校准
+- 数字运动处理器（DMP）
+  - 芯片内部自带姿态解算硬件算法
+  - 需配合官方的DMP库
+- FSYNC
+  - 帧同步
+- 通信部分
+  - I2C从机和SPI串行接口
+    - 用来实现对I2C和SPI通信的支持
+  - I2C主机串行接口
+    - 用来实现对I2C从机设备的支持
+    - 可以外挂磁力传感器到6脚和7脚
+  - 串行接口选择器（Serial Interface Bypass Mux）
+    - 一个开关
+    - 可以实现将7、6脚并联到23、24脚上
+- Bias&LDO
+  - 供电部分
+
+### 芯片电器特性
+
+- I2C时钟最大频率400K
+- 供电电压[2.375,3.46]
+
+### 时钟源的选择
+
+- 允许的内部时钟
+  - 一个内部弛张振荡器 (Relaxation oscillator)
+  - XYZ陀螺仪内部的MEMS振荡器时钟(随温度精度变化±1%)
+- 允许的外部时钟
+  - 32.768Khz方波
+  - 19.2Mhz方波
+
+### 主要寄存器
+
+- 配置寄存器
+  - SMPLRT_DIV 采样频率分频器
+  - CONFIG 配置寄存器
+  - GYRO_CONFIG 陀螺仪配置寄存器
+  - ACCEL_CONFIG 加速度计配置寄存器
+  - ![Alt text](assets/images/image-110.png)
+- 数据寄存器
+  - ACCEL加速度计
+  - TEMP温度计
+  - GYRO陀螺仪
+  - _L低8bit
+  - _H高8bit
+  - ![Alt text](assets/images/image-111.png)
+- 其他
+  - PWR_MGMT_1电源管理配置寄存器1
+  - PWR_MGMT_2电源管理配置寄存器2
+  - WHO_AM_I器件ID(最后一位始终0)
+  - ![Alt text](assets/images/image-112.png)
+
+### 主要寄存器详细说明
+
+> 所有寄存器的默认值为0x00，除了：
+>
+> - 0x75  WHO_AM_I 默认值：0x68 (芯片id)
+> - 0x68  PWR_MGMT_1 默认值：0x40 (低功耗模式)
+
+**SMPLRT_DIV采样频率分频器**
+
+- ![Alt text](assets/images/image-113.png)
+- 采样频率 = 内部时钟频率/(1+SMPLRT_DIV)
+- 数据手册推荐将内部陀螺仪时钟作为内部时钟
+- 不使用低通滤波器时，陀螺仪时钟为8k,使用后为1k
+
+---
+
+**CONFIG配置寄存器**
+
+- ![Alt text](assets/images/image-114.png)
+- EXT_SYNC_SET[2:0] 外部同步设置
+  - 略
+- DLPF_CFG[2:0] 低通滤波器配置
+  - 可以让输出数据更平滑
+  - 配置为0时，表示不使用滤波器，陀螺仪时钟为8K,否则为1k
+  - 配置为1时，使用滤波器，对于加速度计延迟2ms采样，对于陀螺仪计延迟1.9ms采样
+  - ......
+  - ![Alt text](assets/images/image-115.png)
+
+---
+
+**GYRO_CONFIG陀螺仪配置寄存器**
+
+- ![Alt text](assets/images/image-116.png)
+- XG_ST、YG_ST、ZG_ST
+  - X、Y、Z轴的自测使能位
+  - 自测响应=自测使能开启时传感器输出-自测使能关闭时传感器输出
+  - 自测响应范围：
+  - ![Alt text](assets/images/image-117.png)
+- FS_SEL[1:0] 满量程选择位
+  - ![Alt text](assets/images/image-119.png)
+
+---
+
+**ACCEL_CONFIG 加速度计配置寄存器**
+
+- ![Alt text](assets/images/image-120.png)
+  - XA_ST YA_ST ZA_ST，自测使能
+    - 略，同上。
+    - ![Alt text](assets/images/image-122.png)
+  - AFS_SEL[1:0] 满量程选择位
+  - ![Alt text](assets/images/image-118.png)
+
+---
+
+**ACCEL加速度传感器数据寄存器x3**
+
+- ![Alt text](assets/images/image-121.png)
+- ACCEL_XOUT、ACCEL_YOUT、ACCEL_ZOUT
+  - 每个数据为16bit补码形式（16-bit 2’s complement value）
+
+---
+
+**TEMP加速度传感器数据寄存器x1**
+
+- ![Alt text](assets/images/image-123.png)
+- 温度值（℃）的计算
+  - ![Alt text](assets/images/image-124.png)
+- 类型
+  - 16bit有符号数
+  - ![Alt text](assets/images/image-125.png)
+
+---
+
+**GYRO陀螺仪传感器数据寄存器x3**
+
+- ![Alt text](assets/images/image-126.png)
+- 略
+
+---
+
+**PWR_MGMT_1 电源管理配置寄存器1**
+
+- ![Alt text](assets/images/image-127.png)
+- DEVICE_RESET 设备复位位
+  - 写1复位所有寄存器到默认值
+- SLEEP 睡眠模式
+  - 写1芯片睡眠，进入低功耗模式
+- CYCLE 循环模式
+  - 设备进入低功耗模式，过一段时间启动一次，启动频率由下一个寄存器的最高两位决定
+- TEMP_DIS 温度传感器失能
+  - 写1关闭温度传感器
+- CLKSEL 时钟来源选择
+  - 可选值：
+  - ![Alt text](assets/images/image-128.png)
+  - 一般选择内部8M时钟或陀螺仪时钟。
+  - 数据手册强烈建议选择陀螺仪时钟或外部时钟来提高稳定性。
+
+---
+**PWR_MGMT_2 电源管理配置寄存器2**
+
+- ![Alt text](assets/images/image-129.png)
+- LP_WAKE_CTRL
+  - 用来配置循环模式的启动频率
+  - 可选值：
+  - ![Alt text](assets/images/image-130.png)
+  - 例：
+    - 设置PWR_MGMT_1.SLEEP=0(关闭睡眠模式)
+    - 设置PWR_MGMT_1.CYCLE=1(开启循环模式)
+    - 设置PWR_MGMT_2.LP_WAKE_CTRL=1(配置启动频率为5hz)
+- STBY_XA、STBY_YA、STBY_ZA、STBY_XG、STBY_YG、STBY_ZG
+  - 6个轴的待机控制位
+  - 如果不需要某些轴的数据可以写1实现待机省电。
+
+**WHO_AM_I器件ID**(最后一位始终0)
+
+- ![Alt text](assets/images/image-131.png)
+- 用来验证器件的id
+- 存储的是芯片7bit地址的高6位。
+- 其实际I2C地址取决于AP0引脚
+- 默认值为0x68
+
+### 基于软件I2C实现MPU6050驱动
+
+:::code-tabs
+
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/User/main.cpp)
+
+@tab `MPU6050.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/MPU6050.h)
+
+@tab `MPU6050.c`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/MPU6050.c)
+
+@tab `Soft_I2C.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/Soft_I2C.h)
+
+@tab `OLED_Printf.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/Driver/OLED_Printf.h)
+
+@tab `OLED_Printf.c`
+@[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/Driver/OLED_Printf.c)
+
+:::
+
+## I2C通信硬件实现
+
+### 简介
+
+- STM32内部集成了硬件I2C收发电路，
+  - 硬件自动生成时钟、
+  - 起始终止条件生成、
+  - 应答位收发、
+  - 数据收发等
+- 支持多主机模型
+  - 一主多从模型
+  - 多主机模型
+    - 固定多主机模型
+    - 可变多主机模型（stm32）
+- 支持7位/10位地址模式
+  - 7bit地址：起始 + 7bit地址+1bit读写标志
+  - 10bit地址：起始 + 5bit标志位(11110) + 10bit地址 + 1bit读写标志
+- 支持不同的通讯速度
+  - 标准速度(高达100 kHz)
+  - 快速(高达400 kHz)
+- 支持DMA
+  - 在使用I2C读写多字节数据时可使用DMA提高效率
+- 兼容SMBus协议
+
+> STM32F103C8T6 硬件I2C资源：I2C1、I2C2
+
+### 功能框图
+
+![Alt text](assets/images/image-132.png)
+
+### 功能简图
+
+![Alt text](assets/images/image-133.png)
+
+### 收发时序
+
+![Alt text](assets/images/image-134.png)
+![Alt text](assets/images/image-135.png)
+
+### 案例代码
+
+:::code-tabs
+@tab `Hard_I2C.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
+
+@tab `Hard_I2C.c`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.c)
+:::
+
+### 基于硬件I2C实现MPU6050驱动
+
+:::code-tabs
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/User/main.cpp)
+
+@tab `MPU6050.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/MPU6050.h)
+
+@tab `MPU6050.c`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/MPU6050.c)
+
+@tab `Hard_I2C.h`
+@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
 :::

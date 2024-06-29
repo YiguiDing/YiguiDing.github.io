@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "oled_printf.h": "c",
+        "oled.h": "c",
+        "oled_font.h": "c",
+        "stm32f10x.h": "c",
+        "math.h": "c",
+        "stdio.h": "c",
+        "mpu6050.h": "c"
+    }
+}
