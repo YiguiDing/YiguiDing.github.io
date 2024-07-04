@@ -48,7 +48,7 @@ star: true
       - [案例：利用外部时钟源实现`setInterval(callback,times)`](#案例利用外部时钟源实现setintervalcallbacktimes)
     - [案例：LED呼吸灯](#案例led呼吸灯)
     - [案例：舵机驱动](#案例舵机驱动)
-      - [直流电机与驱动电路](#直流电机与驱动电路)
+        - [直流电机与驱动电路](#直流电机与驱动电路)
     - [案例：定时器输出捕获——测量方波](#案例定时器输出捕获测量方波)
     - [编码器接口](#编码器接口)
     - [编码器测位置、测速案例](#编码器测位置测速案例)
@@ -70,14 +70,20 @@ star: true
     - [案例：串口收发数据；实现printf](#案例串口收发数据实现printf)
     - [案例：串口中断接收处理数据](#案例串口中断接收处理数据)
     - [案例：实现简易通信协议](#案例实现简易通信协议)
-  - [I2C通信](#i2c通信)
+  - [I2C通信软件实现](#i2c通信软件实现)
     - [简介](#简介)
     - [硬件规定](#硬件规定)
     - [时序规定](#时序规定)
     - [I2C通信时序](#i2c通信时序)
-    - [I2C通信软件实现](#i2c通信软件实现)
-  - [MPU6050](#mpu6050)
+    - [I2C通信软件实现](#i2c通信软件实现-1)
+  - [I2C通信硬件实现](#i2c通信硬件实现)
     - [简介](#简介-1)
+    - [功能框图](#功能框图)
+    - [功能简图](#功能简图)
+    - [收发时序](#收发时序)
+    - [案例代码](#案例代码)
+  - [MPU6050](#mpu6050)
+    - [简介](#简介-2)
     - [可配置参数](#可配置参数)
     - [芯片框图](#芯片框图)
     - [芯片电器特性](#芯片电器特性)
@@ -85,13 +91,35 @@ star: true
     - [主要寄存器](#主要寄存器)
     - [主要寄存器详细说明](#主要寄存器详细说明)
     - [基于软件I2C实现MPU6050驱动](#基于软件i2c实现mpu6050驱动)
-  - [I2C通信硬件实现](#i2c通信硬件实现)
-    - [简介](#简介-2)
-    - [功能框图](#功能框图)
-    - [功能简图](#功能简图)
-    - [收发时序](#收发时序)
-    - [封装](#封装)
     - [基于硬件I2C实现MPU6050驱动](#基于硬件i2c实现mpu6050驱动)
+  - [SPI通信软件实现](#spi通信软件实现)
+    - [简介](#简介-3)
+    - [硬件电路](#硬件电路)
+    - [移位发送过程](#移位发送过程)
+    - [SPI基本通信时序](#spi基本通信时序)
+      - [起始条件](#起始条件)
+      - [终止条件](#终止条件)
+      - [交换字节(模式0)](#交换字节模式0)
+      - [交换字节(模式1)](#交换字节模式1)
+      - [交换字节(模式2)](#交换字节模式2)
+      - [交换字节(模式3)](#交换字节模式3)
+    - [SPI通信指令](#spi通信指令)
+      - [发送指令](#发送指令)
+      - [指定地址写](#指定地址写)
+      - [指定地址写](#指定地址写-1)
+    - [SPI软件模拟实现](#spi软件模拟实现)
+  - [SPI通信硬件实现](#spi通信硬件实现)
+    - [简介](#简介-4)
+    - [原理框图](#原理框图)
+    - [原理简图](#原理简图)
+    - [SPI硬件外设实现](#spi硬件外设实现)
+  - [W25Q64存储器](#w25q64存储器)
+    - [芯片引脚功能定义](#芯片引脚功能定义)
+    - [芯片内部框图](#芯片内部框图)
+    - [注意事项](#注意事项)
+    - [指令集](#指令集)
+    - [基于软件SPI实现](#基于软件spi实现)
+    - [基于硬件SPI实现](#基于硬件spi实现)
 
 ## F103C8T6简介
 
@@ -2738,7 +2766,7 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 
 :::
 
-## I2C通信
+## I2C通信软件实现
 
 ### 简介
 
@@ -2888,6 +2916,55 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 @[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/Soft_I2C.h)
 @tab `Soft_I2C.c`
 @[code cpp](./projects/stm32-makefile/19-I2C协议软件实现-MPU6050/System/Soft_I2C.c)
+:::
+
+## I2C通信硬件实现
+
+### 简介
+
+- STM32内部集成了硬件I2C收发电路，
+  - 硬件自动生成时钟、
+  - 起始终止条件生成、
+  - 应答位收发、
+  - 数据收发等
+- 支持多主机模型
+  - 一主多从模型
+  - 多主机模型
+    - 固定多主机模型
+    - 可变多主机模型（stm32）
+- 支持7位/10位地址模式
+  - 7bit地址：起始 + 7bit地址+1bit读写标志
+  - 10bit地址：起始 + 5bit标志位(11110) + 10bit地址 + 1bit读写标志
+- 支持不同的通讯速度
+  - 标准速度(高达100 kHz)
+  - 快速(高达400 kHz)
+- 支持DMA
+  - 在使用I2C读写多字节数据时可使用DMA提高效率
+- 兼容SMBus协议
+
+> STM32F103C8T6 硬件I2C资源：I2C1、I2C2
+
+### 功能框图
+
+![Alt text](assets/images/image-132.png)
+
+### 功能简图
+
+![Alt text](assets/images/image-133.png)
+
+### 收发时序
+
+![Alt text](assets/images/image-134.png)
+![Alt text](assets/images/image-135.png)
+
+### 案例代码
+
+:::code-tabs
+@tab `Hard_I2C.h`
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
+
+@tab `Hard_I2C.c`
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/System/Hard_I2C.c)
 :::
 
 ## MPU6050
@@ -3144,67 +3221,279 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 
 :::
 
-## I2C通信硬件实现
-
-### 简介
-
-- STM32内部集成了硬件I2C收发电路，
-  - 硬件自动生成时钟、
-  - 起始终止条件生成、
-  - 应答位收发、
-  - 数据收发等
-- 支持多主机模型
-  - 一主多从模型
-  - 多主机模型
-    - 固定多主机模型
-    - 可变多主机模型（stm32）
-- 支持7位/10位地址模式
-  - 7bit地址：起始 + 7bit地址+1bit读写标志
-  - 10bit地址：起始 + 5bit标志位(11110) + 10bit地址 + 1bit读写标志
-- 支持不同的通讯速度
-  - 标准速度(高达100 kHz)
-  - 快速(高达400 kHz)
-- 支持DMA
-  - 在使用I2C读写多字节数据时可使用DMA提高效率
-- 兼容SMBus协议
-
-> STM32F103C8T6 硬件I2C资源：I2C1、I2C2
-
-### 功能框图
-
-![Alt text](assets/images/image-132.png)
-
-### 功能简图
-
-![Alt text](assets/images/image-133.png)
-
-### 收发时序
-
-![Alt text](assets/images/image-134.png)
-![Alt text](assets/images/image-135.png)
-
-### 案例代码
-
-:::code-tabs
-@tab `Hard_I2C.h`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
-
-@tab `Hard_I2C.c`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.c)
-:::
-
 ### 基于硬件I2C实现MPU6050驱动
 
 :::code-tabs
 @tab `main.cpp`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/User/main.cpp)
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/User/main.cpp)
 
 @tab `MPU6050.h`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/MPU6050.h)
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/System/MPU6050.h)
 
 @tab `MPU6050.c`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/MPU6050.c)
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/System/MPU6050.c)
 
 @tab `Hard_I2C.h`
-@[code cpp](./projects/stm32-makefile/19-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
+@[code cpp](./projects/stm32-makefile/20-I2C协议硬件实现-MPU6050/System/Hard_I2C.h)
+:::
+
+## SPI通信软件实现
+
+### 简介
+
+- SPI（Serial Peripheral Interface）是由Motorola公司开发的一种通用数据总线
+- 四根通信线：
+  - SCK（Serial Clock）
+  - MOSI（Master Output Slave Input）
+  - MISO（Master Input Slave Output）
+  - SS（Slave Select）
+- 同步，全双工
+- 支持总线挂载多设备（一主多从）
+- ![Alt text](assets/images/image-136.png)
+
+### 硬件电路
+
+- 所有SPI设备的SCK、MOSI、MISO分别连在一起
+- 主机另外引出多条SS控制线，分别接到各从机的SS引脚
+- SPI主机输出引脚配置为**推挽输出**，
+- SPI主机输入引脚配置为**浮空或上拉输入**
+
+![Alt text](assets/images/image-137.png)
+
+### 移位发送过程
+
+![Alt text](assets/images/SPI-Working-Data-Transfer.gif)
+
+![Alt text](assets/images/image-138.png)
+![Alt text](assets/images/image-139.png)
+![Alt text](assets/images/image-140.png)
+
+### SPI基本通信时序
+
+#### 起始条件
+
+起始条件：SS从高电平切换到低电平
+![Alt text](assets/images/image-141.png)
+
+#### 终止条件
+
+终止条件：SS从低电平切换到高电平
+![Alt text](assets/images/image-142.png)
+
+#### 交换字节(模式0)
+
+- CPOL(Clock Polarity时钟极性)=0：表示空闲状态时，SCK为低电平
+- CPHA(Clock Phase时钟相位)=0：表示SCK第一个边沿**移入数据**，第二个边沿**移出数据**
+- ![Alt text](assets/images/image-143.png)
+
+#### 交换字节(模式1)
+
+- CPOL=0：空闲状态时，SCK为低电平
+- CPHA=1：SCK第一个边沿移出数据，第二个边沿移入数据
+- ![Alt text](assets/images/image-144.png)
+
+#### 交换字节(模式2)
+
+- CPOL=1：空闲状态时，SCK为高电平
+- CPHA=0：SCK第一个边沿移入数据，第二个边沿移出数据
+- ![Alt text](assets/images/image-145.png)
+
+#### 交换字节(模式3)
+
+- CPOL=1：空闲状态时，SCK为高电平
+- CPHA=1：SCK第一个边沿移出数据，第二个边沿移入数据
+- ![Alt text](assets/images/image-146.png)
+
+### SPI通信指令
+
+#### 发送指令
+
+- 向SS指定的设备，发送指令（0x06）
+
+时序：
+
+```
+| 开始 | 交换字节(0x06) | 停止 |
+```
+
+- ![Alt text](assets/images/image534.jpeg)
+-
+
+#### 指定地址写
+
+- 向SS指定的设备，发送写指令（0x02），
+- 随后在指定地址（Address[23:0]）下，写入指定数据（Data）
+
+时序：
+
+```
+| 开始 | 交换字节(写指令0x02) | 交换字节(Address[23:0]) | 交换字节(Data) | 停止 |
+```
+
+- ![Alt text](assets/images/image535.jpeg)
+
+#### 指定地址写
+
+- 向SS指定的设备，发送读指令（0x03），
+- 随后在指定地址（Address[23:0]）下，读取从机数据（Data）
+
+时序：
+
+```
+| 开始 | 交换字节(读指令0x03) | 交换字节(Address[23:0]) | 交换字节(Data) | 停止 |
+```
+
+- ![Alt text](assets/images/image536.jpeg)
+
+### SPI软件模拟实现
+
+:::code-tabs
+@tab `Soft_SPI.h`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/System/Soft_SPI.h)
+@tab `Soft_SPI.c`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/System/Soft_SPI.c)
+:::
+
+## SPI通信硬件实现
+
+### 简介
+
+- STM32内部集成了硬件SPI收发电路，可以由硬件自动执行时钟生成、数据收发等功能，减轻CPU的负担
+- 可配置
+  - 8位数据帧/16位数据帧(等于两个8位数据帧)
+  - 高位先行/低位先行
+- 时钟频率：
+  - fPCLK / (2, 4, 8, 16, 32, 64, 128, 256)
+  - PCLK(外设时钟)，
+  - SPI1=>APB2=72Mhz
+  - SPI2=>APB1=>36Mhz
+- 支持多主机模型、主或从操作
+- 可精简为：
+  - 半双工(单数据线分时收发数据)
+  - 单工通信(只发送)
+- 支持DMA
+- 兼容I2S协议（音频传输协议）
+
+> STM32F103C8T6 硬件SPI资源：SPI1、SPI2
+
+### 原理框图
+
+- LSBFIRST位：控制帧格式
+  - 1：低位先行（移位寄存器右移）
+  - 0：高位先行（移位寄存器左移）
+- TXE 发送寄存器空（当发送数据寄存器（TDR）数据整体移入移位寄存器时）
+- RXNE 接收寄存器非空（当移位寄存器数据整体移入接收数据寄存器(RDR)时）
+- SPI_CR1寄存器的BR[2:0]三个bit控制分频系数
+  - 000 2分频
+  - 001 4分频
+  - 111 256分频
+- SPE SPI使能位
+- MSTR 主从模式
+- CPOL和CPHA共同决定SPI的四种模式
+- NSS 从机选择引脚，低电平有效（N）
+- ![Alt text](assets/images/image-150.png)
+
+### 原理简图
+
+![Alt text](assets/images/image-151.png)
+
+### SPI硬件外设实现
+
+:::code-tabs
+@tab `Hard_SPI.h`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/Hard_SPI.h)
+@tab `Hard_SPI.c`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/Hard_SPI.c)
+:::
+
+## W25Q64存储器
+
+- W25Qxx系列是一种
+  - 低成本、
+  - 小型化、
+  - 使用简单的
+  - 非易失性存储器
+- 常应用于
+  - 数据存储、
+  - 字库存储、
+  - 固件程序存储(XIP eXecute in Place就地执行)
+  - 等场景
+- 存储介质：Nor Flash（闪存）
+- 时钟频率：
+  - 80MHz（相比于stm32的50Mhz的GPIO非常快）
+  - 160MHz (Dual SPI双重SPI模式)
+  - 320MHz (Quad SPI四重SPI模式)
+- 存储容量（24位地址，16MB寻址空间）：
+  - W25Q40:---->4Mbit / 512KByte
+  - W25Q80:---->8Mbit / 1MByte
+  - W25Q16:---->16Mbit / 2MByte
+  - W25Q32:---->32Mbit / 4MByte
+  - W25Q64:---->64Mbit / 8MByte
+  - W25Q128:---->128Mbit / 16MByte
+  - W25Q256:---->256Mbit / 32MByte
+    - 后16MB需要使用四字节地址读写模式
+
+### 芯片引脚功能定义
+
+![Alt text](assets/images/image-147.png)
+
+### 芯片内部框图
+
+**存储空间划分**
+
+- 块（Block）: 64KB
+- 扇区（Sector）：4KB
+- 页（page）:256B
+
+![Alt text](assets/images/image541.png)
+
+### 注意事项
+
+写入操作时：
+
+- 写入操作前，必须发送写使能指令
+- 每个数据位只能由1改写为0，不能由0改写为1
+- 写入数据前必须先擦除，擦除后，所有数据位变为1，即0xff
+- 擦除必须按最小擦除单元进行
+  - 整个芯片擦除
+  - 按块擦除
+  - 按扇区擦除（4KB）
+- 连续写入多字节时，
+  - 如果从页起始地址开始写入，最多写入一页(256B)的数据，超过页尾位置的数据，会回到页首覆盖写入
+  - 如果从页的中间地址开始写入，写入的位置跨越页地址时，会导致地址错乱。
+- 写入操作结束后，芯片进入忙状态，不响应新的读写操作
+
+读取操作时：
+
+- 直接调用读取时序，无需使能，无需额外操作，没有页的限制，读取操作结束后不会进入忙状态，但不能在忙状态时读取
+
+### 指令集
+
+![Alt text](assets/images/image-148.png)
+![Alt text](assets/images/image-149.png)
+
+### 基于软件SPI实现
+
+:::code-tabs
+@tab `W25Q64.h`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/System/W25Q64.h)
+@tab `W25Q64.c`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/System/W25Q64.c)
+@tab `Soft_SPI.h`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/System/Soft_SPI.h)
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/21-SPI协议软件实现-W25Q64/User/main.cpp)
+:::
+
+### 基于硬件SPI实现
+
+:::code-tabs
+@tab `W25Q64.h`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/W25Q64.h)
+@tab `W25Q64.c`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/W25Q64.c)
+@tab `Hard_SPI.h`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/Hard_SPI.h)
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/User/main.cpp)
 :::
