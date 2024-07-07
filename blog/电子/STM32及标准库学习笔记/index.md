@@ -112,6 +112,8 @@ star: true
     - [简介](#简介-4)
     - [原理框图](#原理框图)
     - [原理简图](#原理简图)
+    - [连续传输发送](#连续传输发送)
+    - [非连续传输发送](#非连续传输发送)
     - [SPI硬件外设实现](#spi硬件外设实现)
   - [W25Q64存储器](#w25q64存储器)
     - [芯片引脚功能定义](#芯片引脚功能定义)
@@ -120,6 +122,17 @@ star: true
     - [指令集](#指令集)
     - [基于软件SPI实现](#基于软件spi实现)
     - [基于硬件SPI实现](#基于硬件spi实现)
+  - [BKP](#bkp)
+    - [注意事项](#注意事项-1)
+    - [BKP标准库函数介绍](#bkp标准库函数介绍)
+    - [读写BKP](#读写bkp)
+    - [原理简图](#原理简图-1)
+  - [RTC](#rtc)
+    - [原理框图](#原理框图-1)
+    - [原理简图](#原理简图-2)
+    - [注意事项](#注意事项-2)
+    - [标准库函数](#标准库函数-1)
+    - [获取RTC毫秒级别时间](#获取rtc毫秒级别时间)
 
 ## F103C8T6简介
 
@@ -3397,6 +3410,43 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 
 ![Alt text](assets/images/image-151.png)
 
+### 连续传输发送
+
+**时序**
+
+- 写入发送寄存器Send_Data[0]
+- 等待发送寄存器空标志位
+- 写入发送寄存器Send_Data[1]
+- while(1)接收数据循环
+  - i=0
+  - 等待接收寄存器非空标志位
+  - 读取接收寄存器Received_Data[0]
+  - 等待发送寄存器空标志位
+  - 写入发送寄存器Send_Data[2]
+  - i=1
+    - 等待接收寄存器非空标志位
+    - 读取接收寄存器Received_Data[1]
+    - 等待发送寄存器空标志位
+    - 写入发送寄存器Send_Data[3]
+    - 等待接收寄存器非空标志位
+  - i=2
+    - 等待接收寄存器非空标志位
+    - 读取接收寄存器Received_Data[2]
+    - 等待发送寄存器空标志位
+    - 写入发送寄存器Send_Data[4]
+  - ......
+- ![Alt text](assets/images/image-152.png)
+
+### 非连续传输发送
+
+**时序**
+
+- 等待发送寄存器空标志位
+- 写入发送寄存器数据
+- 等待接收寄存器非空标志位
+- 读取接收寄存器
+- ![Alt text](assets/images/image-153.png)
+
 ### SPI硬件外设实现
 
 :::code-tabs
@@ -3496,4 +3546,180 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 @[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/System/Hard_SPI.h)
 @tab `main.cpp`
 @[code cpp](./projects/stm32-makefile/22-SPI协议硬件实现-W25Q64/User/main.cpp)
+:::
+
+## BKP
+
+- BKP（Backup Registers）备份寄存器
+- BKP可用于存储用户应用程序数据。
+  - 当VDD（2.0~3.6V）芯片供电电源被切断时，BKP可由VBAT（1.8~3.6V）维持工作。
+  - 待机模式唤醒、系统复位、电源复位，都不会使得BKP复位。
+- BKP可存储RTC时钟校准参数
+- BKP的RTC引脚可输出RTC校准时钟、RTC闹钟脉冲或者秒脉冲
+- BKP的TAMPER引脚可产生的侵入事件将所有备份寄存器内容清除，并产生中断
+  - PC13-TAMPER-RTC共用一个引脚
+- 存储容量：
+  - 20字节（中容量和小容量）(c8t6中容量)
+  - 84字节（大容量和互联型）
+
+### 注意事项
+
+- 实现对BKP和RTC访问的充要条件：
+  1. 通过设置RCC_APB1ENR的PWREN和BKPEN，**使能PWR和BKP时钟**
+  2. 通过设置PWR_CR的DBP， **使能对BKP和RTC的访问**
+
+### BKP标准库函数介绍
+
+```cpp
+// BKP（以及RTC）外设访问控制
+void PWR_BackupAccessCmd(FunctionalState NewState);
+```
+
+```cpp
+// 恢复BKP外设寄存器默认配置，可用于手动清空所有数据寄存器。
+void BKP_DeInit(void);
+// 侵入检测引脚功能配置,设置侵入检测引脚有效电平（高电平触发或低电平触发）
+void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel); 
+// 侵入检查功能开启/关闭
+void BKP_TamperPinCmd(FunctionalState NewState);
+// 中断配置，是否开启
+void BKP_ITConfig(FunctionalState NewState);
+// RTC时钟输出配置（输出RTC校准时钟、RTC闹钟、秒脉冲）
+void BKP_RTCOutputConfig(uint16_t BKP_RTCOutputSource);
+// 设置RTC校准值（写入RTC校准寄存器）。
+void BKP_SetRTCCalibrationValue(uint8_t CalibrationValue);
+// 写入BKP寄存器
+void BKP_WriteBackupRegister(uint16_t BKP_DR, uint16_t Data);
+// 读取BKP寄存器
+uint16_t BKP_ReadBackupRegister(uint16_t BKP_DR);
+// 其他
+FlagStatus BKP_GetFlagStatus(void);
+void BKP_ClearFlag(void);
+ITStatus BKP_GetITStatus(void);
+void BKP_ClearITPendingBit(void);
+```
+
+### 读写BKP
+
+:::code-tabs
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/23-BKP-读写数据/User/main.cpp)
+:::
+
+### 原理简图
+
+![Alt text](assets/images/image-154.png)
+
+## RTC
+
+- RTC（Real Time Clock）实时时钟
+- RTC是一个独立的定时器，可为系统提供时钟和日历的功能
+- RTC和时钟配置系统处于后备区域(BKP)
+  - 后备区域(BKP)系统复位时数据不清零
+  - VDD（2.0~3.6V）断电后可借助VBAT（1.8~3.6V）供电继续走时
+- 32位的可编程计数器，可对应Unix时间戳的秒计数器
+- 20位的可编程预分频器，可适配不同频率的输入时钟
+- 可选择三种RTC时钟源：
+  - HSE时钟除以128（通常为8MHz/128）
+  - LSE振荡器时钟（通常为32.768KHz）
+    - 接入15位计数器，计数器自然溢出的频率就是1Hz
+    - 2^15=32768
+  - LSI振荡器时钟（40KHz）
+  - 三路时钟源，只有32.768Khz时钟能在断电后由VBAT供电工作。
+
+### 原理框图
+
+**分频**
+
+- RTC_PRL:重装寄存器（作用相当于定时器中的ARR自动重装寄存器）
+  - 计数目标值，用来配置是几分频
+  - 写入0是1分频
+  - 写入x是x+1分频
+- RTC_DIV:余数寄存器（作用相当于定时器中的CNT计数器）
+  - 自减计数器
+  - 0值自减将溢出，产生溢出信号，同时自动加载重装值。
+- 将32768hz分频到1hz
+  - RTC_PRL需写入32768-1
+  - RTC_DIV可给0
+  - 第0秒
+    - 第1个时钟到来时，
+      - RTC_DIV自减溢出，产生溢出信号（1hz）
+      - RTC_DIV变为重装值32768-1=32767
+    - 第2个时钟到来时，
+      - RTC_DIV自减，变为=32768-2=32766
+    - ......
+    - 第32768个时钟到来时，
+      - RTC_DIV自减，变为=32768-32768=0
+  - 第1秒
+    - 第1个时钟到来时，
+    - RTC_DIV自减溢出，产生溢出信号（1hz）
+    - RTC_DIV变为重装值32768-1=32767
+
+- RTC_ALR:闹钟寄存器
+  - 和RTC_CNT等宽的寄存器，
+  - 用于设置闹钟值，
+  - 可以配置达到设定值后产生中断、退出待机模式。
+- RTC_Second:秒中断
+  - 来自RTC_CNT寄存器的输入TR_CLK
+  - 开启后可以每秒触发一次中断。
+- RTC_Overflow：溢出中断
+  - CNT计数器溢出中断
+  - CNT为无符号数，在2106年溢出
+
+![Alt text](assets/images/image-156.png)
+
+![Alt text](assets/images/image-155.png)
+
+### 原理简图
+
+![Alt text](assets/images/image-157.png)
+
+### 注意事项
+
+- 实现对BKP和RTC访问的充要条件：
+  1. 通过设置RCC_APB1ENR的PWREN和BKPEN，**使能PWR和BKP时钟**
+  2. 通过设置PWR_CR的DBP， **使能对BKP和RTC的访问**
+- 上电复位后首次读取RTC寄存器需等待RTC时钟和APB1时钟完成同步。
+  - 若在读取RTC寄存器时，RTC的APB1接口曾经处于禁止状态，
+  - 则软件首先必须等待RTC_CRL寄存器中的RSF位（寄存器同步标志）被硬件置1
+- RTC配置模式
+  - 必须设置RTC_CRL寄存器中的CNF位，使RTC进入配置模式后，才能写入RTC_PRL、RTC_CNT、RTC_ALR寄存器。
+    - > 标准库已经自动完成该操作。
+  - 写入前需等待上一次写入操作结束
+    - > 因为RTC电路的工作频率和APB1总线工作频率不一致。
+    - 对RTC任何寄存器的写操作，都必须在前一次写操作结束后进行。
+    - 可以通过查询RTC_CR寄存器中的RTOFF状态位，判断RTC寄存器是否处于更新中。
+    - 仅当RTOFF状态位是1时，才可以写入RTC寄存器
+
+### 标准库函数
+
+```cpp
+void RCC_LSEConfig(uint8_t RCC_LSE);              // L低速E外部时钟：开启/关闭/旁路(从OSE32_IN引脚接入外部时钟)
+void RCC_LSICmd(FunctionalState NewState);        // 低速内部时钟：开启/关闭
+void RCC_RTCCLKConfig(uint32_t RCC_RTCCLKSource); // 选择RTC时钟源：LSE/LSI/HSE_Div128
+void RCC_RTCCLKCmd(FunctionalState NewState);     // RTC时钟：开启/关闭
+FlagStatus RCC_GetFlagStatus(uint8_t RCC_FLAG);   // 获取RCC标志位状态：RCC_FLAG_LSIRDY低速外部时钟成功起振标志
+```
+
+```cpp
+void RTC_EnterConfigMode(void);                 // 进入配置模式，否则无法读写相关寄存器(RTC_PRL、RTC_CNT、RTC_ALR)
+void RTC_ExitConfigMode(void);                  // 退出配置模式
+uint32_t RTC_GetCounter(void);                  // 获取RTC计数器的值（Unix时间戳）
+void RTC_SetCounter(uint32_t CounterValue);     // 设置RTC计数器
+void RTC_SetPrescaler(uint32_t PrescalerValue); // 设置分频系数
+void RTC_SetAlarm(uint32_t AlarmValue);         // 设置闹钟值
+uint32_t  RTC_GetDivider(void);                 // 获取余数寄存器值(得到更精确的时间戳)
+void RTC_WaitForLastTask(void);                 // 等待上次操作完成(等待上一次写操作结束),否则无法写入数据
+void RTC_WaitForSynchro(void);                  // 等待同步(总线时钟和RTC时钟的同步)
+```
+
+### 获取RTC毫秒级别时间
+
+:::code-tabs
+@tab `/System/Rtc.c`
+@[code cpp](./projects/stm32-makefile/24-RTC-获取毫秒级别系统时间/System/Rtc.c)
+@tab `/System/Rtc.h`
+@[code cpp](./projects/stm32-makefile/24-RTC-获取毫秒级别系统时间/System/Rtc.h)
+@tab `main.cpp`
+@[code cpp](./projects/stm32-makefile/24-RTC-获取毫秒级别系统时间/User/main.cpp)
 :::

@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "oled_printf.h": "c",
+        "oled.h": "c",
+        "oled_font.h": "c",
+        "stm32f10x.h": "c",
+        "math.h": "c",
+        "stdio.h": "c",
+        "mpu6050.h": "c",
+        "soft_i2c.h": "c",
+        "hard_i2c.h": "c",
+        "soft_spi.h": "c",
+        "w25qxx.h": "c",
+        "hard_spi.h": "c",
+        "w25q64.h": "c",
+        "stdint.h": "c",
+        "rtc.h": "c"
+    }
+}
