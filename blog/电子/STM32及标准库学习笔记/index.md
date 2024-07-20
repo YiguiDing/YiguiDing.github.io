@@ -133,6 +133,43 @@ star: true
     - [注意事项](#注意事项-2)
     - [标准库函数](#标准库函数-1)
     - [获取RTC毫秒级别时间](#获取rtc毫秒级别时间)
+  - [PWR](#pwr)
+    - [供电方案框图](#供电方案框图)
+    - [上电复位、掉电复位](#上电复位掉电复位)
+    - [电压过低检测](#电压过低检测)
+    - [三种低功耗模式](#三种低功耗模式)
+    - [三种低功耗模式的执行细节](#三种低功耗模式的执行细节)
+    - [降低主频](#降低主频)
+    - [浅睡眠模式——串口唤醒](#浅睡眠模式串口唤醒)
+    - [深度睡眠模式——停机模式——外部中断唤醒](#深度睡眠模式停机模式外部中断唤醒)
+    - [深度睡眠模式——待机模式——rtc闹钟唤醒——wakeup唤醒](#深度睡眠模式待机模式rtc闹钟唤醒wakeup唤醒)
+  - [WDG看门狗](#wdg看门狗)
+    - [原理框图](#原理框图-2)
+    - [独立看门狗键寄存器](#独立看门狗键寄存器)
+    - [独立看门狗超时时间](#独立看门狗超时时间)
+    - [窗口看门狗框图](#窗口看门狗框图)
+    - [窗口看门狗时序](#窗口看门狗时序)
+    - [窗口看门狗的超时时间](#窗口看门狗的超时时间)
+    - [独立看门狗和窗口看门狗的区别](#独立看门狗和窗口看门狗的区别)
+    - [IWDG案例代码](#iwdg案例代码)
+    - [WWDG案例代码](#wwdg案例代码)
+  - [Flash闪存](#flash闪存)
+    - [闪存模块组织结构](#闪存模块组织结构)
+    - [闪存结构简图](#闪存结构简图)
+    - [解锁FLASH](#解锁flash)
+    - [使用指针读取存储器](#使用指针读取存储器)
+    - [Flash全擦除流程](#flash全擦除流程)
+    - [Flash页擦除流程](#flash页擦除流程)
+    - [Flash半字（16bit）写入流程](#flash半字16bit写入流程)
+    - [选项字节](#选项字节)
+      - [选项字节的擦除流程](#选项字节的擦除流程)
+      - [选项字节的写入流程](#选项字节的写入流程)
+    - [器件电子签名](#器件电子签名)
+    - [主闪存编程](#主闪存编程)
+    - [标准库Flash外设](#标准库flash外设)
+    - [FLash擦除和写入](#flash擦除和写入)
+    - [FLashStore存储](#flashstore存储)
+    - [读取芯片容量和ID](#读取芯片容量和id)
 
 ## F103C8T6简介
 
@@ -3722,4 +3759,548 @@ void RTC_WaitForSynchro(void);                  // 等待同步(总线时钟和R
 @[code cpp](./projects/stm32-makefile/24-RTC-获取毫秒级别系统时间/System/Rtc.h)
 @tab `main.cpp`
 @[code cpp](./projects/stm32-makefile/24-RTC-获取毫秒级别系统时间/User/main.cpp)
+:::
+
+## PWR
+
+- PWR（Power Control）电源控制
+- PWR负责管理STM32内部的电源供电部分，
+- 可以实现**可编程电压监测器**和**低功耗模式**的功能
+  - 可编程电压监测器（PVD）
+    - 可以监控VDD电源电压，
+    - 当VDD下降到PVD阀值以下或上升到PVD阀值之上时，
+    - PVD会触发中断，用于执行紧急关闭任务
+  - 低功耗模式：
+    - 睡眠模式（Sleep）
+    - 停机模式（Stop）
+    - 待机模式（Standby）
+  - 可在系统空闲时，降低STM32的功耗，延长设备使用时间
+
+### 供电方案框图
+
+- ![Alt text](assets/images/image-158.png)
+
+### 上电复位、掉电复位
+
+> 当VDD/VDDA电压过低时，内部电路将直接产生复位信号。
+
+![Alt text](assets/images/image-159.png)
+
+> 大于1.88上电复位，低于1.92掉电复位
+
+![Alt text](assets/images/image-160.png)
+
+### 电压过低检测
+
+> 用于实现对VDD电压的监测，阈值范围可调。
+
+![Alt text](assets/images/image-161.png)
+
+> - PVD 属于外部中断。
+> - RTC 本身也有中断，也可以接到外部中断。
+> - 接入外部中断的原因是，只有外部中断信号可以唤醒处于停止模式的设备。
+
+![Alt text](assets/images/image-162.png)
+
+### 三种低功耗模式
+
+![Alt text](assets/images/image-163.png)
+
+**睡眠模式**
+
+- 如何进入
+  - SLEEPONEXIT = 0 则立即进入睡眠模式，否则将等待中断函数执行退出后再进入。
+  - 然后调用WFI(Wait For Interrupt等待中断) 或 调用WFE(Wait For Event 等待事件)
+    - 实际是两条内核指令
+- 如何唤醒
+  - WFI，等待任何中断
+  - WFE，等待任何事件、或者开启了中断但未配置NVIC
+- 对电路的影响
+  - 关闭CPU时钟（但没有关闭电源，所以CPU寄存器和存储器数据仍然存在）
+
+**停机模式**
+
+- 如何进入
+  - PDDS=0 表示进入停机模式，否则进入待机模式
+  - LPDS=0 电压调节器开启（1.8VCPU供电），否则关闭，进入低功耗模式（仍然可维持1.8V区域CPU寄存器和存储器数据）。
+  - SLEEPDEEP = 1 表示进入深度睡眠模式
+  - 调用WFI或调用WFE
+- 如何唤醒
+  - 只有外部中断才能唤醒
+    - WFI需用外部中断的中断模式唤醒
+    - WFE需用外部中断的事件模式唤醒
+- 对电路的影响
+  - 关闭1.8V区域的所有时钟（CPU时钟、存储器，内置数组外设、定时器、串口）
+  - 没有关闭电源，所以CPU寄存器和存储器数据仍然存在。
+  - 内部高速时钟、外部高速时钟关闭。
+  - 电压调节器根据LPDS位决定是否进入低功耗模式（没有关闭）
+
+**待机模式**
+
+- 如何进入
+  - PDDS=1 表示进入待机模式，否则进入停机模式
+  - SLEEPDEEP = 1 表示进入深度睡眠模式
+  - 调用WFI或调用WFE
+- 如何唤醒
+  - 任何中断和事件都无法唤醒
+  - 只有WKUP引脚、RTC闹钟事件、NRST引脚的外部复位信号、IWDG独立看门狗复位。
+- 对电路的影响
+  - 1.8V区时钟关闭
+  - 两高速时钟关闭
+  - 电压调节器关闭（1.8V区域电源关闭，存储器和寄存器数据全部丢失）
+  
+> 执行WFI（Wait For Interrupt）或者WFE（Wait For Event）指令后，STM32进入低功耗模式
+
+### 三种低功耗模式的执行细节
+
+![Alt text](assets/images/image-164.png)
+
+**睡眠模式**
+
+- SLEEPDEEP = 0 表示进入浅睡眠模式
+- 执行完WFI/WFE指令后，STM32进入睡眠模式，程序暂停运行，唤醒后程序从暂停的地方继续运行
+- SLEEPONEXIT位
+  - 决定STM32执行完WFI或WFE后，
+  - SLEEPONEXIT=0 立刻进入睡眠，
+  - SLEEPONEXIT=1 等STM32从最低优先级的中断处理程序中退出时进入睡眠
+- 所有的I/O引脚都保持它们在运行模式时的状态
+- 唤醒条件
+  - WFI指令进入睡眠模式，可被**任意一个NVIC**响应的中断唤醒
+  - WFE指令进入睡眠模式，可被**唤醒事件**唤醒
+    - 产生唤醒事件
+    - 方法1:
+      - 再外设控制寄存器中使能中断（而不是再NVIC中使能）
+      - 再Cortex-M3系统控制寄存器中使能SEVONPEND位
+      - 被唤醒事件唤醒后需手动清除NVIC中断通道挂起位。
+    - 方法2：
+      - 配置一个外部或内部EXIT线为事件模式。
+      - 被唤醒事件唤醒后无需清除中断挂起位或外设的NVIC中断通道挂起位。
+
+**停止模式**
+
+- `SLEEPDEEP = 1` 表示进入深度睡眠模式
+- `PDDS = 0` 表示进入停机模式，否则进入待机模式
+- 执行完`WFI/WFE`指令后，STM32进入停止模式，程序暂停运行，唤醒后程序从暂停的地方继续运行
+- 1.8V供电区域的所有时钟都被停止，PLL、HSI和`HSE`被禁止，SRAM和寄存器内容被保留下来
+- **所有的I/O引脚都保持它们在运行模式时的状态**
+- 当一个中断或唤醒事件导致退出停止模式时，**HSI（高速内部8M时钟）被选为系统时钟**
+  - 一般需要手动重启`HSE`,并配置主频为`72Mhz`
+- 当`LPDS = 1`电压调节器处于低功耗模式下，系统从停止模式退出时，会有一段额外的启动延时
+- 唤醒条件
+  - WFI指令进入停止模式，可被任意一个**EXTI中断**唤醒
+  - WFE指令进入停止模式，可被任意一个**EXTI事件**唤醒
+
+**待机模式**
+
+- `SLEEPDEEP = 1` 表示进入深度睡眠模式
+- `PDDS = 1` 表示进入待机模式
+- 执行完`WFI/WFE`指令后，STM32进入待机模式，**唤醒后程序从头开始运行**
+- 整个1.8V供电区域被断电，PLL、HSI和HSE也被断电，SRAM和寄存器内容丢失，只有备份的寄存器和待机电路维持供电
+- **在待机模式下，所有的I/O引脚变为高阻态（浮空输入）**
+- 唤醒条件
+  - WKUP引脚的上升沿、RTC闹钟事件的上升沿、NRST引脚上外部复位、IWDG复位退出待机模式
+
+### 降低主频
+
+`system_stm32f10x.c`
+
+```cpp
+#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
+/* #define SYSCLK_FREQ_HSE    HSE_VALUE */
+ #define SYSCLK_FREQ_24MHz  24000000
+#else
+// 启用下面一条定义来选择主频。
+/* #define SYSCLK_FREQ_HSE    HSE_VALUE */
+/* #define SYSCLK_FREQ_24MHz  24000000 */
+/* #define SYSCLK_FREQ_36MHz  36000000 */
+/* #define SYSCLK_FREQ_48MHz  48000000 */
+/* #define SYSCLK_FREQ_56MHz  56000000 */
+#define SYSCLK_FREQ_72MHz  72000000
+#endif
+```
+
+```cpp
+#include "stm32f10x.h"
+#include "Delay.h"
+#include "OLED.h"
+#include "OLED_Printf.h"
+
+int main(void)
+{
+    OLED_Init();
+    // 显示系统主频
+    OLED_Printf("SystemCoreClock: %d \n", SystemCoreClock);
+    while (1)
+    {
+    }
+}
+```
+
+### 浅睡眠模式——串口唤醒
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/26-PWR-浅睡眠模式-串口唤醒/User/main.cpp)
+@tab `/System/Serial.c`
+@[code cpp](./projects/stm32-makefile/26-PWR-浅睡眠模式-串口唤醒/System/Serial.c)
+:::
+
+### 深度睡眠模式——停机模式——外部中断唤醒
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/27-PWR-深度睡眠模式-停机模式-外部中断唤醒/User/main.cpp)
+@tab `/System/Serial.c`
+@[code cpp](./projects/stm32-makefile/27-PWR-深度睡眠模式-停机模式-外部中断唤醒/System/Serial.c)
+:::
+
+### 深度睡眠模式——待机模式——rtc闹钟唤醒——wakeup唤醒
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/28-PWR-深度睡眠模式-待机模式-rtc闹钟唤醒+wakeup唤醒/User/main.cpp)
+@tab `System/Rtc.c`
+@[code cpp](./projects/stm32-makefile/28-PWR-深度睡眠模式-待机模式-rtc闹钟唤醒+wakeup唤醒/System/Rtc.c)
+:::
+
+## WDG看门狗
+
+- WDG（Watchdog）看门狗
+- 看门狗可以监控程序的运行状态，当程序因为设计漏洞、硬件故障、电磁干扰等原因，出现卡死或跑飞现象时，看门狗能及时复位程序，避免程序陷入长时间的罢工状态，保证系统的可靠性和安全性
+- 看门狗本质上是一个定时器，当指定时间范围内，程序没有执行喂狗（重置计数器）操作时，看门狗硬件电路就自动产生复位信号
+- STM32内置两个看门狗
+  - 独立看门狗（IWDG）：独立工作，对时间精度要求较低（不能太晚喂狗）
+    - 使用专用时钟，LSI内部低速时钟
+  - 窗口看门狗（WWDG）：要求看门狗在精确计时窗口起作用（不能太晚喂狗也不能太早喂狗）
+    - 使用APB1时钟
+
+### 原理框图
+
+**独立看门狗**
+
+- 递减计数器自减溢出后产生复位信号。
+- 程序运行中为了避免复位应当不断重置计数器，避免其归零。
+- 预分频器只有8位，最大只能进行256分频。
+- 递减计数器为12位， 最大值为：$2^{12-1}=4095$
+- 可以在重装寄存器中写入初始值避免复位。
+- 在键寄存器写入特定数据，然后重装值将复制到计数器中，自减运行。
+
+![Alt text](assets/images/image-165.png)
+
+### 独立看门狗键寄存器
+
+- 键寄存器本质上是控制寄存器，用于控制硬件电路的工作
+- 在可能存在干扰的情况下，一般通过在整个键寄存器写入特定值来代替控制寄存器写入一位的功能，以降低硬件电路受到干扰的概率
+
+|  写入键寄存器的值  |                  作用                  |
+| :----------------: | :------------------------------------: |
+|       0xCCCC       |             启用独立看门狗             |
+|       0xAAAA       | IWDG_RLR中的值重新加载到计数器（喂狗） |
+|       0x5555       |     解除IWDG_PR和IWDG_RLR的写保护      |
+| 0x5555之外的其他值 |     启用IWDG_PR和IWDG_RLR的写保护      |
+
+### 独立看门狗超时时间
+
+- 超时时间：$T_{IWDG} = T_{LSI} × \text{PR预分频系数} × (RL + 1)$
+  - $T_{LSI} = 1/F_{LSI}=0.025ms$
+  - $F_{LSI}=40Khz$
+![Alt text](assets/images/image-166.png)
+
+### 窗口看门狗框图
+
+- PCLK1,36M的时钟，其实还经过了一个固定的4096分频才到达看门狗的预分频器。
+- WWDG_CR控制寄存器
+  - WDGA 启用窗口看门狗的位
+  - CNT: 六位的递减计数器
+  - T6: 计数器的第七位，用来当计数器的溢出标志位，当其从1变化为0时，输出的就是复位信号。
+    - `0x1000000 = 0x40`
+- WWDG_CFR配置寄存器，决定了最早时间界限。
+  - 当喂狗时（往递减计数去写数时），T6:0>W6:0,表示写入的时机过早，比较器将输出1，导致复位。
+
+![Alt text](assets/images/image-167.png)
+
+### 窗口看门狗时序
+
+- （没有及时喂狗）递减计数器T[6:0]的值等于0x40-1时，WWDG产生复位
+- （过早喂狗）递减计数器T[6:0]在窗口W[6:0]外被重新装载时，WWDG产生复位
+- （0溢事件）递减计数器T[6:0]等于0x40时可以产生早期唤醒中断（EWI），用于重装载计数器以避免WWDG复位
+- 定期写入WWDG_CR寄存器（喂狗）以避免WWDG复位
+
+![Alt text](assets/images/image-168.png)
+
+### 窗口看门狗的超时时间
+
+- 超时时间：$T_{WWDG} = T_{PCLK1} × 4096 × 2^{\text{WDGTB预分频系数}} × (T[5:0] + 1)$
+- 窗口时间：$T_{WIN} = T_{PCLK1} × 4096 × 2^{\text{WDGTB预分频系数}} × (T[5:0] - W[5:0])$
+  - 其中：$T_{PCLK1} = 1 / F_{PCLK1}$
+
+![Alt text](assets/images/image-169.png)
+
+### 独立看门狗和窗口看门狗的区别
+
+|            |        IWDG独立看门狗        |           WWDG窗口看门狗            |
+| :--------: | :--------------------------: | :---------------------------------: |
+|    复位    |        计数器减到0后         | 计数器T[5:0]减到0后、过早重装计数器 |
+|    中断    |              无              |            早期唤醒中断             |
+|   时钟源   |         LSI（40KHz）         |           PCLK1（36MHz）            |
+| 预分频系数 |    4、8、16、32、64、128、256    |             1、2、4、8              |
+|   计数器   |             12位             |           6位（有效计数）           |
+|  超时时间  |              0               |    .1ms~26214.4ms 113us~58.25ms     |
+|  喂狗方式  | 写入键寄存器，重装固定值RLR  |   直接写入计数器，写多少重装多少    |
+|  防误操作  |       键寄存器和写保护       |                 无                  |
+|    用途    | 独立工作，对时间精度要求较低 |   要求看门狗在精确计时窗口起作用    |
+
+### IWDG案例代码
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/29-IWDG独立看门狗/User/main.cpp)
+:::
+
+### WWDG案例代码
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/30-WWDG窗口看门狗/User/main.cpp)
+:::
+
+## Flash闪存
+
+- STM32F1系列的FLASH包含三个部分
+  - 程序存储器
+  - 系统存储器
+  - 选项字节
+- 通过**闪存存储器接口（外设）**可以对**程序存储器**和**选项字节**进行擦除和编程
+- 读写FLASH的用途：
+  - 利用程序存储器的剩余空间来保存掉电不丢失的用户数据
+    - 如：可以在FLASH的最后几页存储想要存储的参数。
+  - 通过在程序中编程（IAP），实现程序的自我更新
+    - 通过Flash中的程序直接修改程序自己本身。
+- 在线编程（In-Circuit Programming – ICP）
+  - 用于更新程序存储器的全部内容，它通过JTAG、SWD协议或系统加载程序（Bootloader）下载程序
+  - 就是烧录程序最常用的方式，通过串口或或st-link下载程序。
+- 在程序中编程（In-Application Programming – IAP）
+  - 可以使用微控制器支持的任一种通信接口下载程序
+  - 如自己写一个bootloader程序放在flash存储器的最后几页，
+  - 需要更新程序时，控制程序跳转到自己写的bootloader，
+  - 然后接收任何通信接口的数据写入到Flash。
+
+### 闪存模块组织结构
+
+> STM32F10xxx闪存编程参考手册.pdf
+
+**中容量闪存模块组织结构**
+
+- 主存储器
+  - 存放程序代码的。
+- 信息块
+  - 启动程序代码：系统存储器，存放Bootloader程序，用于串口下载。
+  - 用户选择字节：选项字节，存放独立的参数。
+- 闪存存储器接口寄存器
+  - 实际是一些数据寄存器，存储介质为SRAM，
+  - 可以用来控制闪存的**擦除**和**编程（写入）**
+- ![Alt text](assets/images/image-170.png)
+
+### 闪存结构简图
+
+![Alt text](assets/images/image-171.png)
+
+### 解锁FLASH
+
+**FPEC键值**
+
+```cpp
+/* FLASH Keys */
+#define RDP_Key                  ((uint16_t)0x000000A5) // RDPRT（read protect读保护）
+#define FLASH_KEY1               ((uint32_t)0x45670123)
+#define FLASH_KEY2               ((uint32_t)0xCDEF89AB)
+```
+
+**解锁流程**
+
+- 复位后，闪存存储器接口FPEC被保护，不能写入FLASH_CR
+- **在FLASH_KEYR先写入KEY1，再写入KEY2，解锁**
+  > 错误的操作序列（如电磁干扰）会锁死`FPEC`和`FLASH_CR`,除非复位。
+
+**加锁流程**
+
+- 设置FLASH_CR.LOCK为1,锁住FPEC和FLASH_CR
+
+### 使用指针读取存储器
+
+```cpp
+// 防止编译器优化，告诉编译器该数据是易变的，不需要做缓存优化。
+// 缓存优化：编译器通过把要对内存频繁读写的数据备份到高速缓存（工作组寄存器）来加速读写速度，但是有可能程序直接修改了内存的数据（如中断、DMA、ADC数据寄存器），但是高速寄存器中还是原始值，这就需要使用volatile关键字。
+#define    __IO    volatile
+// 使用指针读指定地址下的存储器：
+uint16_t Data = *((__IO uint16_t *)(0x08000000));
+// 使用指针写指定地址下的存储器(需要提前解锁Flash，并进行忙等待)：
+*((__IO uint16_t *)(0x08000000)) = 0x1234;
+```
+
+```cpp
+// 读取字节
+uint8_t Flash_Read_uint8(uint32_t address){
+  return *((__IO uint8_t *)(address));
+}
+uint16_t Flash_Read_uint16(uint32_t address){
+  return *((__IO uint16_t *)(address));
+} 
+// 读取float
+float Flash_Read_float(uint32_t address){
+  return *((__IO float *)(address));
+} 
+double Flash_Read_double(uint32_t address){
+  return *((__IO double *)(address));
+} 
+```
+
+### Flash全擦除流程
+
+- `执行Flash解锁流程`
+- `FLASH_CR.MER=1`               （MASS ERASE全擦除）
+- `FLASH_CR.STRT=1`              (start 开始干活)
+- `while(FLASH_SR.BSY==1);`     (忙等待)
+
+![Alt text](assets/images/image-172.png)
+
+### Flash页擦除流程
+
+- `执行Flash解锁流程`
+- `FLASH_CR.PER=1`               （Page Erase页擦除）
+- `FLASH_AR=页首地址`
+- `FLASH_CR.STRT=1`              (start 开始干活)
+- `while(FLASH_SR.BSY==1);`     (忙等待)
+
+![Alt text](assets/images/image-173.png)
+
+### Flash半字（16bit）写入流程
+
+- `执行Flash解锁流程`
+- FLASH_CR.PG=1    (Programming编程写入)
+- `*((__IO uint16_t *)(0x08000000)) = 0x1234;`  (写入半字16bit)
+- `while(FLASH_SR.BSY==1);`     (忙等待)
+
+![Alt text](assets/images/image-174.png)
+
+### 选项字节
+
+![Alt text](assets/images/image-175.png)
+
+- `nRDP`
+  - 写入RDP的反码
+- `RDP`
+  - 读出保护选择字节
+  - 写入(RDPRT键=0x00A5)后，闪存被开放允许读出访问。
+- `USER`
+  - 选择看门狗事件：硬件或软件
+  - 进入停机(STOP)模式时的复位事件
+  - 进入待机模式时的复位事件
+- `Data0/1`
+  - 用户自定义使用
+- `WRP0/1/2/3`
+  - 配置写保护
+  - 每位保护4页（中容量）
+    - 4x8=32位
+    - 32x4=128页
+
+#### 选项字节的擦除流程
+
+- `while(FLASH_SR.BSY==1);`     (事前忙等待)
+- `执行Flash解锁流程`
+- `解锁选项字节解锁流程`
+  - 在`FLASH_OPTKEYR`先写入KEY1，再写入KEY2，解锁选项字节
+  - 然后硬件会自动将`FLASH_CR.OPTWRE=1`               （Option Write Enable选项写入允许）
+- `FLASH_CR.OPTER=1`               （Option Erase选项字节擦除）
+- `FLASH_CR.STRT=1`               (start 开始干活)
+- `while(FLASH_SR.BSY==1);`     (事后忙等待)
+- 擦除完成
+
+#### 选项字节的写入流程
+
+- `while(FLASH_SR.BSY==1);`     (事前忙等待)
+- `执行Flash解锁流程`
+- `解锁选项字节解锁流程`
+- `FLASH_CR.OPTPG=1`               （Option Erase选项字节擦除）
+- `*((__IO uint16_t *)(0x08000000)) = 0x1234;`  (写入半字16bit)
+- `while(FLASH_SR.BSY==1);`     (事后忙等待)
+- 写入完成
+
+### 器件电子签名
+
+- **电子签名**存放在闪存存储器模块的**系统存储区域（Bootloader）**，
+- 包含的芯片识别信息在出厂时编写，**不可更改**，
+- 使用指针读指定地址下的存储器可获取电子签名
+- `F_SIZE` 闪存容量寄存器：
+  - 基地址：0x1FFF F7E0
+  - 大小：16位
+- `U_ID` 产品唯一身份标识寄存器：
+  - 基地址： 0x1FFF F7E8
+  - 大小：96位
+
+### 主闪存编程
+
+- 对主闪存编程每次可以写入16位。
+- 当FLASH_CR寄存器的PG位为’1’时，
+- 在一个闪存地址写入一个半字将启动一次编程；
+- 写入任何非半字的数据，FPEC都会产生总线错误。
+- 在编程过程中(BSY位为’1’)，任何读写闪存的操作都会使CPU暂停，直到此次闪存编程结束。
+
+**关于读写闪存导致CPU暂停**
+
+1. 当CPU执行如 while(FLASH_SR.BSY == 1); 这样的循环时，它实际上是在执行存储在RAM或内部缓存中的指令，而不是直接从闪存读取指令。即使闪存处于忙碌状态，CPU仍然能够从其内部缓存或RAM中执行代码，除非它需要从闪存中读取数据或指令。
+2. 对FLASH_SR.BSY的访问实际上是对Flash状态寄存器的访问，而不是对Flash存储器本身的访问。
+3. 如果在 BSY 位为1时尝试访问闪存，CPU并不会真正“暂停”，而是会遇到访问延迟，因为闪存控制器会阻止任何访问直到其内部操作完成。这可能会影响程序的执行速度，尤其是在频繁访问闪存的情况下。
+
+### 标准库Flash外设
+
+```cpp
+// 三个和内核代码有关的，不需要用户调用
+void FLASH_SetLatency(uint32_t FLASH_Latency); // 设置SYSCLK(系统时钟)周期与闪存访问时间的比例
+void FLASH_HalfCycleAccessCmd(uint32_t FLASH_HalfCycleAccess);//闪存半周期访问使能
+void FLASH_PrefetchBufferCmd(uint32_t FLASH_PrefetchBuffer);//预取缓冲区使能
+void FLASH_Unlock(void);// 解锁
+void FLASH_Lock(void);// 上锁
+FLASH_Status FLASH_ErasePage(uint32_t Page_Address);// 页擦除
+FLASH_Status FLASH_EraseAllPages(void);// 全页擦除
+FLASH_Status FLASH_EraseOptionBytes(void);// 选项字节擦除
+FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data);// 写入字
+FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data);// 写入半字
+FLASH_Status FLASH_ProgramOptionByteData(uint32_t Address, uint8_t Data);// 写入选项字节
+FLASH_Status FLASH_EnableWriteProtection(uint32_t FLASH_Pages);// 开启写保护
+FLASH_Status FLASH_ReadOutProtection(FunctionalState NewState);// 开启读保护
+FLASH_Status FLASH_UserOptionByteConfig(uint16_t OB_IWDG, uint16_t OB_STOP, uint16_t OB_STDBY);// 写入用户选项的三个配置位
+uint32_t FLASH_GetUserOptionByte(void);// 读取用户选项
+uint32_t FLASH_GetWriteProtectionOptionByte(void);// 获取写保护状态
+FlagStatus FLASH_GetReadOutProtectionStatus(void);// 获取读保护状态
+FlagStatus FLASH_GetPrefetchBufferStatus(void);// 获取预取缓冲区状态
+```
+
+### FLash擦除和写入
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/31-FLash-擦除和写入/User/main.cpp)
+@tab `System/FlashUtils.h`
+@[code cpp](./projects/stm32-makefile/31-FLash-擦除和写入/System/FlashUtils.h)
+@tab `System/FlashUtils.c`
+@[code cpp](./projects/stm32-makefile/31-FLash-擦除和写入/System/FlashUtils.c)
+:::
+
+### FLashStore存储
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/32-FLash-Store/User/main.cpp)
+@tab `System/FlashStore.h`
+@[code cpp](./projects/stm32-makefile/32-FLash-Store/System/FlashStore.h)
+@tab `System/FlashStore.c`
+@[code cpp](./projects/stm32-makefile/32-FLash-Store/System/FlashStore.c)
+:::
+
+### 读取芯片容量和ID
+
+:::code-tabs
+@tab `User/main.cpp`
+@[code cpp](./projects/stm32-makefile/33-读取芯片Id/User/main.cpp)
 :::
