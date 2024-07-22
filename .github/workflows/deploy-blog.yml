@@ -26,8 +26,9 @@ jobs:
         cache: 'npm'
     # build
     - run: |
+        npm run submodule_install
         # binary package for node_modules/rollup
-        npm i -D @rollup/rollup-linux-x64-gnu
+        npm i -D @rollup/rollup-linux-x64-gnu --legacy-peer-deps
         npm install --legacy-peer-deps
         npm run build
     # 推送到分支static-pages
