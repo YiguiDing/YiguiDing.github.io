@@ -19,21 +19,17 @@ jobs:
       with:
         submodules: true
         fetch-depth: 0
-    # pnpm
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 8.14.3
-    # node
+    # setup node
     - uses: actions/setup-node@v4
       with:
         node-version: 18
-        cache: 'pnpm'
+        cache: 'npm'
     # build
     - run: |
         # binary package for node_modules/rollup
-        pnpm i -D @rollup/rollup-linux-x64-gnu
-        pnpm install
-        pnpm run build
+        npm i -D @rollup/rollup-linux-x64-gnu
+        npm install --legacy-peer-deps
+        npm run build
     # 推送到分支static-pages
     - uses: JamesIves/github-pages-deploy-action@v4
       with:

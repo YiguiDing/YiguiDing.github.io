@@ -33,6 +33,7 @@ Drivers
 ## Makefile文件的生成和修改
 
 1. 先使用STM32CubeMX生成Hal库的makefile工程
+   - ![Alt text](assets/images/image.png)
 2. 删除大部分文件，保留两个文件
    1. `Makefile`文件
    2. 链接脚本，文件名可能为：`STM32F103C8Tx_FLASH.ld`

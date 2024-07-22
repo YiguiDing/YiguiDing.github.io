@@ -6,7 +6,7 @@ import { viteBundlerConfig } from "./viteBdrConfig";
 export default defineUserConfig({
   // 基本信息
   lang: "zh-CN",
-  title: "Yigui-Ding的Blog小站",
+  title: "YiguiDing的Blog小站",
   description: "欢迎来到我的Blog小站",
   // 包含和排除
   pagePatterns: [
@@ -17,7 +17,8 @@ export default defineUserConfig({
     "!**/projs/**",
     "!**/assets/**",
     "!**/.*/**", // 忽略所有隐藏文件和文件夹
-    "!**/_*/**",
+    "!**/_*/**", // 忽略_开头的文件夹
+    "!**/_*",// 忽略_开头的文件
     "!草稿/**",
   ],
   // 插件配置

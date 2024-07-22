@@ -36,7 +36,7 @@ export const themeConfig = hopeTheme({
   // 博客主题配置
   blog: {
     // 用户信息，头像，格言
-    name: "Yigui-Ding",
+    name: "YiguiDing",
     avatar: "/images/author_icon.jpg",
     // roundAvatar: true,
     intro: "/网站/关于.md",
@@ -78,9 +78,18 @@ export const themeConfig = hopeTheme({
       hotReload: true,
     },
     // 代码块
-    prismjs: {
-      light: "atom-dark",
-      dark: "coldark-dark",
+    prismjs: false && {
+      themes: {
+        light: "atom-dark",
+        dark: "coldark-dark",
+      },
+    },
+    shiki: {
+      themes: {
+        light: "github-dark",
+        dark: "slack-dark",
+      },
+      langs: ["cpp", "c", "js", "html", "css", "java", "json", "bash", "makefile", "go"],
     },
     // 代码复制
     copyCode: {
@@ -147,7 +156,7 @@ export const themeConfig = hopeTheme({
       // echarts: true,
       // 流程图
       // flowchart: true, // 流程图
-      mermaid:true, // 流程图，类图，....
+      mermaid: true, // 流程图，类图，....
       // 代码演示
       demo: true,
       playground: {

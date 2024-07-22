@@ -1783,7 +1783,7 @@ int main(void)
 - ![Alt text](assets/images/image-36.png)
 - 测频法：在闸门时间T内，对上升沿计次，得到N，则频率 $f_x=N/T$
 - 测周法：两个上升沿内，以标准频率fc计次，得到N ，则频率 $f_x=f_c/N$
-- 中界频率：测频法与测周法误差相等的频率点 $f_m=√f_c/T$
+- 中界频率：测频法与测周法误差相等的频率点 $f_m=\sqrt{f_c/T}$
 
 **输入捕获基本结构**
 
@@ -1858,19 +1858,19 @@ int main(void)
 
 :::code-tabs
 @tab `User/main.cpp`
-@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/User/main.cpp)
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度-占空比/User/main.cpp)
 
 @tab `/System/InputCompare.h`
-@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/InputCompare.h)
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度-占空比/System/InputCompare.h)
 
 @tab `/System/InputCompare.c`
-@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/InputCompare.c)
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度-占空比/System/InputCompare.c)
 
 @tab `/System/PWM.h`
-@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/PWM.h)
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度-占空比/System/PWM.h)
 
 @tab `/System/PWM.c`
-@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度(占空比)/System/PWM.c)
+@[code cpp](./projects/stm32-makefile/09-Timer-输入比较-PWMI模式-测PWM频率和脉冲宽度-占空比/System/PWM.c)
 :::
 
 ### 编码器接口
@@ -3950,8 +3950,6 @@ int main(void)
 :::code-tabs
 @tab `User/main.cpp`
 @[code cpp](./projects/stm32-makefile/27-PWR-深度睡眠模式-停机模式-外部中断唤醒/User/main.cpp)
-@tab `/System/Serial.c`
-@[code cpp](./projects/stm32-makefile/27-PWR-深度睡眠模式-停机模式-外部中断唤醒/System/Serial.c)
 :::
 
 ### 深度睡眠模式——待机模式——rtc闹钟唤醒——wakeup唤醒

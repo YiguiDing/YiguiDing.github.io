@@ -688,7 +688,7 @@ const addon = require('./addon');
 addon.fn();
 ```
 
-使用 `Napi::Function` 类，可以在原生插件中以两种不同的方法调用JavaScript函数对象：`Call` 和 `MakeCallback`。这两个方法的API非常相似，但它们适用于不同的场景。`MakeCallback` 方法用于在从[异步操作](async_operations.md)返回后，或通常在没有现有JavaScript函数在调用栈上时，从原生代码回调到JavaScript。而 `Call` 方法则在已经有JavaScript函数在调用栈上时使用（例如，在从JavaScript调用的原生方法执行期间）。
+使用 `Napi::Function` 类，可以在原生插件中以两种不同的方法调用JavaScript函数对象：`Call` 和 `MakeCallback`。这两个方法的API非常相似，但它们适用于不同的场景。`MakeCallback` 方法用于在从`[异步操作](async_operations.md)`返回后，或通常在没有现有JavaScript函数在调用栈上时，从原生代码回调到JavaScript。而 `Call` 方法则在已经有JavaScript函数在调用栈上时使用（例如，在从JavaScript调用的原生方法执行期间）。
 
 ### 类型定义
 
@@ -794,7 +794,7 @@ Napi::Value Napi::Function::MakeCallback(napi_value recv, const std::vector<napi
 
 - `[in] recv`: 传递给被调用函数的 `this` 对象。
 - `[in] args`: 作为函数参数的 `napi_value` 形式的JavaScript值列表。
-- `[in] context`: 触发回调的异步操作的上下文。通常应为之前从[Napi::AsyncContext](async_context.md)获取的值。允许使用`nullptr`，这表示使用当前异步上下文（如果有的话）来执行回调。
+- `[in] context`: 触发回调的异步操作的上下文。通常应为之前从`[Napi::AsyncContext](async_context.md)`获取的值。允许使用`nullptr`，这表示使用当前异步上下文（如果有的话）来执行回调。
 
 返回代表函数返回的JavaScript值的 `Napi::Value`。
 
@@ -864,11 +864,11 @@ Napi::Value Napi::Function::operator()(const std::initializer_list<napi_value>& 
 
 `Napi::Object` 类对应于一个JavaScript对象。当处理更具体类型时，该类被以下node-addon-api类扩展，你可能会在开发中使用它们：
 
-- [`Napi::Array`](array.md)
-- [`Napi::ArrayBuffer`](array_buffer.md)
-- [`Napi::Buffer<T>`](buffer.md)
-- [`Napi::Function`](function.md)
-- [`Napi::TypedArray`](typed_array.md)
+- [Napi::Array]
+- [Napi::ArrayBuffer]
+- [Napi::Buffer<T>]
+- [Napi::Function]
+- [Napi::TypedArray]
 
 此类提供了许多便利方法，主要用于在JavaScript对象上设置或获取属性。例如，Set() 和 Get() 方法。
 
@@ -944,7 +944,7 @@ bool Napi::Object::Set(____ key, ____ value) const;
 键可以是以下类型之一：
 
 - `napi_value`
-- [`Napi::Value`](value.md)
+- [`Napi::Value`]
 - `const char*`
 - `const std::string&`
 - `uint32_t`
@@ -964,7 +964,7 @@ bool Napi::Object::Delete(____ key) const;
 `key` 可以是以下类型之一：
 
 - `napi_value`
-- [`Napi::Value`](value.md)
+- [`Napi::Value`]
 - `const char *`
 - `const std::string &`
 - `uint32_t`
@@ -982,7 +982,7 @@ Napi::Value Napi::Object::Get(____ key);
 `key` 可以是以下类型之一：
 
 - `napi_value`
-- [`Napi::Value`](value.md)
+- [`Napi::Value`]
 - `const char *`
 - `const std::string &`
 - `uint32_t`
