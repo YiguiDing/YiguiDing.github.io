@@ -17,7 +17,7 @@ jobs:
     # 拉取仓库
     - uses: actions/checkout@v4
       with:
-        # submodules: true
+        submodules: true
         fetch-depth: 0
     # setup node
     - uses: actions/setup-node@v4
@@ -26,10 +26,10 @@ jobs:
         cache: 'npm'
     # build
     - run: |
-        npm run submodule_install
         # binary package for node_modules/rollup
         npm i -D @rollup/rollup-linux-x64-gnu --legacy-peer-deps
         npm install --legacy-peer-deps
+        # npm run submodule_install
         npm run build
     # 推送到分支static-pages
     - uses: JamesIves/github-pages-deploy-action@v4
