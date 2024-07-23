@@ -10,7 +10,7 @@
     "updates-dependencies": "npx npm-check-updates -u",
     "dev": "vuepress dev blog",
     "dev:clean-dev": "vuepress dev blog --clean-cache",
-    "build": "vuepress build blog",
+    "build": "node --max_old_space_size=8192 ./node_modules/vuepress/bin/vuepress.js build blog",
     "lint": "prettier --check --write .",
     "lint:check": "prettier --check .",
     "lint-md": "markdownlint **/*.md --ignore node_modules --fix",
