@@ -866,7 +866,7 @@ Napi::Value Napi::Function::operator()(const std::initializer_list<napi_value>& 
 
 - [Napi::Array]
 - [Napi::ArrayBuffer]
-- [Napi::Buffer<T>]
+- [`Napi::Buffer<T>`]
 - [Napi::Function]
 - [Napi::TypedArray]
 
@@ -1082,8 +1082,8 @@ bool Napi::Object::DefineProperties(____ properties) const;
 ```
 
 - `[in] properties`: 一个【Napi::PropertyDescriptor】列表。可以是以下类型之一：
-  - const std::initializer_list<Napi::PropertyDescriptor>&
-  - const std::vector<Napi::PropertyDescriptor>&
+  - `const std::initializer_list<Napi::PropertyDescriptor>&`
+  - `const std::vector<Napi::PropertyDescriptor>&`
 
 在对象上定义属性。
 
