@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "*.page-template": "vue",
+        "*.layout-template": "vue",
+        "*.vue": "vue",
+        "i2c.h": "c",
+        "main.h": "c",
+        "soft_i2c.h": "c",
+        "delay.h": "c",
+        "time.h": "c",
+        "oled_printf.h": "c",
+        "mpu6050.h": "c",
+        "inv_mpu.h": "c",
+        "inv_mpu_dmp_motion_driver.h": "c",
+        "ml_math_func.h": "c",
+        "mlinclude.h": "c",
+        "math.h": "c",
+        "mlmath.h": "c",
+        "log.h": "c",
+        "stm32f10x.h": "c",
+        "oled.h": "c",
+        "mpu6050_2.h": "c",
+        "rtc_time.h": "c"
+    }
+}

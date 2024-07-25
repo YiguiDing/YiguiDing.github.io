@@ -63,6 +63,17 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "test.h": "c"
+        "test.h": "c",
+        "oled.h": "c",
+        "oled_printf.h": "c",
+        "mpu6050.h": "c",
+        "ml_math_func.h": "c",
+        "inv_mpu_dmp_motion_driver.h": "c",
+        "inv_mpu.h": "c",
+        "mltypes.h": "c",
+        "stdint_invensense.h": "c",
+        "math.h": "c",
+        "string.h": "c",
+        "stdint.h": "c"
     }
 }

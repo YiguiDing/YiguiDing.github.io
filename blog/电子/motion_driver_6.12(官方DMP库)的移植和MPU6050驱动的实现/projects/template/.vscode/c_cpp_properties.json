@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "gcc-arm-none-eabi",
+      "compilerPath": "D:/app/gcc-arm-none-eabi-10.3-2021.10-win32/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc.exe",
+      "defines": [
+        "STM32F10X_MD",
+        "USE_STDPERIPH_DRIVER",
+        "EMPL_TARGET_STM32F1",
+        "MPU6050",
+      ],
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/Drivers/**"
+      ],
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "${default}"
+    }
+  ],
+  "version": 4
+}
