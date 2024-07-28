@@ -3,6 +3,7 @@ import { sidebar } from "vuepress-theme-hope";
 export const sidebarConfig = sidebar({
   "/前端": "structure",
   "/后端": "structure",
+  "/源码": "structure",
   "/工具": "structure",
   "/随笔": "structure",
   "/理论": "structure",

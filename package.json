@@ -21,11 +21,11 @@
     "publish": "git add . && git commit -m 'update' && git push --force origin master"
   },
   "devDependencies": {
+    "@shikijs/twoslash": "^1.12.0",
     "@vuepress/bundler-vite": "^2.0.0-rc.14",
     "@vuepress/plugin-feed": "^2.0.0-rc.34",
     "@vuepress/plugin-pwa": "^2.0.0-rc.26",
-    "@vuepress/plugin-shiki": "^2.0.0-rc.39",
-    "vite": "^5.3.4",
+    "@vuepress/plugin-shiki": "^2.0.0-rc.40",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "execa": "^9.3.0",
@@ -35,10 +35,12 @@
     "npm-check-updates": "^16.14.20",
     "postcss-preset-env": "^9.6.0",
     "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.4",
+    "vp-update": "^2.0.0-rc.15",
     "vuepress": "2.0.0-rc.14",
     "vuepress-plugin-search-pro": "^2.0.0-rc.52",
-    "vuepress-theme-hope": "2.0.0-rc.52",
-    "vp-update": "^2.0.0-rc.15"
+    "vuepress-theme-hope": "2.0.0-rc.52"
   },
   "dependencies": {
     "@vue/repl": "^4.3.1",

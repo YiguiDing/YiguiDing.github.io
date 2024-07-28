@@ -10,6 +10,7 @@ export const navbarConfig = navbar([
       { text: "后端", icon: "server", link: "/后端/" },
       { text: "算法", icon: "diagram-project", link: "/算法/" },
       { text: "电子", icon: "bolt", link: "/电子/" },
+      { text: "源码", icon: "code-fork", link: "/源码/" },
       { text: "理论", icon: "book-bookmark", link: "/理论/" },
       { text: "工具", icon: "screwdriver-wrench", link: "/工具/" },
     ],

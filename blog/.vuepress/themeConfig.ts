@@ -2,6 +2,7 @@ import { hopeTheme } from "vuepress-theme-hope";
 import { navbarConfig } from "./navBarConfig";
 import { sidebarConfig } from "./sidebarConfig";
 import { encryptConfig } from "./encryptConfig";
+import { transformerTwoslash } from "@shikijs/twoslash";
 
 export const themeConfig = hopeTheme({
   hostname: "https://dingdingdang.online",
@@ -86,10 +87,21 @@ export const themeConfig = hopeTheme({
     },
     shiki: {
       themes: {
-        light: "github-dark",
+        light: "github-light",
         dark: "slack-dark",
       },
-      langs: ["cpp", "c", "js", "html", "css", "java", "json", "bash", "makefile", "go"],
+      langs: ["cpp", "c", "js", "ts", "html", "css", "java", "json", "bash", "makefile", "go"],
+      // https://shiki.style/packages/twoslash
+      transformers: [
+        transformerTwoslash({
+          // 显式触发
+          // https://shiki.style/packages/twoslash#explicit-trigger
+          explicitTrigger: true,
+          onTwoslashError(error, code, lang, options) {
+            console.log(arguments);
+          },
+        }),
+      ],
     },
     // 代码复制
     copyCode: {
