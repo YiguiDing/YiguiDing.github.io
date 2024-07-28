@@ -122,7 +122,7 @@ export const themeConfig = hopeTheme({
       category: "Announcements",
       categoryId: "DIC_kwDOKtsDVc4Ca96V",
     },
-    pwa: {
+    pwa: false && {
       // 提示用户他可能在阅读已过时的内容
       update: "hint",
       // cachePic: true,
