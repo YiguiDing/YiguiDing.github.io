@@ -30,7 +30,7 @@
     </script>
     <meta property="og:url" content="https://dingdingdang.online/%E5%B7%A5%E5%85%B7/%E4%BD%BF%E7%94%A8workflows%E5%AE%9E%E7%8E%B0%E5%AF%B9vuepress%E7%9A%84%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2/"><meta property="og:site_name" content="YiguiDing的Blog小站"><meta property="og:title" content="使用workflows实现对vuepress的一键部署"><meta property="og:description" content="使用workflows实现对vuepress的一键部署 服务端配置记录 创建git用户 为github的主机生成私钥和公钥 在github的仓库创建私钥变量 变量 名为 SSH_PRIVATE_KEY 值为 刚刚生成的私钥内容 Alt text 编写workflows配置文件 此时在该配置文件中就能通过，${{ secrets.SSH_PRIVATE_..."><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2024-03-18T08:31:16.000Z"><meta property="article:author" content="丁毅桂"><meta property="article:published_time" content="2023-11-17T13:21:00.000Z"><meta property="article:modified_time" content="2024-03-18T08:31:16.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"使用workflows实现对vuepress的一键部署","image":[""],"datePublished":"2023-11-17T13:21:00.000Z","dateModified":"2024-03-18T08:31:16.000Z","author":[{"@type":"Person","name":"丁毅桂","email":"2449695354@qq.com"}]}</script><meta name="baidu-site-verification" content="codeva-PwE9Ts6nMl"><link rel="alternate" type="application/rss+xml" href="https://dingdingdang.online/rss.xml" title="YiguiDing的Blog小站 RSS Feed"><link rel="icon" href="/images/favicon_icon.jpg"><title>使用workflows实现对vuepress的一键部署 | YiguiDing的Blog小站</title><meta name="description" content="使用workflows实现对vuepress的一键部署 服务端配置记录 创建git用户 为github的主机生成私钥和公钥 在github的仓库创建私钥变量 变量 名为 SSH_PRIVATE_KEY 值为 刚刚生成的私钥内容 Alt text 编写workflows配置文件 此时在该配置文件中就能通过，${{ secrets.SSH_PRIVATE_...">
     <link rel="preload" href="/assets/style-CAP6j7u6.css" as="style"><link rel="stylesheet" href="/assets/style-CAP6j7u6.css">
-    <link rel="modulepreload" href="/assets/app-Cdh6IwlF.js"><link rel="modulepreload" href="/assets/index.html-Cia-qFRQ.js">
+    <link rel="modulepreload" href="/assets/app-DDZPXrq3.js"><link rel="modulepreload" href="/assets/index.html-BN8ppP0U.js">
     
   </head>
   <body>
@@ -64,101 +64,101 @@
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> github-action.pub</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;"># 将公钥内容附加到已授权的主机列表</span></span>
-<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> github-action.pub</span><span style="--shiki-light:#D73A49;--shiki-dark:#D4D4D4;"> &gt;&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> ~/.ssh/authorized_keys</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>在github的仓库创建私钥变量</strong></p><p>变量 名为 <code>SSH_PRIVATE_KEY</code> 值为 刚刚生成的私钥内容</p><p><img src="/assets/image-BgWh_IE7.png" alt="Alt text"></p><p><strong>编写workflows配置文件</strong></p><blockquote><ul><li>此时在该配置文件中就能通过，<code>${{ secrets.SSH_PRIVATE_KEY }}</code> 获取到配置的私钥地址，</li><li>然后由于已经将其公钥添加到了自己的服务器中，所以github的服务器就能和自己的服务器建立免密链接</li></ul></blockquote><div class="language-yml line-numbers-mode" data-highlighter="shiki" data-ext="yml" data-title="yml" style="--shiki-light:#24292e;--shiki-dark:#E6E6E6;--shiki-light-bg:#fff;--shiki-dark-bg:#222222;"><pre class="shiki shiki-themes github-light slack-dark vp-code"><code><span class="line"><span>name: Deploy blog</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>on:</span></span>
-<span class="line"><span>  push:</span></span>
-<span class="line"><span>    branches:</span></span>
-<span class="line"><span>      - master</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>permissions:</span></span>
-<span class="line"><span>  contents: write</span></span>
-<span class="line"><span>  pages: write</span></span>
-<span class="line"><span>  id-token: write</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>jobs:</span></span>
-<span class="line"><span>  build-static-pages:</span></span>
-<span class="line"><span>    runs-on: ubuntu-latest</span></span>
-<span class="line"><span>    steps:</span></span>
-<span class="line"><span>      - name: Checkout</span></span>
-<span class="line"><span>        uses: actions/checkout@v4</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          submodules: true</span></span>
-<span class="line"><span>          fetch-depth: 0</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Setup Node.js</span></span>
-<span class="line"><span>        uses: actions/setup-node@v4</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          node-version: 18</span></span>
-<span class="line"><span>          cache: npm</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Build Blog</span></span>
-<span class="line"><span>        run: |</span></span>
-<span class="line"><span>          npm install</span></span>
-<span class="line"><span>          npm run build</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Deploy</span></span>
-<span class="line"><span>        uses: JamesIves/github-pages-deploy-action@v4</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          # 将目录下代码推送到某个分支</span></span>
-<span class="line"><span>          folder: blog/.vuepress/dist</span></span>
-<span class="line"><span>          branch: static-pages</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  deploy-to-github-pages:</span></span>
-<span class="line"><span>    needs: build-static-pages</span></span>
-<span class="line"><span>    runs-on: ubuntu-latest</span></span>
-<span class="line"><span>    environment:</span></span>
-<span class="line"><span>      name: github-pages</span></span>
-<span class="line"><span>      # https://YiguiDing.github.io/</span></span>
-<span class="line"><span>      url: ${{ steps.deployment.outputs.page_url }}</span></span>
-<span class="line"><span>    steps:</span></span>
-<span class="line"><span>      - name: Checkout</span></span>
-<span class="line"><span>        uses: actions/checkout@v4</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          ref: static-pages</span></span>
-<span class="line"><span>          fetch-depth: 0</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Setup Pages</span></span>
-<span class="line"><span>        uses: actions/configure-pages@v3</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Upload artifact</span></span>
-<span class="line"><span>        uses: actions/upload-pages-artifact@v2</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          # Upload entire repository</span></span>
-<span class="line"><span>          path: &#39;./&#39;</span></span>
-<span class="line"><span>          </span></span>
-<span class="line"><span>      - name: Deploy to GitHub Pages</span></span>
-<span class="line"><span>        id: deployment</span></span>
-<span class="line"><span>        uses: actions/deploy-pages@v2</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  deploy-to-server:</span></span>
-<span class="line"><span>    needs: build-static-pages</span></span>
-<span class="line"><span>    runs-on: ubuntu-latest</span></span>
-<span class="line"><span>    steps:</span></span>
-<span class="line"><span>      - name: Checkout</span></span>
-<span class="line"><span>        uses: actions/checkout@v4</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          ref: static-pages</span></span>
-<span class="line"><span>          fetch-depth: 0</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Configuration environment</span></span>
-<span class="line"><span>        uses: webfactory/ssh-agent@v0.8.0</span></span>
-<span class="line"><span>        with:</span></span>
-<span class="line"><span>          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>      - name: Deploy</span></span>
-<span class="line"><span>        run: |</span></span>
-<span class="line"><span>          ssh-keyscan dingdingdang.online &gt;&gt; ~/.ssh/known_hosts</span></span>
-<span class="line"><span>          git config --global user.name &#39;YiguiDing&#39;</span></span>
-<span class="line"><span>          git config --global user.email &#39;2449695354@qq.com&#39;</span></span>
-<span class="line"><span>          ssh git@dingdingdang.online &quot;git config --global --add safe.directory /var/www/vuepress2-blog-root/&quot;</span></span>
-<span class="line"><span>          ssh git@dingdingdang.online &quot;git config --global --add receive.denyCurrentBranch ignore&quot;</span></span>
-<span class="line"><span>          git push -f git@dingdingdang.online:/var/www/vuepress2-blog-root/ static-pages</span></span>
-<span class="line"><span>          ssh git@dingdingdang.online &quot;cd /var/www/vuepress2-blog-root/  &amp;&amp; git reset --hard HEAD&quot;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>将本地分支提交到github仓库</strong></p><div class="language-bash line-numbers-mode" data-highlighter="shiki" data-ext="bash" data-title="bash" style="--shiki-light:#24292e;--shiki-dark:#E6E6E6;--shiki-light-bg:#fff;--shiki-dark-bg:#222222;"><pre class="shiki shiki-themes github-light slack-dark vp-code"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;"># 添加远程地址</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> github-action.pub</span><span style="--shiki-light:#D73A49;--shiki-dark:#D4D4D4;"> &gt;&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> ~/.ssh/authorized_keys</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>在github的仓库创建私钥变量</strong></p><p>变量 名为 <code>SSH_PRIVATE_KEY</code> 值为 刚刚生成的私钥内容</p><p><img src="/assets/image-BgWh_IE7.png" alt="Alt text"></p><p><strong>编写workflows配置文件</strong></p><blockquote><ul><li>此时在该配置文件中就能通过，<code>${{ secrets.SSH_PRIVATE_KEY }}</code> 获取到配置的私钥地址，</li><li>然后由于已经将其公钥添加到了自己的服务器中，所以github的服务器就能和自己的服务器建立免密链接</li></ul></blockquote><div class="language-yml line-numbers-mode" data-highlighter="shiki" data-ext="yml" data-title="yml" style="--shiki-light:#24292e;--shiki-dark:#E6E6E6;--shiki-light-bg:#fff;--shiki-dark-bg:#222222;"><pre class="shiki shiki-themes github-light slack-dark vp-code"><code><span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Deploy blog</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#569CD6;">on</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  push</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    branches</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">master</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">permissions</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  contents</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">write</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  pages</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">write</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  id-token</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">write</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">jobs</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  build-static-pages</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    runs-on</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">ubuntu-latest</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    steps</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Checkout</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/checkout@v4</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          submodules</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#569CD6;">true</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          fetch-depth</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#B5CEA8;">0</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Setup Node.js</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/setup-node@v4</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          node-version</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#B5CEA8;">18</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          cache</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">npm</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Build Blog</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        run</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#D73A49;--shiki-dark:#C586C0;">|</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          npm install</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          npm run build</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Deploy</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">JamesIves/github-pages-deploy-action@v4</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;">          # 将目录下代码推送到某个分支</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          folder</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">blog/.vuepress/dist</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          branch</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">static-pages</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  deploy-to-github-pages</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    needs</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">build-static-pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    runs-on</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">ubuntu-latest</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    environment</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">      name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">github-pages</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;">      # https://YiguiDing.github.io/</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">      url</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">${{ steps.deployment.outputs.page_url }}</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    steps</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Checkout</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/checkout@v4</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          ref</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">static-pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          fetch-depth</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#B5CEA8;">0</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Setup Pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/configure-pages@v3</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Upload artifact</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/upload-pages-artifact@v2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;">          # Upload entire repository</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          path</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">&#39;./&#39;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">          </span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Deploy to GitHub Pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        id</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">deployment</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/deploy-pages@v2</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">  deploy-to-server</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    needs</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">build-static-pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    runs-on</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">ubuntu-latest</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">    steps</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Checkout</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">actions/checkout@v4</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          ref</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">static-pages</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          fetch-depth</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#B5CEA8;">0</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Configuration environment</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        uses</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">webfactory/ssh-agent@v0.8.0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        with</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">:</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">          ssh-private-key</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">${{ secrets.SSH_PRIVATE_KEY }}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">      - </span><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">Deploy</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#569CD6;">        run</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;">: </span><span style="--shiki-light:#D73A49;--shiki-dark:#C586C0;">|</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          ssh-keyscan dingdingdang.online &gt;&gt; ~/.ssh/known_hosts</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          git config --global user.name &#39;YiguiDing&#39;</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          git config --global user.email &#39;2449695354@qq.com&#39;</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          ssh git@dingdingdang.online &quot;git config --global --add safe.directory /var/www/vuepress2-blog-root/&quot;</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          ssh git@dingdingdang.online &quot;git config --global --add receive.denyCurrentBranch ignore&quot;</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          git push -f git@dingdingdang.online:/var/www/vuepress2-blog-root/ static-pages</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;">          ssh git@dingdingdang.online &quot;cd /var/www/vuepress2-blog-root/  &amp;&amp; git reset --hard HEAD&quot;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>将本地分支提交到github仓库</strong></p><div class="language-bash line-numbers-mode" data-highlighter="shiki" data-ext="bash" data-title="bash" style="--shiki-light:#24292e;--shiki-dark:#E6E6E6;--shiki-light-bg:#fff;--shiki-dark-bg:#222222;"><pre class="shiki shiki-themes github-light slack-dark vp-code"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;"># 添加远程地址</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> remote</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> add</span><span style="--shiki-light:#005CC5;--shiki-dark:#CE9178;"> --master</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> master</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> origin</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> git@github.com:YiguiDing/YiguiDing.github.io.git</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> add</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> .</span><span style="--shiki-light:#24292E;--shiki-dark:#E6E6E6;"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> commit</span><span style="--shiki-light:#005CC5;--shiki-dark:#CE9178;"> -m</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> &quot;update&quot;</span></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A9955;"># 强制推送</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#DCDCAA;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> push</span><span style="--shiki-light:#005CC5;--shiki-dark:#CE9178;"> --force</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> origin</span><span style="--shiki-light:#032F62;--shiki-dark:#CE9178;"> master</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>实现效果</strong></p><p><img src="/assets/image2-BcqzzwnX.png" alt="Alt text"></p></div><!----><footer class="vp-page-meta"><!----><div class="vp-meta-item git-info"><!----><div class="contributors"><span class="vp-meta-label">贡献者: </span><!--[--><!--[--><span class="vp-meta-info" title="email: 2449695354@qq.com">YiguiDing</span><!--]--><!--]--></div></div></footer><!----><div id="vp-comment" class="giscus-wrapper input-top" style="display:block;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" preserveAspectRatio="xMidYMid" viewBox="0 0 100 100"><circle cx="28" cy="75" r="11" fill="currentColor"><animate attributeName="fill-opacity" begin="0s" dur="1s" keyTimes="0;0.2;1" repeatCount="indefinite" values="0;1;1"></animate></circle><path fill="none" stroke="#88baf0" stroke-width="10" d="M28 47a28 28 0 0 1 28 28"><animate attributeName="stroke-opacity" begin="0.1s" dur="1s" keyTimes="0;0.2;1" repeatCount="indefinite" values="0;1;1"></animate></path><path fill="none" stroke="#88baf0" stroke-width="10" d="M28 25a50 50 0 0 1 50 50"><animate attributeName="stroke-opacity" begin="0.2s" dur="1s" keyTimes="0;0.2;1" repeatCount="indefinite" values="0;1;1"></animate></path></svg></div><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><!----><div class="vp-copyright">MIT Licensed | Copyright © 2019-present Yigui-Ding</div></footer></div><!--]--><!--[--><!----><!----><!----><!--]--><!--]--></div>
-    <script type="module" src="/assets/app-Cdh6IwlF.js" defer></script>
+    <script type="module" src="/assets/app-DDZPXrq3.js" defer></script>
   </body>
 </html>
