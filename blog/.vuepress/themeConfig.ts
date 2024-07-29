@@ -90,7 +90,27 @@ export const themeConfig = hopeTheme({
         light: "github-light",
         dark: "slack-dark",
       },
-      langs: ["cpp", "c", "js", "ts", "html", "css", "java", "json", "bash", "makefile", "go"],
+      langs: [
+        "cpp",
+        "c",
+        "js",
+        "ts",
+        "html",
+        "css",
+        "less",
+        "vue",
+        "jsx",
+        "markdown",
+        "xml",
+        "properties",
+        "yaml",
+        "csharp",
+        "java",
+        "json",
+        "bash",
+        "makefile",
+        "go",
+      ],
       // https://shiki.style/packages/twoslash
       transformers: [
         transformerTwoslash({
