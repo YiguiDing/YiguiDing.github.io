@@ -2,24 +2,57 @@
 import { Manager } from "socket.io-client";
 import { WebRTCSocket } from "./lib/socket/web-rtc-socket";
 import { SignalingChannel } from "./lib/socket/signaling-channel";
-import { onMounted } from "vue";
+import { Buffer } from "node:buffer";
+import { ref } from "vue";
 
-async function main() {
-  let web_socket = new Manager("localhost:8080");
-  let signalingChannel = new SignalingChannel(web_socket);
-  let peerConnection = new RTCPeerConnection();
-  let webRtcSocket = new WebRTCSocket(peerConnection, signalingChannel);
-  await webRtcSocket.sendOffer();
-  webRtcSocket.on("data", (data) => console.log(data));
-  webRtcSocket.on("open", () => {
-    webRtcSocket.write(Buffer.from("hello web-rtc!"));
-  });
+let open = ref(false);
+let temp = ref("");
+let messages = ref(new Array<any>());
+let webSocket = new Manager("localhost:8080");
+let signalingChannel = new SignalingChannel(webSocket);
+let webRtcSocket: WebRTCSocket;
+
+async function init(initiator: boolean) {
+  webRtcSocket = new WebRTCSocket(initiator, signalingChannel);
+  webRtcSocket.on("open", () => (open.value = true));
+  webRtcSocket.on("close", () => (open.value = false));
+  webRtcSocket.on("data", (data) => messages.value.push(data));
 }
 
-onMounted(main);
+async function send() {
+  webRtcSocket.write(Buffer.from(temp.value));
+  temp.value = "";
+}
 </script>
 <template>
-  <div></div>
+  <div class="wrapper">
+    <div class="top">连接状态：{{ open }}</div>
+    <div class="content">
+      <div class="row" v-for="item in messages">{{ Buffer.from(item) }}</div>
+    </div>
+    <div class="bottom">
+      <button @click="() => init(true)">发起连接</button>
+      <button @click="() => init(false)">等待连接</button>
+      <input v-model="temp" type="text" />
+      <button @click="send">发送消息</button>
+    </div>
+  </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.wrapper {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  border: 1px solid gray;
+  .content {
+    width: 100%;
+    min-height: 100px;
+  }
+  .bottom {
+    display: flex;
+  }
+}
+</style>
