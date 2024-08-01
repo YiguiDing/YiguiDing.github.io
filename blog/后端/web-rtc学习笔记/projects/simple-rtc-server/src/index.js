@@ -8,9 +8,9 @@ const addr = "0.0.0.0";
 const port = 8080;
 
 io.of("/signaling").on("connection", (socket) => {
-  socket.on("offer", (offer) => console.log("offer", offer));
-  socket.on("answer", (answer) => console.log("answer", answer));
-  socket.on("icecandidate", (icecandidate) => console.log("icecandidate", icecandidate));
+  socket.on("offer", (offer) => socket.broadcast.emit("offer", offer));
+  socket.on("answer", (answer) => socket.broadcast.emit("answer", answer));
+  socket.on("icecandidate", (icecandidate) => socket.broadcast.emit("icecandidate", icecandidate));
 });
 
 httpServer.listen(port, addr, () => {

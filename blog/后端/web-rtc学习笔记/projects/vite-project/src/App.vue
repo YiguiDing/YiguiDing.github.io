@@ -28,6 +28,7 @@ async function send() {
   <div class="wrapper">
     <div class="top">连接状态：{{ open }}</div>
     <div class="content">
+      收到消息：
       <div class="row" v-for="item in messages">{{ Buffer.from(item) }}</div>
     </div>
     <div class="bottom">
