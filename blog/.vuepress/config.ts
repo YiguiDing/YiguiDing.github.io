@@ -11,7 +11,6 @@ export default defineUserConfig({
   // 包含和排除
   pagePatterns: [
     "**/*.md",
-    "**/*.vue",
     "!**/.vuepress/**",
     "!**/node_modules/**",
     "!**/projs/**",
