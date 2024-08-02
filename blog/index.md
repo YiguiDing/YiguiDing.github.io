@@ -2,7 +2,7 @@
 home: true 
 layout: BlogHome
 index: false
-heroText: 在绝望中坚持真理 在荒诞中奋起反抗
+heroText: 在绝望中寻找希望 在荒诞中奋起反抗
 tagline: 欢迎来到我的新blog小站
 # heroImage: "/images/author_icon.jpg"
 # 背景图
