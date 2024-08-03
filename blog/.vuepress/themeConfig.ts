@@ -87,7 +87,7 @@ export const themeConfig = hopeTheme({
     },
     shiki: {
       themes: {
-        light: "github-light",
+        light: "catppuccin-latte",
         dark: "slack-dark",
       },
       langs: [
