@@ -1,15 +1,17 @@
 #include "FOC.h"
 
-float max_power_supply_voltage = 12; // 供电电压
-float limit_voltage = 5;             // 供电电压
+float max_power_supply_voltage = 32; // 供电电压
+float limit_voltage = 10;            // 供电电压
 uint8_t pole_pairs = 7;              // 极对数
+float max_force_angle = 45;          // 输出最大力矩时的最大误差角度（用于计算位置闭环控制的Kp）
 
 void FOC_Init()
 {
     Timer2_PWM_Init();
-    Timer2_PWM_SetFreq(70);
+    Timer2_PWM_SetFreq(10);
     RTC_Time_Init();
-    OLED_Init();
+    Soft_I2C_Init();
+    AS5600_Init();
 }
 /**
  * @param uD 施加在D轴的电压 范围 [-max,+max]
@@ -68,6 +70,23 @@ void FOC_SpeedOpenLoopControl(float targetSpeed)
         angle = normalizeAngle(angle);
         FOC_ControlUpdate(0, limit_voltage, angle);
         prevTime_ms = curTime_ms;
+    }
+}
+/**
+ * 位置闭环控制
+ * @param targetAngle 位置
+ */
+void FOC_PositionCloseLoopControl(float targetAngle)
+{
+    while (1)
+    {
+        float curentAngle = AS5600_Angle();              // 获取当前位置
+        float positon_error = targetAngle - curentAngle; // 计算位置误差
+        float Kp = limit_voltage / max_force_angle;      // 计算k_p 最大输出力矩:最大误差角度
+
+        float output_Uq = Kp * positon_error; // 计算输出值
+
+        FOC_ControlUpdate(0, output_Uq, rad(curentAngle));
     }
 }
 /**

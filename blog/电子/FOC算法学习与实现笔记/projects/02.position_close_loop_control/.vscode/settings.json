@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.page-template": "vue",
+        "*.layout-template": "vue",
+        "*.vue": "vue",
+        "stm32f10x.h": "c",
+        "timer2_pwm.h": "c",
+        "rtc_time.h": "c",
+        "foc.h": "c",
+        "math.h": "c",
+        "oled.h": "c",
+        "delay.h": "c",
+        "oled_printf.h": "c",
+        "as5600.h": "c",
+        "soft_i2c.h": "c",
+        "main.h": "c"
+    }
+}
