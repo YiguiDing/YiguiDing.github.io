@@ -1,9 +1,9 @@
 #include "FOC.h"
 
-float max_power_supply_voltage = 32; // 供电电压
-float limit_voltage = 10;            // 供电电压
+float max_power_supply_voltage = 24; // 供电电压
+float limit_voltage = 2;             // 供电电压
 uint8_t pole_pairs = 7;              // 极对数
-float max_force_angle = 45;          // 输出最大力矩时的最大误差角度（用于计算位置闭环控制的Kp）
+float max_force_angle = 0.25 * M_PI; // 45° // 输出最大力矩时的最大误差角度（用于计算位置闭环控制的Kp）
 
 void FOC_Init()
 {
@@ -78,15 +78,21 @@ void FOC_SpeedOpenLoopControl(float targetSpeed)
  */
 void FOC_PositionCloseLoopControl(float targetAngle)
 {
+    targetAngle = 0.5 * M_PI;
+    uint64_t prevTime_ms, curTime_ms, dt_ms;
+    curTime_ms = prevTime_ms = RTC_Time_GetTime_MS(NULL);
     while (1)
     {
+        curTime_ms = RTC_Time_GetTime_MS(NULL);
+        dt_ms = curTime_ms - prevTime_ms;
         float curentAngle = AS5600_Angle();              // 获取当前位置
         float positon_error = targetAngle - curentAngle; // 计算位置误差
         float Kp = limit_voltage / max_force_angle;      // 计算k_p 最大输出力矩:最大误差角度
 
         float output_Uq = Kp * positon_error; // 计算输出值
 
-        FOC_ControlUpdate(0, output_Uq, rad(curentAngle));
+        FOC_ControlUpdate(0, output_Uq, curentAngle);
+        prevTime_ms = curTime_ms;
     }
 }
 /**

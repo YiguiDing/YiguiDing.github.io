@@ -31,6 +31,7 @@ extern "C"
 
     void AS5600_Init();
     float AS5600_Angle();
+    float AS5600_RawAngle();
     float AS5600_Cycle();
 
 #ifdef __cplusplus

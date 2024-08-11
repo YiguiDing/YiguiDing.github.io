@@ -6,6 +6,7 @@
 
 int main()
 {
+  OLED_Init();
   FOC_Init();
   FOC_PositionCloseLoopControl(180);
   return 0;
