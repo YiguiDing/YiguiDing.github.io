@@ -12,6 +12,13 @@ void FOC_Init()
     RTC_Time_Init();
     Soft_I2C_Init();
     AS5600_Init();
+    // ####### 校准AS5600 ######
+    // 在Q轴产生磁场 此时的位置就是定子的0度
+    FOC_ControlUpdate(0, limit_voltage, normalizeAngle(rad(-90)));
+    Delay_ms(500);
+    AS5600_SetError(AS5600_Angle());
+    FOC_ControlUpdate(0, 0, 0);
+    // #########################
 }
 /**
  * @param uD 施加在D轴的电压 范围 [-max,+max]
@@ -78,7 +85,6 @@ void FOC_SpeedOpenLoopControl(float targetSpeed)
  */
 void FOC_PositionCloseLoopControl(float targetAngle)
 {
-    targetAngle = 0.5 * M_PI;
     uint64_t prevTime_ms, curTime_ms, dt_ms;
     curTime_ms = prevTime_ms = RTC_Time_GetTime_MS(NULL);
     while (1)

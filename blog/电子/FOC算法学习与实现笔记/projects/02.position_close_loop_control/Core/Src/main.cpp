@@ -8,6 +8,6 @@ int main()
 {
   OLED_Init();
   FOC_Init();
-  FOC_PositionCloseLoopControl(180);
+  FOC_PositionCloseLoopControl(M_PI);
   return 0;
 }
