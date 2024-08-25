@@ -1,23 +1,24 @@
 #include "FOC.h"
 
-float max_power_supply_voltage = 24; // 供电电压
-float limit_voltage = 2;             // 供电电压
+float max_power_supply_voltage = 12; // 供电电压
+float limit_voltage = 4;             // 供电电压
 uint8_t pole_pairs = 7;              // 极对数
 float max_force_angle = 0.25 * M_PI; // 45° // 输出最大力矩时的最大误差角度（用于计算位置闭环控制的Kp）
 
 void FOC_Init()
 {
     Timer2_PWM_Init();
-    Timer2_PWM_SetFreq(10);
+    Timer2_PWM_SetFreq(40);
     RTC_Time_Init();
     Soft_I2C_Init();
     AS5600_Init();
     // ####### 校准AS5600 ######
-    // 在Q轴产生磁场 此时的位置就是定子的0度
-    FOC_ControlUpdate(0, limit_voltage, normalizeAngle(rad(-90)));
-    Delay_ms(500);
-    AS5600_SetError(AS5600_Angle());
+    // 在D轴产生磁场 此时的位置就是定子的0度
+    FOC_ControlUpdate(2, 0, 0);
+    Delay_ms(1000);
+    AS5600_SetError(-AS5600_Angle());
     FOC_ControlUpdate(0, 0, 0);
+    Delay_ms(1000);
     // #########################
 }
 /**
@@ -28,8 +29,8 @@ void FOC_Init()
 void FOC_ControlUpdate(float uD, float uQ, float angle)
 {
     // 限制电压范围
-    uD = fixedRange(-max_power_supply_voltage, uD, max_power_supply_voltage);
-    uQ = fixedRange(-max_power_supply_voltage, uQ, max_power_supply_voltage);
+    uD = fixedRange(-limit_voltage, uD, limit_voltage);
+    uQ = fixedRange(-limit_voltage, uQ, limit_voltage);
     // 通过机械角度计算电角度
     angle = normalizeAngle(electricalAngle(angle));
     // 帕克变换
@@ -49,15 +50,11 @@ void FOC_ControlUpdate(float uD, float uQ, float angle)
  */
 void FOC_setPhaseVoltage(float uA, float uB, float uC)
 {
-    // 限制电压范围
-    uA = fixedRange(-limit_voltage, uA, limit_voltage);
-    uB = fixedRange(-limit_voltage, uB, limit_voltage);
-    uC = fixedRange(-limit_voltage, uC, limit_voltage);
-    Timer2_PWM_SetDuty(
-        // 重映射 [-max,+max] => [0,1]
-        uA / 2 / max_power_supply_voltage + 0.5,
-        uB / 2 / max_power_supply_voltage + 0.5,
-        uC / 2 / max_power_supply_voltage + 0.5);
+    // 重映射 [-max,+max] => [0,1]
+    uA = uA / 2 / max_power_supply_voltage + 0.5;
+    uB = uB / 2 / max_power_supply_voltage + 0.5;
+    uC = uC / 2 / max_power_supply_voltage + 0.5;
+    Timer2_PWM_SetDuty(uA, uB, uC);
 }
 /**
  * 速度开环控制
@@ -91,13 +88,12 @@ void FOC_PositionCloseLoopControl(float targetAngle)
     {
         curTime_ms = RTC_Time_GetTime_MS(NULL);
         dt_ms = curTime_ms - prevTime_ms;
-        float curentAngle = AS5600_Angle();              // 获取当前位置
-        float positon_error = targetAngle - curentAngle; // 计算位置误差
-        float Kp = limit_voltage / max_force_angle;      // 计算k_p 最大输出力矩:最大误差角度
-
+        float curent_pos = AS5600_Position();           // 获取当前位置
+        float positon_error = targetAngle - curent_pos; // 计算位置误差
+        float Kp = limit_voltage / max_force_angle;     // 计算k_p 最大输出力矩:最大误差角度
         float output_Uq = Kp * positon_error; // 计算输出值
-
-        FOC_ControlUpdate(0, output_Uq, curentAngle);
+        // OLED_Printf("%.2f\n",curent_pos);
+        FOC_ControlUpdate(0, output_Uq, curent_pos);
         prevTime_ms = curTime_ms;
     }
 }

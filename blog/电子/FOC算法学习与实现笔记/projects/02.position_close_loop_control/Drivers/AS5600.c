@@ -3,7 +3,7 @@
 float angle, prev_angle, cur_angle, error;
 void AS5600_Init()
 {
-    angle = prev_angle = cur_angle = AS5600_RawAngle();
+    angle = prev_angle = cur_angle = AS5600_Angle();
 }
 void AS5600_SetError(float _error)
 {
@@ -12,7 +12,7 @@ void AS5600_SetError(float _error)
 /**
  * 获取位置[0,2π]
  */
-float AS5600_RawAngle()
+float AS5600_Angle()
 {
     uint8_t data[2];
     read(AS5600_ANGLE, data, 2);
@@ -20,9 +20,9 @@ float AS5600_RawAngle()
 }
 
 float minus(float degA, float degB);
-float AS5600_Angle()
+float AS5600_Position()
 {
-    cur_angle = AS5600_RawAngle();
+    cur_angle = AS5600_Angle();
     angle += minus(cur_angle, prev_angle);
     prev_angle = cur_angle;
     return angle + error;
