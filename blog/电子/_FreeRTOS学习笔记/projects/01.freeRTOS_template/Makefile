@@ -6,13 +6,6 @@
 #	2017-02-10 - Several enhancements + project update mode
 #   2015-07-22 - first version
 # ------------------------------------------------
-
-######################################
-# target
-######################################
-TARGET = template
-
-
 ######################################
 # building variables
 ######################################
@@ -20,14 +13,15 @@ TARGET = template
 DEBUG = 1
 # optimization
 OPT = -Og
-
-
 #######################################
 # paths
 #######################################
-# Build path
 BUILD_DIR = build
-
+OUTPUT_DIR = output
+######################################
+# target
+######################################
+TARGET = main
 ######################################
 # source
 ######################################
@@ -121,13 +115,21 @@ LIBS = -lc -lm -lnosys
 LIBDIR = 
 LDFLAGS = $(MCU) -specs=nosys.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections,--print-memory-usage -u _printf_float
 
-# default action: build all
-all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
-
-
 #######################################
 # build the application
 #######################################
+
+#######################################
+# build  objects
+#######################################
+$(BUILD_DIR):
+	mkdir $@
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
+	$(CC) -c $(C_FLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
+$(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR) 
+	$(XX) -c $(CPP_FLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
+$(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
+	$(AS) -c $(C_FLAGS) $< -o $@
 # list of c program objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
 vpath %.c $(sort $(dir $(C_SOURCES)))
@@ -139,43 +141,39 @@ OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASMM_SOURCES:.S=.o)))
 vpath %.S $(sort $(dir $(ASMM_SOURCES)))
-
-$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
-	$(CC) -c $(C_FLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
-
-$(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR) 
-	$(XX) -c $(CPP_FLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
-
-$(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
-	$(AS) -c $(C_FLAGS) $< -o $@
-
-$(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
+#######################################
+# build  elf hex 
+#######################################
+$(OUTPUT_DIR):
+	mkdir $@
+$(OUTPUT_DIR)/$(TARGET).elf: $(OBJECTS) Makefile | $(OUTPUT_DIR)
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 	$(SZ) $@
-
-$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
+$(OUTPUT_DIR)/%.hex: $(OUTPUT_DIR)/%.elf | $(OUTPUT_DIR)
 	$(HEX) $< $@
-	
-$(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
-	
-$(BUILD_DIR):
-	mkdir $@		
+$(OUTPUT_DIR)/%.bin: $(OUTPUT_DIR)/%.elf | $(OUTPUT_DIR)
+	$(BIN) $< $@
 
+#######################################
+# default action: build all
+#######################################
+all: $(OUTPUT_DIR)/$(TARGET).elf $(OUTPUT_DIR)/$(TARGET).hex $(OUTPUT_DIR)/$(TARGET).bin
+	
 #######################################
 # clean up
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
+	-rm -fR $(OUTPUT_DIR)
 
 #######################################
 # write
 #######################################
-write: $(BUILD_DIR)/$(TARGET).bin
+write: $(OUTPUT_DIR)/$(TARGET).bin
 	openocd \
 		-f interface/stlink.cfg \
 		-f target/stm32f1x.cfg \
-		-c "init; reset halt; wait_halt; flash write_image erase $(BUILD_DIR)/$(TARGET).bin ${FLASH_START}; reset; shutdown;" 
+		-c "init; reset halt; wait_halt; flash write_image erase $(OUTPUT_DIR)/$(TARGET).bin ${FLASH_START}; reset; shutdown;" 
 		@echo "Write Completed."
 
 #######################################
