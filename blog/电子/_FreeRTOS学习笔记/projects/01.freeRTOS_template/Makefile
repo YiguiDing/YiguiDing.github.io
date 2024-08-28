@@ -2,6 +2,10 @@
 # Generic Makefile (based on gcc)
 #
 # ChangeLog :
+# 	2024-08-28 - 通过include关键字实现模块的拆分
+# 					+ include Library/Makefile
+# 					+ include Driver/Makefile
+# 					+ include Core/Makefile
 # 	2024-07-22 - 实现c/c++混合编译、调用openocd实现写入/擦除
 #	2017-02-10 - Several enhancements + project update mode
 #   2015-07-22 - first version
@@ -87,10 +91,8 @@ C_DEFS =  \
 	-D USE_STDPERIPH_DRIVER
 
 # compile gcc flags
-ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-
+ASFLAGS += $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 C_FLAGS += $(MCU) $(C_DEFS) $(C_CPP_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-
 CPP_FLAGS += $(MCU) $(C_DEFS) $(C_CPP_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
 ifeq ($(DEBUG), 1)
@@ -98,11 +100,9 @@ C_FLAGS += -g -gdwarf-2
 CPP_FLAGS += -g -gdwarf-2
 endif
 
-
 # Generate dependency information
 C_FLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 CPP_FLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
-
 
 #######################################
 # LDFLAGS
@@ -118,7 +118,14 @@ LDFLAGS = $(MCU) -specs=nosys.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(B
 #######################################
 # build the application
 #######################################
-
+OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASMM_SOURCES:.S=.o)))
+vpath %.c $(sort $(dir $(C_SOURCES)))
+vpath %.cpp $(sort $(dir $(CPP_SOURCES)))
+vpath %.s $(sort $(dir $(ASM_SOURCES)))
+vpath %.S $(sort $(dir $(ASMM_SOURCES)))
 #######################################
 # build  objects
 #######################################
@@ -130,19 +137,10 @@ $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
 	$(XX) -c $(CPP_FLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(C_FLAGS) $< -o $@
-# list of c program objects
-OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
-vpath %.c $(sort $(dir $(C_SOURCES)))
-# list of cpp program objects
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
-vpath %.cpp $(sort $(dir $(CPP_SOURCES)))
-# list of ASM program objects
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
-vpath %.s $(sort $(dir $(ASM_SOURCES)))
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASMM_SOURCES:.S=.o)))
-vpath %.S $(sort $(dir $(ASMM_SOURCES)))
+$(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
+	$(AS) -c $(C_FLAGS) $< -o $@
 #######################################
-# build  elf hex 
+# build  elf hex bin
 #######################################
 $(OUTPUT_DIR):
 	mkdir $@
@@ -153,19 +151,16 @@ $(OUTPUT_DIR)/%.hex: $(OUTPUT_DIR)/%.elf | $(OUTPUT_DIR)
 	$(HEX) $< $@
 $(OUTPUT_DIR)/%.bin: $(OUTPUT_DIR)/%.elf | $(OUTPUT_DIR)
 	$(BIN) $< $@
-
 #######################################
 # default action: build all
 #######################################
 all: $(OUTPUT_DIR)/$(TARGET).elf $(OUTPUT_DIR)/$(TARGET).hex $(OUTPUT_DIR)/$(TARGET).bin
-	
 #######################################
 # clean up
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
 	-rm -fR $(OUTPUT_DIR)
-
 #######################################
 # write
 #######################################
@@ -175,7 +170,6 @@ write: $(OUTPUT_DIR)/$(TARGET).bin
 		-f target/stm32f1x.cfg \
 		-c "init; reset halt; wait_halt; flash write_image erase $(OUTPUT_DIR)/$(TARGET).bin ${FLASH_START}; reset; shutdown;" 
 		@echo "Write Completed."
-
 #######################################
 # erase
 #######################################
@@ -185,7 +179,6 @@ erase:
 		-f target/stm32f1x.cfg \
 		-c "init; reset halt; flash erase_sector 0 0 1; exit"
 	@echo "Erase Completed."
-
 #######################################
 # reset
 #######################################
@@ -199,5 +192,4 @@ reset:
 # dependencies
 #######################################
 -include $(wildcard $(BUILD_DIR)/*.d)
-
 # *** EOF ***

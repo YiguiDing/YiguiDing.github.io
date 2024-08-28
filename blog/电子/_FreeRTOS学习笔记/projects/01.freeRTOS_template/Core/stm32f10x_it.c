@@ -98,6 +98,16 @@ void UsageFault_Handler(void)
   {
   }
 }
+/**
+  * @brief  This function handles Debug Monitor exception.
+  * @param  None
+  * @retval None
+  */
+void DebugMon_Handler(void)
+{
+}
+
+#if !USE_FREE_RTOS
 
 /**
   * @brief  This function handles SVCall exception.
@@ -105,15 +115,6 @@ void UsageFault_Handler(void)
   * @retval None
   */
 void SVC_Handler(void)
-{
-}
-
-/**
-  * @brief  This function handles Debug Monitor exception.
-  * @param  None
-  * @retval None
-  */
-void DebugMon_Handler(void)
 {
 }
 
@@ -134,6 +135,8 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
+
+#endif
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

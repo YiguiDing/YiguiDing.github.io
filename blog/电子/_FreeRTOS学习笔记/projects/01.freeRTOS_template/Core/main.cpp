@@ -11,6 +11,8 @@
 /*-----------------------------------------------------------*/
 void task1(void *parameters)
 {
+  Serial_Printf("vTaskStartScheduler\n");
+
   /* Unused parameters. */
   (void)parameters;
 
@@ -36,11 +38,12 @@ void task2(void *parameters)
 int main(void)
 {
   Serial_Init();
-  Serial_Printf("Example FreeRTOS Project\n");
+  Serial_Printf("Example FreeRTOS Project0\n"); // 有输出
 
   // task1
   TaskHandle_t pxCreatedTask1Handler;
-  xTaskCreate(task1, "task1", 100, NULL, 1, &pxCreatedTask1Handler);
+  xTaskCreate(task1, "task1", 1024, NULL, 1, &pxCreatedTask1Handler); // 为什么卡死
+  Serial_Printf("Example FreeRTOS Project1\n"); // 没有输出
 
   // task2
   TaskHandle_t pxCreatedTask2Handler;

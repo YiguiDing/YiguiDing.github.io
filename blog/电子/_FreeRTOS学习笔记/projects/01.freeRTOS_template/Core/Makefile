@@ -1,10 +1,10 @@
 # C sources
 C_SOURCES +=  \
-	$(wildcard Core/Src/stm32f10x_it.c) \
+	$(wildcard Core/*.c) \
 
 # CPP sources
 CPP_SOURCES +=  \
-	$(wildcard Core/Src/main.cpp) \
+	$(wildcard Core/*.cpp) \
 
 # ASM sources
 ASM_SOURCES +=  \
@@ -14,4 +14,4 @@ ASMM_SOURCES += \
 
 # C/C++ includes
 C_CPP_INCLUDES +=  \
-	-I Core/Inc/ \
+	-I Core/ \

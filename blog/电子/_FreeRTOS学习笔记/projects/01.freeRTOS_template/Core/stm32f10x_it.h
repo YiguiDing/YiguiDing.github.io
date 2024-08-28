@@ -26,9 +26,10 @@
  extern "C" {
 #endif 
 
+#define USE_FREE_RTOS 1
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
-
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -39,10 +40,12 @@ void HardFault_Handler(void);
 void MemManage_Handler(void);
 void BusFault_Handler(void);
 void UsageFault_Handler(void);
+void PendSV_Handler(void);
+#if !USE_FREE_RTOS
 void SVC_Handler(void);
 void DebugMon_Handler(void);
-void PendSV_Handler(void);
 void SysTick_Handler(void);
+#endif
 
 #ifdef __cplusplus
 }
