@@ -29,7 +29,7 @@ float PIDController::Output(float error,float dt){
     output =  _constrain(output, -limit, limit);        // 限幅
 
     if(output_ramp > 0) {
-        float output_rate = (output - output_prev)/dt; // 计算导数 dy/dt（输出变化率）
+        float output_rate = (output - output_prev)/dt; // 计算导数 dy/dt（瞬时变化率）
         if (output_rate > output_ramp) output = output_prev + output_ramp * dt; // 防止其变化率过大
         else if (output_rate < -output_ramp) output = output_prev - output_ramp * dt;// 防止其变化率过小
     }
