@@ -79,13 +79,13 @@ export const themeConfig = hopeTheme({
       hotReload: true,
     },
     // 代码块
-    prismjs: false && {
+    prismjs: true && {
       themes: {
         light: "atom-dark",
         dark: "coldark-dark",
       },
     },
-    shiki: {
+    shiki: undefined && {
       themes: {
         light: "catppuccin-latte",
         dark: "slack-dark",
