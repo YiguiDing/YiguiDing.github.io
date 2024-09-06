@@ -1,0 +1,142 @@
+import{_ as n,c as s,o as a,b as t}from"./app-B5uJTUF5.js";const p={},o=t(`<h2 id="最简代码实现" tabindex="-1"><a class="header-anchor" href="#最简代码实现"><span>最简代码实现</span></a></h2><pre><code class="language-cpp"><span class="token class-name">PIDController</span><span class="token double-colon punctuation">::</span><span class="token function">PIDController</span><span class="token punctuation">(</span><span class="token keyword">float</span> _P<span class="token punctuation">,</span> <span class="token keyword">float</span> _I<span class="token punctuation">,</span> <span class="token keyword">float</span> _D<span class="token punctuation">,</span> <span class="token keyword">float</span> _ramp<span class="token punctuation">,</span> <span class="token keyword">float</span> _limit<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    P <span class="token operator">=</span> _P<span class="token punctuation">;</span>
+    I <span class="token operator">=</span> _I<span class="token punctuation">;</span>
+    D <span class="token operator">=</span> _D<span class="token punctuation">;</span>
+    ramp <span class="token operator">=</span> _ramp<span class="token punctuation">;</span>
+    limit <span class="token operator">=</span> _limit<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">float</span> <span class="token class-name">PIDController</span><span class="token double-colon punctuation">::</span><span class="token function">Output</span><span class="token punctuation">(</span><span class="token keyword">float</span> error<span class="token punctuation">,</span><span class="token keyword">float</span> dt<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    
+    <span class="token keyword">float</span> proportional <span class="token operator">=</span> P <span class="token operator">*</span> error<span class="token punctuation">;</span>                                            <span class="token comment">// 比例</span>
+    <span class="token keyword">float</span> integral <span class="token operator">=</span> integral_prev <span class="token operator">+</span> I <span class="token operator">*</span> <span class="token number">0.5f</span> <span class="token operator">*</span> <span class="token punctuation">(</span>error <span class="token operator">+</span> error_prev<span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">;</span>     <span class="token comment">// 积分</span>
+    <span class="token keyword">float</span> derivative <span class="token operator">=</span> D<span class="token operator">*</span><span class="token punctuation">(</span>error <span class="token operator">-</span> error_prev<span class="token punctuation">)</span><span class="token operator">/</span>dt<span class="token punctuation">;</span>                              <span class="token comment">// 微分</span>
+    
+    proportional <span class="token operator">=</span>  <span class="token function">_constrain</span><span class="token punctuation">(</span>proportional<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 限幅</span>
+    integral <span class="token operator">=</span>  <span class="token function">_constrain</span><span class="token punctuation">(</span>integral<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment">// 限幅</span>
+    derivative <span class="token operator">=</span>  <span class="token function">_constrain</span><span class="token punctuation">(</span>derivative<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 限幅</span>
+    
+    <span class="token keyword">float</span> output <span class="token operator">=</span> proportional <span class="token operator">+</span> integral <span class="token operator">+</span> derivative<span class="token punctuation">;</span> <span class="token comment">// 求和</span>
+
+    output <span class="token operator">=</span>  <span class="token function">_constrain</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 限幅</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>output_ramp <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">float</span> output_rate <span class="token operator">=</span> <span class="token punctuation">(</span>output <span class="token operator">-</span> output_prev<span class="token punctuation">)</span><span class="token operator">/</span>dt<span class="token punctuation">;</span> <span class="token comment">// 计算导数 dy/dt（瞬时变化率）</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>output_rate <span class="token operator">&gt;</span> output_ramp<span class="token punctuation">)</span> output <span class="token operator">=</span> output_prev <span class="token operator">+</span> output_ramp <span class="token operator">*</span> dt<span class="token punctuation">;</span> <span class="token comment">// 防止其变化率过大</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>output_rate <span class="token operator">&lt;</span> <span class="token operator">-</span>output_ramp<span class="token punctuation">)</span> output <span class="token operator">=</span> output_prev <span class="token operator">-</span> output_ramp <span class="token operator">*</span> dt<span class="token punctuation">;</span><span class="token comment">// 防止其变化率过小</span>
+    <span class="token punctuation">}</span>
+
+    output <span class="token operator">=</span>  <span class="token function">_constrain</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 限幅</span>
+
+    error_prev <span class="token operator">=</span> error<span class="token punctuation">;</span>
+    integral_prev <span class="token operator">=</span> integral<span class="token punctuation">;</span>
+    output_prev <span class="token operator">=</span> output<span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> output<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="源代码实现" tabindex="-1"><a class="header-anchor" href="#源代码实现"><span>源代码实现</span></a></h2><pre><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;pid.h&quot;</span></span>
+
+<span class="token class-name">PIDController</span><span class="token double-colon punctuation">::</span><span class="token function">PIDController</span><span class="token punctuation">(</span><span class="token keyword">float</span> P<span class="token punctuation">,</span> <span class="token keyword">float</span> I<span class="token punctuation">,</span> <span class="token keyword">float</span> D<span class="token punctuation">,</span> <span class="token keyword">float</span> ramp<span class="token punctuation">,</span> <span class="token keyword">float</span> limit<span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">P</span><span class="token punctuation">(</span>P<span class="token punctuation">)</span>
+    <span class="token punctuation">,</span> <span class="token function">I</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span>
+    <span class="token punctuation">,</span> <span class="token function">D</span><span class="token punctuation">(</span>D<span class="token punctuation">)</span>
+    <span class="token punctuation">,</span> <span class="token function">output_ramp</span><span class="token punctuation">(</span>ramp<span class="token punctuation">)</span>    <span class="token comment">// output derivative limit [volts/second]</span>
+    <span class="token punctuation">,</span> <span class="token function">limit</span><span class="token punctuation">(</span>limit<span class="token punctuation">)</span>         <span class="token comment">// output supply limit     [volts]</span>
+    <span class="token punctuation">,</span> <span class="token function">error_prev</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">)</span>
+    <span class="token punctuation">,</span> <span class="token function">output_prev</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">)</span>
+    <span class="token punctuation">,</span> <span class="token function">integral_prev</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    timestamp_prev <span class="token operator">=</span> <span class="token function">_micros</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// PID controller function</span>
+<span class="token keyword">float</span> <span class="token class-name">PIDController</span><span class="token double-colon punctuation">::</span><span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">float</span> error<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// calculate the time from the last call</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> timestamp_now <span class="token operator">=</span> <span class="token function">_micros</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Ts <span class="token operator">=</span> <span class="token punctuation">(</span>timestamp_now <span class="token operator">-</span> timestamp_prev<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">1e-6f</span><span class="token punctuation">;</span>
+    <span class="token comment">// quick fix for strange cases (micros overflow)</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Ts <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> Ts <span class="token operator">&gt;</span> <span class="token number">0.5f</span><span class="token punctuation">)</span> Ts <span class="token operator">=</span> <span class="token number">1e-3f</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// u(s) = (P + I/s + Ds)e(s)</span>
+    <span class="token comment">// Discrete implementations</span>
+    <span class="token comment">// proportional part</span>
+    <span class="token comment">// u_p  = P *e(k)</span>
+    <span class="token keyword">float</span> proportional <span class="token operator">=</span> P <span class="token operator">*</span> error<span class="token punctuation">;</span>
+    <span class="token comment">// Tustin transform of the integral part</span>
+    <span class="token comment">// u_ik = u_ik_1  + I*Ts/2*(ek + ek_1)</span>
+    <span class="token keyword">float</span> integral <span class="token operator">=</span> integral_prev <span class="token operator">+</span> I<span class="token operator">*</span>Ts<span class="token operator">*</span><span class="token number">0.5f</span><span class="token operator">*</span><span class="token punctuation">(</span>error <span class="token operator">+</span> error_prev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// antiwindup - limit the output</span>
+    integral <span class="token operator">=</span> <span class="token function">_constrain</span><span class="token punctuation">(</span>integral<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Discrete derivation</span>
+    <span class="token comment">// u_dk = D(ek - ek_1)/Ts</span>
+    <span class="token keyword">float</span> derivative <span class="token operator">=</span> D<span class="token operator">*</span><span class="token punctuation">(</span>error <span class="token operator">-</span> error_prev<span class="token punctuation">)</span><span class="token operator">/</span>Ts<span class="token punctuation">;</span>
+
+    <span class="token comment">// sum all the components</span>
+    <span class="token keyword">float</span> output <span class="token operator">=</span> proportional <span class="token operator">+</span> integral <span class="token operator">+</span> derivative<span class="token punctuation">;</span>
+    <span class="token comment">// antiwindup - limit the output variable</span>
+    output <span class="token operator">=</span> <span class="token function">_constrain</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token operator">-</span>limit<span class="token punctuation">,</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// if output ramp defined</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>output_ramp <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// limit the acceleration by ramping the output</span>
+        <span class="token keyword">float</span> output_rate <span class="token operator">=</span> <span class="token punctuation">(</span>output <span class="token operator">-</span> output_prev<span class="token punctuation">)</span><span class="token operator">/</span>Ts<span class="token punctuation">;</span> <span class="token comment">// 计算 dy/dt 就是导数（输出变化率）</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>output_rate <span class="token operator">&gt;</span> output_ramp<span class="token punctuation">)</span>
+            output <span class="token operator">=</span> output_prev <span class="token operator">+</span> output_ramp<span class="token operator">*</span>Ts<span class="token punctuation">;</span> <span class="token comment">// 保证其增长率最高为output_ramp</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>output_rate <span class="token operator">&lt;</span> <span class="token operator">-</span>output_ramp<span class="token punctuation">)</span>
+            output <span class="token operator">=</span> output_prev <span class="token operator">-</span> output_ramp<span class="token operator">*</span>Ts<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// saving for the next pass</span>
+    integral_prev <span class="token operator">=</span> integral<span class="token punctuation">;</span>
+    output_prev <span class="token operator">=</span> output<span class="token punctuation">;</span>
+    error_prev <span class="token operator">=</span> error<span class="token punctuation">;</span>
+    timestamp_prev <span class="token operator">=</span> timestamp_now<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> output<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token class-name">PIDController</span><span class="token double-colon punctuation">::</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    integral_prev <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+    output_prev <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+    error_prev <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre><pre><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">PID_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">PID_H</span></span>
+
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;time_utils.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;foc_utils.h&quot;</span></span>
+
+<span class="token comment">/**
+ *  PID controller class
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">PIDController</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">/**
+     *  
+     * @param P - Proportional gain 
+     * @param I - Integral gain
+     * @param D - Derivative gain 
+     * @param ramp - Maximum speed of change of the output value
+     * @param limit - Maximum output value
+     */</span>
+    <span class="token function">PIDController</span><span class="token punctuation">(</span><span class="token keyword">float</span> P<span class="token punctuation">,</span> <span class="token keyword">float</span> I<span class="token punctuation">,</span> <span class="token keyword">float</span> D<span class="token punctuation">,</span> <span class="token keyword">float</span> ramp<span class="token punctuation">,</span> <span class="token keyword">float</span> limit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">PIDController</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">float</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> P<span class="token punctuation">;</span> <span class="token comment">//!&lt; Proportional gain </span>
+    <span class="token keyword">float</span> I<span class="token punctuation">;</span> <span class="token comment">//!&lt; Integral gain </span>
+    <span class="token keyword">float</span> D<span class="token punctuation">;</span> <span class="token comment">//!&lt; Derivative gain </span>
+    <span class="token keyword">float</span> output_ramp<span class="token punctuation">;</span> <span class="token comment">//!&lt; Maximum speed of change of the output value</span>
+    <span class="token keyword">float</span> limit<span class="token punctuation">;</span> <span class="token comment">//!&lt; Maximum output value</span>
+
+<span class="token keyword">protected</span><span class="token operator">:</span>
+    <span class="token keyword">float</span> error_prev<span class="token punctuation">;</span> <span class="token comment">//!&lt; last tracking error value</span>
+    <span class="token keyword">float</span> output_prev<span class="token punctuation">;</span>  <span class="token comment">//!&lt; last pid output value</span>
+    <span class="token keyword">float</span> integral_prev<span class="token punctuation">;</span> <span class="token comment">//!&lt; last integral component value</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> timestamp_prev<span class="token punctuation">;</span> <span class="token comment">//!&lt; Last execution timestamp</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">// PID_H</span></span>
+</code></pre>`,5),e=[o];function c(l,r){return a(),s("div",null,e)}const k=n(p,[["render",c],["__file","PID控制器.html.vue"]]),i=JSON.parse('{"path":"/%E7%94%B5%E5%AD%90/SimpleFOC%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PID%E6%8E%A7%E5%88%B6%E5%99%A8.html","title":"SimpleFOC源码阅读学习笔记：PID控制器","lang":"zh-CN","frontmatter":{"title":"SimpleFOC源码阅读学习笔记：PID控制器","shortTitle":"PID控制器","date":"2024-08-30T12:53:00.000Z","description":"最简代码实现 源代码实现","head":[["meta",{"property":"og:url","content":"https://dingdingdang.online/%E7%94%B5%E5%AD%90/SimpleFOC%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PID%E6%8E%A7%E5%88%B6%E5%99%A8.html"}],["meta",{"property":"og:site_name","content":"YiguiDing的Blog小站"}],["meta",{"property":"og:title","content":"SimpleFOC源码阅读学习笔记：PID控制器"}],["meta",{"property":"og:description","content":"最简代码实现 源代码实现"}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:updated_time","content":"2024-09-06T08:37:49.000Z"}],["meta",{"property":"article:author","content":"丁毅桂"}],["meta",{"property":"article:published_time","content":"2024-08-30T12:53:00.000Z"}],["meta",{"property":"article:modified_time","content":"2024-09-06T08:37:49.000Z"}],["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"SimpleFOC源码阅读学习笔记：PID控制器\\",\\"image\\":[\\"\\"],\\"datePublished\\":\\"2024-08-30T12:53:00.000Z\\",\\"dateModified\\":\\"2024-09-06T08:37:49.000Z\\",\\"author\\":[{\\"@type\\":\\"Person\\",\\"name\\":\\"丁毅桂\\",\\"email\\":\\"2449695354@qq.com\\"}]}"],["meta",{"name":"baidu-site-verification","content":"codeva-PwE9Ts6nMl"}]]},"headers":[{"level":2,"title":"最简代码实现","slug":"最简代码实现","link":"#最简代码实现","children":[]},{"level":2,"title":"源代码实现","slug":"源代码实现","link":"#源代码实现","children":[]}],"git":{"createdTime":1725012793000,"updatedTime":1725611869000,"contributors":[{"name":"YiguiDing","email":"2449695354@qq.com","commits":1}]},"readingTime":{"minutes":1.97,"words":592},"filePathRelative":"电子/SimpleFOC源码阅读学习笔记/PID控制器.md","localizedDate":"2024年8月30日","excerpt":"","autoDesc":true}');export{k as comp,i as data};
