@@ -1,0 +1,128 @@
+import{_ as n,c as s,o as a,b as t}from"./app-BSX0n7Vp.js";const p="/assets/2023-02-17-00-54-27-BLqMBWYR.png",o="/assets/2023-02-17-00-54-49-C_W0Sb41.png",e={},c=t('<p><img src="'+p+`" alt=""></p><h2 id="递归求解" tabindex="-1"><a class="header-anchor" href="#递归求解"><span>递归求解</span></a></h2><pre><code class="language-java"><span class="token keyword">package</span> 走格子<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Arrays</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> 走格子 <span class="token punctuation">{</span>
+
+ <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">doSomeThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">process</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;当前找到：&quot;</span> <span class="token operator">+</span> count <span class="token operator">+</span> <span class="token string">&quot;种&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">static</span> <span class="token class-name">String</span> f<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+ <span class="token keyword">static</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> directions <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">&quot;↑&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;↓&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;←&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;→&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token keyword">static</span> <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">process</span><span class="token punctuation">(</span><span class="token class-name">String</span> f<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> cur_y<span class="token punctuation">,</span> <span class="token keyword">int</span> cur_x<span class="token punctuation">,</span> <span class="token keyword">int</span> step<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>cur_y <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> cur_y <span class="token operator">&gt;=</span> <span class="token number">3</span> <span class="token operator">||</span> cur_x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> cur_x <span class="token operator">&gt;=</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// 越界</span>
+   <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>f<span class="token punctuation">[</span>cur_y<span class="token punctuation">]</span><span class="token punctuation">[</span>cur_x<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// 不能走走过的路</span>
+   <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    step <span class="token operator">==</span> <span class="token number">18</span>
+    <span class="token operator">&amp;&amp;</span> cur_y <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> cur_x <span class="token operator">==</span> <span class="token number">5</span> <span class="token comment">// 走了18步，到达终点位置</span>
+    <span class="token operator">&amp;&amp;</span> f<span class="token punctuation">[</span>cur_y<span class="token punctuation">]</span><span class="token punctuation">[</span>cur_x<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token keyword">null</span>  <span class="token comment">//</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;find:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> f<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   count<span class="token operator">++</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> direction <span class="token operator">:</span> directions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   f<span class="token punctuation">[</span>cur_y<span class="token punctuation">]</span><span class="token punctuation">[</span>cur_x<span class="token punctuation">]</span> <span class="token operator">=</span> direction<span class="token punctuation">;</span>
+   <span class="token keyword">switch</span> <span class="token punctuation">(</span>direction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;↑&quot;</span><span class="token operator">:</span>
+     <span class="token function">process</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> cur_y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> cur_x <span class="token operator">+</span> <span class="token number">0</span><span class="token punctuation">,</span> step <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;↓&quot;</span><span class="token operator">:</span>
+     <span class="token function">process</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> cur_y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> cur_x <span class="token operator">+</span> <span class="token number">0</span><span class="token punctuation">,</span> step <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;←&quot;</span><span class="token operator">:</span>
+     <span class="token function">process</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> cur_y <span class="token operator">+</span> <span class="token number">0</span><span class="token punctuation">,</span> cur_x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> step <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;→&quot;</span><span class="token operator">:</span>
+     <span class="token function">process</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> cur_y <span class="token operator">+</span> <span class="token number">0</span><span class="token punctuation">,</span> cur_x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> step <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">break</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   f<span class="token punctuation">[</span>cur_y<span class="token punctuation">]</span><span class="token punctuation">[</span>cur_x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">long</span> start <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">doSomeThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">long</span> end <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;耗时:&quot;</span> <span class="token operator">+</span> <span class="token punctuation">(</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;毫秒&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>走到[2,5]位置的输出测试</p><pre><code class="language-txt">find:
+[↓, →, ↓, →, →, ↓]
+[↓, ↑, ↓, ↑, ↓, ←]
+[→, ↑, →, ↑, →, null]
+find:
+[↓, →, ↓, →, →, ↓]
+[↓, ↑, ↓, ↑, ←, ↓]
+[→, ↑, →, →, ↑, null]
+find:
+[↓, →, →, ↓, →, ↓]
+[↓, ↑, ↓, ←, ↑, ↓]
+[→, ↑, →, →, ↑, null]
+find:
+[↓, →, →, →, →, ↓]
+[↓, ↑, ↓, ←, ←, ←]
+[→, ↑, →, →, →, null]
+find:
+[↓, →, →, ↓, →, ↓]
+[↓, ↑, ←, ↓, ↑, ↓]
+[→, →, ↑, →, ↑, null]
+find:
+[↓, →, →, →, →, ↓]
+[↓, ↑, ←, ↓, ←, ←]
+[→, →, ↑, →, →, null]
+find:
+[↓, →, →, →, →, ↓]
+[↓, ↑, ←, ←, ↓, ←]
+[→, →, →, ↑, →, null]
+find:
+[↓, →, →, →, →, ↓]
+[↓, ↑, ←, ←, ←, ↓]
+[→, →, →, →, ↑, null]
+find:
+[→, ↓, →, ↓, →, ↓]
+[↓, ←, ↑, ↓, ↑, ↓]
+[→, →, ↑, →, ↑, null]
+find:
+[→, ↓, →, →, →, ↓]
+[↓, ←, ↑, ↓, ←, ←]
+[→, →, ↑, →, →, null]
+find:
+[→, ↓, →, →, →, ↓]
+[↓, ←, ↑, ←, ↓, ←]
+[→, →, →, ↑, →, null]
+find:
+[→, ↓, →, →, →, ↓]
+[↓, ←, ↑, ←, ←, ↓]
+[→, →, →, →, ↑, null]
+find:
+[→, →, ↓, →, →, ↓]
+[↓, ←, ←, ↑, ↓, ←]
+[→, →, →, ↑, →, null]
+find:
+[→, →, ↓, →, →, ↓]
+[↓, ←, ←, ↑, ←, ↓]
+[→, →, →, →, ↑, null]
+find:
+[→, →, →, ↓, →, ↓]
+[↓, ←, ←, ←, ↑, ↓]
+[→, →, →, →, ↑, null]
+find:
+[→, →, →, →, →, ↓]
+[↓, ←, ←, ←, ←, ←]
+[→, →, →, →, →, null]
+当前找到：16种
+耗时:40毫秒
+</code></pre><hr><p><img src="`+o+`" alt=""></p><p>走到[0,2]位置的输出测试</p><pre><code class="language-txt">当前找到：0种
+耗时:2毫秒
+</code></pre>`,9),u=[c];function l(k,i){return a(),s("div",null,u)}const d=n(e,[["render",l],["__file","markdown.html.vue"]]),m=JSON.parse('{"path":"/%E7%AE%97%E6%B3%95/zip%E5%BD%92%E6%A1%A3/%E8%B5%B0%E6%A0%BC%E5%AD%90/markdown.html","title":"走格子","lang":"zh-CN","frontmatter":{"title":"走格子","cover":"./cover/default_cover.jpg","date":"2023-02-16T14:48:00.000Z","tag":["蓝桥杯","JAVA","算法","刷题笔记"],"category":"算法","description":"递归求解 走到[2,5]位置的输出测试 走到[0,2]位置的输出测试","head":[["meta",{"property":"og:url","content":"https://dingdingdang.online/%E7%AE%97%E6%B3%95/zip%E5%BD%92%E6%A1%A3/%E8%B5%B0%E6%A0%BC%E5%AD%90/markdown.html"}],["meta",{"property":"og:site_name","content":"YiguiDing的Blog小站"}],["meta",{"property":"og:title","content":"走格子"}],["meta",{"property":"og:description","content":"递归求解 走到[2,5]位置的输出测试 走到[0,2]位置的输出测试"}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:updated_time","content":"2024-03-18T08:31:16.000Z"}],["meta",{"property":"article:author","content":"丁毅桂"}],["meta",{"property":"article:tag","content":"蓝桥杯"}],["meta",{"property":"article:tag","content":"JAVA"}],["meta",{"property":"article:tag","content":"算法"}],["meta",{"property":"article:tag","content":"刷题笔记"}],["meta",{"property":"article:published_time","content":"2023-02-16T14:48:00.000Z"}],["meta",{"property":"article:modified_time","content":"2024-03-18T08:31:16.000Z"}],["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"走格子\\",\\"image\\":[\\"\\"],\\"datePublished\\":\\"2023-02-16T14:48:00.000Z\\",\\"dateModified\\":\\"2024-03-18T08:31:16.000Z\\",\\"author\\":[{\\"@type\\":\\"Person\\",\\"name\\":\\"丁毅桂\\",\\"email\\":\\"2449695354@qq.com\\"}]}"],["meta",{"name":"baidu-site-verification","content":"codeva-PwE9Ts6nMl"}]]},"headers":[{"level":2,"title":"递归求解","slug":"递归求解","link":"#递归求解","children":[]}],"git":{"createdTime":1700226391000,"updatedTime":1710750676000,"contributors":[{"name":"YiguiDing","email":"2449695354@qq.com","commits":1}]},"readingTime":{"minutes":1.08,"words":324},"filePathRelative":"算法/zip归档/走格子/markdown.md","localizedDate":"2023年2月16日","excerpt":"","autoDesc":true}');export{d as comp,m as data};
