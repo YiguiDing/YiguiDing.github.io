@@ -79,13 +79,13 @@ export const themeConfig = hopeTheme({
       hotReload: true,
     },
     // 代码块
-    prismjs: true && {
+    prismjs: false && {
       themes: {
-        light: "atom-dark",
+        light: "ateliersulphurpool-light",
         dark: "coldark-dark",
       },
     },
-    shiki: undefined && {
+    shiki: {
       themes: {
         light: "catppuccin-latte",
         dark: "slack-dark",
@@ -196,6 +196,7 @@ export const themeConfig = hopeTheme({
       },
       vuePlayground: true,
       // 数学表达式支持
+      // 有bug!!!
       katex: {
         copy: true,
         mhchem: true,

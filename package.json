@@ -26,6 +26,7 @@
     "@vuepress/plugin-feed": "^2.0.0-rc.34",
     "@vuepress/plugin-pwa": "^2.0.0-rc.26",
     "@vuepress/plugin-shiki": "^2.0.0-rc.40",
+    "mathjax-full": "^3.2.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "execa": "^9.3.0",
