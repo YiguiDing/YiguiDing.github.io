@@ -12,6 +12,9 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
     int16_t sin, cos;
     _sincos(e_angle, &sin, &cos);
     // 帕克逆变换
+    // 因为 0xffff * 0xffff ≈ 0xffff0000
+    // 即 uin16_t * uin16_t 结果须用 uit32_t 来保存
+    // 另外 因为结果扩大了 0xffff倍 ，所以要缩放回去。
     int16_t u_alpha = ((cos * (int32_t)u_d) + (-sin * (int32_t)u_q)) / _INT16_ONE_;
     int16_t u_beta = ((sin * (int32_t)u_d) + (cos * (int32_t)u_q)) / _INT16_ONE_;
     // 克拉克逆变换(等幅值形式)
