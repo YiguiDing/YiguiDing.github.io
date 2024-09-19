@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "foc_utils.h": "c",
+        "typedef.h": "c",
+        "stdint.h": "c"
+    }
+}
