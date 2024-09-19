@@ -5,6 +5,7 @@
 // 180°
 #define _PI_ 32767
 // 360°
+// #define _2PI_ UINT16_MAX
 #define _2PI_ 65535
 // 90°
 #define _PI_2_ 16383

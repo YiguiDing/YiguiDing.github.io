@@ -31,7 +31,7 @@ void BLDCMotor::loopFOC()
 {
     if (this->sensor)
         this->sensor->update();
-    this->setPhraseVoltage(0, 0.4 * _INT16_ONE_, (this->sensor->getPositon() * 7) % UINT16_MAX);
+    this->setPhraseVoltage(0, 0.4 * _INT16_ONE_, (this->sensor->getPositon() * 7));
 }
 
 /**
