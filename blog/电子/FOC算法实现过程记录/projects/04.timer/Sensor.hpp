@@ -3,11 +3,11 @@
 
 #include <stdint.h>
 #include "arduino.h"
-#include "Time.hpp"
+#include "Timer.hpp"
 
 class BLDCMotor;
 
-class Sensor : Time {
+class Sensor : Timer {
 
 private:
   //

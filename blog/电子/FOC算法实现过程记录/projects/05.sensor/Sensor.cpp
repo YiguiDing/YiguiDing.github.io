@@ -1,6 +1,6 @@
-#include "HardwareSerial.h"
 #include "Sensor.hpp"
 #include "BLDCMotor.hpp"
+#include "Arduino.h"
 
 Sensor::Sensor(void (*_initSensorl)(), uint16_t (*_readSensor)())
 {
@@ -21,8 +21,10 @@ void Sensor::connectMotor(BLDCMotor *motor)
 }
 void Sensor::alignSensor()
 {
+    if (!this->motor)
+        return;
     this->motor->setPhraseVoltage(0, 0.2 * INT16_MAX, _3_PI_2_); // -90°位置施加磁场
-    delay(1000);
+    delay(500);
     this->offset = this->_readSensor();
     this->motor->setPhraseVoltage(0, 0, 0);
 }
@@ -43,9 +45,9 @@ void Sensor::update()
     // ####################################
     // 3.计算
     // ----计算位置
-    this->position = this->angle - offset;
+    this->position = this->angle - (int32_t)offset;
     // ----计算位置(带圈数)
-    this->positions = this->full_rotations * _2PI_ + this->angle - this->offset;
+    this->positions = this->full_rotations * _2PI_ + this->angle - (int16_t)this->offset;
     // ----计算速度(rad/ms)
     this->velocity = ((this->full_rotations - this->prev_full_rotations) * _2PI_ + (this->angle - (int32_t)this->prev_angle)) / dt_ms();
     // ####################################

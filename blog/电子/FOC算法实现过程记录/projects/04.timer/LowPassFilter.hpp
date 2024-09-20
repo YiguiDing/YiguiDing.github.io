@@ -1,7 +1,7 @@
 #ifndef _LowPassFilter_H_
 #define _LowPassFilter_H_
-#include "Time.hpp"
-class LowPassFilter : Time
+#include "Timer.hpp"
+class LowPassFilter : Timer
 {
 private:
     uint16_t Tms;
