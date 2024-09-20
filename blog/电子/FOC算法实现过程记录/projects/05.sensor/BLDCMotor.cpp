@@ -28,12 +28,12 @@ void BLDCMotor::initFOC()
     }
 }
 #include "LowPassFilter.hpp"
-LowPassFilter filter4 = LowPassFilter(40);
+LowPassFilter filter_test = LowPassFilter(40);
 void BLDCMotor::loopFOC()
 {
     if (this->sensor)
         this->sensor->update();
-    this->setPhraseVoltage(0, 1 * _INT16_ONE_, filter4(this->sensor->getPositons() * 7));
+    this->setPhraseVoltage(0, 1 * _INT16_ONE_, filter_test(this->sensor->getPositons() * 7));
 }
 
 /**

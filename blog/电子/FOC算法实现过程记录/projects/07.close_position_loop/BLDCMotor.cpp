@@ -24,16 +24,35 @@ void BLDCMotor::initFOC()
         this->sensor->initSensor();
         this->sensor->connectMotor(this);
         this->sensor->alignSensor();
+        this->sensor->init();
         this->sensor->update();
     }
 }
 #include "LowPassFilter.hpp"
-LowPassFilter filter_test = LowPassFilter(40);
+LowPassFilter filter1 = LowPassFilter(5);
+LowPassFilter filter2 = LowPassFilter(10);
+LowPassFilter filter3 = LowPassFilter(20);
+uint16_t e_angle(int32_t angle)
+{
+    angle %= _2PI_;
+    if (angle < 0)
+        angle += _2PI_;
+    return angle * 7;
+}
 void BLDCMotor::loopFOC()
 {
     if (this->sensor)
         this->sensor->update();
-    this->setPhraseVoltage(0, 1 * _INT16_ONE_, filter_test(this->sensor->getPositons() * 7));
+    // Serial.print(0);
+    // Serial.print(',');
+    // Serial.print(_2PI_);
+    // Serial.print(',');
+    // Serial.print(this->sensor->getPositons());
+    // Serial.print(',');
+    // Serial.print(e_angle(this->sensor->getPositons()));
+    // Serial.print(',');
+    // Serial.println((e_angle(filter2(this->sensor->getPositons()))));
+    this->setPhraseVoltage(0, 0.5 * _INT16_ONE_, (e_angle(filter2(this->sensor->getPositons()))));
 }
 
 /**

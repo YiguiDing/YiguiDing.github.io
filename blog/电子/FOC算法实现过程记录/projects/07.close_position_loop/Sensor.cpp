@@ -21,11 +21,14 @@ void Sensor::connectMotor(BLDCMotor *motor)
 }
 void Sensor::alignSensor()
 {
-    this->motor->setPhraseVoltage(0, 0.2 * INT16_MAX, _3_PI_2_); // -90°位置施加磁场
+    this->motor->setPhraseVoltage(0, 0.4 * INT16_MAX, _3_PI_2_); // -90°位置施加磁场
     delay(1000);
     this->offset = this->_readSensor();
-    this->offset = 0;
     this->motor->setPhraseVoltage(0, 0, 0);
+}
+void Sensor::init()
+{
+    this->angle = this->readSensor();
 }
 void Sensor::update()
 {
@@ -44,9 +47,9 @@ void Sensor::update()
     // ####################################
     // 3.计算
     // ----计算位置
-    this->position = this->angle - (int16_t)offset;
+    this->position = this->angle - offset;
     // ----计算位置(带圈数)
-    this->positions = this->full_rotations * _2PI_ + this->angle - (int16_t)this->offset;
+    this->positions = this->full_rotations * _2PI_ + this->angle - this->offset;
     // ----计算速度(rad/ms)
     this->velocity = ((this->full_rotations - this->prev_full_rotations) * _2PI_ + (this->angle - (int32_t)this->prev_angle)) / dt_ms();
     // ####################################
