@@ -74,6 +74,9 @@
         "stdint_invensense.h": "c",
         "math.h": "c",
         "string.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "typedef.h": "c",
+        "foc_utils.h": "c",
+        "as5600.h": "c"
     }
 }
