@@ -4,19 +4,21 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-#define _1_Second_ 1000000
-#define _1_Millisecond_ 1000
-
 class Timer
 {
 private:
     uint32_t pre_us;
-    uint32_t cur_us;
+
+protected:
+    uint32_t pre_dt_us;
+    float pre_dt_ms;
+    float pre_dt_s;
 
 public:
+    Timer();
     uint32_t dt_us();
-    uint16_t dt_ms();
-    uint16_t dt_s();
+    float dt_ms();
+    float dt_s();
 };
 
 #endif

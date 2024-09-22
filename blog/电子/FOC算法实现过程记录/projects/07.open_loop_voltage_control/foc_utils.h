@@ -15,6 +15,7 @@ extern "C"
     int16_t _sin(uint16_t a);
     int16_t _cos(uint16_t a);
     void _sincos(uint16_t a, int16_t *s, int16_t *c);
+    float _constrain(float min, float value, float max);
 #ifdef __cplusplus
 }
 #endif

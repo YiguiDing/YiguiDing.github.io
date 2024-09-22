@@ -50,3 +50,8 @@ __attribute__((weak)) void _sincos(uint16_t a, int16_t *s, int16_t *c)
     *s = _sin(a);
     *c = _cos(a);
 }
+
+__attribute__((weak)) float _constrain(float min, float value, float max)
+{
+    return (value < min ? min : (value > max ? max : value));
+}

@@ -9,11 +9,18 @@ class BLDCMotor;
 
 class Sensor : Timer
 {
+  enum SensorDirectrion : int8_t
+  {
+    UNKNOW = 0,
+    CLOCK_WISE = 1,
+    ANTI_CLOCK_WISE = -1,
+  };
+  friend class BLDCMotor;
 
 private:
-  //
-  void (*_initSensor)();
-  uint16_t (*_readSensor)();
+  // haredware
+  void (*initHardWare)();
+  uint16_t (*readHardWare)();
   //
   BLDCMotor *motor = nullptr;
   //
@@ -22,13 +29,16 @@ private:
   uint16_t prev_angle = 0;
   int32_t full_rotations = 0;
   int32_t prev_full_rotations = 0;
-  //
-  uint16_t position = 0;
-  int32_t positions = 0;
-  int32_t velocity = 0;
+  // for Velocity
+  float v_positions = 0;
+  float v_prev_positions = 0;
+  float prev_velocity = 0;
+  float v_dt_s = 0;
+  // for dir
+  SensorDirectrion directron = SensorDirectrion::UNKNOW;
 
 public:
-  Sensor::Sensor(void (*initSensor)(), uint16_t (*readSensor)());
+  Sensor(void (*initHardWare)(), uint16_t (*readHardWare)());
   void connectMotor(BLDCMotor *motor);
   void initSensor();
   uint16_t readSensor();
@@ -36,8 +46,8 @@ public:
   void init();
   void update();
   uint16_t getPositon();
-  int32_t getPositons();
-  int32_t getVelocity();
+  float getPositons();
+  float getVelocity();
 };
 
 #endif

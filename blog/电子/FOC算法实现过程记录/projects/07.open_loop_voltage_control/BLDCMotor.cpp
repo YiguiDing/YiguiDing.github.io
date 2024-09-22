@@ -1,7 +1,9 @@
 #include "BLDCMotor.hpp"
 
-BLDCMotor::BLDCMotor()
+BLDCMotor::BLDCMotor(uint8_t polePairs, float power_supply_voltage)
 {
+    this->polePairs = polePairs;
+    this->power_supply_voltage = power_supply_voltage;
 }
 void BLDCMotor::connectDriver(BLDCDriver *driver)
 {
@@ -28,33 +30,15 @@ void BLDCMotor::initFOC()
         this->sensor->update();
     }
 }
-#include "LowPassFilter.hpp"
-LowPassFilter filter1 = LowPassFilter(5);
-LowPassFilter filter2 = LowPassFilter(10);
-LowPassFilter filter3 = LowPassFilter(20);
-uint16_t e_angle(int32_t angle)
+/**
+ * @details
+ *  电角度=机械角度*极对数
+ *  @return [0,2PI] => [0,UINT16_MAX]
+ */
+uint16_t BLDCMotor::electricalAngle()
 {
-    angle %= _2PI_;
-    if (angle < 0)
-        angle += _2PI_;
-    return angle * 7;
+    return this->sensor->getPositon() * polePairs;
 }
-void BLDCMotor::loopFOC()
-{
-    if (this->sensor)
-        this->sensor->update();
-    // Serial.print(0);
-    // Serial.print(',');
-    // Serial.print(_2PI_);
-    // Serial.print(',');
-    // Serial.print(this->sensor->getPositons());
-    // Serial.print(',');
-    // Serial.print(e_angle(this->sensor->getPositons()));
-    // Serial.print(',');
-    // Serial.println((e_angle(filter2(this->sensor->getPositons()))));
-    this->setPhraseVoltage(0, 0.5 * _INT16_ONE_, (e_angle(filter2(this->sensor->getPositons()))));
-}
-
 /**
  * 设置相电压
  * @param u_d int16_t [-32768,32767] 表示 [-1,1] 精度：1/32768 = 0.0000305
@@ -67,12 +51,31 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
     // 计算三角函数
     _sincos(e_angle, &sin, &cos);
     // 帕克逆变换
-    int16_t u_alpha = ((cos * (int32_t)u_d) + (-sin * (int32_t)u_q)) / _INT16_ONE_;
-    int16_t u_beta = ((sin * (int32_t)u_d) + (cos * (int32_t)u_q)) / _INT16_ONE_;
+    int16_t u_alpha = ((cos * (int32_t)u_d) + (-sin * (int32_t)u_q)) / INT16_MAX;
+    int16_t u_beta = ((sin * (int32_t)u_d) + (cos * (int32_t)u_q)) / INT16_MAX;
     // 克拉克逆变换(等幅值形式)
     int16_t u_a = u_alpha;
-    int16_t u_b = (-u_alpha + _INT16_SQRT3_ * u_beta / _INT16_ONE_) / 2;
+    int16_t u_b = (-u_alpha + _INT16_SQRT3_ * u_beta / INT16_MAX) / 2;
     int16_t u_c = -(u_a + u_b);
     // 设置相电压
     driver->setPhraseVoltage(u_a, u_b, u_c);
+}
+
+void BLDCMotor::open_loop_voltage_control(float target)
+{
+    float voltage = _constrain(-limit_voltage, target, limit_voltage);
+    int16_t u_q = this->direction * (voltage / power_supply_voltage * INT16_MAX);
+    this->setPhraseVoltage(0, u_q, this->electricalAngle());
+}
+
+uint8_t idx = 0;
+void BLDCMotor::loopFOC()
+{
+    if (this->sensor)
+        this->sensor->update();
+
+    if (++idx == 0)
+        Serial.println(this->sensor->getVelocity() / _2PI_);
+
+    this->open_loop_voltage_control(3.0f);
 }
