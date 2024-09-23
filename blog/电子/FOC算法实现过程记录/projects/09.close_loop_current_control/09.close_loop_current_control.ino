@@ -97,47 +97,15 @@ CurrentSensor currentSensor = CurrentSensor(
 void setup()
 {
   Serial.begin(115200);
+
   motor.connectDriver(&driver);
   motor.connectSensor(&sensor);
-  motor.initFOC();
+  motor.connectCurrentSensor(&currentSensor);
 
-  currentSensor.initSensor();
-  currentSensor.alignSensor();
+  motor.initFOC();
 }
 
-#include "LowPassFilter.hpp"
-LowPassFilter filterA(200);
-LowPassFilter filterB(200);
-LowPassFilter filterC(200);
-LowPassFilter filterD(200);
 void loop()
 {
   motor.loopFOC();
-
-  CurrentABC iabc = currentSensor.getCurrentABC();
-  Serial.print("i.a:");
-  Serial.print(filterA(iabc.a));
-  Serial.print(',');
-  Serial.print("i.b:");
-  Serial.print(filterB(iabc.b));
-  Serial.print(',');
-
-  CurrentAB i = currentSensor.getCurrentAB();
-  Serial.print("i.alpha:");
-  Serial.print(filterA(i.alpha));
-  Serial.print(',');
-  Serial.print("i.beta:");
-  Serial.print(filterB(i.beta));
-  Serial.print(',');
-
-  CurrentDC dc = currentSensor.getCurrentDC();
-  Serial.print("i.dc:");
-  Serial.print(filterC(dc));
-  Serial.print(',');
-
-  CurrentDQ dq = currentSensor.getCurrentDQ(motor.electricalAngle());
-  Serial.print("i.dq.q:");
-  Serial.print(filterD(dq.q));
-  Serial.print(',');
-  Serial.print('\n');
 }

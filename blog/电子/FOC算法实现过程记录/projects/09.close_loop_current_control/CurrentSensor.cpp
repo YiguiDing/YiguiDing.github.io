@@ -63,9 +63,9 @@ CurrentDQ CurrentSensor::getCurrentDQ(uint16_t theta)
 {
     int16_t sin, cos;
     _sincos(theta, &sin, &cos);
-    CurrentABC i = this->getCurrentABC();
+    CurrentAB i = this->getCurrentAB();
     return {
-        .d = (i.a * cos + i.b * sin) / INT16_MAX,
-        .q = (-i.a * sin + i.b * cos) / INT16_MAX,
+        .d = (i.alpha * cos + i.beta * sin) / INT16_MAX,
+        .q = (-i.alpha * sin + i.beta * cos) / INT16_MAX,
     };
 }

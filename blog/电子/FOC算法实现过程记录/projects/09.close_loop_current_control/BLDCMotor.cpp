@@ -39,6 +39,15 @@ void BLDCMotor::initFOC()
         this->sensor->update();
     }
 }
+
+void BLDCMotor::loopFOC()
+{
+    if (this->sensor)
+        this->sensor->update();
+    // this->open_loop_voltage_control(1.0f);
+    this->close_loop_current_control(0.5f);
+}
+
 /**
  * @details
  *  电角度=机械角度*极对数
@@ -66,21 +75,34 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
     int16_t u_a = u_alpha;
     int16_t u_b = (-u_alpha + _INT16_SQRT3_ * u_beta / INT16_MAX) / 2;
     int16_t u_c = -(u_a + u_b);
-
-    // Serial.print("u.a:");
-    // Serial.print(u_a / (float)INT16_MAX * 100);
-    // Serial.print(',');
-
-    // Serial.print("u.b:");
-    // Serial.print(u_b / (float)INT16_MAX * 100);
-    // Serial.print(',');
-
-    // Serial.print("u.c:");
-    // Serial.print(u_c / (float)INT16_MAX * 100);
-    // Serial.print(',');
-
     // 设置相电压
     driver->setPhraseVoltage(u_a, u_b, u_c);
+}
+void BLDCMotor::open_loop_voltage_control(float target)
+{
+    float voltage = _constrain(-limit_voltage, target, limit_voltage);
+    int16_t u_q = this->sensor->directron * this->direction * (voltage / power_supply_voltage * INT16_MAX);
+    this->setPhraseVoltage(0, u_q, this->electricalAngle());
+}
+/**
+ * 获取Q轴电流
+ */
+float BLDCMotor::getCurrentQ()
+{
+    uint16_t angle = this->sensor->getPositon();
+    CurrentDQ i = this->currentSensor->getCurrentDQ(angle);
+    return this->current_q_filter(i.q);
+}
+/**
+ * 电流闭环控制
+ */
+void BLDCMotor::close_loop_current_control(float target)
+{
+    float target_i_q = _constrain(-limit_current, target, limit_current);
+    float error = target_i_q - this->getCurrentQ();
+    float u_q = this->pid_iq_controller(error);
+    Serial.println(u_q);
+    this->open_loop_voltage_control(u_q);
 }
 
 /**
@@ -96,18 +118,4 @@ float BLDCMotor::shaftAngle()
 float BLDCMotor::shaftVelocity()
 {
     return shaft_velocity_filter(this->sensor->getVelocity());
-}
-
-void BLDCMotor::open_loop_voltage_control(float target)
-{
-    float voltage = _constrain(-limit_voltage, target, limit_voltage);
-    int16_t u_q = this->sensor->directron * this->direction * (voltage / power_supply_voltage * INT16_MAX);
-    this->setPhraseVoltage(0, u_q, this->electricalAngle());
-}
-
-void BLDCMotor::loopFOC()
-{
-    if (this->sensor)
-        this->sensor->update();
-    this->open_loop_voltage_control(1.0f);
 }

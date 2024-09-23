@@ -7,6 +7,7 @@
 #include "CurrentSensor.hpp"
 #include "Sensor.hpp"
 #include "Timer.hpp"
+#include "pid.hpp"
 
 class BLDCMotor : Timer
 {
@@ -31,8 +32,11 @@ public:
     // directron
     MotorDirectrion direction = MotorDirectrion::CLOCK_WISE;
     // filter
+    LowPassFilter current_q_filter{500};
     LowPassFilter shaft_angle_filter{20};
     LowPassFilter shaft_velocity_filter{20};
+    // pid-controller
+    PIDControler pid_iq_controller{5, 0, 0, 0, 12};
 
 private:
     //
@@ -63,6 +67,10 @@ public:
      * 开环电压控制
      */
     void open_loop_voltage_control(float target);
+    /**
+     * 获取q轴电流
+     */
+    float getCurrentQ();
     /**
      * 闭环电流控制
      */
