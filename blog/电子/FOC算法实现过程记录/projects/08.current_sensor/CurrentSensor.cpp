@@ -22,13 +22,13 @@ CurrentABC CurrentSensor::readSensor()
 void CurrentSensor::alignSensor()
 {
     uint16_t times = 1000;
-    CurrentABC average = {0, 0}, current;
+    CurrentABC average = {0, 0};
     for (uint16_t n = 1; n <= times; n++)
     {
-        current = this->readHardWare();
+        CurrentABC current = this->readHardWare();
         average.a += current.a;
         average.b += current.b;
-        delay(1);
+        delay(2);
     }
     average.a /= times;
     average.b /= times;

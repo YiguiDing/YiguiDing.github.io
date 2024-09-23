@@ -19,6 +19,11 @@ void BLDCMotor::connectCurrentSensor(CurrentSensor *currentSensor)
 }
 void BLDCMotor::initFOC()
 {
+    if (this->currentSensor)
+    {
+        this->currentSensor->initSensor();
+        this->currentSensor->alignSensor();
+    }
     if (this->driver)
     {
         this->driver->initDriver();
@@ -32,11 +37,6 @@ void BLDCMotor::initFOC()
         this->sensor->alignSensor();
         this->sensor->init();
         this->sensor->update();
-    }
-    if (this->currentSensor)
-    {
-        this->currentSensor->initSensor();
-        this->currentSensor->alignSensor();
     }
 }
 /**
@@ -66,6 +66,19 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
     int16_t u_a = u_alpha;
     int16_t u_b = (-u_alpha + _INT16_SQRT3_ * u_beta / INT16_MAX) / 2;
     int16_t u_c = -(u_a + u_b);
+
+    // Serial.print("u.a:");
+    // Serial.print(u_a / (float)INT16_MAX * 100);
+    // Serial.print(',');
+
+    // Serial.print("u.b:");
+    // Serial.print(u_b / (float)INT16_MAX * 100);
+    // Serial.print(',');
+
+    // Serial.print("u.c:");
+    // Serial.print(u_c / (float)INT16_MAX * 100);
+    // Serial.print(',');
+
     // 设置相电压
     driver->setPhraseVoltage(u_a, u_b, u_c);
 }
@@ -91,36 +104,10 @@ void BLDCMotor::open_loop_voltage_control(float target)
     int16_t u_q = this->sensor->directron * this->direction * (voltage / power_supply_voltage * INT16_MAX);
     this->setPhraseVoltage(0, u_q, this->electricalAngle());
 }
-#include "LowPassFilter.hpp"
-LowPassFilter filter(100);
-uint8_t idx = 0;
+
 void BLDCMotor::loopFOC()
 {
     if (this->sensor)
         this->sensor->update();
-
-    CurrentABC i = this->currentSensor->getCurrentABC();
-    Serial.print("i.a:");
-    Serial.print(i.a);
-    Serial.print(',');
-
-    Serial.print("i.b:");
-    Serial.print(i.b);
-    Serial.print(',');
-
-    CurrentDC dc = this->currentSensor->getCurrentDC();
-    Serial.print("dc:");
-    Serial.print(dc);
-    Serial.print(',');
-
-    // CurrentDQ dq = this->currentSensor->getCurrentDQ(this->electricalAngle());
-    // Serial.print("dq.q:");
-    // Serial.print((dq.q));
-    // Serial.print(',');
-    // Serial.print("filter(dq.q):");
-    // Serial.print(filter(dq.q));
-
-    Serial.print('\n');
-
     this->open_loop_voltage_control(1.0f);
 }

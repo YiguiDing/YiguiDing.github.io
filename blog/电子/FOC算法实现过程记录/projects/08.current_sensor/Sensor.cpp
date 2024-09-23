@@ -22,7 +22,7 @@ void Sensor::connectMotor(BLDCMotor *motor)
 void Sensor::alignSensor()
 {
     // offset
-    this->motor->setPhraseVoltage(0, 0.2 * INT16_MAX, _3_PI_2_); // -90°位置施加磁场
+    this->motor->setPhraseVoltage(0.1f * INT16_MAX, 0, 0); // -90°位置q轴施加电压，或0度d轴施加电压
     delay(1000);
     this->offset = this->readHardWare();
     this->motor->setPhraseVoltage(0, 0, 0);

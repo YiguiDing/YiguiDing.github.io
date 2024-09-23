@@ -6,8 +6,9 @@
 #include "LowPassFilter.hpp"
 #include "CurrentSensor.hpp"
 #include "Sensor.hpp"
+#include "Timer.hpp"
 
-class BLDCMotor
+class BLDCMotor : Timer
 {
     enum MotorDirectrion : int8_t
     {

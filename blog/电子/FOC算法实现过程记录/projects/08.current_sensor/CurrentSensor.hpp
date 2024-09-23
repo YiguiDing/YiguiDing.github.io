@@ -29,7 +29,9 @@ class CurrentSensor
 private:
     void (*initHardWare)();
     CurrentABC (*readHardWare)();
-    CurrentABC offset;
+
+public:
+    CurrentABC offset = {0, 0};
 
 public:
     CurrentSensor(void (*initHardWare)(), CurrentABC (*readHardWare)());
