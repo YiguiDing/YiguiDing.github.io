@@ -61,7 +61,7 @@ Sensor sensor = Sensor(
       uint16_t data = 0;
       *((uint8_t *)&data + 1) = Wire.read();
       *((uint8_t *)&data + 0) = Wire.read();
-      Wire.endTransmission();
+      // Wire.endTransmission();
       // as5600 12bit精度，左移4位变成16位
       data <<= 4;
       return data;
@@ -80,7 +80,7 @@ CurrentSensor currentSensor = CurrentSensor(
       pinMode(M1_Ia, INPUT);
       pinMode(M1_Ib, INPUT);
       // Arduino 板上的标准分辨率为 10 位 (0-1023)
-      analogReadResolution(14);    // UNO R4 支持高达 14 位(0-16383)的分辨率
+      analogReadResolution(14); // UNO R4 支持高达 14 位(0-16383)的分辨率
       analogReference(AR_DEFAULT); // 默认参考电压 5 V
       // analogReference(AR_INTERNAL); // 内置参考电压 1.5 V
     },
@@ -90,7 +90,7 @@ CurrentSensor currentSensor = CurrentSensor(
       return CurrentABC{
           // i = u/r
           .a = (analogRead(M1_Ia) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50,
-          .b = (analogRead(M1_Ib) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50, // b电路接反了 加符号
+          .b = -(analogRead(M1_Ib) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50, // b电路接反了 加符号
       };
     });
 

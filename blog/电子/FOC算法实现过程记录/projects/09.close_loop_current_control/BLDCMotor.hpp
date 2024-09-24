@@ -14,8 +14,8 @@ class BLDCMotor : Timer
     enum MotorDirectrion : int8_t
     {
         UNKNOW = 0,
-        CLOCK_WISE = 1,
-        ANTI_CLOCK_WISE = -1,
+        ANTI_CLOCK_WISE = 1,
+        CLOCK_WISE = -1,
     };
 
 public:
@@ -30,13 +30,15 @@ public:
     // 限制电流
     float limit_current = 4.0f;
     // directron
-    MotorDirectrion direction = MotorDirectrion::CLOCK_WISE;
+    MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
     // filter
-    LowPassFilter current_q_filter{500};
+    LowPassFilter current_q_filter{100};
+    LowPassFilter current_d_filter{100};
     LowPassFilter shaft_angle_filter{20};
     LowPassFilter shaft_velocity_filter{20};
     // pid-controller
-    PIDControler pid_iq_controller{10, 0, 0, 0, 12};
+    PIDControler pid_iq_controller{10, 50, -0.01, 0, 12};
+    PIDControler pid_id_controller{10, 50, -0.01, 0, 12};
 
 private:
     //
@@ -66,11 +68,11 @@ public:
     /**
      * 开环电压控制
      */
-    void open_loop_voltage_control(float target);
+    void open_loop_voltage_control(float target_ud, float target_uq);
     /**
      * 获取q轴电流
      */
-    float getCurrentQ();
+    CurrentDQ getCurrentDQ();
     /**
      * 闭环电流控制
      */
