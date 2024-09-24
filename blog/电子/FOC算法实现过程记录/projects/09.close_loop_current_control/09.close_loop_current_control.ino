@@ -90,7 +90,7 @@ CurrentSensor currentSensor = CurrentSensor(
       return CurrentABC{
           // i = u/r
           .a = (analogRead(M1_Ia) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50,
-          .b = -(analogRead(M1_Ib) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50, // b电路接反了 加符号
+          .b = (analogRead(M1_Ib) / 16383.0f * 5.0f - 2.5f) / 0.01f / 50, // b电路接反了 加符号
       };
     });
 

@@ -36,7 +36,7 @@ public:
     LowPassFilter shaft_angle_filter{20};
     LowPassFilter shaft_velocity_filter{20};
     // pid-controller
-    PIDControler pid_iq_controller{5, 0, 0, 0, 12};
+    PIDControler pid_iq_controller{10, 0, 0, 0, 12};
 
 private:
     //
