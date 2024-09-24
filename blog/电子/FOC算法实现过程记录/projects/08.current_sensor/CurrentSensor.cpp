@@ -43,13 +43,16 @@ CurrentABC CurrentSensor::getCurrentABC()
     return i;
 }
 
+#define M_1_SQRT3 0.57735026919f // (1 / sqrtf(3))
+#define M_2_SQRT3 1.15470053838f // (2 / sqrtf(3))
+
 CurrentAB CurrentSensor::getCurrentAB()
 {
     CurrentABC i = this->getCurrentABC();
     // 克拉克变换，等赋值形式
     return {
-        .alpha = i.a,                     // i_alpha = 1 * i_a + 0 * i_b
-        .beta = (i.a + 2 * i.b) / M_SQRT3 // i_beta = 1/sqrt(3) * i_a + 2 / sqrt(3) * i_b
+        .alpha = i.a,                              // i_alpha = 1 * i_a + 0 * i_b
+        .beta = M_1_SQRT3 * i.a + M_2_SQRT3 * i.b, // i_beta = 1/sqrt(3) * i_a + 2 / sqrt(3) * i_b
     };
 }
 
@@ -59,13 +62,13 @@ CurrentDC CurrentSensor::getCurrentDC()
     return sqrtf(i.alpha * i.alpha + i.beta * i.beta);
 }
 
-CurrentDQ CurrentSensor::getCurrentDQ(uint16_t theta)
+CurrentDQ CurrentSensor::getCurrentDQ(uint16_t e_theta)
 {
     int16_t sin, cos;
-    _sincos(theta, &sin, &cos);
-    CurrentABC i = this->getCurrentABC();
+    _sincos(e_theta, &sin, &cos);
+    CurrentAB i = this->getCurrentAB();
     return {
-        .d = (i.a * cos + i.b * sin) / INT16_MAX,
-        .q = (-i.a * sin + i.b * cos) / INT16_MAX,
+        .d = (cos * i.alpha + sin * i.beta) / (INT16_MAX),
+        .q = (sin * -i.alpha + cos * i.beta) / (INT16_MAX),
     };
 }
