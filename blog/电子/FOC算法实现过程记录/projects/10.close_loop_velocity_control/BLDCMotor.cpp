@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include "AS5600.h"
 #include "BLDCMotor.hpp"
 
 BLDCMotor::BLDCMotor(uint8_t polePairs, float power_supply_voltage)
@@ -45,8 +46,9 @@ void BLDCMotor::loopFOC()
 {
     if (this->sensor)
         this->sensor->update();
-    // this->open_loop_voltage_control(0, 1.0f);
-    this->close_loop_current_control(2.5f);
+    this->open_loop_voltage_control(0, 1.0f);
+    // this->close_loop_current_control(2.5f);
+    // this->close_loop_velocity_control(30 * 6.28f);
 }
 
 /**
@@ -70,11 +72,11 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
     // 计算三角函数
     _sincos(e_angle, &sin, &cos);
     // 帕克逆变换
-    int16_t u_alpha = ((cos * (int32_t)u_d) + (-sin * (int32_t)u_q)) / INT16_MAX;
+    int16_t u_alpha = ((cos * (int32_t)u_d) + (sin * -(int32_t)u_q)) / INT16_MAX;
     int16_t u_beta = ((sin * (int32_t)u_d) + (cos * (int32_t)u_q)) / INT16_MAX;
     // 克拉克逆变换(等幅值形式)
     int16_t u_a = u_alpha;
-    int16_t u_b = (-u_alpha + _INT16_SQRT3_ * u_beta / INT16_MAX) / 2;
+    int16_t u_b = (-1 * u_alpha + _INT16_SQRT3_ * u_beta / INT16_MAX) / 2;
     int16_t u_c = -(u_a + u_b);
     // 设置相电压
     driver->setPhraseVoltage(u_a, u_b, u_c);
@@ -127,4 +129,22 @@ float BLDCMotor::shaftAngle()
 float BLDCMotor::shaftVelocity()
 {
     return shaft_velocity_filter(this->sensor->getVelocity());
+}
+uint8_t idx = 0;
+void BLDCMotor::close_loop_velocity_control(float target)
+{
+    float target_velocity = _constrain(-limit_velocity, target, limit_velocity);
+    float current_velocity = this->shaftVelocity();
+    float error = target_velocity - current_velocity;
+    float i_q = this->direction * this->pid_velocity_controller(error);
+    this->close_loop_current_control(i_q);
+    if (++idx % 60 == 0)
+    {
+        Serial.print(target_velocity);
+        Serial.print(',');
+        Serial.print(current_velocity);
+        Serial.print(',');
+        Serial.print(i_q);
+        Serial.print('\n');
+    }
 }

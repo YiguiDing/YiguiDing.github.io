@@ -26,7 +26,7 @@ public:
     // 限制电压
     float limit_voltage = 4.0f;
     // 限制速度
-    float limit_speed = 100.0f;
+    float limit_velocity = 100.0f;
     // 限制电流
     float limit_current = 4.0f;
     // directron
@@ -34,11 +34,14 @@ public:
     // filter
     LowPassFilter current_q_filter{100};
     LowPassFilter current_d_filter{100};
-    LowPassFilter shaft_angle_filter{20};
-    LowPassFilter shaft_velocity_filter{20};
+    LowPassFilter shaft_velocity_filter{100};
+    LowPassFilter shaft_angle_filter{100};
     // pid-controller
-    PIDControler pid_iq_controller{10, 50, -0.01, 0, 12};
-    PIDControler pid_id_controller{10, 50, -0.01, 0, 12};
+    // kp 1i->10u
+    PIDControler pid_iq_controller{1, 0.5f, 0, 0, 12};
+    PIDControler pid_id_controller{1, 0.5f, 0, 0, 12};
+    // kp 1rad->0.5A
+    PIDControler pid_velocity_controller{1, 0.2, 0, 0, 5};
 
 private:
     //
@@ -80,15 +83,15 @@ public:
     /**
      * 获取机械角度
      */
-    float shaftAngle();
+    float shaftVelocity();
     /**
      * 闭环速度控制
      */
-    void close_loop_speed_control(float target);
+    void close_loop_velocity_control(float target);
     /**
      * 获取机械角度
      */
-    float shaftVelocity();
+    float shaftAngle();
     /**
      * 闭环位置控制
      */
