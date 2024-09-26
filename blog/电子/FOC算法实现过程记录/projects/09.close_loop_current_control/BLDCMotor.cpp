@@ -46,7 +46,7 @@ void BLDCMotor::loopFOC()
     if (this->sensor)
         this->sensor->update();
     // this->open_loop_voltage_control(0, 1.0f);
-    this->close_loop_current_control(2.5f);
+    this->close_loop_current_control(0.12f);
 }
 
 /**

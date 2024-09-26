@@ -6,7 +6,6 @@
 #include "foc_utils.h"
 #include "typedef.h"
 #include "pwm.h"
-#include "AS5600.h"
 
 BLDCMotor motor = BLDCMotor(7, 12);
 
@@ -45,26 +44,39 @@ BLDCDriver driver = BLDCDriver(
       pwmC.pulse_perc(u_c / 32768.0f * 50 + 50);
     });
 
-// AS5600 as5600= AS5600();
 #define AS5600_ADDR 0x36
 #define AS5600_RAW_ANGLE 0x0c
 #define AS5600_ANGLE 0x0e
 Sensor sensor = Sensor(
     []()
     {
+      Wire.setClock(1000000); //  100000 (standard mode)  400000 (fast mode) 1000000 (fast mode plus)
       Wire.begin();
     },
     []()
     {
-      // return as5600.readAngle();
       Wire.beginTransmission(AS5600_ADDR);
       Wire.write(AS5600_ANGLE);
-      Wire.endTransmission(false);
+      uint8_t err = Wire.endTransmission(false);
+      if (!!err)
+      {
+        Serial.print("errorcode:");
+        Serial.println(err);
+        return (uint16_t)0;
+      }
       Wire.requestFrom(AS5600_ADDR, 2);
+
       uint16_t data = 0;
       *((uint8_t *)&data + 1) = Wire.read();
       *((uint8_t *)&data + 0) = Wire.read();
-      Wire.endTransmission();
+      err = Wire.endTransmission(true);
+      if (!!err)
+      {
+        Serial.print("errorcode:");
+        Serial.println(err);
+        return (uint16_t)0;
+      }
+       delay(1); // 这行代码解决了磁编码器有时无法读取的问题,开始怀疑时排针接触不良,然后尝试焊接排针问题依然存在,然后怀疑是SDA\SCL上拉电阻太多导致,拆掉问题依旧存在,然后怀疑是电机导致的电压波动,然后给AS5600供电加了个1uf和0.1uf电容,问题依旧,最后google搜索后发现别人的代码中有delay遂加上,问题解决.
       // as5600 12bit精度，左移4位变成16位
       data <<= 4;
       return data;
