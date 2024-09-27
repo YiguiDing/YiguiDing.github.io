@@ -75,8 +75,8 @@ public:
     //          设置 filter_iq = 20ms; kp = 0.8  pid_iq_max_rate=1 问题同上.
     //          这样下去filter_iq将逐渐减小,kp也逐渐减小,由回到最上面的情况了,现在尝试在原先的基础上限制uq变化率
     // 2024-09-27 00:55
-    //      尝试回到原先配置
-    //      设置 filter_iq = 5ms; kp = 0.5  ki=1 pid_iq_max_rate=1 target_iq=0 电机飞速旋转 尝试修改filter_iq
+    //   回溯：尝试回到原先配置
+    //       设置 filter_iq = 5ms; kp = 0.5  ki=1 pid_iq_max_rate=1 target_iq=0 电机飞速旋转 尝试修改filter_iq
     //       设置 filter_iq = 10ms; kp = 0.5  ki=1 pid_iq_max_rate=1 target_iq=0  同上 尝试修改 ki
     //       设置 filter_iq = 10ms; kp = 0.5  ki=0.1 pid_iq_max_rate=1 target_iq=0 电机低低速启转然后缓慢停下 然后设置target_iq=1 电机 **逐渐加速** 然后逐渐越来越快.  尝试修改增大filter_iq
     //       设置 filter_iq = 20ms; kp = 0.5  ki=0.1 pid_iq_max_rate=1 target_iq=0  现象问题同上,但突然发现iq id波形在当用手转动电机时呈正弦波动,感觉滤波太大. 另外暂时应该不设置积分 应当保证 iq和id波形为直流没有交流分量.
@@ -85,7 +85,7 @@ public:
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=4 target_iq=[-8->8]  同上
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=8 target_iq=[-2,-1,0,1,2] 电机不转 target_iq=[3,4,5]电机才起转  转速在target_iq=[-3,-4,-5]时比target_iq=[3,4,5]慢；感觉uq变换率已到极限，尝试减小变化率找到最佳值，然后寻找最佳的kp。
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=6 target_iq=[-9,9]。非常完美 正反转速度显著提高 增加uq变化率到7
-    //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=7 target_iq=[-9,9]。非常完美 正反转速度显著提高 
+    //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=7 target_iq=[-9,9]。非常完美 正反转速度显著提高
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=8 target_iq=[-9,9]。非常完美 为什么上面测试uq变化率=8的这种情况会有问题？  继续增加
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=9 target_iq=[-9,9]。也没问题，有没有一种可能不限制uq变化率也可以很完美？ 因为现在kp本来就不大，而且上面发现需要限制uq变化率是因为ki的影响。尝试不限制uq变化率
     //       设置 filter_iq = 5ms; kp = 0.5  ki=0 pid_iq_max_rate=0 target_iq=[-9,9]。没问题，也就是说如果kp很小的话根本不需要限制uq变化率？尝试增大kp
@@ -93,14 +93,18 @@ public:
     //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=10 target_iq=[0,1,2,3,4,5] 没问题   但是 target_iq=[5->0] 停不下来 说明uq变化率过大需要减小
     //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=5 target_iq=[0,1,2] 没问题 但target_iq=[0,1,3]时电机突然反向加速旋转，然后不受控制。
     //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=3 target_iq=[0]  没问题  target_iq=[1] 时问题同上。
-    //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=1 target_iq=[0] 问题同上...... 为什么？ kp 太大了？程序有问题？
-
-
-
-    PIDControler pid_iq_controller{1, 0, 0, 1, 12};
-    PIDControler pid_id_controller{1, 0, 0, 1, 12};
+    //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=1 target_iq=[0] 问题同上...... 但target_iq=[0->1]电机加速过于缓慢 为什么？ kp 太大了？程序有问题？
+    //   回溯：因为上面uq变化率为10现象表现为太大，为5时的现象可能是因为太小。现在设置为7
+    //       设置 filter_iq = 5ms; kp = 1.0  ki=0 pid_iq_max_rate=7 target_iq=[0,1] target_iq=[1->2]转动电机逐渐加速不受控
+    // 2024-09-27 09:30
+    //   回溯：不限制uq变化率，寻找可正常工作的kp最大值
+    //       设置 filter_iq = 5ms; kp = 0.75  ki=0 pid_iq_max_rate=0 target_iq=[0,1,2,3,4,5] 没问题 没有限制uq变化率，target_iq=[9 -> -9]也没问题,可以快速正反转  但是没限制电流，下管好像烧了....; 测了下，B相对地阻值10欧姆，其余两相为8.8k欧姆；
+    //
+    //
+    PIDControler pid_iq_controller{0.75, 0, 0, 12, 0};
+    PIDControler pid_id_controller{0.75, 0, 0, 12, 0};
     // kp 1rad->0.5A
-    PIDControler pid_velocity_controller{1, 0.2, 0, 0, 5};
+    PIDControler pid_velocity_controller{1, 0.2, 0, 5, 0};
 
 private:
     //
@@ -139,6 +143,10 @@ public:
      * 闭环电流控制
      */
     void close_loop_current_control(float target);
+    /**
+     * 查找最佳pid参数
+     */
+    void find_close_loop_position_control_kp_ki_kd();
     /**
      * 获取机械角度
      */

@@ -6,11 +6,14 @@ class PIDControler : Timer
 {
 private:
 public:
-    float p, i, d, limit, max_rate;
+    float K_p, K_i, K_d;    // pid系数
+    float output_limit;     // 限制输出幅值
+    float output_roc_limit; // 限制输出最大变化率 ROC(rate of change)输出变化率
     float pre_error, pre_integral, pre_output;
 
 public:
-    PIDControler(float p, float i, float d, float max_rate, float limit);
+    PIDControler(float Kp, float Ki, float Kd, float output_roc_limit, float output_limit);
     float operator()(float error);
+    void reset();
 };
 #endif

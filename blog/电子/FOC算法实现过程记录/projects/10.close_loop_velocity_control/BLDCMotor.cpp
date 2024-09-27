@@ -123,6 +123,31 @@ void BLDCMotor::close_loop_current_control(float target)
   Serial.print(',');
   Serial.println(current.q);
 }
+void BLDCMotor::find_close_loop_position_control_kp_ki_kd()
+{
+  this->pid_id_controller = PIDControler(0, 0, 0, 0, limit_voltage);
+
+  float kp = 0, min = 0, max = 10, mid = (max + min) / 2;
+  while (true)
+  {
+
+    for (float target_iq = 0; target_iq < 6; target_iq += 0.1)
+    {
+      for (uint16_t t = 0; t < 2000; t++)
+      {
+        this->sensor->update();
+        this->close_loop_current_control(target_iq);
+        // stop
+        if (Serial.available() > 1 && Serial.read() == 's')
+          break;
+      }
+    }
+    // stop
+    if (Serial.available() > 1 && Serial.read() == 's')
+      break;
+  }
+}
+
 /**
  * 获取机械角度
  */

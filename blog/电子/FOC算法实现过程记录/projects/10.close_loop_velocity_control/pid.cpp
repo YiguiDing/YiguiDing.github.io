@@ -1,35 +1,35 @@
 #include "pid.hpp"
 
-PIDControler::PIDControler(float p, float i, float d, float max_rate, float limit)
+PIDControler::PIDControler(float Kp, float Ki, float Kd, float output_roc_limit, float output_limit)
 {
-    this->p = p;
-    this->i = i;
-    this->d = d;
-    this->max_rate = max_rate;
-    this->limit = limit;
+    this->K_p = Kp;
+    this->K_i = Ki;
+    this->K_d = Kd;
+    this->output_roc_limit = output_roc_limit;
+    this->output_limit = output_limit;
 }
 float PIDControler ::operator()(float error)
 {
     float dt = this->dt_s();
-    float proportional = p * error;
-    float integral = pre_integral + i * 0.5f * (error + pre_error) * dt;
-    float derivative = d * (error - pre_error) / dt;
+    float proportional = K_p * error;
+    float integral = pre_integral + K_i * 0.5f * (error + pre_error) * dt;
+    float derivative = K_d * (error - pre_error) / dt;
     //
-    proportional = _constrain(-limit, proportional, limit);
-    integral = _constrain(-limit, integral, limit);
-    derivative = _constrain(-limit, derivative, limit);
+    proportional = _constrain(-output_limit, proportional, output_limit);
+    integral = _constrain(-output_limit, integral, output_limit);
+    derivative = _constrain(-output_limit, derivative, output_limit);
     //
     float output = proportional + integral + derivative;
-    output = _constrain(-limit, output, limit);
+    output = _constrain(-output_limit, output, output_limit);
     //
-    if (max_rate)
+    if (output_roc_limit)
     {
         float out_rate = (output - pre_output) / dt;
-        if (out_rate > max_rate)
-            output = pre_output + max_rate * dt;
-        else if (out_rate < -max_rate)
-            output = pre_output - max_rate * dt;
-        output = _constrain(-limit, output, limit);
+        if (out_rate > output_roc_limit)
+            output = pre_output + output_roc_limit * dt;
+        else if (out_rate < -output_roc_limit)
+            output = pre_output - output_roc_limit * dt;
+        output = _constrain(-output_limit, output, output_limit);
     }
     //
     pre_error = error;
@@ -38,3 +38,11 @@ float PIDControler ::operator()(float error)
     //
     return output;
 }
+void PIDControler::reset()
+{
+    this->pre_output = 0;
+    this->pre_integral = 0;
+    this->pre_error = 0;
+    this->dt_ms();
+}
+
