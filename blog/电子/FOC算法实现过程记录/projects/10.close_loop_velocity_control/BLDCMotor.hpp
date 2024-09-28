@@ -24,20 +24,15 @@ public:
     // 供电电压
     float power_supply_voltage = 12.0f;
     // 限制电压
-    float limit_voltage = 12.0f;
-    // 限制速度
-    float limit_velocity = 100.0f;
+    float limit_voltage = 5.0f;
     // 限制电流
     float limit_current = 10.0f;
+    // 限制速度
+    float limit_velocity = 100.0f;
+
     // directron
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
-    // filter
-    LowPassFilter current_q_filter{10};
-    LowPassFilter current_d_filter{10};
-    LowPassFilter shaft_velocity_filter{5};
-    LowPassFilter shaft_angle_filter{100};
     // 调参日志
-    // pid-controller
     // 2024-09-26 21:37
     //      kp参数的确定：
     //      iq滤波5ms(任意给定的较小值)target_iq=0 时
@@ -99,12 +94,98 @@ public:
     // 2024-09-27 09:30
     //   回溯：不限制uq变化率，寻找可正常工作的kp最大值
     //       设置 filter_iq = 5ms; kp = 0.75  ki=0 pid_iq_max_rate=0 target_iq=[0,1,2,3,4,5] 没问题 没有限制uq变化率，target_iq=[9 -> -9]也没问题,可以快速正反转  但是没限制电流，下管好像烧了....; 测了下，B相对地阻值10欧姆，其余两相为8.8k欧姆；
-    //
-    //
-    PIDControler pid_iq_controller{0.75, 0, 0, 12, 0};
-    PIDControler pid_id_controller{0.75, 0, 0, 12, 0};
+    // 2024-09-27 21:01
+    //       设置 filter_iq = 5ms; kp = 0.75  ki=0 pid_iq_max_rate=0
+    //                  target_iq=1 旋转时，实际iq在0.2附近，振幅为0.3左右
+    //                  target_iq=2 旋转时，实际iq在0.5附近，振幅为0.3左右
+    //                  target_iq=3 旋转时，实际iq在0.8附近，振幅为0.25左右
+    //                  target_iq=4 旋转时，实际iq在1.19附近  振幅0.25左右
+    //                  结论是kp过小
+    //      设置 filter_iq = 5ms; kp = 1  ki=0 pid_iq_max_rate=0
+    //                  target_iq=1 堵转时，实际iq在0.26
+    //                  target_iq=2 堵转时，实际iq在1.08
+    //                  结论是kp过小
+    //      设置 filter_iq = 5ms; kp = 2  ki=0 pid_iq_max_rate=0
+    //                  target_iq=1 堵转时，实际iq最大在0.85 最小在0.55
+    //                  target_iq=2 堵转时，实际iq最大在1.2~1.4 但是由于iq的周期波动，电机会周期加减速，
+    //                  结论是kp还要增大一些，iq滤波常数要加大
+    //      设置 filter_iq = 5ms; kp = 2.35  ki=0 pid_iq_max_rate=0
+    //                  target_iq=1 堵转时，实际iq最大在0.86 最小在0.42
+    //      设置 filter_iq = 5ms; kp = 3  ki=0 pid_iq_max_rate=0
+    //                  target_iq=1 堵转时，实际iq最大在0.9 最小在0.5, 松手后电机抖动，稳压电源显示电流达到2A
+    //                  结论是kp=2 可能表现还算不错，目标1，实际能达到0.7左右
+    //                  但问题时为什么实际id iq周期变化，而且周期和转子位子相关，感觉像计算错了？？？
+    // 2024-09-27 23:53
+    //      重新来，现在怀疑iq有计算错误
+    // 2024-09-28 15:02
+    //      测试输出了u_alpha u_beta 和 i_alpha i_beta 波形没问题 正相关，而 i_alpha i_beta => i_d i_q的计算公式也没问题。
+    //      尝试继续调kp
+    //      设置 filter_iq = 5ms; ki=0 pid_iq_max_rate=0
+    //      kp = 2.0 target_iq=1 轻微堵转  i.q∈[0.2,0.8] u_q∈[1.57,0.4]
+    //      kp = 2.5 target_iq=1 轻微堵转  i.q∈[0.29,0.84] u_q∈[1.77,0.41]
+    //      kp = 2.8 target_iq=1 轻微堵转  i.q∈[0.35,0.85] u_q∈[1.82,0.42]
+    //      kp = 3.0 target_iq=1 轻微堵转  i.q∈[0.35,0.77] u_q∈[1.95,0.70]
+    //      结论： 感觉kp = 2.8 表现不错
+    // 2024-09-28 15:30
+    //      尝试继续调ki
+    //      设置 filter_iq = 5ms; ki=0 pid_iq_max_rate=0 kp = 2.8
+    //      ki = 1 target_iq=0 开机电机慢速起转 然后停下  target_iq=1 电机起转 但是再次设置target_iq=0 无法停下
+    //      ki = 0.1 target_iq=0 开机电机静止 然后设置target_iq=1 电机起转 但是积分效果不明显（iq应当在1附近波动） 轻微堵转 i.q∈[0.58,0.98] u_q∈[2.24,1.11]
+    //      ki = 0.5 target_iq=0 开机电机静止 然后设置target_iq=1 电机起转 约10秒后 iq可在1附近波动 i.q∈[0.82,1.17] u_q∈[2.42,1.43] 设置设置target_iq=0，uq也要几秒时间才能恢复到0
+    //      ki = 0.8 target_iq=0 开机电机慢速起转然后停下
+    //      ki = 0.7 target_iq=0 开机电机慢速起转然后停下
+    //      ki = 0.6 target_iq=0 开机电机静止 但是电机uq会逐渐到负半轴去，然后堵转的话会导致电机反转 ki=0.6还是过大 但是如果要实现让iq可在1附近波动，上面测试结果是ki = 0.5要10秒，就是ki=0.5太小
+    //      ki = 0.55 target_iq=0 开机电机静止 然后设置target_iq=1 电机起转 轻微堵转导致iq始终不能达到1，这将累计大量误差，这导致然后设置target_iq=0，uq会从0.4v缓慢落下 有时甚至无法停下
+    //   因为上面测试结果是 ki = 0.5 约10秒后 iq可在1附近波动，那么设置ki=5应该就是1秒，但是这肯定导致开机电机起转，所以要限制uq变换率
+    //      ki = 5  output_roc_limit=1 可能uq变化过慢
+    //      ki = 5  output_roc_limit=10 可能uq变化过慢
+    //      ki = 5  output_roc_limit=100 uq变化不慢了，似乎和uq变化率无关，ki还是小了
+    // 受不了了，还是得写一个PID调参助手
+    //      ki = 200  output_roc_limit=100 感觉可能uq变化率过大
+    //      ki = 200  output_roc_limit=50 感觉可能uq变化率过大
+    //      ki = 200  output_roc_limit=25 感觉可能uq变化率过大
+    //      ki = 200  output_roc_limit=10 感觉不是uq变化率的问题
+    //      ki = 100  output_roc_limit=50 感觉uq变化率过小
+    //      ki = 200  output_roc_limit=0 堵转达到目标电流值大约要30ms
+    //      ki = 100  output_roc_limit=0 堵转达到目标电流值大约要200ms
+    //      ki = 50  output_roc_limit=0 堵转达到目标电流值大约要130ms 通电起转，在给电机稍许阻力表现很好，否则当设置target_iq=0电机难以停下 反复震荡后停下 时间较长
+    //      ki = 40  output_roc_limit=0 同上 通电起转，堵转达到目标电流值大约要150ms
+    //      ki = 25  output_roc_limit=0 同上
+    //      ki = 20  output_roc_limit=0 同上 通电起转，堵转达到目标电流值大约要300ms 电机空转时设置target_iq=0电机可以反复震荡后难以停下
+    //      ki = 10  output_roc_limit=0 同上 通电起转，
+    //      ki = 5  output_roc_limit=0 同上 通电起转，
+    //      ki = 3  output_roc_limit=0 同上 但能感受到 随着积分系数的减小，达到目标值所需的时间越来越长
+    //      ki = 6  output_roc_limit=0 同上 为降低响应时间，提高ki
+    //      ki = 10  output_roc_limit=0 同上 响应时间也低了 大概1秒，uq不会过冲，感觉已经非常完美 缺点就是得给一点阻力
+    //      ki = 100  output_roc_limit=0 同上
+    // 确定 iq滤波常数5ms kp=2.8 ki=200
+    // filter
+    LowPassFilter current_q_filter{5};
+    LowPassFilter current_d_filter{5};
+    LowPassFilter shaft_velocity_filter{30};
+    LowPassFilter shaft_angle_filter{100};
+    // pid-controller
+    PIDControler pid_iq_controller{2.8, 200, 0, 12, 0};
+    PIDControler pid_id_controller{2.8, 200, 0, 12, 0};
     // kp 1rad->0.5A
-    PIDControler pid_velocity_controller{1, 0.2, 0, 5, 0};
+    // 2024-09-29T00:20
+    // 尝试确定参数 kp
+    //      shaft_velocity_filter=5 kp=1 ki=0 设置target_velocity=0,开机速度在【-10，10】抖动
+    //      shaft_velocity_filter=5 kp=0.1 ki=0 不再抖动 设置速度为10系统开始有响应
+    //      shaft_velocity_filter=5 kp=0.5 ki=0 抖动 开机速度在【-8.6，8.12】抖动
+    //      shaft_velocity_filter=5 kp=0.25 ki=0  不再抖动 设置速度为5系统开始有响应
+    // 尝试确定参数 ki
+    //      shaft_velocity_filter=5 kp=0.25 ki=1 系统开始在0.2电角度圈数/秒 响应 但是依旧有顿挫感
+    //      shaft_velocity_filter=5 kp=0.25 ki=10 系统开始可以在0.05响应 顿挫感没有了，但是有高频抖动
+    // 尝试确定参数 shaft_velocity_filter
+    //      shaft_velocity_filter=10 kp=0.25 ki=10 设置速度为0.1时 速度有 [-1.08,1.25]左右噪声 噪声周期30ms
+    //      shaft_velocity_filter=30 kp=0.25 ki=10 噪声消失 但还是有来自永磁体的顿挫感 设置速度为10时，速度的顿挫感幅度[14.72,7.57] 周期为30ms
+    //      shaft_velocity_filter=60 kp=0.25 ki=10 开机起转，系统将产生抖动
+    //      shaft_velocity_filter=40 kp=0.25 ki=10 开机抖动然后静止，顿挫感无法消除，另外发现拨动转子会产生震荡周期40ms
+    //      shaft_velocity_filter=80 kp=0.25 ki=10 开机失控转动无法停止
+    // 结论：shaft_velocity_filter=30 kp=0.25 ki=10
+    // 
+    PIDControler pid_velocity_controller{0.25, 10, 0, 5, 0};
 
 private:
     //

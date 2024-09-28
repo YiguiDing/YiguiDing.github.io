@@ -12,7 +12,7 @@ public:
     float pre_error, pre_integral, pre_output;
 
 public:
-    PIDControler(float Kp, float Ki, float Kd, float output_roc_limit, float output_limit);
+    PIDControler(float Kp, float Ki, float Kd, float output_limit, float output_roc_limit);
     float operator()(float error);
     void reset();
 };

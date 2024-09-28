@@ -40,18 +40,28 @@ void BLDCMotor::initFOC()
     this->sensor->update();
   }
 }
+uint8_t mode = 2;
 float target = 0;
 void BLDCMotor::loopFOC()
 {
   if (this->sensor)
     this->sensor->update();
   if (Serial.available() > 1)
-  {
     target = Serial.parseFloat();
+  switch (mode)
+  {
+  case 0:
+    this->open_loop_voltage_control(0, target);
+    break;
+  case 1:
+    this->close_loop_current_control(target);
+    break;
+  case 2:
+    this->close_loop_velocity_control(target);
+    break;
+  default:
+    break;
   }
-  // this->open_loop_voltage_control(0, 1.0f);
-  this->close_loop_current_control(target);
-  // this->close_loop_velocity_control(30 * 6.28f);
 }
 
 /**
@@ -105,11 +115,14 @@ CurrentDQ BLDCMotor::getCurrentDQ()
       .q = this->current_q_filter(i.q),
   };
 }
+#include "foc_utils.h"
 /**
  * 电流闭环控制
  */
+
 void BLDCMotor::close_loop_current_control(float target)
 {
+
   float target_i_d = 0;
   float target_i_q = _constrain(-limit_current, target, limit_current);
   CurrentDQ current = this->getCurrentDQ();
@@ -118,36 +131,20 @@ void BLDCMotor::close_loop_current_control(float target)
   float u_d = this->pid_id_controller(error_d);
   float u_q = this->pid_iq_controller(error_q);
   this->open_loop_voltage_control(u_d, u_q);
-
-  Serial.print(current.d);
-  Serial.print(',');
-  Serial.println(current.q);
+  // static uint8_t idx = 0;
+  // if (++idx % 10 == 0)
+  // {
+  //   Serial.print(target);
+  //   Serial.print(',');
+  //   Serial.print(current.d);
+  //   Serial.print(',');
+  //   Serial.print(current.q);
+  //   Serial.print(',');
+  //   Serial.print(u_q);
+  //   Serial.print(',');
+  //   Serial.print('\n');
+  // }
 }
-void BLDCMotor::find_close_loop_position_control_kp_ki_kd()
-{
-  this->pid_id_controller = PIDControler(0, 0, 0, 0, limit_voltage);
-
-  float kp = 0, min = 0, max = 10, mid = (max + min) / 2;
-  while (true)
-  {
-
-    for (float target_iq = 0; target_iq < 6; target_iq += 0.1)
-    {
-      for (uint16_t t = 0; t < 2000; t++)
-      {
-        this->sensor->update();
-        this->close_loop_current_control(target_iq);
-        // stop
-        if (Serial.available() > 1 && Serial.read() == 's')
-          break;
-      }
-    }
-    // stop
-    if (Serial.available() > 1 && Serial.read() == 's')
-      break;
-  }
-}
-
 /**
  * 获取机械角度
  */
@@ -162,7 +159,6 @@ float BLDCMotor::shaftVelocity()
 {
   return shaft_velocity_filter(this->sensor->getVelocity());
 }
-uint8_t idx = 0;
 void BLDCMotor::close_loop_velocity_control(float target)
 {
   float target_velocity = _constrain(-limit_velocity, target, limit_velocity);
@@ -170,13 +166,14 @@ void BLDCMotor::close_loop_velocity_control(float target)
   float error = target_velocity - current_velocity;
   float i_q = this->direction * this->pid_velocity_controller(error);
   this->close_loop_current_control(i_q);
-  if (++idx % 60 == 0)
-  {
-    Serial.print(target_velocity);
-    Serial.print(',');
-    Serial.print(current_velocity);
-    Serial.print(',');
-    Serial.print(i_q);
-    Serial.print('\n');
-  }
+  // static uint8_t idx = 0;
+  // if (++idx % 30 == 0)
+  // {
+  //   Serial.print(target_velocity);
+  //   Serial.print(',');
+  //   Serial.print(current_velocity);
+  //   Serial.print(',');
+  //   Serial.print(i_q);
+  //   Serial.print('\n');
+  // }
 }

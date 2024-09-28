@@ -1,12 +1,14 @@
 #include "pid.hpp"
 
-PIDControler::PIDControler(float Kp, float Ki, float Kd, float output_roc_limit, float output_limit)
+PIDControler::PIDControler(float Kp, float Ki, float Kd, float output_limit, float output_roc_limit)
+
 {
     this->K_p = Kp;
     this->K_i = Ki;
     this->K_d = Kd;
-    this->output_roc_limit = output_roc_limit;
     this->output_limit = output_limit;
+    this->output_roc_limit = output_roc_limit;
+    this->reset();
 }
 float PIDControler ::operator()(float error)
 {
@@ -45,4 +47,3 @@ void PIDControler::reset()
     this->pre_error = 0;
     this->dt_ms();
 }
-

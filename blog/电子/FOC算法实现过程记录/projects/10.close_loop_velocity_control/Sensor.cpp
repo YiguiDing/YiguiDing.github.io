@@ -58,6 +58,7 @@ void Sensor::update()
  */
 uint16_t Sensor::getPositon()
 {
+    // 2 K PI + α  = α
     return UINT16_MAX + this->directron * this->angle;
 }
 #define _TWO_PI_ 6.2831855f
