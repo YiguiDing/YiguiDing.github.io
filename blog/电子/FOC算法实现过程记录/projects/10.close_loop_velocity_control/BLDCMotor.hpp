@@ -28,7 +28,7 @@ public:
     // 限制电流
     float limit_current = 10.0f;
     // 限制速度
-    float limit_velocity = 100.0f;
+    float limit_velocity = 1000.0f;
 
     // directron
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
@@ -173,8 +173,8 @@ public:
     LowPassFilter shaft_velocity_filter{30};
     LowPassFilter shaft_angle_filter{100};
     // pid-controller
-    PIDControler pid_iq_controller{2.8, 50, 0, 12, 0};
-    PIDControler pid_id_controller{2.8, 50, 0, 12, 0};
+    PIDControler pid_iq_controller{2.8, 5, 0, 12, 0};
+    PIDControler pid_id_controller{2.8, 5, 0, 12, 0};
     // kp 1rad->0.5A
     // 2024-09-29T00:20
     // 尝试确定速度控制参数 kp
@@ -213,7 +213,7 @@ public:
     //      ki = 40 抖动现象有减弱 当目标速度为4是出现颗粒感 但空转难以控制 
     //      ki = 80 难以控制
     //      ki = 5 颗粒感过于明显
-    // 尝试调速度环Ki
+    // 尝试调速度环Kd
     //      kp=0.25 ki=10 kd=-10 剧烈抖动
     //      kp=0.25 ki=10 kd=-1 剧烈抖动
     //      kp=0.25 ki=10 kd=-0.5 剧烈抖动
@@ -226,7 +226,26 @@ public:
     //      kp=0.25 ki=10 kd=-100 剧烈抖动
     //      kp=0.25 ki=10 kd=-0.005 
     //      kd给高给低都没什么效果...
-    PIDControler pid_velocity_controller{0.25, 10, 0, 5, 0};
+    // 尝试调速度环Ki 因为电机静止状态下功耗能达到12V0.128A
+    //     电流ki=50 速度ki = 10 目标速度为0  12V0.128A
+    //     电流ki=50 速度ki = 0 目标速度为0  12V0.128A
+    //     电流ki=0 速度ki = 0 目标速度为0  12V0.132A 去掉积分项转速不会失控了....
+    //     电流ki=0 速度ki = 5 目标速度为0  12V0.135A 速度加上积分项，可以消除速度误差了。但电流始终有1A误差
+    //     电流ki=50 速度ki = 5 目标速度为0  12V0.138A 电流ki=50 目标速度为60则电机失控无法停下
+    //     电流ki=25 速度ki = 5 目标速度为0  12V0.138A 电流ki=25 目标速度为90则电机失控无法停下
+    //     电流ki=10 速度ki = 5 目标速度为0  12V0.162A 电流ki=10 目标速度为90则电机失控无法停下 电流响应时间达到260ms
+    //     电流ki=5 速度ki = 5 目标速度为0  12V0.188A 电流ki=5 电流响应时间大于500ms 设置速度为90 电机仍然会失控
+    //     电流ki=5 速度ki = 0 目标速度为0  12V0.152A 速度ki = 0 电机就不会失控了，说明和电流ki无关 
+    //     电流ki=50 速度ki = 0 目标速度为0 设置速度0->90依然导致电机失控，即使去除速度ki项，电流ki还是过大
+    //     电流ki=25 速度ki = 0 目标速度为0 ki还是过大
+    //     电流ki=10 速度ki = 0 目标速度为0  设置转速从0->90电机不再失控 设置转速从90->90电机失控
+    //     电流ki=20 速度ki = 0 目标速度为0 设置转速从90->90电机失控
+    //     电流ki=0 速度ki = 0 设置转速从 90 <-> -90电机不失控
+    //     电流ki=5 速度ki = 0 目标速度为0  12V0.152A  设置转速从 90 <-> -90电机失控
+    //      感觉ki太小还是不行，可能得限制速度的变化率
+    //     电流ki=2.5 速度ki = 0 
+    // 
+    PIDControler pid_velocity_controller{0.25, 0, 0, 5, 0};
 private:
     //
     BLDCDriver *driver = nullptr;
