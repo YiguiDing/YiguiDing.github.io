@@ -159,34 +159,74 @@ public:
     //      ki = 10  output_roc_limit=0 同上 响应时间也低了 大概1秒，uq不会过冲，感觉已经非常完美 缺点就是得给一点阻力
     //      ki = 100  output_roc_limit=0 同上
     // 确定 iq滤波常数5ms kp=2.8 ki=200
+    // 2024-09-29T11:30
+    // 尝试重调电流环ki减小抖动
+    //      ki= 300 设置电流为1 实际电流最大在[0.84,1.19] 即±20mA波动
+    //      ki= 150 设置电流为1 实际电流最大在[0.83,1.21] 即±20mA波动
+    //      ki= 100 设置电流为1 实际电流最大在[0.83,1.15] 即±15mA波动
+    //      ki= 50 设置电流为1 实际电流最大在[0.83,1.13] 即±13mA波动
+    //      ki= 25 设置电流为1 实际电流最大在[0.87,1.13] 即±13mA波动
+    // 结论，感觉ki= 50效果可以
     // filter
     LowPassFilter current_q_filter{5};
     LowPassFilter current_d_filter{5};
     LowPassFilter shaft_velocity_filter{30};
     LowPassFilter shaft_angle_filter{100};
     // pid-controller
-    PIDControler pid_iq_controller{2.8, 200, 0, 12, 0};
-    PIDControler pid_id_controller{2.8, 200, 0, 12, 0};
+    PIDControler pid_iq_controller{2.8, 50, 0, 12, 0};
+    PIDControler pid_id_controller{2.8, 50, 0, 12, 0};
     // kp 1rad->0.5A
     // 2024-09-29T00:20
-    // 尝试确定参数 kp
+    // 尝试确定速度控制参数 kp
     //      shaft_velocity_filter=5 kp=1 ki=0 设置target_velocity=0,开机速度在【-10，10】抖动
     //      shaft_velocity_filter=5 kp=0.1 ki=0 不再抖动 设置速度为10系统开始有响应
     //      shaft_velocity_filter=5 kp=0.5 ki=0 抖动 开机速度在【-8.6，8.12】抖动
     //      shaft_velocity_filter=5 kp=0.25 ki=0  不再抖动 设置速度为5系统开始有响应
-    // 尝试确定参数 ki
+    // 尝试确定速度控制参数 ki
     //      shaft_velocity_filter=5 kp=0.25 ki=1 系统开始在0.2电角度圈数/秒 响应 但是依旧有顿挫感
     //      shaft_velocity_filter=5 kp=0.25 ki=10 系统开始可以在0.05响应 顿挫感没有了，但是有高频抖动
-    // 尝试确定参数 shaft_velocity_filter
+    // 尝试确定速度控制参数 shaft_velocity_filter
     //      shaft_velocity_filter=10 kp=0.25 ki=10 设置速度为0.1时 速度有 [-1.08,1.25]左右噪声 噪声周期30ms
     //      shaft_velocity_filter=30 kp=0.25 ki=10 噪声消失 但还是有来自永磁体的顿挫感 设置速度为10时，速度的顿挫感幅度[14.72,7.57] 周期为30ms
     //      shaft_velocity_filter=60 kp=0.25 ki=10 开机起转，系统将产生抖动
     //      shaft_velocity_filter=40 kp=0.25 ki=10 开机抖动然后静止，顿挫感无法消除，另外发现拨动转子会产生震荡周期40ms
     //      shaft_velocity_filter=80 kp=0.25 ki=10 开机失控转动无法停止
     // 结论：shaft_velocity_filter=30 kp=0.25 ki=10
-    // 
+    // 2024-09-29T09:34
+    // 尝试重调kp:
+    //      用匀速转动是电机抖动，尝试减小参数 kp
+    //      kp=0.2 不抖动 但设置速度为5系统不响应
+    //      kp=0.1 太小
+    // 尝试调output_roc_limit:
+    //      设置速度为0，然后拨动电机导致电机振荡抖动
+    //      抖动周期 40ms 幅值[1.55,-0.57] 斜率为 （1.55- -0.57）/(40/4) = 1/10 = 0.1A/ms = 100A/s
+    //      所以先尝试限制iq变换率为 50A/s
+    //      output_roc_limit = 50A/s   抖动周期 10ms 幅值[-2.34,1.87] 斜率为  (1.87 - -2.34) / (10/4) = 0.052625 A/ms = 52 A/S
+    //      output_roc_limit = 40A/s
+    //      output_roc_limit = 25A/s   抖动周期 14ms 幅值[2.69,1.94] 斜率为  (2.69-1.94) / (14/4) = 0.0133928571428571 A/ms = 13.3928 A/S
+    //      output_roc_limit = 10A/s
+    //      output_roc_limit = 5A/s
+    //      output_roc_limit = 2A/s   依然抖动
+    // 2024-09-29T11:40
+    // 尝试重调速度环ki减小抖动
+    //      ki = 20 转子转动的颗粒感消失 但还不够平滑 设置目标速度1 波动范围[0.59,2.17]
+    //      ki = 40 抖动现象有减弱 当目标速度为4是出现颗粒感 但空转难以控制 
+    //      ki = 80 难以控制
+    //      ki = 5 颗粒感过于明显
+    // 尝试调速度环Ki
+    //      kp=0.25 ki=10 kd=-10 剧烈抖动
+    //      kp=0.25 ki=10 kd=-1 剧烈抖动
+    //      kp=0.25 ki=10 kd=-0.5 剧烈抖动
+    //      kp=0.25 ki=10 kd=-0.25 剧烈抖动
+    //      kp=0.25 ki=10 kd=-0.1 剧烈抖动
+    //      kp=0.25 ki=10 kd=-0.05 抖动
+    //      kp=0.25 ki=10 kd=-0.01 抖动
+    //      kp=0.25 ki=10 kd=-0.001 抖动
+    //      kp=0.25 ki=10 kd=-0.0001 不再抖动
+    //      kp=0.25 ki=10 kd=-100 剧烈抖动
+    //      kp=0.25 ki=10 kd=-0.005 
+    //      kd给高给低都没什么效果...
     PIDControler pid_velocity_controller{0.25, 10, 0, 5, 0};
-
 private:
     //
     BLDCDriver *driver = nullptr;
@@ -204,7 +244,6 @@ public:
      * 获取电角度
      */
     uint16_t electricalAngle();
-
     /**
      * 设置相电压
      * @param u_d int16_t [-32768,32767] 表示 [-1,1] 精度：1/32768 = 0.0000305

@@ -36,6 +36,8 @@ private:
   float v_dt_s = 0;
   // for dir
   SensorDirectrion directron = SensorDirectrion::UNKNOW;
+  // 
+  float velocity = 0;
 
 public:
   Sensor(void (*initHardWare)(), uint16_t (*readHardWare)());

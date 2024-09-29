@@ -132,16 +132,18 @@ void BLDCMotor::close_loop_current_control(float target)
   float u_q = this->pid_iq_controller(error_q);
   this->open_loop_voltage_control(u_d, u_q);
   // static uint8_t idx = 0;
-  // if (++idx % 10 == 0)
+  // if (++idx % 60 == 0)
   // {
   //   Serial.print(target);
   //   Serial.print(',');
-  //   Serial.print(current.d);
-  //   Serial.print(',');
+  //   // Serial.print(current.d);
+  //   // Serial.print(',');
   //   Serial.print(current.q);
   //   Serial.print(',');
-  //   Serial.print(u_q);
-  //   Serial.print(',');
+  //   // Serial.print(u_q);
+  //   // Serial.print(',');
+  //   // Serial.print(u_d);
+  //   // Serial.print(',');
   //   Serial.print('\n');
   // }
 }
@@ -164,16 +166,16 @@ void BLDCMotor::close_loop_velocity_control(float target)
   float target_velocity = _constrain(-limit_velocity, target, limit_velocity);
   float current_velocity = this->shaftVelocity();
   float error = target_velocity - current_velocity;
-  float i_q = this->direction * this->pid_velocity_controller(error);
+  float i_q = this->direction * this->sensor->directron * this->pid_velocity_controller(error);
   this->close_loop_current_control(i_q);
-  // static uint8_t idx = 0;
-  // if (++idx % 30 == 0)
-  // {
-  //   Serial.print(target_velocity);
-  //   Serial.print(',');
-  //   Serial.print(current_velocity);
-  //   Serial.print(',');
-  //   Serial.print(i_q);
-  //   Serial.print('\n');
-  // }
+  static uint8_t idx = 0;
+  if (++idx % 30 == 0)
+  {
+    Serial.print(target_velocity);
+    Serial.print(',');
+    Serial.print(current_velocity);
+    Serial.print(',');
+    Serial.print(i_q);
+    Serial.print('\n');
+  }
 }
