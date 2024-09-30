@@ -32,16 +32,18 @@ public:
 
     // directron
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
-
     // filter
     LowPassFilter current_q_filter{5};
     LowPassFilter current_d_filter{5};
+    LowPassFilter current_dc_filter{5};
     LowPassFilter shaft_velocity_filter{30};
     LowPassFilter shaft_angle_filter{100};
     // pid-controller
     PIDControler pid_iq_controller{2.8, 50, 0, 12, 0};
     PIDControler pid_id_controller{2.8, 50, 0, 12, 0};
-    PIDControler pid_velocity_controller{0.25, 10, 0, 5, 0};
+    PIDControler pid_dc_controller{0, 0, 0, 12, 0};
+    PIDControler pid_velocity_controller{0.25, 5, 0, 5, 0};
+
 private:
     //
     BLDCDriver *driver = nullptr;
@@ -75,9 +77,17 @@ public:
      */
     CurrentDQ getCurrentDQ();
     /**
-     * 闭环电流控制
+     * 闭环DQ电流控制
      */
-    void close_loop_current_control(float target);
+    void close_loop_current_dq_control(float target);
+    /**
+     * 获取直流电流
+     */
+    CurrentDC getCurrentDC();
+    /**
+     * 闭环DC电流控制
+     */
+    void close_loop_current_dc_control(float target);
     /**
      * 查找最佳pid参数
      */
