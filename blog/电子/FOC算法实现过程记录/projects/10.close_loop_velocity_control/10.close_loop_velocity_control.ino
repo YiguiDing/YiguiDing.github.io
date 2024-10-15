@@ -6,6 +6,7 @@
 #include "foc_utils.h"
 #include "typedef.h"
 #include "pwm.h"
+#include "Command.cpp"
 
 BLDCMotor motor = BLDCMotor(7, 12);
 
@@ -76,7 +77,7 @@ Sensor sensor = Sensor(
         Serial.println(err);
         return (uint16_t)0;
       }
-       delay(1); // 这行代码解决了磁编码器有时无法读取的问题,开始怀疑时排针接触不良,然后尝试焊接排针问题依然存在,然后怀疑是SDA\SCL上拉电阻太多导致,拆掉问题依旧存在,然后怀疑是电机导致的电压波动,然后给AS5600供电加了个1uf和0.1uf电容,问题依旧,最后google搜索后发现别人的代码中有delay遂加上,问题解决.
+      delay(1); // 这行代码解决了磁编码器有时无法读取的问题,开始怀疑时排针接触不良,然后尝试焊接排针问题依然存在,然后怀疑是SDA\SCL上拉电阻太多导致,拆掉问题依旧存在,然后怀疑是电机导致的电压波动,然后给AS5600供电加了个1uf和0.1uf电容,问题依旧,最后google搜索后发现别人的代码中有delay遂加上,问题解决.
       // as5600 12bit精度，左移4位变成16位
       data <<= 4;
       return data;
@@ -109,17 +110,20 @@ CurrentSensor currentSensor = CurrentSensor(
       };
     });
 
+Command command;
+
 void setup()
 {
   Serial.begin(115200);
-
   motor.connectDriver(&driver);
   motor.connectSensor(&sensor);
   motor.connectCurrentSensor(&currentSensor);
+  command.connectMotor(&motor);
   motor.initFOC();
 }
 
 void loop()
 {
   motor.loopFOC();
+  command.update();
 }

@@ -9,8 +9,17 @@
 #include "Timer.hpp"
 #include "pid.hpp"
 
+enum ControlMode : uint8_t
+{
+    Unknow = 0,
+    Voltage = 1,
+    Current = 2,
+    Velocity = 3,
+    Position = 4
+};
 class BLDCMotor : Timer
 {
+
     enum MotorDirectrion : int8_t
     {
         UNKNOW = 0,
@@ -29,19 +38,24 @@ public:
     float limit_current = 10.0f;
     // 限制速度
     float limit_velocity = 1000.0f;
-
     // directron
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
-
+    // taget
+    float target = 0;
+    // mode
+    ControlMode controlMode = ControlMode::Unknow;
+    uint8_t debug = 0;
     // filter
     LowPassFilter current_q_filter{5};
     LowPassFilter current_d_filter{5};
-    LowPassFilter shaft_velocity_filter{30};
+    LowPassFilter shaft_velocity_filter{50};
     LowPassFilter shaft_angle_filter{100};
     // pid-controller
-    PIDControler pid_iq_controller{2.8, 50, 0, 12, 0};
-    PIDControler pid_id_controller{2.8, 50, 0, 12, 0};
-    PIDControler pid_velocity_controller{0.25, 10, 0, 5, 0};
+    PIDControler pid_iq_controller;
+    PIDControler pid_id_controller;
+    PIDControler pid_velocity_controller;
+    PIDControler pid_position_controller;
+
 private:
     //
     BLDCDriver *driver = nullptr;
@@ -55,6 +69,10 @@ public:
     void connectCurrentSensor(CurrentSensor *currentSensor);
     void initFOC();
     void loopFOC();
+    /**
+     * 设置控制模式
+     */
+    void setMode(ControlMode mode);
     /**
      * 获取电角度
      */
