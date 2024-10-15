@@ -36,6 +36,13 @@ pi@raspberrypi:~/mediamtx $ tar -xvf ./mediamtx_v1.8.2_linux_armv6.tar.gz
 
 ```bash
 pi@raspberrypi:~ $ cd mediamtx
+# list-devices for linux
+pi@raspberrypi:~ $ v4l2-ctl --list-devices
+# H264 USB Camera: USB Camera (usb-0000:01:00.0-1.4):
+#         /dev/video0
+#         /dev/video1
+#         /dev/video2
+#         /dev/video3
 pi@raspberrypi:~/mediamtx $ cat >> mediamtx.yml
 paths:
   # example:
