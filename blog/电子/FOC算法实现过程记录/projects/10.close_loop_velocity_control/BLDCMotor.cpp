@@ -18,6 +18,11 @@ void BLDCMotor::connectCurrentSensor(CurrentSensor *currentSensor)
 {
   this->currentSensor = currentSensor;
 }
+void BLDCMotor::connectCommand(Command *command)
+{
+  this->command = command;
+}
+
 void BLDCMotor::initFOC()
 {
   if (this->currentSensor)
@@ -75,22 +80,22 @@ void BLDCMotor::setMode(ControlMode controlMode)
     break;
   case ControlMode::Current:
     // Simple FOC Shield v2.0.4
-    // this->pid_id_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
-    // this->pid_iq_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
+    this->pid_id_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
+    this->pid_iq_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
     // 2222
     // 设置target=1,p=4开始震荡，于是设置为2
-    this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
-    this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
+    // this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
+    // this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
     break;
   case ControlMode::Velocity:
     // Simple FOC Shield v2.0.4
-    // this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    // this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    // this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0); //  kp<1; ki<=10;
-    // 2222
-    this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
-    this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
-    this->pid_velocity_controller = PIDControler(0, 0, 0, this->limit_current, 0);
+    this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0); //  kp<1; ki<=10;
+    // // 2222
+    // this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
+    // this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
+    // this->pid_velocity_controller = PIDControler(0, 0, 0, this->limit_current, 0);
     break;
   case ControlMode::Position:
     this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
@@ -143,17 +148,6 @@ void BLDCMotor::open_loop_voltage_control(float target_ud, float target_uq)
   int16_t u_q = this->sensor->directron * this->direction * (voltage_uq / power_supply_voltage * INT16_MAX);
   uint16_t e_angle = this->electricalAngle();
   this->setPhraseVoltage(u_d, u_q, e_angle);
-  //
-  static uint8_t idx = 0;
-  if (debug && controlMode == ControlMode::Voltage && ++idx % 100 == 0)
-  {
-    Serial.print(target);
-    Serial.print(',');
-    Serial.print(voltage_uq);
-    Serial.print(',');
-    Serial.print(this->dt_ms());
-    Serial.print('\n');
-  }
 }
 /**
  * 获取Q轴电流
@@ -183,14 +177,9 @@ void BLDCMotor::close_loop_current_control(float target)
   this->open_loop_voltage_control(u_d, u_q);
   //
   static uint8_t idx = 0;
-  if (debug && controlMode == ControlMode::Current && ++idx % 100 == 0)
+  if (debug && this->command && ++idx % 200 == 0)
   {
-    Serial.print(target);
-    Serial.print(',');
-    Serial.print(current.q);
-    Serial.print(',');
-    Serial.print(this->dt_ms());
-    Serial.print('\n');
+    this->command->drawDragram(1, target, u_q);
   }
 }
 /**
@@ -209,14 +198,9 @@ void BLDCMotor::close_loop_velocity_control(float target)
   this->close_loop_current_control(i_q);
   //
   static uint8_t idx = 0;
-  if (debug && controlMode == ControlMode::Velocity && ++idx % 100 == 0)
+  if (debug && this->command && ++idx % 200 == 0)
   {
-    Serial.print(target_velocity);
-    Serial.print(',');
-    Serial.print(current_velocity);
-    Serial.print(',');
-    Serial.print(this->dt_ms());
-    Serial.print('\n');
+    this->command->drawDragram(this->controlMode, target, i_q);
   }
 }
 /**

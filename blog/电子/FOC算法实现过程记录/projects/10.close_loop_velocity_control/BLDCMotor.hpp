@@ -8,6 +8,7 @@
 #include "Sensor.hpp"
 #include "Timer.hpp"
 #include "pid.hpp"
+#include "Command.cpp"
 
 enum ControlMode : uint8_t
 {
@@ -61,12 +62,14 @@ private:
     BLDCDriver *driver = nullptr;
     Sensor *sensor = nullptr;
     CurrentSensor *currentSensor = nullptr;
+    Command *command = nullptr;
 
 public:
     BLDCMotor(uint8_t polePairs, float power_supply_voltage);
     void connectDriver(BLDCDriver *driver);
     void connectSensor(Sensor *sensor);
     void connectCurrentSensor(CurrentSensor *currentSensor);
+    void connectCommand(Command *command);
     void initFOC();
     void loopFOC();
     /**

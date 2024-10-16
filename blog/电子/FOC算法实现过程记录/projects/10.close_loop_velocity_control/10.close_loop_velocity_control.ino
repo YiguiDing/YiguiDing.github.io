@@ -115,11 +115,14 @@ Command command;
 void setup()
 {
   Serial.begin(115200);
+
   motor.connectDriver(&driver);
   motor.connectSensor(&sensor);
   motor.connectCurrentSensor(&currentSensor);
-  command.connectMotor(&motor);
   motor.initFOC();
+
+  command.connectMotor(&motor);
+  command.connectSerial(&Serial);
 }
 
 void loop()
