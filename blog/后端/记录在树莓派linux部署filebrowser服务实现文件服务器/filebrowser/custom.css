@@ -1,0 +1,28 @@
+/* 滚动条自定义 */
+*::-webkit-scrollbar {
+    width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff88;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #409eff;
+}
+
+/* 文档链接 */
+p.credits{
+    display: none;
+}
+
+#login img{
+    width: 256px;
+}
+#login h1{
+    display: none;
+}
+header img{
+    width: 150px;
+}

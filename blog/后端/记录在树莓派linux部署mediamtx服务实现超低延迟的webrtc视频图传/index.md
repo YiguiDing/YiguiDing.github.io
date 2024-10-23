@@ -11,31 +11,31 @@ article: false
 
 下载
 ```bash
-$ scp 'c:/Users/YiguiDing/Downloads/mediamtx_v1.8.2_linux_armv6.tar.gz' pi@192.168.2.2:/home/pi/
+$ scp 'c:/Users/24496/Downloads/mediamtx_v1.8.2_linux_armv6.tar.gz' pi@192.168.2.2:/home/pi/
 pi@192.168.2.2's password:
 mediamtx_v1.8.2_linux_armv6.tar.gz                                                                            100%   14MB   9.5MB/s   00:01
 
-$ scp 'c:/Users/YiguiDing/Downloads/ffmpeg-release-armhf-static.tar.xz' pi@192.168.2.2:/home/pi/
+$ scp 'c:/Users/24496/Downloads/ffmpeg-release-armhf-static.tar.xz' pi@192.168.2.2:/home/pi/
 pi@192.168.2.2's password:
 ffmpeg-release-armhf-static.tar.xz                                                                            100%   15MB   9.4MB/s   00:01
 ```
 解压
 ```bash
-pi@raspberrypi:~ mkdir ffmpeg
-pi@raspberrypi:~ $ mv ffmpeg-release-armhf-static.tar.xz ffmpeg
-pi@raspberrypi:~ $ cd ffmpeg
-pi@raspberrypi:~/ffmpeg $ tar -xvf ./ffmpeg-release-armhf-static.tar.xz
-
-pi@raspberrypi:~ mkdir mediamtx
-pi@raspberrypi:~ mv mediamtx_v1.8.2_linux_armv6.tar.gz mediamtx
-pi@raspberrypi:~ $ cd mediamtx
-pi@raspberrypi:~/mediamtx $ tar -xvf ./mediamtx_v1.8.2_linux_armv6.tar.gz
+mkdir ffmpeg
+mv ffmpeg-release-armhf-static.tar.xz ffmpeg
+cd ffmpeg
+tar -xvf ./ffmpeg-release-armhf-static.tar.xz
+cd ..
+mkdir mediamtx
+mv mediamtx_v1.8.2_linux_armv6.tar.gz mediamtx
+cd mediamtx
+tar -xvf ./mediamtx_v1.8.2_linux_armv6.tar.gz
 ```
 
 **二、改写mediamtx.yml配置文件**
 
 ```bash
-pi@raspberrypi:~ $ cd mediamtx
+cd mediamtx
 # list-devices for linux
 pi@raspberrypi:~ $ v4l2-ctl --list-devices
 # H264 USB Camera: USB Camera (usb-0000:01:00.0-1.4):
@@ -52,7 +52,7 @@ paths:
   # for window
     # runOnInit: ffmpeg -f dshow -i video="USB Camera" -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
   # for linux
-    runOnInit: /home/pi/ffmpeg/ffmpeg-7.0.1-armhf-static/ffmpeg -f v4l2 -i /dev/video1 -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
+    runOnInit: /home/pi/ffmpeg/ffmpeg-7.0.1-armhf-static/ffmpeg -f v4l2 -i /dev/video2 -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
     runOnInitRestart: yes
   all_others:
 ```
@@ -60,14 +60,14 @@ paths:
 **三、移动配置文件到etc**
 
 ```bash
-pi@raspberrypi:~ $ sudo mkdir /etc/mediamtx
-pi@raspberrypi:~ $ sudo cp ./mediamtx/mediamtx.yml /etc/mediamtx/mediamtx.yml
+sudo mkdir /etc/mediamtx
+sudo cp ./mediamtx/mediamtx.yml /etc/mediamtx/mediamtx.yml
 ```
 
 **四、实现开机自动执行**
 
 ```bash
-pi@raspberrypi:~ $ sudo vi /etc/rc.local
+sudo vi /etc/rc.local
 # 添加代码：
 /home/pi/mediamtx/mediamtx &
 ```
@@ -77,4 +77,21 @@ pi@raspberrypi:~ $ sudo vi /etc/rc.local
 ```
 http://192.168.2.2:8889/camera
 http://192.168.2.2:8889/camera/whep
+```
+
+
+允许任何用户的任何ip拥有api权限
+
+```
+- user: any
+  pass:
+  # ips: ['127.0.0.1', '::1']
+  ips: []
+  permissions:
+  - action: api
+  - action: metrics
+  - action: pprof
+
+# 开启api
+api: yes
 ```
