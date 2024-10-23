@@ -1,163 +1,151 @@
-#ifndef _Command_H_
-#define _Command_H_
+#include "Command.hpp"
 #include "BLDCMotor.hpp"
-#include "arduino.h"
-#include "lib/pid-configer/commander.cpp"
-
-class Command : public PID_Configer
+void Command::connectMotor(BLDCMotor *motor)
 {
-private:
-    BLDCMotor *motor;
-    Serial_ *serial;
-
-public:
-    void connectMotor(BLDCMotor *motor)
+    this->motor = motor;
+}
+void Command::connectSerial(HardwareSerial *serial)
+{
+    this->serial = serial;
+}
+void Command::update()
+{
+    while (this->serial->available())
+        this->receive(this->serial->read());
+    PID_Configer::update(); // for send data
+}
+void Command::send(uint8_t byte)
+{
+    this->serial->write(byte);
+}
+void Command::onSetKp(uint8_t ch, float Kp)
+{
+    switch (ch)
     {
-        this->motor = motor;
+    case 1:
+        this->motor->pid_id_controller.K_p = Kp;
+        this->motor->pid_iq_controller.K_p = Kp;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->pid_velocity_controller.K_p = Kp;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->pid_position_controller.K_p = Kp;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-    void connectSerial(Serial_ *serial)
+}
+void Command::onSetKi(uint8_t ch, float Ki)
+{
+    switch (ch)
     {
-        this->serial = serial;
+    case 1:
+        this->motor->pid_id_controller.K_i = Ki;
+        this->motor->pid_iq_controller.K_i = Ki;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->pid_velocity_controller.K_i = Ki;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->pid_position_controller.K_i = Ki;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-    void update()
+}
+void Command::onSetKd(uint8_t ch, float Kd)
+{
+    switch (ch)
     {
-        while (this->serial->available())
-            this->receive(this->serial->read());
+    case 1:
+        this->motor->pid_id_controller.K_d = Kd;
+        this->motor->pid_iq_controller.K_d = Kd;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->pid_velocity_controller.K_d = Kd;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->pid_position_controller.K_d = Kd;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-
-private:
-    void send(uint8_t byte) override
+}
+void Command::onSetLimit(uint8_t ch, float limit)
+{
+    switch (ch)
     {
-        this->serial->write(byte);
+    case 1:
+        this->motor->pid_id_controller.output_limit = limit;
+        this->motor->pid_iq_controller.output_limit = limit;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->pid_velocity_controller.output_limit = limit;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->pid_position_controller.output_limit = limit;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-    void onSetKp(uint8_t ch, float Kp) override
+}
+void Command::onSetROC(uint8_t ch, float roc)
+{
+    switch (ch)
     {
-        switch (ch)
-        {
-        case 1:
-            this->motor->pid_id_controller.K_p = Kp;
-            this->motor->pid_iq_controller.K_p = Kp;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->pid_velocity_controller.K_p = Kp;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->pid_position_controller.K_p = Kp;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
+    case 1:
+        this->motor->pid_id_controller.output_roc_limit = roc;
+        this->motor->pid_iq_controller.output_roc_limit = roc;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->pid_velocity_controller.output_roc_limit = roc;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->pid_position_controller.output_roc_limit = roc;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-    void onSetKi(uint8_t ch, float Ki) override
+}
+void Command::onSetTarget(uint8_t ch, float target)
+{
+    switch (ch)
     {
-        switch (ch)
-        {
-        case 1:
-            this->motor->pid_id_controller.K_i = Ki;
-            this->motor->pid_iq_controller.K_i = Ki;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->pid_velocity_controller.K_i = Ki;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->pid_position_controller.K_i = Ki;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
+    case 1:
+        this->motor->controlMode = BLDCMotor::ControlMode::Current;
+        this->motor->target = target;
+        this->motor->pid_id_controller.reset();
+        this->motor->pid_iq_controller.reset();
+        break;
+    case 2:
+        this->motor->controlMode = BLDCMotor::ControlMode::Velocity;
+        this->motor->target = target;
+        this->motor->pid_velocity_controller.reset();
+        break;
+    case 3:
+        this->motor->controlMode = BLDCMotor::ControlMode::Position;
+        this->motor->target = target;
+        this->motor->pid_position_controller.reset();
+    default:
+        break;
     }
-    void onSetKd(uint8_t ch, float Kd) override
-    {
-        switch (ch)
-        {
-        case 1:
-            this->motor->pid_id_controller.K_d = Kd;
-            this->motor->pid_iq_controller.K_d = Kd;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->pid_velocity_controller.K_d = Kd;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->pid_position_controller.K_d = Kd;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
-    }
-    void onSetLimit(uint8_t ch, float limit) override
-    {
-        switch (ch)
-        {
-        case 1:
-            this->motor->pid_id_controller.output_limit = limit;
-            this->motor->pid_iq_controller.output_limit = limit;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->pid_velocity_controller.output_limit = limit;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->pid_position_controller.output_limit = limit;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
-    }
-    void onSetROC(uint8_t ch, float roc) override
-    {
-        switch (ch)
-        {
-        case 1:
-            this->motor->pid_id_controller.output_roc_limit = roc;
-            this->motor->pid_iq_controller.output_roc_limit = roc;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->pid_velocity_controller.output_roc_limit = roc;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->pid_position_controller.output_roc_limit = roc;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
-    }
-    void onSetTarget(uint8_t ch, float target) override
-    {
-        switch (ch)
-        {
-        case 1:
-            this->motor->controlMode = ControlMode::Current;
-            this->motor->target = target;
-            this->motor->pid_id_controller.reset();
-            this->motor->pid_iq_controller.reset();
-            break;
-        case 2:
-            this->motor->controlMode = ControlMode::Velocity;
-            this->motor->target = target;
-            this->motor->pid_velocity_controller.reset();
-            break;
-        case 3:
-            this->motor->controlMode = ControlMode::Position;
-            this->motor->target = target;
-            this->motor->pid_position_controller.reset();
-        default:
-            break;
-        }
-    }
-};
-
-#endif
+}
+void Command::onDrawDragram(uint8_t ch, float target, float current)
+{
+}

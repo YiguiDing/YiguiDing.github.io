@@ -148,6 +148,12 @@ void BLDCMotor::open_loop_voltage_control(float target_ud, float target_uq)
   int16_t u_q = this->sensor->directron * this->direction * (voltage_uq / power_supply_voltage * INT16_MAX);
   uint16_t e_angle = this->electricalAngle();
   this->setPhraseVoltage(u_d, u_q, e_angle);
+  static uint8_t idx = 0;
+  if (this->command && ++idx % 255 == 0)
+  {
+    idx = 0;
+    this->command->drawDragram(3, e_angle, 0);
+  }
 }
 /**
  * 获取Q轴电流
@@ -166,7 +172,6 @@ CurrentDQ BLDCMotor::getCurrentDQ()
  */
 void BLDCMotor::close_loop_current_control(float target)
 {
-
   float target_i_d = 0;
   float target_i_q = _constrain(-limit_current, target, limit_current);
   CurrentDQ current = this->getCurrentDQ();
@@ -175,11 +180,11 @@ void BLDCMotor::close_loop_current_control(float target)
   float u_d = this->pid_id_controller(error_d);
   float u_q = this->pid_iq_controller(error_q);
   this->open_loop_voltage_control(u_d, u_q);
-  //
   static uint8_t idx = 0;
-  if (debug && this->command && ++idx % 200 == 0)
+  if (this->command && ++idx % 255 == 0)
   {
-    this->command->drawDragram(1, target, u_q);
+    idx = 0;
+    this->command->drawDragram(1, target_i_q, current.q);
   }
 }
 /**
@@ -196,11 +201,12 @@ void BLDCMotor::close_loop_velocity_control(float target)
   float error = target_velocity - current_velocity;
   float i_q = this->direction * this->sensor->directron * this->pid_velocity_controller(error);
   this->close_loop_current_control(i_q);
-  //
+
   static uint8_t idx = 0;
-  if (debug && this->command && ++idx % 200 == 0)
+  if (this->command && ++idx % 255 == 0)
   {
-    this->command->drawDragram(this->controlMode, target, i_q);
+    idx = 0;
+    this->command->drawDragram(2, target_velocity, current_velocity);
   }
 }
 /**

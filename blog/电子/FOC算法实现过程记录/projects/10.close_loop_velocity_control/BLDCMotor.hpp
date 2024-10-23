@@ -8,19 +8,20 @@
 #include "Sensor.hpp"
 #include "Timer.hpp"
 #include "pid.hpp"
-#include "Command.cpp"
+#include "Command.hpp"
 
-enum ControlMode : uint8_t
-{
-    Unknow = 0,
-    Voltage = 1,
-    Current = 2,
-    Velocity = 3,
-    Position = 4
-};
 class BLDCMotor : Timer
 {
 
+public:
+    enum ControlMode : uint8_t
+    {
+        Unknow = 0,
+        Voltage = 1,
+        Current = 2,
+        Velocity = 3,
+        Position = 4
+    };
     enum MotorDirectrion : int8_t
     {
         UNKNOW = 0,
@@ -28,7 +29,6 @@ class BLDCMotor : Timer
         CLOCK_WISE = -1,
     };
 
-public:
     // 极对数
     uint8_t polePairs;
     // 供电电压
@@ -44,8 +44,7 @@ public:
     // taget
     float target = 0;
     // mode
-    ControlMode controlMode = ControlMode::Unknow;
-    uint8_t debug = 0;
+    ControlMode controlMode = ControlMode::Velocity;
     // filter
     LowPassFilter current_q_filter{5};
     LowPassFilter current_d_filter{5};

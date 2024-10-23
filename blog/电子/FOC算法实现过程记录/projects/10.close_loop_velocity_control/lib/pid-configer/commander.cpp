@@ -1,6 +1,6 @@
 #ifndef __PID_Configer_H__
 #define __PID_Configer_H__
-#include "../simple-protocal/src/simple-protocal.cpp"
+#include "simple-protocal/src/simple-protocal.cpp"
 #include <vector>
 #include <functional>
 #include <cstring> // for memcpy
@@ -9,24 +9,51 @@ class PID_Configer
 {
 private:
     SimpleProtocolParser protocal;
+    std::vector<std::vector<uint8_t>> tx_queue;
+    void send(const std::vector<uint8_t> &data)
+    {
+        if (tx_queue.size() > 10)
+            return;
+        auto frame = this->protocal.encoder(data);
+        tx_queue.push_back(frame);
+    }
 
 public:
     // send and receive message
-    virtual void send(uint8_t byte);
+    virtual void send(uint8_t byte) = 0;
+
+public:
+    void update()
+    {
+        if (tx_queue.empty())
+        {
+            return;
+        }
+        if (tx_queue[0].empty())
+        {
+            tx_queue.erase(tx_queue.begin());
+            return;
+        }
+        this->send(tx_queue[0][0]);
+        tx_queue[0].erase(tx_queue[0].begin());
+    }
+
+public:
     void receive(uint8_t byte)
     {
         auto data = protocal.decoder(byte);
-        if (data.size() == 0) return;
+        if (data.size() == 0)
+            return;
+        this->ack();
         this->process(data);
     }
-
-    virtual void onSetKp(uint8_t ch, float Kp);
-    virtual void onSetKi(uint8_t ch, float Ki);
-    virtual void onSetKd(uint8_t ch, float Kd);
-    virtual void onSetLimit(uint8_t ch, float limit);
-    virtual void onSetROC(uint8_t ch, float roc);
-    virtual void onSetTarget(uint8_t ch, float target);
-    virtual void onDrawDragram(uint8_t ch, float target, float current);
+    virtual void onSetKp(uint8_t ch, float Kp) = 0;
+    virtual void onSetKi(uint8_t ch, float Ki) = 0;
+    virtual void onSetKd(uint8_t ch, float Kd) = 0;
+    virtual void onSetLimit(uint8_t ch, float limit) = 0;
+    virtual void onSetROC(uint8_t ch, float roc) = 0;
+    virtual void onSetTarget(uint8_t ch, float target) = 0;
+    virtual void onDrawDragram(uint8_t ch, float target, float current) = 0;
 
     // cmd
     void setKp(uint8_t ch, float Kp)
@@ -94,28 +121,28 @@ public:
         memcpy(&data[2], &target, sizeof(target));
         send(data);
     }
-
     void drawDragram(uint8_t ch, float target, float current)
     {
         // |   ch    | target  | current |
         // | uint8_t | float32 | float32 |
-        std::vector<uint8_t> data(9);
-        data[0] = Command::SetTarget;
+        std::vector<uint8_t> data(10);
+        data[0] = Command::DrawDragram;
         data[1] = ch;
         memcpy(&data[2 + 0], &target, 4);
         memcpy(&data[2 + 4], &current, 4);
         send(data);
     }
-
-private:
-    void send(const std::vector<uint8_t> &data)
+    void ack()
     {
-        for (uint8_t idx = 0; idx < data.size(); idx++)
-            this->send(data[idx]);
+        std::vector<uint8_t> data(1);
+        data[0] = Command::Ack;
+        send(data);
     }
 
+private:
     enum Command
     {
+        Ack = 0,
         SetKp = 1,
         SetKi = 2,
         SetKd = 3,

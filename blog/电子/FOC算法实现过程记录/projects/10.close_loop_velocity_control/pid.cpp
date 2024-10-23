@@ -4,7 +4,6 @@ PIDControler::PIDControler()
 {
 }
 PIDControler::PIDControler(float Kp, float Ki, float Kd, float output_limit, float output_roc_limit)
-
 {
     this->K_p = Kp;
     this->K_i = Ki;
