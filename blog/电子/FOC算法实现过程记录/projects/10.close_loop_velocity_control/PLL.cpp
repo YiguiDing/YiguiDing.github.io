@@ -1,5 +1,0 @@
-class PLL
-{
-private:
-public:
-};

@@ -128,20 +128,24 @@ void Command::onSetTarget(uint8_t ch, float target)
     switch (ch)
     {
     case 1:
-        this->motor->controlMode = BLDCMotor::ControlMode::Current;
+        if (this->motor->controlMode != BLDCMotor::ControlMode::Current)
+            this->motor->setMode(BLDCMotor::ControlMode::Current);
+        this->motor->setTarget(target);
         this->motor->target = target;
-        this->motor->pid_id_controller.reset();
-        this->motor->pid_iq_controller.reset();
+        // this->motor->pid_id_controller.reset();
+        // this->motor->pid_iq_controller.reset();
         break;
     case 2:
-        this->motor->controlMode = BLDCMotor::ControlMode::Velocity;
-        this->motor->target = target;
-        this->motor->pid_velocity_controller.reset();
+        if (this->motor->controlMode != BLDCMotor::ControlMode::Velocity)
+            this->motor->setMode(BLDCMotor::ControlMode::Velocity);
+        this->motor->setTarget(target);
+        // this->motor->pid_velocity_controller.reset();
         break;
     case 3:
-        this->motor->controlMode = BLDCMotor::ControlMode::Position;
-        this->motor->target = target;
-        this->motor->pid_position_controller.reset();
+        if (this->motor->controlMode != BLDCMotor::ControlMode::Position)
+            this->motor->setMode(BLDCMotor::ControlMode::Position);
+        this->motor->setTarget(target);
+        // this->motor->pid_position_controller.reset();
     default:
         break;
     }

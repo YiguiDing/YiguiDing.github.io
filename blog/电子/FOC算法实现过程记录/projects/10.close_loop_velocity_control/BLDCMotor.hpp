@@ -34,11 +34,11 @@ public:
     // 供电电压
     float power_supply_voltage = 12.0f;
     // 限制电压
-    float limit_voltage = 5.0f;
+    float limit_voltage = 12.0f;
     // 限制电流
     float limit_current = 10.0f;
     // 限制速度
-    float limit_velocity = 1000.0f;
+    float limit_velocity = 130.0f;
     // directron
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;
     // taget
@@ -75,6 +75,7 @@ public:
      * 设置控制模式
      */
     void setMode(ControlMode mode);
+    void setTarget(float target);
     /**
      * 获取电角度
      */
@@ -99,24 +100,12 @@ public:
      */
     void close_loop_current_control(float target);
     /**
-     * 查找最佳pid参数
-     */
-    void find_close_loop_position_control_kp_ki_kd();
-    /**
-     * 获取机械角度
+     * 获取机械角速度
      */
     float shaftVelocity();
     /**
      * 闭环速度控制
      */
     void close_loop_velocity_control(float target);
-    /**
-     * 获取机械角度
-     */
-    float shaftAngle();
-    /**
-     * 闭环位置控制
-     */
-    void close_loop_position_control(float target);
 };
 #endif

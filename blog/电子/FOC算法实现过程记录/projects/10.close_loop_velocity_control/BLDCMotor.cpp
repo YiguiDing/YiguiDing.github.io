@@ -79,36 +79,49 @@ void BLDCMotor::setMode(ControlMode controlMode)
   case ControlMode::Voltage:
     break;
   case ControlMode::Current:
-    // Simple FOC Shield v2.0.4
-    this->pid_id_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
-    this->pid_iq_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
-    // 2222
-    // 设置target=1,p=4开始震荡，于是设置为2
+    // 官方 Simple FOC Shield v2.0.4 开发板 with 2808云台电机
+    // this->pid_id_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
+    // this->pid_iq_controller = PIDControler(2.8, 200, -0.005, this->limit_voltage, 0);
+
+    // 艾尔塞电子 Simple FOC Shield v2.0.4 开发板 with 2808云台电机
     // this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
     // this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
+
+    // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
+    this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 0);
+    this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 0); // 完美
     break;
   case ControlMode::Velocity:
-    // Simple FOC Shield v2.0.4
-    this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0); //  kp<1; ki<=10;
-    // // 2222
+    // 官方 Simple FOC Shield v2.0.4 开发板 with 2808云台电机
+    // this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    // this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    // this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0); //  kp<1; ki<=10;
+
+    // 艾尔塞电子 Simple FOC Shield v2.0.4 开发板 with 2808云台电机
     // this->pid_id_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
     // this->pid_iq_controller = PIDControler(2, 1000, 0, this->limit_voltage, 0);
     // this->pid_velocity_controller = PIDControler(0, 0, 0, this->limit_current, 0);
+
+    // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
+    this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 0); // kp可以设置到60 但取其 2/3 为 60，余量留给ki发挥
+    this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 0);
+    this->pid_velocity_controller = PIDControler(0.01, 0.05, 0, this->limit_current, 20); // 还算完美
     break;
   case ControlMode::Position:
-    this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
-    this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0);
-    this->pid_position_controller = PIDControler(0, 0, 0, this->limit_velocity, 0);
+    // this->pid_id_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    // this->pid_iq_controller = PIDControler(2.8, 0.01, 0, this->limit_voltage, 0);
+    // this->pid_velocity_controller = PIDControler(0.5, 2.5, 0, this->limit_current, 0);
+    // this->pid_position_controller = PIDControler(0, 0, 0, this->limit_velocity, 0);
     break;
   default:
     break;
   }
   this->controlMode = controlMode;
 }
-
+void BLDCMotor::setTarget(float target)
+{
+  this->target = target;
+}
 /**
  * @details
  *  电角度=机械角度*极对数
@@ -120,7 +133,7 @@ uint16_t BLDCMotor::electricalAngle()
 }
 /**
  * 设置相电压
- * @param u_d int16_t [-32768,32767] 表示 [-1,1] 精度：1/32768 = 0.0000305
+ * @param u_d int16_t [-32768,32767] 表示 [-1,1] 精度：1/32768 = 0.0000605
  * @param u_q int16_t [-32768,32767] 表示 [-1,1]
  * @param e_angle uint16_t [0,65535] 表示 [0,2PI] 精度：360°/65535 = 0.00549°
  */
@@ -139,21 +152,14 @@ void BLDCMotor::setPhraseVoltage(int16_t u_d, int16_t u_q, uint16_t e_angle)
   // 设置相电压
   driver->setPhraseVoltage(u_a, u_b, u_c);
 }
-
 void BLDCMotor::open_loop_voltage_control(float target_ud, float target_uq)
 {
+  uint16_t e_angle = this->electricalAngle();
   float voltage_ud = _constrain(-limit_voltage, target_ud, limit_voltage);
   float voltage_uq = _constrain(-limit_voltage, target_uq, limit_voltage);
   int16_t u_d = this->sensor->directron * this->direction * (voltage_ud / power_supply_voltage * INT16_MAX);
   int16_t u_q = this->sensor->directron * this->direction * (voltage_uq / power_supply_voltage * INT16_MAX);
-  uint16_t e_angle = this->electricalAngle();
   this->setPhraseVoltage(u_d, u_q, e_angle);
-  static uint8_t idx = 0;
-  if (this->command && ++idx % 255 == 0)
-  {
-    idx = 0;
-    this->command->drawDragram(3, e_angle, 0);
-  }
 }
 /**
  * 获取Q轴电流
@@ -180,15 +186,16 @@ void BLDCMotor::close_loop_current_control(float target)
   float u_d = this->pid_id_controller(error_d);
   float u_q = this->pid_iq_controller(error_q);
   this->open_loop_voltage_control(u_d, u_q);
+
   static uint8_t idx = 0;
-  if (this->command && ++idx % 255 == 0)
+  if (this->command && ++idx % 61 == 0)
   {
     idx = 0;
     this->command->drawDragram(1, target_i_q, current.q);
   }
 }
 /**
- * 获取机械角度
+ * 获取机械角速度
  */
 float BLDCMotor::shaftVelocity()
 {
@@ -203,19 +210,9 @@ void BLDCMotor::close_loop_velocity_control(float target)
   this->close_loop_current_control(i_q);
 
   static uint8_t idx = 0;
-  if (this->command && ++idx % 255 == 0)
+  if (this->command && ++idx % 62 == 0)
   {
     idx = 0;
     this->command->drawDragram(2, target_velocity, current_velocity);
   }
-}
-/**
- * 获取机械角度
- */
-float BLDCMotor::shaftAngle()
-{
-  return shaft_angle_filter(this->sensor->getPositons());
-}
-void BLDCMotor::close_loop_position_control(float target)
-{
 }

@@ -23,13 +23,21 @@ BLDCDriver driver = BLDCDriver(
     []()
     {
       pinMode(M1_En, OUTPUT); // enable
+
       // pinMode(M1_Ua, OUTPUT); // a
       // pinMode(M1_Ub, OUTPUT); // b
       // pinMode(M1_Uc, OUTPUT); // c
+
+      // 20k
       // period 50us = 20,000hz; pulse 0 us = 0%
-      pwmA.begin(20000.0f, 0.0f);
-      pwmB.begin(20000.0f, 0.0f);
-      pwmC.begin(20000.0f, 0.0f);
+      // pwmA.begin(20000.0f, 0.0f);
+      // pwmB.begin(20000.0f, 0.0f);
+      // pwmC.begin(20000.0f, 0.0f);
+
+      // 10k
+      pwmA.begin(10000.0f, 0.0f);
+      pwmB.begin(10000.0f, 0.0f);
+      pwmC.begin(10000.0f, 0.0f);
     },
     // enable or disable driver
     [](bool enable)
@@ -63,7 +71,7 @@ Sensor sensor = Sensor(
       uint8_t err = Wire.endTransmission(false);
       if (!!err)
       {
-        Wire.endTransmission(true);
+        // Wire.endTransmission(true);
         // Serial.print("errorcode:");
         // Serial.println(err);
         return (uint16_t)0;
@@ -83,6 +91,7 @@ Sensor sensor = Sensor(
       delay(1); // 这行代码解决了磁编码器有时无法读取的问题,开始怀疑时排针接触不良,然后尝试焊接排针问题依然存在,然后怀疑是SDA\SCL上拉电阻太多导致,拆掉问题依旧存在,然后怀疑是电机导致的电压波动,然后给AS5600供电加了个1uf和0.1uf电容,问题依旧,最后google搜索后发现别人的代码中有delay遂加上,问题解决.
       // as5600 12bit精度，左移4位变成16位
       data <<= 4;
+      // Serial.println(data);
       return data;
     });
 
