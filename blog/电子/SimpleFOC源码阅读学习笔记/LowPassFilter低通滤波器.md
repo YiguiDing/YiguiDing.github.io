@@ -2,6 +2,8 @@
 title: SimpleFOC源码阅读学习笔记：LowPassFilter低通滤波器
 shortTitle: LowPassFilter低通滤波器
 date: 2024-08-30T09:35:00
+article: false
+index: true
 ---
 
 ## 原理
