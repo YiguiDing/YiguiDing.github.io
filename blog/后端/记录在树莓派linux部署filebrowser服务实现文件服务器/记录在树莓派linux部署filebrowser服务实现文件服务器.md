@@ -1,7 +1,9 @@
 ---
 title: 记录在树莓派linux部署filebrowser服务实现文件服务器
 date: 2024-10-22T12:16:00
+article: false
 ---
+
 ## filebrowser配置
 
 ```bash
