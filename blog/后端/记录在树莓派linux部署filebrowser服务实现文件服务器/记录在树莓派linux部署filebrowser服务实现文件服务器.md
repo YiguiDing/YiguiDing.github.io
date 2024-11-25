@@ -16,19 +16,37 @@ mv linux-armv6-filebrowser.tar.gz  filebrowser/
 cd filebrowser/
 tar -xvf linux-armv6-filebrowser.tar.gz 
 sudo mv filebrowser /usr/bin/
-sudo filebrowser -d /etc/filebrowser.db config init
-sudo filebrowser -d /etc/filebrowser.db config set --address 0.0.0.0
-sudo filebrowser -d /etc/filebrowser.db config set --port 8080
-sudo filebrowser -d /etc/filebrowser.db config set --locale zh-cn
-sudo filebrowser -d /etc/filebrowser.db config set --log /home/pi/log/filebrowser.log
-sudo filebrowser -d /etc/filebrowser.db config set --root /home/pi/filebrowser/public/
-sudo filebrowser -d /etc/filebrowser.db config set --branding.files /home/pi/filebrowser/
-sudo filebrowser -d /etc/filebrowser.db config set --branding.name "File Server"
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config init
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --address 0.0.0.0
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --port 8080
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --locale zh-cn
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --log /home/pi/log/filebrowser.log
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --root /home/pi/filebrowser/public/
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --branding.files /etc/filebrowser/branding/
+sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --branding.name "File Server"
 # 用户名：root 密码：root
-sudo filebrowser -d /etc/filebrowser.db users add root root --perm.create --perm.delete --perm.download --perm.modify --perm.rename
+sudo filebrowser -d /etc/filebrowser/filebrowser.db users add root root --perm.create --perm.delete --perm.download --perm.modify --perm.rename
 
 # run test 
-sudo filebrowser -d /etc/filebrowser.db
+sudo filebrowser -d /etc/filebrowser/filebrowser.db
 # sudo nono 
 sudo vi /etc/rc.local
+```
+
+
+```
+pi@raspberrypi:~/server $ cat /etc/systemd/system/filebrowser.service
+[Unit]
+Description=filerowser server
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/
+Restart=always
+ExecStart=/usr/bin/filebrowser -d /etc/filebrowser/filebrowser.db
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
 ```
