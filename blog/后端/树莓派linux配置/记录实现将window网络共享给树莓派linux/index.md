@@ -1,6 +1,7 @@
 ---
 title: 记录实现将window网络共享给树莓派linux
 date: 2024-07-29T15:18:00
+index: true
 article: false
 ---
 
