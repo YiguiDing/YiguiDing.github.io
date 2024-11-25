@@ -2,7 +2,8 @@
 title: Arduino学习笔记：Arduino编程语言实践
 shortTitle: Arduino编程语言实践
 date: 2024-09-15T20:42:00
-article: true
+article: false 
+index: true
 ---
 
 ## Arduino编程语言实践
