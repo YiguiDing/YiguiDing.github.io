@@ -1,8 +1,6 @@
 ---
-title: Linux复习笔记
+title: Linux网络配置
 date: 2024-11-24T15:08:00+08:00
-index: true
-article: false
 ---
 
 ### 网络管理
