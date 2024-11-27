@@ -5,4 +5,6 @@ article: true
 index: false
 ---
 
+# FOC算法学习与实现笔记
+
 <Catalog />

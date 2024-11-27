@@ -2,6 +2,8 @@
 title: SimpleFOC源码阅读学习笔记：PID控制器
 shortTitle: PID控制器
 date: 2024-08-30T12:53:00
+article: false
+index: true
 ---
 
 ## 最简代码实现

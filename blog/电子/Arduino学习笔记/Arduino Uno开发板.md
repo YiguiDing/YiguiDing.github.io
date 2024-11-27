@@ -2,7 +2,8 @@
 title: Arduino学习笔记：Arduino Uno开发板
 shortTitle: Arduino Uno开发板
 date: 2024-09-15T17:49:00
-article: true
+article: false 
+index: true
 ---
 
 ## Arduino Uno
