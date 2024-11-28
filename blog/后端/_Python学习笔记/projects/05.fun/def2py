@@ -1,0 +1,29 @@
+def add(a,b):
+    """加法函数
+
+    Args:
+        a (int): 参数1
+        b (int): 参数2
+
+    Returns:
+        int: 相加结果
+    """
+    return a+b
+
+
+print(add(1,2))
+
+
+def add(a,b):
+    """
+    加法函数
+    :param a: 参数1
+    :param b: 参数2
+    :return: 返回值
+    """
+    def sum(): return a+b # 函数嵌套定义并调用
+    return sum()
+
+
+
+print(add(1,2))

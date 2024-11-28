@@ -20,6 +20,21 @@ category: 工具
 
 ## 安装Miniconda
 
+**下载**
+
+> - <https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/>
+> - <https://www.anaconda.com/download/success#miniconda>
+
+**安装**
+
+```bash
+# 1.解压安装miniConda
+# 2.然后在bash中执行：
+$ /d/app/miniconda3/Scripts/conda init bash
+$ /d/app/miniconda3/Scripts/conda init powershell
+$ /d/app/miniconda3/Scripts/conda init cmd.exe
+```
+
 - win10安装方法
   - 官网下载安装包安装
   - 配置环境

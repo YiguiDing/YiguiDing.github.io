@@ -2,7 +2,8 @@
 title: Arduino学习笔记：Arduino API编程语言
 shortTitle: Arduino API编程语言
 date: 2024-09-15T20:22:00
-article: true
+article: false 
+index: true
 ---
 
 ## Arduino API编程语言
