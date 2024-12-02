@@ -6,8 +6,9 @@ cover: ./assets/cover/无刷电机上位机.png
 tag: [笔记]
 category: 笔记
 star: true
-# order: 1
 article: false
+dir:
+  order: 1
 ---
 
 # 无刷电机简易上位机软件

@@ -5,7 +5,8 @@ cover: ./cover/TypeScript写的2D游戏的实现细节笔记.gif
 tag: [笔记]
 category: 笔记
 star: true
-# order: 3
+dir:
+  order: 3
 ---
 
 # 1. TypeScript写的2D游戏的实现细节笔记

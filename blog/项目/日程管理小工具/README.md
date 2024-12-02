@@ -5,8 +5,8 @@ cover: ./cover/最近写的一个小工具dwt-utils.png
 tag: [笔记]
 category: 笔记
 star: true
-# order: 2
-# ---article: false---
+dir:
+  order: 2
 ---
 
 ## 最近写的一个小工具
