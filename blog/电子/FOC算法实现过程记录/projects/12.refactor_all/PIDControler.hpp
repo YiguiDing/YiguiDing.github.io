@@ -12,6 +12,7 @@ public:
     float output_roc_limit; // 限制输出最大变化率 ROC(rate of change)输出变化率
     float pre_error, pre_integral, pre_output;
     Timer *timer = new ConcreteTimer();
+
 public:
     PIDControler() {}
     PIDControler(float Kp, float Ki, float Kd, float output_limit, float output_roc_limit)
@@ -35,8 +36,6 @@ public:
         derivative = _constrain(-output_limit, derivative, output_limit);
         //
         float output = proportional + integral + derivative;
-        output = _constrain(-output_limit, output, output_limit);
-        //
         if (output_roc_limit)
         {
             float out_rate = (output - pre_output) / dt;
@@ -44,8 +43,8 @@ public:
                 output = pre_output + output_roc_limit * dt;
             else if (out_rate < -output_roc_limit)
                 output = pre_output - output_roc_limit * dt;
-            output = _constrain(-output_limit, output, output_limit);
         }
+        output = _constrain(-output_limit, output, output_limit);
         //
         pre_error = error;
         pre_integral = integral;

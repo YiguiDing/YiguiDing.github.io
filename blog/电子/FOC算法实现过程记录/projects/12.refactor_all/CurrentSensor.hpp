@@ -2,7 +2,7 @@
 #define __CurrentSensor_H__
 #include <stdint.h>
 #include "foc_utils.h"
-#include "math.h"
+#include <math.h>
 #include "BLDCMotor.hpp"
 #define M_SQRT3 1.73205080756887719000
 // CurrentABC
@@ -68,7 +68,7 @@ public:
 
     CurrentABC getCurrentABC()
     {
-        return CurrentABC{
+        return {
             .a = cache.a - offset.a,
             .b = cache.b - offset.b,
             .c = cache.c - offset.c,
@@ -79,7 +79,7 @@ public:
     {
         CurrentABC i = this->getCurrentABC();
         // 克拉克变换，等赋值形式
-        return CurrentAB{
+        return {
             .alpha = i.a,                      // i_alpha = 1 * i_a + 0 * i_b
             .beta = (i.a + 2 * i.b) / M_SQRT3, // i_beta = 1/sqrt(3) * i_a + 2 / sqrt(3) * i_b = (i_a + 2 * i_b)/sqrt(3)
         };
@@ -98,7 +98,7 @@ public:
         float sin, cos;
         _sincos(e_theta, &sin, &cos);
         CurrentAB i = this->getCurrentAB();
-        return CurrentDQ{
+        return {
             .d = cos * i.alpha + sin * i.beta,
             .q = -sin * i.alpha + cos * i.beta,
         };

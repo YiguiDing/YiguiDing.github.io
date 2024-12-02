@@ -46,31 +46,4 @@ void loop()
 {
   motor.loopFOC();
   command.update();
-  return;
-  sensor->update();
-  currentSensor->update();
-
-  float e_angle = motor.electricalAngle();
-  CurrentABC abc = currentSensor->getCurrentABC();
-  CurrentAB ab = currentSensor->getCurrentAB();
-  CurrentDQ dq = currentSensor->getCurrentDQ(e_angle);
-
-  motor.setPhraseVoltage(0, 0.3, e_angle);
-
-  Serial.print(abc.a);
-  Serial.print(',');
-  Serial.print(abc.b);
-  Serial.print(',');
-  Serial.print(abc.c);
-  Serial.print(',');
-
-  Serial.print(ab.alpha);
-  Serial.print(',');
-  Serial.print(ab.beta);
-  Serial.print(',');
-
-  Serial.print(dq.d);
-  Serial.print(',');
-  Serial.print(dq.q);
-  Serial.print('\n');
 }

@@ -32,7 +32,7 @@ public:
         float i_a = (analogRead(this->Ia) / 16383.0f * 5.0f - 2.5f) / this->R / this->A;
         float i_b = -(analogRead(this->Ib) / 16383.0f * 5.0f - 2.5f) / this->R / this->A; // b电路接反了 加符号
         float i_c = -(i_a + i_b);
-        return CurrentABC{i_a, i_b, i_c};
+        return {i_a, i_b, i_c};
     }
 };
 #endif

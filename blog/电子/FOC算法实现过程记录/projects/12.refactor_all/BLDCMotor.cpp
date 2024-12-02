@@ -96,34 +96,39 @@ void BLDCMotor::setMode(BLDCControlMode controlMode)
     case BLDCControlMode::Current:
         // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
         this->limit_voltage = 12.0; // 电机额定电压
-        this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 400); // 完美
+        this->limit_current = 1;    // 额定电流
+        // kp=35 时目标电流1 实际电流0.9 精确度90%
+        // roc=600电机在快速正反转时抖动失控，所以取500
+        this->pid_id_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_iq_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
         break;
     case BLDCControlMode::VelocityCurrent:
         // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
-        this->limit_voltage = 12.0;                                                   // 电机额定电压
-        this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 400); // kp可以设置到30 但取其 2/3 为 20，余量留给ki发挥 roc设置为400是为了
-        this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->limit_current = 1;                                                                   // 额定电流
-        this->pid_velocity_controller = PIDControler(0.01, 0.05, 0.0001, this->limit_current, 20); // 非常完美 但当电压为12v时最好设置电流限制为1
+        this->limit_voltage = 12.0; // 电机额定电压
+        this->limit_current = 1;    // 额定电流
+        this->limit_velocity = 100; // 最大速度
+        this->pid_id_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_iq_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        // kp=0.05 时 目标速度100 实际速度90 精确度90%
+        // ki=0.5 时 电机目标速度从100降到0时，电机有两次过冲抖动，ki=0.25 时 电机目标速度从100降到0时，电机有一次过冲抖动，遂取ki=0.1
+        this->pid_velocity_controller = PIDControler(0.05, 0.1, 0, this->limit_current, 0);
         break;
-    case BLDCControlMode::PositionCurrent:
+    case BLDCControlMode::PositionCurrent: // 力位控制
         // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
         this->limit_voltage = 12.0; // 电机额定电压
-        this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->limit_current = 1; // 额定电流
-        this->pid_position_controller = PIDControler(0.05, 0, 0.005, this->limit_current, 5);
+        this->limit_current = 1;    // 额定电流
+        this->pid_id_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_iq_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_position_controller = PIDControler(0.5, 0, 0.025, this->limit_current, 0);
         break;
-    case BLDCControlMode::PositionVelocityCurrent:
-        // 官方 Simple FOC Shield v2.0.4 开发板 with 2804-100kv 云台电机
-        this->limit_voltage = 12.0; // 电机额定电压
-        this->pid_id_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->pid_iq_controller = PIDControler(20, 500, 0, this->limit_voltage, 400);
-        this->limit_current = 1; // 额定电流
-        this->pid_velocity_controller = PIDControler(0.01, 0.05, 0.0001, this->limit_current, 20);
-        this->limit_velocity = 120; // 编码器最大速度
-        this->pid_position_controller = PIDControler(5, 0, 0.1, this->limit_velocity, 1000);
+    case BLDCControlMode::PositionVelocityCurrent: // 力矩-速度-位置控制
+        this->limit_voltage = 12.0;
+        this->limit_current = 1;
+        this->limit_velocity = 100; // 最大速度
+        this->pid_id_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_iq_controller = PIDControler(35, 0, 0, this->limit_voltage, 500);
+        this->pid_velocity_controller = PIDControler(0.05, 0, 0, this->limit_current, 0);
+        this->pid_position_controller = PIDControler(10, 0, 0.1, this->limit_velocity, 0);
         break;
     default:
         break;
@@ -188,7 +193,7 @@ CurrentDQ BLDCMotor::getCurrentDQ()
 {
     CurrentDQ i = this->currentSensor->getCurrentDQ(this->electricalAngle());
     return {
-        .d = this->current_d_filter(i.d),// TODO: 测试新旧滤波器差异
+        .d = this->current_d_filter(i.d), // TODO: 测试新旧滤波器差异
         .q = this->current_q_filter(i.q),
     };
 }
@@ -202,15 +207,15 @@ void BLDCMotor::close_loop_current_control(float target)
     CurrentDQ current = this->getCurrentDQ();
     float error_d = target_i_d - current.d;
     float error_q = target_i_q - current.q;
-    float u_d = this->direction * this->pid_id_controller(error_d);
-    float u_q = this->direction * this->pid_iq_controller(error_q);
+    float u_d = this->pid_id_controller(error_d);
+    float u_q = this->pid_iq_controller(error_q);
     this->open_loop_voltage_control(u_d, u_q);
     // ######################################################################
     static uint8_t idx = 0;
     if (this->command && ++idx % 61 == 0)
     {
         idx = 0;
-        this->command->drawDragram(1, target, current.q);
+        this->command->drawDragram(1, target_i_q, current.q);
     }
 }
 /**

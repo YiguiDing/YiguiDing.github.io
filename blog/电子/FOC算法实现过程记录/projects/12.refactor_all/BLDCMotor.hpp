@@ -40,8 +40,8 @@ public:
     BLDCControlMode controlMode = BLDCControlMode::VelocityCurrent; // mode
     MotorDirectrion direction = MotorDirectrion::ANTI_CLOCK_WISE;   // directron
     // ####################################################################################
-    LowPassFilter current_q_filter{1};
-    LowPassFilter current_d_filter{1};
+    LowPassFilter current_q_filter{10};
+    LowPassFilter current_d_filter{10};
     LowPassFilter shaft_velocity_filter{50};
     LowPassFilter shaft_angle_filter{100};
     // ####################################################################################
