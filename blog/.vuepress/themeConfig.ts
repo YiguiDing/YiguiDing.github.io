@@ -203,6 +203,9 @@ export const themeConfig = hopeTheme({
       },
       // mathjax: true,
     },
+    components: {
+      components: ['BiliBili']
+    },
     feed: {
       rss: true,
       rssOutputFilename: "rss.xml",
