@@ -1,3 +1,9 @@
 [submodule "blog/.vuepress/public/vue3-live2d-static-api"]
 	path = blog/.vuepress/public/vue3-live2d-static-api
 	url = git@github.com:YiguiDing/vue3-live2d-static-api.git
+[submodule "blog/项目/Pid调参工具/projects/pid-configer"]
+	path = blog/项目/Pid调参工具/projects/pid-configer
+	url = git@github.com:YiguiDing/pid-configer.git
+[submodule "blog/项目/简单协议/projects/simple-protocal"]
+	path = blog/项目/简单协议/projects/simple-protocal
+	url = git@github.com:YiguiDing/simple-protocal.git
