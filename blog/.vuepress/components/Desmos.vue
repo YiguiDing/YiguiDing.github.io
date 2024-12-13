@@ -6,8 +6,9 @@ import { ref, defineProps, onMounted, toValue } from "vue";
 const { expressions } = defineProps<{ expressions?: Array<{ id: string; latex: string }> }>();
 const desmosElRef = ref<HTMLDivElement>();
 onMounted(async () => {
-  let Desmos = await import("desmos");
-  const calculator = Desmos.GraphingCalculator(toValue(desmosElRef));
+  // const Desmos = await import("desmos");
+  await import("./calculator.js");
+  const calculator = Desmos.GraphingCalculator(toValue(desmosElRef)!);
   expressions?.forEach((expression) => {
     calculator.setExpression(expression);
   });
