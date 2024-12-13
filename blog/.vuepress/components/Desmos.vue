@@ -7,7 +7,7 @@ const { expressions } = defineProps<{ expressions?: Array<{ id: string; latex: s
 const desmosElRef = ref<HTMLDivElement>();
 onMounted(async () => {
   // const Desmos = await import("desmos");
-  await import("./calculator.js");
+  const Desmos = await import("./calculator.js");
   const calculator = Desmos.GraphingCalculator(toValue(desmosElRef)!);
   expressions?.forEach((expression) => {
     calculator.setExpression(expression);
