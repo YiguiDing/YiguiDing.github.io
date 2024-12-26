@@ -185,7 +185,7 @@ export const themeConfig = hopeTheme({
       component: true,
       // 图表
       // chart: true,
-      // echarts: true,
+      echarts: true,
       // 流程图
       // flowchart: true, // 流程图
       mermaid: true, // 流程图，类图，....
