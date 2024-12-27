@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "compilerPath": "${userHome}/AppData/Local/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-cpp.exe",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${userHome}/AppData/Local/Arduino15/packages/arduino/hardware/renesas_uno/1.3.1/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USBCON"
+            ]
+        }
+    ],
+    "version": 4
+}
