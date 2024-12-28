@@ -31,7 +31,7 @@ void Sensor::update()
   case SensorMode::PLL_Mode:           // 锁相环法
     position_now = this->readSensor(); // for position_now
     this->pll.update(position_now);    //  /* 37us */
-    this->positon = _normalizeAngle(this->directron * (position_now - offset));
+    this->positon = _normalizeAngle(this->directron * (this->pll.value - offset));
     this->positons = this->directron * (this->pll.value - offset);
     this->velocity = this->directron * this->pll.speed;
     break;

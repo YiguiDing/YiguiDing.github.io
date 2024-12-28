@@ -55,28 +55,43 @@ void decode_message()
     case 't':
       motor.setTarget(val);
       break;
-    case 'l':
-      motor.current_d_filter.Tms = val;
-      motor.current_q_filter.Tms = val;
+      case 'l':
+      sensor->pll.lpf.Tms=val;
       break;
     case 'p':
-      motor.pid_id_controller.Kp = val;
-      motor.pid_iq_controller.Kp = val;
-      motor.pid_id_controller.reset();
-      motor.pid_iq_controller.reset();
+      sensor->pll.pid_speed_controller.Kp=val;
+      sensor->pll.pid_speed_controller.reset();
       break;
     case 'i':
-      motor.pid_id_controller.Ki = val;
-      motor.pid_iq_controller.Ki = val;
-      motor.pid_id_controller.reset();
-      motor.pid_iq_controller.reset();
+      sensor->pll.pid_speed_controller.Ki=val;
+      sensor->pll.pid_speed_controller.reset();
       break;
     case 'd':
-      motor.pid_id_controller.Kd = val;
-      motor.pid_iq_controller.Kd = val;
-      motor.pid_id_controller.reset();
-      motor.pid_iq_controller.reset();
+      sensor->pll.pid_speed_controller.Kd=val;
+      sensor->pll.pid_speed_controller.reset();
       break;
+    // case 'l':
+    //   motor.current_d_filter.Tms = val;
+    //   motor.current_q_filter.Tms = val;
+    //   break;
+    // case 'p':
+    //   motor.pid_id_controller.Kp = val;
+    //   motor.pid_iq_controller.Kp = val;
+    //   motor.pid_id_controller.reset();
+    //   motor.pid_iq_controller.reset();
+    //   break;
+    // case 'i':
+    //   motor.pid_id_controller.Ki = val;
+    //   motor.pid_iq_controller.Ki = val;
+    //   motor.pid_id_controller.reset();
+    //   motor.pid_iq_controller.reset();
+    //   break;
+    // case 'd':
+    //   motor.pid_id_controller.Kd = val;
+    //   motor.pid_iq_controller.Kd = val;
+    //   motor.pid_id_controller.reset();
+    //   motor.pid_iq_controller.reset();
+    //   break;
     default:
       break;
     }

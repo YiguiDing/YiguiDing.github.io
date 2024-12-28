@@ -12,8 +12,8 @@ private:
     Timer *timer = new ConcreteTimer();
 
 public:
-    PIDControler pid_speed_controller{500, 0, 0, 1e10, 0};
-    LowPassFilter lpf{10};
+    PIDControler pid_speed_controller{500, 250, 0, 1e10, 0};
+    LowPassFilter lpf{5};
     float speed = 0;
     float value = 0;
     float update(float target)
