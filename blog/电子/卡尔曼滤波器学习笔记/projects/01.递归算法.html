@@ -1,0 +1,99 @@
+<body style="height: 100%;">
+    <div id="container" style="height: 100%"></div>
+    <script type="text/javascript"
+        src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById('container');
+        var myChart = echarts.init(dom, null, {
+            renderer: 'canvas',
+            useDirtyRect: false,
+        });
+        let timeId = null
+        let measurement = [];
+        let estimate = [];
+        const options = {
+            title: {
+                text: '卡尔曼滤波器：测量值与估计值'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [
+                {
+                    name: '测量值',
+                    type: 'line',
+                    showSymbol: false,
+                    data: measurement
+                },
+                {
+                    name: '估计值',
+                    type: 'line',
+                    showSymbol: false,
+                    data: estimate
+                }
+            ]
+        }
+        myChart.setOption(options);
+        // 高斯分布
+        function gaussianRand(mu = 0, sigma = 1) {
+            // 使用Box-Muller变换生成两个独立的标准正态分布随机变量
+            // 只需要其中一个，因此只返回一个结果
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random(); // 如果u是0，那么Math.log(u)会是无穷大
+            while (v === 0) v = Math.random(); // 如果v是0，那么Math.sqrt(-2.0 * Math.log(u))会是无穷大
+            let z0 = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v); // 原理：https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
+            //let z1 = Math.sqrt(-2.0 * Math.log(u)) * Math.sin(2.0 * Math.PI * v); // 第二个数未使用
+            return mu + z0 * sigma;
+        }
+        // sin函数
+        function sin(w, A) {
+            let t = 0;
+            return function (dt) {
+                t += dt;
+                return A * Math.sin(w * t);
+            }
+        }
+        let mySin = sin(0.01, 1); // 角速度0.1，振幅1
+        let dt = 1000 / 50 //
+        let X = 0 // estimate value 估计值
+        let P = 10 // estimate error 估计误差
+        let R = 10 // measurement error 测量误差
+        let K = P / (P + R) //  kalman gain 卡尔曼增益
+        function update() {
+            if (myChart._disposed) return clearInterval(timeId);
+
+            let Z = 100 + gaussianRand(0, 10); // 测量值 = 真实值 + 噪声N(u=0, sigma=10)
+            // kalman filter
+            K = P / (P + R) // 卡尔曼增益=估计误差/(估计误差+测量误差)
+            X = X - K * (X - Z) // 估计值 = 估计值 - 卡尔曼增益*(估计值-测量值)
+            P = (1 - K) * P   // 更新估计误差=（1-卡尔曼增益）*估计误差
+            // 
+            measurement.push([new Date(), Z]);
+            estimate.push([new Date(), X]);
+            while (measurement.length > 200) {
+                measurement.shift();
+                estimate.shift();
+            }
+            myChart.setOption({
+                series: [{ data: measurement }, { data: estimate }]
+            });
+        }
+        timeId = setInterval(update, dt);
+        window.addEventListener('resize', myChart.resize);
+    </script>
+</body>
