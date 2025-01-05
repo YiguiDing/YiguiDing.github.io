@@ -44,6 +44,7 @@
     "vuepress-theme-hope": "2.0.0-rc.52"
   },
   "dependencies": {
+    "@types/desmos": "^1.6.3",
     "@vue/repl": "^4.3.1",
     "@vuepress/plugin-prismjs": "^2.0.0-rc.0",
     "axios": "^1.7.2",
