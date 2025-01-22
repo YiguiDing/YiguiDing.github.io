@@ -1,12 +1,38 @@
 ---
-title: chip-8虚拟机实现
-date: 2025-01-22T14:03:00
+title: 用js实现8bit虚拟机(chip-8)
+date: 2025-01-23T00:58:00
 article: true 
-index: false
+index: true
 ---
 
 
-# chip-8虚拟机实现
+# 用js实现8bit虚拟机(chip-8)
+
+
+## cpu实现
+
+@[code js](./projecs/01.demo/src/chip-8/cpu.js)
+
+## render实现
+
+@[code js](./projecs/01.demo/src/chip-8/render.js)
+
+## speaker实现
+
+@[code js](./projecs/01.demo/src/chip-8/speaker.js)
+
+## keyboard实现
+
+@[code js](./projecs/01.demo/src/chip-8/keyboard.js)
+
+## main.js
+
+@[code js](./projecs/01.demo/src/main.js)
+
+## mindex.html
+
+@[code html](./projecs/01.demo/index.html)
+
 
 ## 参考文档
 
