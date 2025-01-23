@@ -25,8 +25,18 @@ export class Renderer {
         this.display = new Array(this.cols * this.rows);
     }
     setPixel(x, y) {
-        x = Math.max(0, Math.min(this.cols - 1, x));
-        y = Math.max(0, Math.min(this.rows - 1, y));
+        if (x > this.cols) {
+            x -= this.cols;
+        } else if (x < 0) {
+            x += this.cols;
+        }
+        
+        if (y > this.rows) {
+            y -= this.rows;
+        } else if (y < 0) {
+            y += this.rows;
+        }
+        
         let offset = y * this.cols + x;
         // sprites are XORed onto the display:
         this.display[offset] ^= 1;
