@@ -9,7 +9,7 @@ article: false
 
 ```bash
 scp 'c:/迅雷下载/linux-armv6-filebrowser.tar.gz' pi@192.168.2.2:~
-scp -r './filebrowser' pi@192.168.2.2:~
+scp -r './etc/filebrowser' pi@192.168.2.2:~
 ```
 
 ```bash
@@ -28,7 +28,8 @@ sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --root /home/pi/f
 sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --branding.files /etc/filebrowser/branding/
 sudo filebrowser -d /etc/filebrowser/filebrowser.db config set --branding.name "File Server"
 # 用户名：root 密码：root
-sudo filebrowser -d /etc/filebrowser/filebrowser.db users add root root --perm.create --perm.delete --perm.download --perm.modify --perm.rename
+# 用户名：admin 密码：admin
+sudo filebrowser -d /etc/filebrowser/filebrowser.db users add admin admin --perm.create --perm.delete --perm.download --perm.modify --perm.rename
 
 # run test 
 sudo filebrowser -d /etc/filebrowser/filebrowser.db
@@ -36,15 +37,16 @@ sudo filebrowser -d /etc/filebrowser/filebrowser.db
 sudo vi /etc/rc.local
 ```
 
+配置servers
 
-```
+```bash
 pi@raspberrypi:~/server $ cat /etc/systemd/system/filebrowser.service
 [Unit]
 Description=filerowser server
 After=network.target
 
 [Service]
-User=root
+User=pi
 WorkingDirectory=/
 Restart=always
 ExecStart=/usr/bin/filebrowser -d /etc/filebrowser/filebrowser.db
