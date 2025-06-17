@@ -35,6 +35,15 @@ tar -xvf ./mediamtx_v1.8.2_linux_armv6.tar.gz
 
 **二、改写mediamtx.yml配置文件**
 
+
+**Windows**
+
+```bash
+ffmpeg -list_devices true -f dshow -i dummy
+```
+
+**linux**
+
 ```bash
 cd mediamtx
 # list-devices for linux
@@ -53,6 +62,7 @@ paths:
   # for window
     # runOnInit: ffmpeg -f dshow -i video="USB Camera" -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
   # for linux
+  # ffmpeg -f v4l2 -i /dev/video0 -vcodec libx264 -preset:v ultrafast -tune:v zerolatency -f mp4  1.mp4
     runOnInit: /home/pi/ffmpeg/ffmpeg-7.0.1-armhf-static/ffmpeg -f v4l2 -i /dev/video2 -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
     runOnInitRestart: yes
   all_others:
