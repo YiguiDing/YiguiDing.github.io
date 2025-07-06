@@ -79,6 +79,27 @@ WantedBy = multi-user.target
 EOF
 ```
 
+
+**新版配置文件**
+
+```bash
+sudo cat > /etc/systemd/system/frps.service << EOF
+[Unit]
+Description=frp server
+After=network.target
+
+[Service]
+# User=root
+# WorkingDirectory=/
+Restart=always
+ExecStart=/usr/local/bin/frps -c /usr/local/etc/frps.toml
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
 **配置开机自启:使用 systemd 命令，管理 frps**
 
 ```bash

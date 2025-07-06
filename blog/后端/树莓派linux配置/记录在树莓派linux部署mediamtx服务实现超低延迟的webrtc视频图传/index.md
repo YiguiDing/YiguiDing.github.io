@@ -35,6 +35,15 @@ tar -xvf ./mediamtx_v1.8.2_linux_armv6.tar.gz
 
 **二、改写mediamtx.yml配置文件**
 
+
+**Windows**
+
+```bash
+ffmpeg -list_devices true -f dshow -i dummy
+```
+
+**linux**
+
 ```bash
 cd mediamtx
 # list-devices for linux
@@ -53,6 +62,7 @@ paths:
   # for window
     # runOnInit: ffmpeg -f dshow -i video="USB Camera" -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
   # for linux
+  # ffmpeg -f v4l2 -i /dev/video0 -vcodec libx264 -preset:v ultrafast -tune:v zerolatency -f mp4  1.mp4
     runOnInit: /home/pi/ffmpeg/ffmpeg-7.0.1-armhf-static/ffmpeg -f v4l2 -i /dev/video2 -vcodec copy -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
     runOnInitRestart: yes
   all_others:
@@ -95,4 +105,27 @@ http://192.168.2.2:8889/camera/whep
 
 # 开启api
 api: yes
+```
+
+**五、配置servers**
+
+```bash
+sudo mv mediamtx /usr/local/bin/
+sudo mv mediamtx.yml /usr/local/etc/
+```
+```
+sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
+[Unit]
+Wants=network.target
+[Service]
+ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable mediamtx
+sudo systemctl start mediamtx
 ```
