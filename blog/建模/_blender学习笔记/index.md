@@ -25,6 +25,7 @@ date: 2024-04-29T23:06:00+08:00
     - [轴心点](#轴心点)
     - [坐标](#坐标)
     - [偏好设置](#偏好设置)
+    - [本章练习 珍珠耳环的少女](#本章练习-珍珠耳环的少女)
   - [建模篇](#建模篇)
     - [点线面的选择](#点线面的选择)
       - [物体交互模式切换](#物体交互模式切换)
@@ -41,9 +42,35 @@ date: 2024-04-29T23:06:00+08:00
       - [点线面的融并操作](#点线面的融并操作)
       - [法线方向](#法线方向)
     - [建模工具](#建模工具)
-      - [建模操作](#建模操作)
-      - [辅助工具](#辅助工具)
-      - [修改器](#修改器)
+      - [十大建模操作](#十大建模操作)
+        - [挤出Extrude(E)](#挤出extrudee)
+        - [向内挤出Insert(I)](#向内挤出inserti)
+        - [环切LoopCut(Ctrl+R)](#环切loopcutctrlr)
+        - [倒角Bevel(Ctrl+B)](#倒角bevelctrlb)
+        - [合并Merge(M)](#合并mergem)
+        - [断开Rip(V)](#断开ripv)
+        - [切刀KnifeCut(K)](#切刀knifecutk)
+        - [填充FillFace(F)](#填充fillfacef)
+        - [桥接Bridge(Ctrl+E)](#桥接bridgectrle)
+        - [分离Separate(P)](#分离separatep)
+      - [五个辅助工具](#五个辅助工具)
+        - [衰减编辑(Proportional)](#衰减编辑proportional)
+        - [吸附工具(Snapping)](#吸附工具snapping)
+        - [曲线建模(Curve)](#曲线建模curve)
+        - [晶格形变(Lattice)](#晶格形变lattice)
+        - [旋绕工具(Spin Tool)](#旋绕工具spin-tool)
+      - [十一个常用修改器](#十一个常用修改器)
+        - [表面细分(Subdivision Surface)](#表面细分subdivision-surface)
+        - [实体化(Solidify)](#实体化solidify)
+        - [倒角(Bevel)](#倒角bevel)
+        - [布尔(Boolean)](#布尔boolean)
+        - [阵列(Array)](#阵列array)
+        - [简易形变(Simple Deform)](#简易形变simple-deform)
+        - [曲线(Curve)](#曲线curve)
+        - [镜像(Mirror)](#镜像mirror)
+        - [置换(Displace)](#置换displace)
+        - [蒙皮(Skin)](#蒙皮skin)
+        - [缩囊(Shrink wrap)](#缩囊shrink-wrap)
 
 ## 基础篇
 
@@ -325,6 +352,13 @@ date: 2024-04-29T23:06:00+08:00
 
 ![Alt text](assets/images/image-64.png)
 
+
+### 本章练习 珍珠耳环的少女
+
+![Alt text](./projects/01.png)
+![Alt text](./projects/01.out_01.png)
+
+
 ## 建模篇
 
 ### 点线面的选择
@@ -517,30 +551,188 @@ date: 2024-04-29T23:06:00+08:00
 
 ### 建模工具
 
-#### 建模操作
+#### 十大建模操作
 
-挤出Extrude(E)
+![alt text](assets/images/image-158.png)
 
-向内挤出Insert(I)
 
-环切LoopCut(Ctrl+R)
+##### 挤出Extrude(E)
 
-倒角Bevel(Ctrl+B)
+- 快捷键E
+- ![alt text](assets/images/image-117.png)
 
-合并Merge(M)
+- 挤出面
+- ![alt text](assets/images/image-118.png)
 
-断开Rip(V)
+- 挤出线
+- ![alt text](assets/images/image-119.png)
 
-切刀KnifeCut(K)
+- 挤出点
+- ![alt text](assets/images/image-120.png)
 
-填充FillFace(F)
+- 挤出流体
+- ![alt text](assets/images/image-133.png)
+- 挤出选区（普通挤出）
+- ![alt text](assets/images/image-134.png)
 
-桥接Bridge(Ctrl+E)
 
-分离Separate(P)
+- 沿法相挤出
+- ![alt text](assets/images/image-135.png)
 
-#### 辅助工具
+- 挤出各个面
+- ![alt text](assets/images/image-140.png)
+- ![alt text](assets/images/image-137.png)
+- ![alt text](assets/images/image-138.png)
+- 普通挤出
+- ![alt text](assets/images/image-139.png)
 
-衰减编辑
+##### 向内挤出Insert(I)
 
-#### 修改器
+- 快捷键I
+![alt text](assets/images/image-121.png)
+
+- 内插面
+- ![alt text](assets/images/image-122.png)
+- 内插面的同时控制深度（按住ctrl）
+- ![alt text](assets/images/image-123.png)
+
+##### 环切LoopCut(Ctrl+R)
+
+- 快捷键Ctrl+R
+- ![alt text](assets/images/image-130.png)
+
+- 固定次数环切（十次）
+- ![alt text](assets/images/image-131.png)
+- 可调次数环切（鼠标滚轮）
+- 需要确保在左侧在框选模式，通过快捷键进入环切模式
+- ![alt text](assets/images/image-132.png)
+
+##### 倒角Bevel(Ctrl+B)
+
+- 快捷键Ctrl+B
+- ![alt text](assets/images/image-124.png)
+
+- 倒角-面
+- ![alt text](assets/images/image-125.png)
+- 倒角的同时控制细分（鼠标滚轮）
+- ![alt text](assets/images/image-127.png)
+
+- 倒角-边
+- ![alt text](assets/images/image-126.png)
+- 倒角的同时控制细分（鼠标滚轮）
+- ![alt text](assets/images/image-128.png)
+
+- 倒角-顶点
+- ![alt text](assets/images/image-129.png)
+
+
+##### 合并Merge(M)
+
+
+- 快捷键M
+- 鼠标框选，没有先后顺序。
+- ![alt text](assets/images/image-136.png)
+- ![alt text](assets/images/image-141.png)
+- 鼠标点选，有先后顺序，可以合并到首选点
+- ![alt text](assets/images/image-142.png)
+- ![alt text](assets/images/image-143.png)
+
+##### 断开Rip(V)
+
+
+- 快捷键V
+- ![alt text](assets/images/image-145.png)
+- ![alt text](assets/images/image-144.png)
+
+##### 切刀KnifeCut(K)
+
+- 快捷键K
+- ![alt text](assets/images/image-151.png)
+- ![alt text](assets/images/image-152.png)
+
+##### 填充FillFace(F)
+
+- 快捷键F
+- 快捷键Alt+点选第二条边选中闭合环形
+- ![alt text](assets/images/image-146.png)
+- 快捷键F 填充
+- ![alt text](assets/images/image-147.png)
+- 快捷键Alt+F 填充
+- ![alt text](assets/images/image-148.png)
+- 栅格填充
+- 栅格填充要求边的数量是偶数的，若不是，则可将某条边中心增加一个节点，变成偶数。
+- ![alt text](assets/images/image-149.png)
+- ![alt text](assets/images/image-150.png)
+
+##### 桥接Bridge(Ctrl+E)
+
+
+- 选中两物体合并（ctrl+j）
+- ![alt text](assets/images/image-153.png)
+- 选中两条循环边,桥接
+- ![alt text](assets/images/image-154.png)
+- ![alt text](assets/images/image-155.png)
+
+##### 分离Separate(P)
+
+- 进入透视模式，选中要分离的物体，快捷键P分离
+- ![alt text](assets/images/image-156.png)
+- ![alt text](assets/images/image-157.png)
+
+
+#### 五个辅助工具
+
+##### 衰减编辑(Proportional)
+
+##### 吸附工具(Snapping)
+
+##### 曲线建模(Curve)
+
+##### 晶格形变(Lattice)
+
+##### 旋绕工具(Spin Tool)
+
+#### 十一个常用修改器
+
+##### 表面细分(Subdivision Surface)
+
+> 理解为线性插值
+
+- ![alt text](assets/images/image-159.png)
+- ![alt text](assets/images/image-160.png)
+- ![alt text](assets/images/image-161.png)
+
+##### 实体化(Solidify)
+
+> 理解为加厚度
+- ![alt text](assets/images/image-162.png)
+- ![alt text](assets/images/image-164.png)
+- ![alt text](assets/images/image-163.png)
+
+##### 倒角(Bevel)
+
+- ![alt text](assets/images/image-165.png)
+- ![alt text](assets/images/image-166.png)
+- ![alt text](assets/images/image-167.png)
+
+##### 布尔(Boolean)
+
+- ![alt text](assets/images/image-168.png)
+- ![alt text](assets/images/image-169.png)
+- ![alt text](assets/images/image-170.png)
+
+
+##### 阵列(Array)
+
+##### 简易形变(Simple Deform)
+
+##### 曲线(Curve)
+
+##### 镜像(Mirror)
+
+##### 置换(Displace)
+
+##### 蒙皮(Skin)
+
+##### 缩囊(Shrink wrap)
+
