@@ -16,7 +16,7 @@ export const navbarConfig = navbar([
     ],
   },
   { text: "随笔", icon: "note-sticky", link: "/随笔/" },
-  { text: "计划", icon: "list-check", link: "/计划/" },
+  // { text: "计划", icon: "list-check", link: "/计划/" },
   { text: "项目", icon: "box", link: "/项目/" },
   { text: "友链", icon: "user-group", link: "/网站/友链.md" },
   { text: "关于", icon: "address-card", link: "/网站/关于.md" },
