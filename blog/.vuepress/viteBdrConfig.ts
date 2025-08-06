@@ -7,7 +7,7 @@ export const viteBundlerConfig = viteBundler({
   viteOptions: {
     build: {
       // target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
-      target: "modules",
+      target: "es2020",
     },
     assetsInclude: ["**/assets/**"],
     css: {

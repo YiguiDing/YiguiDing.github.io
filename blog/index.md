@@ -1,6 +1,6 @@
 ---
 home: true 
-layout: BlogHome
+layout: Blog
 index: false
 heroText: 在绝望中寻找希望 在荒诞中奋起反抗
 tagline: 欢迎来到我的新blog小站

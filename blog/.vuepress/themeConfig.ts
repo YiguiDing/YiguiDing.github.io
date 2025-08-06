@@ -13,8 +13,6 @@ export const themeConfig = hopeTheme({
     name: "丁毅桂",
     email: "2449695354@qq.com",
   },
-  // https://fontawesome.com/
-  iconAssets: "fontawesome-with-brands",
   // 侧边栏
   sidebar: sidebarConfig,
   // 优先按order排序，然后按时间降序排序
@@ -64,30 +62,52 @@ export const themeConfig = hopeTheme({
   // 其他
   themeColor: true,
   fullscreen: true,
-  plugins: {
-    searchPro: {
-      indexContent: false,
+  markdown: {
+    // 标准 GitHub Favor Markdown 支持
+    gfm: true,
+    // 文字高亮
+    mark: true,
+    // 选项卡
+    tabs: true,
+    // 代码选项卡
+    codeTabs: true,
+    // 任务列表
+    tasklist: true,
+    // 图片懒加载(设置为true时会和图片预览插件冲突)
+    imgLazyload: false,
+    // 属性 支持
+    attrs: true,
+    // 允许在markdown中导入展示其他文件代码，格式： <!-- @include: filename{start-end} -->
+    include: true,
+    // 组件支持
+    component: true,
+    // 图表
+    // chart: true,
+    echarts: true,
+    // 流程图
+    // flowchart: true, // 流程图
+    mermaid: true, // 流程图，类图，....
+    // 代码演示
+    demo: true,
+    playground: {
+      presets: ["vue", "ts"],
     },
-    // 自动目录页生成
-    catalog: {
-      level: 1,
+    vuePlayground: true,
+    // 数学表达式支持
+    // 有bug!!!
+    math: {
+      copy: true,
+      mhchem: true,
     },
-    // 启用博客主题
-    blog: {
-      // 摘要最大长度
-      excerptLength: 0,
-      hotReload: true,
-    },
-    // 代码块
-    prismjs:
-      // false &&
-      {
-        themes: {
-          light: "coldark-cold",
-          dark: "coldark-dark",
-        },
-      },
-    shiki: false && {
+    // mathjax: true,
+    highlighter: {
+      // 代码块
+      // type: "prismjs",
+      // themes: {
+      //   light: "coldark-cold",
+      //   dark: "coldark-dark",
+      // },
+      type: "shiki",
       themes: {
         light: "catppuccin-latte",
         dark: "slack-dark",
@@ -124,6 +144,25 @@ export const themeConfig = hopeTheme({
           },
         }),
       ],
+    }
+  },
+  plugins: {
+    icon: {
+      // https://fontawesome.com/
+      assets: 'fontawesome-with-brands'
+    },
+    slimsearch: {
+      indexContent: true,
+    },
+    // 自动目录页生成
+    catalog: {
+      level: 1,
+    },
+    // 启用博客主题
+    blog: {
+      // 摘要最大长度
+      excerptLength: 0,
+      hotReload: true,
     },
     // 代码复制
     copyCode: {
@@ -164,46 +203,6 @@ export const themeConfig = hopeTheme({
           },
         ],
       },
-    },
-    // markdown增强
-    mdEnhance: {
-      // 标准 GitHub Favor Markdown 支持
-      gfm: true,
-      // 文字高亮
-      mark: true,
-      // 选项卡
-      tabs: true,
-      // 代码选项卡
-      codetabs: true,
-      // 任务列表
-      tasklist: true,
-      // 图片懒加载(设置为true时会和图片预览插件冲突)
-      imgLazyload: false,
-      // 属性 支持
-      attrs: true,
-      // 允许在markdown中导入展示其他文件代码，格式： <!-- @include: filename{start-end} -->
-      include: true,
-      // 组件支持
-      component: true,
-      // 图表
-      // chart: true,
-      echarts: true,
-      // 流程图
-      // flowchart: true, // 流程图
-      mermaid: true, // 流程图，类图，....
-      // 代码演示
-      demo: true,
-      playground: {
-        presets: ["vue", "ts"],
-      },
-      vuePlayground: true,
-      // 数学表达式支持
-      // 有bug!!!
-      katex: {
-        copy: true,
-        mhchem: true,
-      },
-      // mathjax: true,
     },
     components: {
       components: ['BiliBili']
