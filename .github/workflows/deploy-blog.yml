@@ -1,79 +1,71 @@
-name: Deploy blog
+name: Deploy Blog
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
 
 permissions:
   contents: write
   pages: write
-  id-token: write
+  id-token: write  # 必需权限
 
 jobs:
-  build-static-pages:
+  build:
     runs-on: ubuntu-latest
     steps:
-    # 拉取仓库
-    - uses: actions/checkout@v4
+    # 1. 拉取仓库
+    - name: Pull Repository
+      uses: actions/checkout@v4
       with:
         submodules: true
         fetch-depth: 0
-    # setup node
-    - uses: actions/setup-node@v4
+        
+    # 2. 配置 Node.js
+    - name: Setup Node
+      uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
-    # build
-    - run: |
-        # binary package for node_modules/rollup
+        
+    # 3. 构建静态网站
+    - name: Build Pages
+      run: |
         npm i -D @rollup/rollup-linux-x64-gnu --legacy-peer-deps
         npm install --legacy-peer-deps
-        # npm run submodule_install
         npm run build
-    # 推送到分支static-pages
-    - uses: JamesIves/github-pages-deploy-action@v4
+        
+    # 4. 上传到 GitHub Pages
+    - name: Upload Pages Artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        # 将目录下代码推送到某个分支
-        folder: blog/.vuepress/dist
+        path: 'blog/.vuepress/dist'  # 构建输出目录
+
+    # 5. 存档到static-pages分支
+    - name: Push static files to branch
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: 'blog/.vuepress/dist'
         branch: static-pages
-  deploy-to-github-pages:
-    needs: build-static-pages
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       # https://YiguiDing.github.io/
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    # 拉取分支static-pages
-    - uses: actions/checkout@v4
-      with:
-        ref: static-pages
-        fetch-depth: 0
-    # 推送到github Pages
-    - uses: actions/configure-pages@v3
-    - uses: actions/upload-pages-artifact@v2
-      with:
-        # Upload entire repository
-        path: "./"
+    # 1. 自动部署GitHub Pages
+    - name: Deploy Pages
+      uses: actions/deploy-pages@v4
       id: deployment
-    - uses: actions/deploy-pages@v2
-  deploy-to-server:
-    needs: build-static-pages
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: static-pages
-        fetch-depth: 0
-    - uses: webfactory/ssh-agent@v0.8.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - run: |
-        ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
-        git config --global user.name 'YiguiDing'
-        git config --global user.email '2449695354@qq.com'
-        ssh git@dingdingdang.online "git config --global --add safe.directory /var/www/vuepress2-blog-root/"
-        ssh git@dingdingdang.online "git config --global --add receive.denyCurrentBranch ignore"
-        git push -f git@dingdingdang.online:/var/www/vuepress2-blog-root/ static-pages
-        ssh git@dingdingdang.online "cd /var/www/vuepress2-blog-root/  && git reset --hard HEAD"
+      
+    # 2. 部署到私有服务器
+    # - uses: actions/download-artifact@v4
+    #   with:
+    #     name: github-pages  # 自动生成的制品名
+    # - uses: webfactory/ssh-agent@v0.8.0
+    #   with:
+    #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    # - run: |
+    #     ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
+    #     rsync -avz --delete ./ git@dingdingdang.online:/var/www/vuepress2-blog-root/
