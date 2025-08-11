@@ -6,25 +6,14 @@ class TestStrategy(bt.Strategy):
     params = (
         ('sma_period', 15),  # 可调整参数：移动平均周期（默认15）
     )
-
-    def log(self, txt, dt=None):
-        '''
-            策略的日志记录函数
-        '''
-        dt = dt or self.datas[0].datetime.date(0)  # 若无指定日期，使用当前数据日期
-        print('%s, %s' % (dt.isoformat(), txt))  # 打印日期和日志内容
-
+    
     def __init__(self):
         # 引用数据序列中的收盘价线
         self.dataclose = self.datas[0].close
-
         # 跟踪挂单、买入价格和佣金
         self.order = None  # 当前订单状态
         self.buyprice = None  # 买入价格
         self.buycomm = None  # 买入佣金
-
-        # 初始化技术指标
-
         # 简单移动平均线（SMA）
         self.sma = bt.indicators.SimpleMovingAverage(self.datas[0], period=self.params.sma_period)
         # 指数移动平均线（EMA）
@@ -33,6 +22,7 @@ class TestStrategy(bt.Strategy):
         self.wma = bt.indicators.WeightedMovingAverage(self.datas[0], period=25, subplot=True)
         # MACD柱状图指标
         self.macd = bt.indicators.MACDHisto(self.datas[0])
+
     def next(self):
         ''' 
             每个K线周期调用的策略逻辑
@@ -51,6 +41,7 @@ class TestStrategy(bt.Strategy):
             if self.dataclose[0] < self.sma[0]:  # 收盘价下穿SMA时卖出
                 self.log('创建卖出订单, %.2f' % self.dataclose[0])
                 self.order = self.sell()  # 发送卖出指令
+
     def notify_order(self, order):
         ''' 
             订单状态通知处理
@@ -58,24 +49,18 @@ class TestStrategy(bt.Strategy):
         if order.status in [order.Submitted, order.Accepted]:
             # 订单已提交/接受，无需操作
             return
-
         # 检查订单是否完成（注意：资金不足时经纪人可能拒绝）
         if order.status in [order.Completed]:
             if order.isbuy():
-                self.log(
-                    '买入执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %  # 记录买入详情
-                    (order.executed.price, order.executed.value, order.executed.comm)
-                )
+                    # 记录买入详情
+                self.log('买入执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %(order.executed.price, order.executed.value, order.executed.comm))
                 self.buyprice = order.executed.price
                 self.buycomm = order.executed.comm
             else:  # 卖出订单
-                self.log('卖出执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %
-                         (order.executed.price, order.executed.value, order.executed.comm))
+                self.log('卖出执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %(order.executed.price, order.executed.value, order.executed.comm))
             self.bar_executed = len(self)  # 记录订单执行时的K线位置
-
         elif order.status in [order.Canceled, order.Margin, order.Rejected]:
             self.log('订单取消/保证金不足/被拒绝')
-
         self.order = None  # 重置当前订单状态
 
     def notify_trade(self, trade):
@@ -86,3 +71,9 @@ class TestStrategy(bt.Strategy):
             return
         self.log('交易利润, 毛利润 %.2f, 净利润 %.2f' % (trade.pnl, trade.pnlcomm))
 
+    def log(self, txt, dt=None):
+        '''
+            策略的日志记录函数
+        '''
+        dt = dt or self.datas[0].datetime.date(0)  # 若无指定日期，使用当前数据日期
+        print('%s, %s' % (dt.isoformat(), txt))  # 打印日期和日志内容
