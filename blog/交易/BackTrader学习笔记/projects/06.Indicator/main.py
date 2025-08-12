@@ -23,31 +23,14 @@ class TestStrategy(bt.Strategy):
         self.buycomm = None  # 买入佣金
         ################################  技术指标 ################################
         # 简单移动平均线（SMA）
-        self.sma = bt.indicators.SimpleMovingAverage(self.datas[0], period=self.params.sma_period)
-        # 指数移动平均线（EMA）
-        self.ema = bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)
-        # 加权移动平均线（WMA）
-        self.wma = bt.indicators.WeightedMovingAverage(self.datas[0], period=25, subplot=True)
-        # MACD柱状图指标
-        self.macd = bt.indicators.MACDHisto(self.datas[0])
+        self.sma = 
     def next(self):
         ''' 
             每个K线周期调用的策略逻辑
         '''
         # 记录当前收盘价
         self.log('收盘价, %.2f' % self.dataclose[0]) 
-        # 存在挂单时禁止新订单
-        if self.order:  
-            return
-        # 检查当前持仓状态
-        if not self.position:  # 无持仓
-            if self.dataclose[0] > self.sma[0]:  # 收盘价上穿SMA时买入
-                self.log('创建买入订单, %.2f' % self.dataclose[0])
-                self.order = self.buy()  # 发送买入指令
-        else:  # 有持仓
-            if self.dataclose[0] < self.sma[0]:  # 收盘价下穿SMA时卖出
-                self.log('创建卖出订单, %.2f' % self.dataclose[0])
-                self.order = self.sell()  # 发送卖出指令
+
     def notify_order(self, order):
         ''' 
             订单状态通知处理
@@ -59,8 +42,10 @@ class TestStrategy(bt.Strategy):
         # 检查订单是否完成（注意：资金不足时经纪人可能拒绝）
         if order.status in [order.Completed]:
             if order.isbuy():
-                # 记录买入详情
-                self.log('买入执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %(order.executed.price, order.executed.value, order.executed.comm))
+                self.log(
+                    '买入执行, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %  # 记录买入详情
+                    (order.executed.price, order.executed.value, order.executed.comm)
+                )
                 self.buyprice = order.executed.price
                 self.buycomm = order.executed.comm
             else:  # 卖出订单
