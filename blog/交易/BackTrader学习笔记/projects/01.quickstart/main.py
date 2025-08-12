@@ -14,6 +14,7 @@ if __name__ == '__main__':
 
     # 添加策略并设置参数
     cerebro.addstrategy(TestStrategy, sma_period=20)  # 设定移动平均周期为20
+    # cerebro.optstrategy(TestStrategy, sma_period=range(5, 30)) # 优化参数
 
     # 获取数据文件路径（适配不同执行路径）
     modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -26,6 +27,7 @@ if __name__ == '__main__':
         todate=datetime.datetime(2000, 12, 31),  # 结束日期
         reverse=False  # 不反转数据顺序
     )
+    print(data)
     cerebro.adddata(data)  # 将数据加载到引擎
 
     # 设置初始资金10万
@@ -42,9 +44,9 @@ if __name__ == '__main__':
     # 打印初始投资组合价值
     print('初始投资组合价值: %.2f' % cerebro.broker.getvalue())
 
-    cerebro.run()  # 执行策略回测
+    cerebro.run(maxcpus=1)  # 执行策略回测
 
     # 打印最终投资组合价值
     print('最终投资组合价值: %.2f' % cerebro.broker.getvalue())
 
-    cerebro.plot()  # 可视化回测结果
+    # cerebro.plot()  # 可视化回测结果
