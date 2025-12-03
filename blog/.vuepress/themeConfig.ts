@@ -28,7 +28,7 @@ export const themeConfig = hopeTheme({
   navbarAutoHide: "none",
   hideSiteNameOnMobile: true,
   // 加密配置
-  encrypt: encryptConfig,
+  // encrypt: encryptConfig,
   // 版权信息
   displayFooter: true,
   copyright: "MIT Licensed | Copyright © 2019-present Yigui-Ding",
@@ -57,7 +57,7 @@ export const themeConfig = hopeTheme({
       Wechat: "https://u.wechat.com/MH91sJy7fFJmV5WVsHOa7ho",
       Rss: "/rss.xml",
     },
-    articlePerPage: 10,
+    articlePerPage: 20,
   },
   // 其他
   themeColor: true,
@@ -205,7 +205,7 @@ export const themeConfig = hopeTheme({
       },
     },
     components: {
-      components: ['BiliBili']
+      components: ['BiliBili', 'ArtPlayer', 'VidStack']
     },
     feed: {
       rss: true,

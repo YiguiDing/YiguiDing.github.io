@@ -13,6 +13,7 @@ export const navbarConfig = navbar([
       { text: "源码", icon: "code-fork", link: "/源码/" },
       { text: "理论", icon: "book-bookmark", link: "/理论/" },
       { text: "工具", icon: "screwdriver-wrench", link: "/工具/" },
+      { text: "投资", icon: "right-left", link: "/交易/" },
     ],
   },
   { text: "随笔", icon: "note-sticky", link: "/随笔/" },

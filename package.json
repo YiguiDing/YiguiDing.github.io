@@ -48,6 +48,7 @@
   "dependencies": {
     "@types/desmos": "^1.11.0",
     "@vue/repl": "^4.6.3",
+    "artplayer": "^5.3.0",
     "axios": "^1.11.0",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.13",
@@ -57,6 +58,7 @@
     "katex": "^0.16.22",
     "nodemon": "^3.1.10",
     "spacecraft.io": "^0.0.4",
+    "vidstack": "^1.12.13",
     "vue": "^3.5.18",
     "vue3-live2d": "^0.0.1"
   },

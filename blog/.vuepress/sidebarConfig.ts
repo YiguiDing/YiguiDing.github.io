@@ -13,6 +13,7 @@ export const sidebarConfig = sidebar({
   "/草稿": "structure",
   "/计划": "structure",
   "/项目": "structure",
+  "/交易": "structure",
   // 兜底规则
   "/": "structure",
 });

@@ -1,6 +1,7 @@
 ---
 title: motion_driver_6.12(官方DMP库)的移植和MPU6050驱动的实现
 date: 2024-07-26T01:57:00
+article: false
 ---
 
 
