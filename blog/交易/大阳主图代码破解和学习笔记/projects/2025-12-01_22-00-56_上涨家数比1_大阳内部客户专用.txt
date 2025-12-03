@@ -1,0 +1,19 @@
+{公式名称: 上涨家数比1
+公式描述: 大阳内部客户专用
+无参数
+公式类型: 技术指标公式-其他类型
+画线方法: 副图
+公式版本: 0
+显示小数: 缺省位数
+坐标线位置: 自动
+额外Y轴分界: 无
+
+参数精灵:无
+用法注释7无
+公式源码:}
+极端下跌:0.2,DOTLINE,COLORMAGENTA;
+极端上涨:0.8,DOTLINE,COLORBLUE;
+上涨家数比:INDEXADV/(INDEXDEC+INDEXADV),COLORMAGENTA;
+IF(上涨家数比<0.2,上涨家数比,DRAWNULL),COLORRED,LINETHICK2;
+IF(上涨家数比>0.8,上涨家数比,DRAWNULL),COLORGREEN,LINETHICK2;
+X_1:=HIGH<FINANCE(34);
