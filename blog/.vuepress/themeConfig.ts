@@ -205,7 +205,7 @@ export const themeConfig = hopeTheme({
       },
     },
     components: {
-      components: ['BiliBili']
+      components: ['BiliBili', 'ArtPlayer', 'VidStack']
     },
     feed: {
       rss: true,

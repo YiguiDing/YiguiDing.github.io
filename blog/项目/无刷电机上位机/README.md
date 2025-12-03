@@ -33,3 +33,7 @@ dir:
 ![Alt text](assets/images/9683df4ba826d05ed1b7894c82420683.png)
 
 ![Alt text](assets/images/d6781f1b9e5cc551a39e03e6ebd83e2b.png)
+
+## 更新-实现同时独立控制多个电机
+
+![alt text](assets/images/image-25.png)
