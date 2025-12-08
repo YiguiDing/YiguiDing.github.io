@@ -60,12 +60,13 @@ jobs:
       id: deployment
       
     # 2. 部署到私有服务器
-    # - uses: actions/download-artifact@v4
-    #   with:
-    #     name: github-pages  # 自动生成的制品名
-    # - uses: webfactory/ssh-agent@v0.8.0
-    #   with:
-    #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    # - run: |
-    #     ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
-    #     rsync -avz --delete ./ git@dingdingdang.online:/var/www/vuepress2-blog-root/
+    - uses: actions/download-artifact@v4
+      with:
+        name: github-pages  # 自动生成的制品名
+    - uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - run: |
+        ssh-keyscan dingdingdang.online >> ~/.ssh/known_hosts
+        # rsync 文件同步 -a Archive (归档模式) -v Verbose (详细模式) -z Compress (压缩) --delete Delete (删除多余文件)
+        rsync -avz --delete ./ github@dingdingdang.online:/var/www/blog/root/
