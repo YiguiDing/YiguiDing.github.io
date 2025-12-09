@@ -1,0 +1,22 @@
+{
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 2000,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "uuiduuid-uuid-uuid-uuid-uuiduuid",
+                        "alterId": 0
+                    }
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
