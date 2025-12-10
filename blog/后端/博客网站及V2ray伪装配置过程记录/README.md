@@ -61,6 +61,11 @@ vi /etc/nginx/conf.d/default.conf
 ```
 
 ```nginx
+server{
+    listen 80;
+    # 80端口的请求全部301重定向到https
+    return 301 https://$host$request_uri;
+}
 server {
     listen       443 ssl;
     server_name  dingdingdang.online www.dingdingdang.online;
