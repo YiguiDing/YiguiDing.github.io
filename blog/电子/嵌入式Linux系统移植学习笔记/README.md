@@ -148,3 +148,107 @@ article: false
 
 - 配置用户环境
 - 执行服务进程
+
+## u-boot 的配置、编译、烧写
+
+**u-boot是什么？**
+
+- U-Boot(Universal Boot Loader)，即通用Bootloader
+  - 通用
+    - 支持多架构CPU: PowerPC、MIPC、X86、ARM等;
+    - 支持多系统OS: Linux、VxWorks、QNX、LynxOscar等操作系统
+- 德国DENX小组开发的用于多种嵌入式CPU的bootloader程序
+- 遵循GPL条款的开放源代码项目
+
+> - Bootloader不属于操作系统内核，这一部分代码不具有可移植性;
+> - 在移植操作系统时，这部分代码必须加以改写;
+> - Bootloader不但依赖于CPU的体系结构，而且依赖于嵌入式系统板级设备的配置
+
+**u-boot特点**
+
+- 代码结构清晰、易于移植
+- 支持多种处理器体系结构
+- 支持众多开发板
+- 支持网络协议、USB、SD等多种协议和设备
+- 支持文件系统
+
+**u-boot代码的获取**
+
+- 官网获取 <https://u-boot.org/>
+- github获取 <https://github.com/u-boot/u-boot>
+- 开发板厂商提供
+
+**配置wsl: Ubuntu 22.04 记录**
+
+```bash
+cat >> /etc/wsl.conf << EOF
+# 互操作设置
+[interop]
+# 是否支持启动 Windows 进程
+enabled=false
+# 是否将 Windows 路径元素添加到 $PATH 环境变量
+appendWindowsPath=false
+EOF
+
+# 在windows中执行： 
+# 关闭 WSL 发行版，以便重启 WSL 实例
+wsl.exe --shutdown
+wsl --list --all
+wsl --manage Ubuntu-24.04 --move D:\WSL\Ubuntu
+```
+
+**安装gcc编译器**
+
+```bash
+sudo update
+# 安装 build-essential: gcc/g++/make/dpkg-dev/libc...
+sudo apt install build-essential
+# 编译u-boot要求gcc版本>10
+# Ubuntu 20.04 默认 装的是GCC 9.4
+# Ubuntu 22.04 默认 装的是GCC 11.3
+```
+
+**在Linux系统安装ARM交叉编译工具**
+
+```bash
+# 从arm官网找到下载链接
+# 注意不要下载嵌入式的编译工具gcc-arm-none-eabi
+wget https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-aarch64-none-linux-gnu.tar.xz
+# 解压
+tar -xJvf arm-gnu-toolchain-14.3.rel1-x86_64-aarch64-none-linux-gnu.tar.xz 
+
+# 安装
+mkdir ~/.tools
+mv ./arm-gnu-toolchain-14.3.rel1-x86_64-aarch64-none-linux-gnu/ ~/.tools/
+vi ~/.bashrc
+export PATH=$PATH:/root/.tools/arm-gnu-toolchain-14.3.rel1-x86_64-aarch64-none-linux-gnu/bin/
+source ~/.bashrc
+```
+
+**构建 Arm 可信固件 (TF-A)**
+
+```bash
+git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+cd trusted-firmware-a
+# 编译 目标平台=sun50i_h616 (根据dts设备树描述，h618的cpu和h616共用一个)
+make CROSS_COMPILE=aarch64-none-linux-gnu- PLAT=sun50i_h616 DEBUG=1
+export BL31=$(pwd)/build/sun50i_h616/debug/bl31.bin
+```
+
+**构建u-boot**
+
+```bash
+wget https://github.com/u-boot/u-boot/archive/refs/tags/v2026.01-rc4.tar.gz
+tar -xzvf u-boot-2026.01-rc4.tar.gz
+cd u-boot-2026.01-rc4
+
+# 安装后续编译操作的依赖项 否则将依次报错缺失相关文件
+sudo apt-get install bison flex swig python3-dev libssl-dev libgnutls28-dev
+
+# 查看支持的开发板
+ls configs/ | grep orangepi
+# 生成配置文件 .config
+make orangepi_zero2w_defconfig
+# 生成 u-boot
+make CROSS_COMPILE=aarch64-none-linux-gnu-
+```
