@@ -1,5 +1,5 @@
 ---
-title: 在 WSL2 上运行 xtquant 量化交易库
+title: 在WSL环境下安装xtquant量化交易库存在问题的解决方法
 date: 2026-03-14T00:23:33
 article: true 
 index: false
