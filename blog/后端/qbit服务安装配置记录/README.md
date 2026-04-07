@@ -1,8 +1,8 @@
 ---
 title: qbit服务安装配置记录
 date: 2026-02-03T03:08:57
-article: true 
-index: false
+article: false 
+index: true
 ---
 
 **安装qbittorrent-nox**

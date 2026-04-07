@@ -2,6 +2,8 @@
 title: 串口通信
 date: 2024-01-01T12:39:13.340Z
 cover: /cover/串口通信.png
+article: false 
+index: true
 ---
 
 **串口通信**
