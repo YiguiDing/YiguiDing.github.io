@@ -6,8 +6,8 @@
     <link>https://dingdingdang.online/</link>
     <description>欢迎来到我的Blog小站</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 08 Apr 2026 16:28:45 GMT</pubDate>
-    <lastBuildDate>Wed, 08 Apr 2026 16:28:45 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Apr 2026 08:55:55 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Apr 2026 08:55:55 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>项目</category>
@@ -18388,27 +18388,6 @@ bootstrap3中默认将网页分成12等份<br>
 ]]></content:encoded>
     </item>
     <item>
-      <title>font-class图标使用</title>
-      <link>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0.html</link>
-      <guid>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0.html</guid>
-      <source url="https://dingdingdang.online/rss.xml">font-class图标使用</source>
-      <description>阿里巴巴矢量图标库 https://www.iconfont.cn/ font-class 引用 font-class使用 class 来定义图标，所以当要替换图标时，只需要修改 class 里面的 Unicode 引用。 使用步骤如下： 第一步：引入项目下面生成的 fontclass 代码： 第二步：挑选相应图标并获取类名，应用于页面： &amp;quot; icon...</description>
-      <category>前端</category>
-      <pubDate>Wed, 23 Feb 2022 02:31:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h2>阿里巴巴矢量图标库</h2>
-<p></p>
-<p><a href="https://www.iconfont.cn/" target="_blank" rel="noopener noreferrer">https://www.iconfont.cn/</a></p>
-<h2>font-class 引用</h2>
-<p>font-class使用 class 来定义图标，所以当要替换图标时，只需要修改 class 里面的 Unicode 引用。</p>
-<p>使用步骤如下：</p>
-<p>第一步：引入项目下面生成的 fontclass 代码：</p>
-<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-"><span class="line"><span>&lt;link rel="stylesheet" href="./iconfont.css"&gt;</span></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>第二步：挑选相应图标并获取类名，应用于页面：</p>
-<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-"><span class="line"><span>&lt;span class="iconfont icon-xxx"&gt;&lt;/span&gt;</span></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>" iconfont" 是你项目下的 font-family。可以通过编辑项目查看，默认是 "iconfont"。</p>
-]]></content:encoded>
-    </item>
-    <item>
       <title>flexible.js源码分析</title>
       <link>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/flexible.js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/flexible.js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html</link>
       <guid>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/flexible.js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/flexible.js%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html</guid>
@@ -18540,6 +18519,27 @@ bootstrap3中默认将网页分成12等份<br>
 <span class="line"><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">  }</span></span>
 <span class="line"><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">}</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE">window</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">,</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> document</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">))</span></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>font-class图标使用</title>
+      <link>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0.html</link>
+      <guid>https://dingdingdang.online/%E5%89%8D%E7%AB%AF/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/font-class%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0.html</guid>
+      <source url="https://dingdingdang.online/rss.xml">font-class图标使用</source>
+      <description>阿里巴巴矢量图标库 https://www.iconfont.cn/ font-class 引用 font-class使用 class 来定义图标，所以当要替换图标时，只需要修改 class 里面的 Unicode 引用。 使用步骤如下： 第一步：引入项目下面生成的 fontclass 代码： 第二步：挑选相应图标并获取类名，应用于页面： &amp;quot; icon...</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Feb 2022 02:31:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>阿里巴巴矢量图标库</h2>
+<p></p>
+<p><a href="https://www.iconfont.cn/" target="_blank" rel="noopener noreferrer">https://www.iconfont.cn/</a></p>
+<h2>font-class 引用</h2>
+<p>font-class使用 class 来定义图标，所以当要替换图标时，只需要修改 class 里面的 Unicode 引用。</p>
+<p>使用步骤如下：</p>
+<p>第一步：引入项目下面生成的 fontclass 代码：</p>
+<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-"><span class="line"><span>&lt;link rel="stylesheet" href="./iconfont.css"&gt;</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>第二步：挑选相应图标并获取类名，应用于页面：</p>
+<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-"><span class="line"><span>&lt;span class="iconfont icon-xxx"&gt;&lt;/span&gt;</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>" iconfont" 是你项目下的 font-family。可以通过编辑项目查看，默认是 "iconfont"。</p>
+]]></content:encoded>
     </item>
     <item>
       <title>indexedDB学习笔记</title>
@@ -23589,6 +23589,28 @@ bootstrap3中默认将网页分成12等份<br>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
     </item>
     <item>
+      <title>express配置子域名和https证书</title>
+      <link>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6.html</link>
+      <guid>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6.html</guid>
+      <source url="https://dingdingdang.online/rss.xml">express配置子域名和https证书</source>
+      <description>express配置web服务记录 server.js</description>
+      <category>后端</category>
+      <pubDate>Tue, 04 Apr 2023 05:04:00 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p><code>server.js</code></p>
+<div class="language-js line-numbers-mode" data-highlighter="shiki" data-ext="js" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-js"><span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> Express</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"express"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> connect</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"connect"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express 的connect 模块</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> vhost</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"vhost"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express 的 vhost 模块 子域名支持</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">const</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> proxy</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"express-http-proxy"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express的http代理中间件</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> http</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"http"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// nodejs 原生http模块</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> https</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"https"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// nodejs 原生https模块</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> fs</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"fs"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">const</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> path</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"path"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">//</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+    </item>
+    <item>
       <title>express学习笔记</title>
       <link>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/express%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</link>
       <guid>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/express%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</guid>
@@ -23653,28 +23675,6 @@ bootstrap3中默认将网页分成12等份<br>
 </li>
 </ul>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>express配置子域名和https证书</title>
-      <link>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6.html</link>
-      <guid>https://dingdingdang.online/%E5%90%8E%E7%AB%AF/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6/express%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%92%8Chttps%E8%AF%81%E4%B9%A6.html</guid>
-      <source url="https://dingdingdang.online/rss.xml">express配置子域名和https证书</source>
-      <description>express配置web服务记录 server.js</description>
-      <category>后端</category>
-      <pubDate>Tue, 04 Apr 2023 05:04:00 GMT</pubDate>
-      <content:encoded><![CDATA[
-<p><code>server.js</code></p>
-<div class="language-js line-numbers-mode" data-highlighter="shiki" data-ext="js" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-js"><span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> Express</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"express"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> connect</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"connect"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express 的connect 模块</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> vhost</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"vhost"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express 的 vhost 模块 子域名支持</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">const</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> proxy</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"express-http-proxy"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// express的http代理中间件</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> http</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"http"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// nodejs 原生http模块</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> https</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"https"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">// nodejs 原生https模块</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">let</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> fs</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"fs"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">const</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> path</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> require</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"path"</span><span style="--shiki-light:#4C4F69;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">//</span></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
     </item>
     <item>
       <title>java学习笔记</title>
