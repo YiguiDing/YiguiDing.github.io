@@ -6,8 +6,8 @@
     <link>https://dingdingdang.online/</link>
     <description>欢迎来到我的Blog小站</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 09 Apr 2026 12:39:48 GMT</pubDate>
-    <lastBuildDate>Thu, 09 Apr 2026 12:39:48 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Apr 2026 18:08:54 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Apr 2026 18:08:54 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>项目</category>
@@ -44685,6 +44685,143 @@ java中不要用scanner 要用BufferReader,速度相差20倍(真的吗？？？�
       <enclosure url="https://cdn.luogu.com.cn/upload/pic/3449.png" type="image/png"/>
     </item>
     <item>
+      <title>【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</title>
+      <link>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E3%80%90%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE%E3%80%912021%E6%9C%80%E6%96%B0%E7%9A%84%20%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</link>
+      <guid>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E3%80%90%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE%E3%80%912021%E6%9C%80%E6%96%B0%E7%9A%84%20%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</guid>
+      <source url="https://dingdingdang.online/rss.xml">【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</source>
+      <description>【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记 笔记目录 【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记 笔记目录 递归与循环 循环改递归 经典递归 N取M个有多少取法 求全排列 求两个串的最长公共子序列 递归真题：反转串 递归真题：杨辉三角形 递归真题：排列问题 递归真题：整数划分 递归真题：溜掉的金额 浮点数的注意事项 浮点数运算非...</description>
+      <category>算法</category>
+      <pubDate>Tue, 21 Mar 2023 12:39:00 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>笔记目录</h2>
+<ul>
+<li><a href="#%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFjava%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</a>
+<ul>
+<li><a href="#%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95">笔记目录</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E4%B8%8E%E5%BE%AA%E7%8E%AF">递归与循环</a>
+<ul>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E6%94%B9%E9%80%92%E5%BD%92">循环改递归</a></li>
+<li><a href="#%E7%BB%8F%E5%85%B8%E9%80%92%E5%BD%92">经典递归</a>
+<ul>
+<li><a href="#n%E5%8F%96m%E4%B8%AA%E6%9C%89%E5%A4%9A%E5%B0%91%E5%8F%96%E6%B3%95">N取M个有多少取法</a></li>
+<li><a href="#%E6%B1%82%E5%85%A8%E6%8E%92%E5%88%97">求全排列</a></li>
+<li><a href="#%E6%B1%82%E4%B8%A4%E4%B8%AA%E4%B8%B2%E7%9A%84%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97">求两个串的最长公共子序列</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E5%8F%8D%E8%BD%AC%E4%B8%B2">递归真题：反转串</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E5%BD%A2">递归真题：杨辉三角形</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98">递归真题：排列问题</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%95%B4%E6%95%B0%E5%88%92%E5%88%86">递归真题：整数划分</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%BA%9C%E6%8E%89%E7%9A%84%E9%87%91%E9%A2%9D">递归真题：溜掉的金额</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">浮点数的注意事项</a>
+<ul>
+<li><a href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E9%9D%9E%E5%B8%B8%E5%8D%B1%E9%99%A9">浮点数运算非常危险</a></li>
+<li><a href="#%E5%95%A4%E9%85%92%E5%92%8C%E9%A5%AE%E6%96%99">啤酒和饮料</a></li>
+<li><a href="#%E6%AF%94%E9%85%92%E9%87%8F">比酒量</a>
+<ul>
+<li><a href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0">暴力解法：并使用有理分数</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E8%A7%A3%E6%B3%95%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0">递归解法：并使用有理分数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0">有理分数的完整实现</a></li>
+<li><a href="#ieee754%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%80%BC">IEEE754中的特殊值</a></li>
+<li><a href="#java%E7%9A%84%E8%88%8D%E5%85%A5%E6%A8%A1%E5%BC%8F%E5%9B%9B%E8%88%8D%E5%85%AD%E5%85%A5%E4%BA%94%E6%88%90%E5%8F%8C">java的舍入模式：四舍六入五成双</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B4%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%E5%92%8C%E5%BA%94%E7%94%A8">整数的基本性质和应用</a>
+<ul>
+<li><a href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95">最大公约数的几种计算方法</a></li>
+<li><a href="#%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E6%B1%82%E8%A7%A3%E6%96%B9%E6%B3%95">最小公倍数的几种求解方法</a></li>
+<li><a href="#%E6%B1%82a%E7%9A%84n%E6%AC%A1%E5%B9%82%E7%9A%84%E5%87%A0%E7%A7%8D%E6%B1%82%E8%A7%A3%E6%96%B9%E6%B3%95">求a的n次幂的几种求解方法</a></li>
+<li><a href="#%E7%AC%AC100002%E4%B8%AA%E7%B4%A0%E6%95%B0">第100002个素数</a>
+<ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%B1%82%E7%AC%ACk%E4%BD%8D%E7%B4%A0%E6%95%B0%E5%9F%83%E6%B0%8F%E7%AD%9B%E6%B3%95">快速求第k位素数:埃氏筛法</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%B1%82%E7%AC%ACk%E4%BD%8D%E7%B4%A0%E6%95%B0%E6%AC%A7%E6%8B%89%E7%AD%9B">快速求第k位素数:欧拉筛</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE">买不到的数目</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%B3%95">不定方程的解法</a>
+<ul>
+<li><a href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95%E9%80%82%E7%94%A8%E4%BA%8E%E8%BE%83%E5%B0%8F%E7%9A%84%E6%95%B0">暴力解法:适用于较小的数</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E8%A7%A3%E6%B3%951%E4%BC%98%E5%8C%96for%E5%BE%AA%E7%8E%AF%E5%B1%82%E6%95%B0">优化解法1：优化for循环层数</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E8%A7%A3%E6%B3%952%E5%85%88%E6%B1%82%E7%89%B9%E8%A7%A3%E5%9C%A8%E7%94%A8%E9%80%9A%E8%A7%A3%E5%85%AC%E5%BC%8F%E6%B1%82%E6%89%80%E6%9C%89%E7%89%B9%E8%A7%A3">优化解法2：先求特解，在用通解公式求所有特解</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0">题目：买不到的数</a>
+<ul>
+<li><a href="#%E5%88%A9%E7%94%A8%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%B3%95%E4%BD%8E%E6%95%88">利用数组的解法：低效</a></li>
+<li><a href="#%E5%88%A9%E7%94%A8%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%B3%95%E9%AB%98%E6%95%88">利用不定方程的解法：高效</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9F%90%E4%B8%AA%E6%AD%A3%E8%A7%84%E5%A4%A7%E8%B5%9B%E8%B5%9B%E9%A2%98%E8%8A%B1%E6%9C%B5%E6%95%B0">某个正规大赛赛题：花朵数</a>
+<ul>
+<li><a href="#%E6%AD%A3%E7%A1%AE%E8%A7%A3%E6%B3%95%E6%AD%A4%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E6%B1%82%E4%BB%BB%E6%84%8F%E4%BD%8D%E6%95%B0%E7%9A%84%E8%8A%B1%E6%9C%B5%E6%95%B0">正确解法：此方法可以求任意位数的花朵数</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF%E8%A7%A3%E6%B3%95%E6%9A%B4%E5%8A%9B%E5%B0%9D%E8%AF%95">错误解法：暴力尝试</a></li>
+<li><a href="#%E5%85%AD%E8%A7%92%E5%B9%BB%E6%96%B9">六角幻方</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8">随机算法的应用</a>
+<ul>
+<li><a href="#%E6%A6%82%E7%8E%87%E6%A8%A1%E6%8B%9F">概率模拟</a></li>
+<li><a href="#%E6%89%91%E5%85%8B%E7%82%B9%E6%95%B024">扑克点数24</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98">博弈问题</a>
+<ul>
+<li><a href="#%E9%AB%98%E5%83%A7%E6%96%97%E6%B3%95">高僧斗法</a>
+<ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E8%A7%A3%E6%B3%95%E5%8D%9A%E5%BC%88%E8%AE%BA%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E7%BC%93%E5%AD%98">一般解法：博弈论+深度优先+缓存</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E5%90%88%E5%8D%9A%E5%BC%88%E8%AE%BA">组合博弈论</a></li>
+<li><a href="#%E9%AB%98%E5%83%A7%E6%96%97%E6%B3%95%E9%97%AE%E9%A2%98%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B0%BC%E5%A7%86%E5%A0%86">高僧斗法问题转换为尼姆堆</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>递归与循环</h2>
+<ul>
+<li>理论上任何循环都可改写为递归
+<ul>
+<li>递归可以改写成递归</li>
+<li>循环可以改写成递归</li>
+<li>循环改递归可以避免栈溢出的问题</li>
+<li>有些语言没有循环语句，只能使用递归，如Lisp clojure</li>
+</ul>
+</li>
+<li>尾递归
+<ul>
+<li>尾递归就是：递归调用仅出现在函数末尾，编译器将会优化成不需要压栈的代码</li>
+<li>java不支持尾递归</li>
+<li>C语言可以使用goto实现尾递归，但goto不推荐使用</li>
+</ul>
+</li>
+</ul>
+<h3>循环改递归</h3>
+<ul>
+<li>改递归的关键是发现逻辑的相似性
+<ul>
+<li>如果没有相似性，需要主动构造</li>
+<li>不能相似的原因可能是缺少参数</li>
+</ul>
+</li>
+<li>不要忘记递归出口</li>
+<li>应该把程序的状态推向递归的出口</li>
+<li>递归和数学的递推公式类似</li>
+</ul>
+<p><strong>简单for循环改递归</strong></p>
+<div class="language-java line-numbers-mode" data-highlighter="shiki" data-ext="java" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-java"><span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">public</span><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> class</span><span style="--shiki-light:#DF8E1D;--shiki-light-font-style:italic;--shiki-dark:#4EC9B0;--shiki-dark-font-style:inherit"> _01_简单循环改递归</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> public</span><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> static</span><span style="--shiki-light:#8839EF;--shiki-dark:#4EC9B0"> void</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> main</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#8839EF;--shiki-dark:#4EC9B0">String</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">[]</span><span style="--shiki-light:#E64553;--shiki-light-font-style:italic;--shiki-dark:#9CDCFE;--shiki-dark-font-style:inherit"> args</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6"> {</span></span>
+<span class="line"><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE">  System</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">.</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE">out</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">.</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit">println</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+    </item>
+    <item>
       <title>蓝桥杯培训内部2014年预赛讲解学习笔记</title>
       <link>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%9F%B9%E8%AE%AD%E5%86%85%E9%83%A82014%E5%B9%B4%E9%A2%84%E8%B5%9B%E8%AE%B2%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%9F%B9%E8%AE%AD%E5%86%85%E9%83%A82014%E5%B9%B4%E9%A2%84%E8%B5%9B%E8%AE%B2%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</link>
       <guid>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%9F%B9%E8%AE%AD%E5%86%85%E9%83%A82014%E5%B9%B4%E9%A2%84%E8%B5%9B%E8%AE%B2%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%9F%B9%E8%AE%AD%E5%86%85%E9%83%A82014%E5%B9%B4%E9%A2%84%E8%B5%9B%E8%AE%B2%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</guid>
@@ -45499,143 +45636,6 @@ java中不要用scanner 要用BufferReader,速度相差20倍(真的吗？？？�
 <span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#4EC9B0">    int</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> idxB</span><span style="--shiki-light:#179299;--shiki-dark:#D4D4D4"> =</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE"> sc</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">.</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit">nextInt</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">();</span></span>
 <span class="line"><span style="--shiki-light:#7C7F93;--shiki-light-font-style:italic;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit">//    System.out.println(idxA + "&lt;</span></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</title>
-      <link>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E3%80%90%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE%E3%80%912021%E6%9C%80%E6%96%B0%E7%9A%84%20%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</link>
-      <guid>https://dingdingdang.online/%E7%AE%97%E6%B3%95/%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E3%80%90%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE%E3%80%912021%E6%9C%80%E6%96%B0%E7%9A%84%20%E8%93%9D%E6%A1%A5%E6%9D%AFJAVA%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</guid>
-      <source url="https://dingdingdang.online/rss.xml">【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</source>
-      <description>【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记 笔记目录 【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记 笔记目录 递归与循环 循环改递归 经典递归 N取M个有多少取法 求全排列 求两个串的最长公共子序列 递归真题：反转串 递归真题：杨辉三角形 递归真题：排列问题 递归真题：整数划分 递归真题：溜掉的金额 浮点数的注意事项 浮点数运算非...</description>
-      <category>算法</category>
-      <pubDate>Tue, 21 Mar 2023 12:39:00 GMT</pubDate>
-      <content:encoded><![CDATA[
-<h2>笔记目录</h2>
-<ul>
-<li><a href="#%E7%BA%A2%E5%AE%A2%E7%A0%94%E4%B9%A0%E7%A4%BE2021%E8%93%9D%E6%A1%A5%E6%9D%AFjava%E7%AE%97%E6%B3%95%E7%89%B9%E8%AE%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">【红客研习社】2021蓝桥杯JAVA算法特训课学习笔记</a>
-<ul>
-<li><a href="#%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95">笔记目录</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E4%B8%8E%E5%BE%AA%E7%8E%AF">递归与循环</a>
-<ul>
-<li><a href="#%E5%BE%AA%E7%8E%AF%E6%94%B9%E9%80%92%E5%BD%92">循环改递归</a></li>
-<li><a href="#%E7%BB%8F%E5%85%B8%E9%80%92%E5%BD%92">经典递归</a>
-<ul>
-<li><a href="#n%E5%8F%96m%E4%B8%AA%E6%9C%89%E5%A4%9A%E5%B0%91%E5%8F%96%E6%B3%95">N取M个有多少取法</a></li>
-<li><a href="#%E6%B1%82%E5%85%A8%E6%8E%92%E5%88%97">求全排列</a></li>
-<li><a href="#%E6%B1%82%E4%B8%A4%E4%B8%AA%E4%B8%B2%E7%9A%84%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97">求两个串的最长公共子序列</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E5%8F%8D%E8%BD%AC%E4%B8%B2">递归真题：反转串</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E5%BD%A2">递归真题：杨辉三角形</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98">递归真题：排列问题</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%95%B4%E6%95%B0%E5%88%92%E5%88%86">递归真题：整数划分</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E7%9C%9F%E9%A2%98%E6%BA%9C%E6%8E%89%E7%9A%84%E9%87%91%E9%A2%9D">递归真题：溜掉的金额</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">浮点数的注意事项</a>
-<ul>
-<li><a href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E9%9D%9E%E5%B8%B8%E5%8D%B1%E9%99%A9">浮点数运算非常危险</a></li>
-<li><a href="#%E5%95%A4%E9%85%92%E5%92%8C%E9%A5%AE%E6%96%99">啤酒和饮料</a></li>
-<li><a href="#%E6%AF%94%E9%85%92%E9%87%8F">比酒量</a>
-<ul>
-<li><a href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0">暴力解法：并使用有理分数</a></li>
-<li><a href="#%E9%80%92%E5%BD%92%E8%A7%A3%E6%B3%95%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0">递归解法：并使用有理分数</a></li>
-</ul>
-</li>
-<li><a href="#%E6%9C%89%E7%90%86%E5%88%86%E6%95%B0%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0">有理分数的完整实现</a></li>
-<li><a href="#ieee754%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%80%BC">IEEE754中的特殊值</a></li>
-<li><a href="#java%E7%9A%84%E8%88%8D%E5%85%A5%E6%A8%A1%E5%BC%8F%E5%9B%9B%E8%88%8D%E5%85%AD%E5%85%A5%E4%BA%94%E6%88%90%E5%8F%8C">java的舍入模式：四舍六入五成双</a></li>
-</ul>
-</li>
-<li><a href="#%E6%95%B4%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%E5%92%8C%E5%BA%94%E7%94%A8">整数的基本性质和应用</a>
-<ul>
-<li><a href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95">最大公约数的几种计算方法</a></li>
-<li><a href="#%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E6%B1%82%E8%A7%A3%E6%96%B9%E6%B3%95">最小公倍数的几种求解方法</a></li>
-<li><a href="#%E6%B1%82a%E7%9A%84n%E6%AC%A1%E5%B9%82%E7%9A%84%E5%87%A0%E7%A7%8D%E6%B1%82%E8%A7%A3%E6%96%B9%E6%B3%95">求a的n次幂的几种求解方法</a></li>
-<li><a href="#%E7%AC%AC100002%E4%B8%AA%E7%B4%A0%E6%95%B0">第100002个素数</a>
-<ul>
-<li><a href="#%E5%BF%AB%E9%80%9F%E6%B1%82%E7%AC%ACk%E4%BD%8D%E7%B4%A0%E6%95%B0%E5%9F%83%E6%B0%8F%E7%AD%9B%E6%B3%95">快速求第k位素数:埃氏筛法</a></li>
-<li><a href="#%E5%BF%AB%E9%80%9F%E6%B1%82%E7%AC%ACk%E4%BD%8D%E7%B4%A0%E6%95%B0%E6%AC%A7%E6%8B%89%E7%AD%9B">快速求第k位素数:欧拉筛</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE">买不到的数目</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%B3%95">不定方程的解法</a>
-<ul>
-<li><a href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95%E9%80%82%E7%94%A8%E4%BA%8E%E8%BE%83%E5%B0%8F%E7%9A%84%E6%95%B0">暴力解法:适用于较小的数</a></li>
-<li><a href="#%E4%BC%98%E5%8C%96%E8%A7%A3%E6%B3%951%E4%BC%98%E5%8C%96for%E5%BE%AA%E7%8E%AF%E5%B1%82%E6%95%B0">优化解法1：优化for循环层数</a></li>
-<li><a href="#%E4%BC%98%E5%8C%96%E8%A7%A3%E6%B3%952%E5%85%88%E6%B1%82%E7%89%B9%E8%A7%A3%E5%9C%A8%E7%94%A8%E9%80%9A%E8%A7%A3%E5%85%AC%E5%BC%8F%E6%B1%82%E6%89%80%E6%9C%89%E7%89%B9%E8%A7%A3">优化解法2：先求特解，在用通解公式求所有特解</a></li>
-<li><a href="#%E9%A2%98%E7%9B%AE%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0">题目：买不到的数</a>
-<ul>
-<li><a href="#%E5%88%A9%E7%94%A8%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%B3%95%E4%BD%8E%E6%95%88">利用数组的解法：低效</a></li>
-<li><a href="#%E5%88%A9%E7%94%A8%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%B3%95%E9%AB%98%E6%95%88">利用不定方程的解法：高效</a></li>
-</ul>
-</li>
-<li><a href="#%E6%9F%90%E4%B8%AA%E6%AD%A3%E8%A7%84%E5%A4%A7%E8%B5%9B%E8%B5%9B%E9%A2%98%E8%8A%B1%E6%9C%B5%E6%95%B0">某个正规大赛赛题：花朵数</a>
-<ul>
-<li><a href="#%E6%AD%A3%E7%A1%AE%E8%A7%A3%E6%B3%95%E6%AD%A4%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E6%B1%82%E4%BB%BB%E6%84%8F%E4%BD%8D%E6%95%B0%E7%9A%84%E8%8A%B1%E6%9C%B5%E6%95%B0">正确解法：此方法可以求任意位数的花朵数</a></li>
-<li><a href="#%E9%94%99%E8%AF%AF%E8%A7%A3%E6%B3%95%E6%9A%B4%E5%8A%9B%E5%B0%9D%E8%AF%95">错误解法：暴力尝试</a></li>
-<li><a href="#%E5%85%AD%E8%A7%92%E5%B9%BB%E6%96%B9">六角幻方</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8">随机算法的应用</a>
-<ul>
-<li><a href="#%E6%A6%82%E7%8E%87%E6%A8%A1%E6%8B%9F">概率模拟</a></li>
-<li><a href="#%E6%89%91%E5%85%8B%E7%82%B9%E6%95%B024">扑克点数24</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98">博弈问题</a>
-<ul>
-<li><a href="#%E9%AB%98%E5%83%A7%E6%96%97%E6%B3%95">高僧斗法</a>
-<ul>
-<li><a href="#%E4%B8%80%E8%88%AC%E8%A7%A3%E6%B3%95%E5%8D%9A%E5%BC%88%E8%AE%BA%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E7%BC%93%E5%AD%98">一般解法：博弈论+深度优先+缓存</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BB%84%E5%90%88%E5%8D%9A%E5%BC%88%E8%AE%BA">组合博弈论</a></li>
-<li><a href="#%E9%AB%98%E5%83%A7%E6%96%97%E6%B3%95%E9%97%AE%E9%A2%98%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B0%BC%E5%A7%86%E5%A0%86">高僧斗法问题转换为尼姆堆</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2>递归与循环</h2>
-<ul>
-<li>理论上任何循环都可改写为递归
-<ul>
-<li>递归可以改写成递归</li>
-<li>循环可以改写成递归</li>
-<li>循环改递归可以避免栈溢出的问题</li>
-<li>有些语言没有循环语句，只能使用递归，如Lisp clojure</li>
-</ul>
-</li>
-<li>尾递归
-<ul>
-<li>尾递归就是：递归调用仅出现在函数末尾，编译器将会优化成不需要压栈的代码</li>
-<li>java不支持尾递归</li>
-<li>C语言可以使用goto实现尾递归，但goto不推荐使用</li>
-</ul>
-</li>
-</ul>
-<h3>循环改递归</h3>
-<ul>
-<li>改递归的关键是发现逻辑的相似性
-<ul>
-<li>如果没有相似性，需要主动构造</li>
-<li>不能相似的原因可能是缺少参数</li>
-</ul>
-</li>
-<li>不要忘记递归出口</li>
-<li>应该把程序的状态推向递归的出口</li>
-<li>递归和数学的递推公式类似</li>
-</ul>
-<p><strong>简单for循环改递归</strong></p>
-<div class="language-java line-numbers-mode" data-highlighter="shiki" data-ext="java" style="--shiki-light:#4c4f69;--shiki-dark:#E6E6E6;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#222222"><pre class="shiki shiki-themes catppuccin-latte slack-dark vp-code"><code class="language-java"><span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6">public</span><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> class</span><span style="--shiki-light:#DF8E1D;--shiki-light-font-style:italic;--shiki-dark:#4EC9B0;--shiki-dark-font-style:inherit"> _01_简单循环改递归</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6"> {</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> public</span><span style="--shiki-light:#8839EF;--shiki-dark:#569CD6"> static</span><span style="--shiki-light:#8839EF;--shiki-dark:#4EC9B0"> void</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit"> main</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#8839EF;--shiki-dark:#4EC9B0">String</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">[]</span><span style="--shiki-light:#E64553;--shiki-light-font-style:italic;--shiki-dark:#9CDCFE;--shiki-dark-font-style:inherit"> args</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">)</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6"> {</span></span>
-<span class="line"><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE">  System</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">.</span><span style="--shiki-light:#4C4F69;--shiki-dark:#9CDCFE">out</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">.</span><span style="--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#DCDCAA;--shiki-dark-font-style:inherit">println</span><span style="--shiki-light:#7C7F93;--shiki-dark:#E6E6E6">(</span><span style="--shiki-light:#40A02B;--shiki-dark:#CE9178">"</span></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
     </item>
     <item>
       <title>蓝桥杯 2013 年 java B 组真题刷题笔记</title>
