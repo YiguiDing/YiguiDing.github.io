@@ -15,6 +15,7 @@ scp -r './etc/filebrowser' pi@192.168.2.2:~
 ```bash
 ssh pi@192.168.2.2
 ls
+# wget https://github.com/filebrowser/filebrowser/releases/download/v2.32.0/windows-armv6-filebrowser.zip
 mv linux-armv6-filebrowser.tar.gz  filebrowser/
 cd filebrowser/
 tar -xvf linux-armv6-filebrowser.tar.gz 
